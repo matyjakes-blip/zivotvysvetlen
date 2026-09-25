@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Mapa Akademie Život vysvětlen. Šest modulů, dvacet tři submodulů, sto jedna lekcí.">
+<meta property="og:title" content="Mapa Akademie · Život vysvětlen">
+<meta property="og:description" content="První terénní akademie v češtině. Šest síní a jedna cesta.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zivotvysvetlen.cz/mapa.html">
+<meta property="og:image" content="https://zivotvysvetlen.cz/mapa/hero.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1048">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:site_name" content="Život vysvětlen">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Akademie · Život vysvětlen">
+<meta name="twitter:description" content="První terénní akademie v češtině. Šest síní a jedna cesta.">
+<meta name="twitter:image" content="https://zivotvysvetlen.cz/mapa/hero.jpg">
+<link rel="canonical" href="https://zivotvysvetlen.cz/mapa.html">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/ikona-512.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>Mapa Akademie · Život vysvětlen</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
+<style>
+  html{-webkit-text-size-adjust:100%}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<style>
+  :root{
+    --cern:#0c0a07;
+    --zed:#15100a;
+    --zed2:#1d160e;
+    --zlato:#c6a15b;
+    --zlato-svetle:#e3c98e;
+    --zlato-tmave:#7d6031;
+    --kost:#ece2cf;
+    --umbra:#a0907a;
+    --umbra-tmava:#6f6353;
+    --display:'Cinzel','Trajan Pro','Times New Roman',serif;
+    --text:'Cormorant Garamond','Baskerville','Hoefler Text',Georgia,serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{background:var(--cern)}
+  body{
+    background:
+      radial-gradient(ellipse 70% 40% at 50% 0%, rgba(198,161,91,.10), transparent 70%),
+      linear-gradient(180deg, var(--zed) 0%, var(--cern) 55%);
+    background-color:var(--cern);
+    color:var(--kost);
+    font-family:var(--text);
+    font-size:19px;
+    line-height:1.55;
+    padding-inline:18px;
+  }
+  .obal{max-width:1060px;margin:0 auto;padding-block:clamp(36px,7vw,84px) 72px}
+
+  /* ---------- vstup ---------- */
+  .vstup{text-align:center}
+  .nadpis{
+    font-family:var(--display);font-weight:600;
+    font-size:clamp(2.6rem,9vw,5.4rem);letter-spacing:.22em;line-height:1;
+    color:var(--zlato);padding-left:.22em;
+    text-shadow:0 1px 0 rgba(0,0,0,.6),0 0 42px rgba(198,161,91,.18);
+  }
+  .podnadpis{margin-top:14px;font-style:italic;font-size:clamp(1.25rem,3vw,1.6rem);color:var(--zlato-svetle)}
+  .prvni{margin-top:10px;font-family:var(--display);font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;color:var(--umbra)}
+  .ozdoba{display:flex;align-items:center;justify-content:center;gap:14px;margin:22px auto 0;color:var(--zlato-tmave);max-width:420px}
+  .ozdoba::before,.ozdoba::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--zlato-tmave),transparent)}
+  .cisla{
+    margin-top:22px;font-family:var(--display);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--umbra);
+    display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;font-variant-numeric:tabular-nums;
+  }
+  .cisla b{color:var(--zlato-svetle);font-weight:600;font-size:1.05rem;margin-right:6px;letter-spacing:.08em}
+
+  .ram{
+    position:relative;
+    padding:clamp(8px,1.4vw,14px);
+    background:
+      linear-gradient(135deg,#8a6a33 0%,#d8b877 22%,#7a5b2b 48%,#c9a764 72%,#6e5126 100%);
+    box-shadow:
+      0 0 0 1px #3a2a12,
+      0 18px 50px rgba(0,0,0,.65),
+      inset 0 0 0 1px rgba(255,236,190,.35);
+  }
+  .ram::after{
+    content:"";position:absolute;inset:clamp(8px,1.4vw,14px);
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.7), inset 0 0 26px rgba(0,0,0,.55);
+    pointer-events:none;
+  }
+  .ram img{display:block;width:100%;height:auto;max-width:100%}
+
+  .uvodni-obraz{margin:clamp(30px,5vw,48px) auto 0;max-width:880px}
+  .stitek{
+    margin:14px auto 0;max-width:880px;text-align:center;
+    font-style:italic;font-size:.95rem;color:var(--umbra);
+  }
+  .uvod{max-width:34em;margin:26px auto 0;text-align:center;font-size:1.2rem;color:var(--kost);text-wrap:balance}
+  .uvod em{color:var(--zlato-svetle)}
+
+  .ovladani{display:flex;justify-content:center;margin-top:26px}
+  .tlacitko{
+    font-family:var(--display);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--zlato);background:transparent;border:1px solid var(--zlato-tmave);
+    padding:10px 18px;cursor:pointer;transition:color .2s ease,border-color .2s ease,background .2s ease;
+  }
+  .tlacitko:hover{color:var(--kost);border-color:var(--zlato);background:rgba(198,161,91,.08)}
+  .tlacitko:focus-visible{outline:2px solid var(--zlato-svetle);outline-offset:3px}
+
+  /* ---------- galerie ---------- */
+  .galerie{margin-top:clamp(40px,7vw,70px);display:flex;flex-direction:column;align-items:stretch}
+  .predel{
+    display:flex;flex-direction:column;align-items:center;color:var(--zlato-tmave);
+    padding-block:18px;font-size:.8rem;
+  }
+  .predel::before,.predel::after{content:"";width:1px;height:34px;background:linear-gradient(180deg,transparent,var(--zlato-tmave),transparent)}
+  .predel span{padding-block:6px}
+
+  .sin{
+    display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+    gap:clamp(22px,4vw,48px);align-items:center;
+  }
+  .sin:nth-of-type(even) .obraz{order:2}
+  .obraz{justify-self:center;width:100%}
+  .obraz.na-vysku{max-width:340px}
+  .obraz .ram{transition:transform .5s ease, box-shadow .5s ease}
+  .obraz .ram img{transition:filter .5s ease}
+  .sin:hover .obraz .ram{transform:translateY(-3px);box-shadow:0 0 0 1px #3a2a12,0 26px 60px rgba(0,0,0,.75),inset 0 0 0 1px rgba(255,236,190,.35)}
+  .sin:hover .obraz .ram img{filter:brightness(1.06)}
+  .popisek{margin-top:10px;text-align:center;font-style:italic;font-size:.86rem;color:var(--umbra-tmava)}
+
+  .deska{
+    border-top:1px solid var(--zlato-tmave);border-bottom:1px solid var(--zlato-tmave);
+    padding-block:22px;
+  }
+  .modul{font-family:var(--display);font-size:.74rem;letter-spacing:.3em;text-transform:uppercase;color:var(--zlato)}
+  .jmeno{
+    margin-top:6px;font-family:var(--display);font-weight:600;
+    font-size:clamp(1.55rem,3.6vw,2.2rem);letter-spacing:.06em;line-height:1.15;color:var(--kost);text-wrap:balance;
+  }
+  .proc{margin-top:12px;font-style:italic;font-size:1.12rem;color:var(--zlato-svetle);line-height:1.45;max-width:30em}
+  .meta{
+    margin-top:14px;font-family:var(--display);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--umbra);font-variant-numeric:tabular-nums;
+  }
+  .deska .tlacitko{margin-top:18px}
+
+  .rejstrik{grid-column:1 / -1;max-height:0;overflow:hidden;transition:max-height .7s cubic-bezier(.4,0,.2,1)}
+  .sin.otevrena .rejstrik{max-height:6000px}
+  .rejstrik-vnitrek{
+    margin-top:clamp(8px,2vw,18px);padding:clamp(20px,3vw,34px);
+    border:1px solid rgba(198,161,91,.28);
+    background:linear-gradient(180deg,rgba(29,22,14,.85),rgba(12,10,7,.6));
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(22px,3vw,34px) clamp(22px,4vw,44px);
+  }
+  .podsin h3{
+    display:flex;align-items:baseline;gap:10px;
+    font-family:var(--display);font-weight:600;font-size:1.02rem;letter-spacing:.08em;line-height:1.3;color:var(--kost);
+    padding-bottom:8px;border-bottom:1px solid rgba(198,161,91,.22);text-wrap:balance;
+  }
+  .podsin h3 b{color:var(--zlato);font-weight:600;font-variant-numeric:tabular-nums;min-width:2.4ch}
+  .podpopis{margin-top:8px;font-style:italic;color:var(--zlato-svetle);font-size:1.02rem;line-height:1.45}
+  .lekce{list-style:none;margin-top:10px;display:grid;gap:3px}
+  .lekce li{font-size:.98rem;color:var(--umbra);line-height:1.4}
+  .lekce li b{font-family:var(--display);font-weight:400;font-size:.72rem;letter-spacing:.1em;color:var(--zlato-tmave);margin-right:8px;font-variant-numeric:tabular-nums}
+  .exponaty{margin-top:14px;display:flex;flex-wrap:wrap;gap:12px}
+  .exponat{
+    flex:0 1 auto;padding:5px;
+    background:linear-gradient(135deg,#8a6a33 0%,#d8b877 30%,#7a5b2b 60%,#c9a764 100%);
+    box-shadow:0 0 0 1px #3a2a12,0 8px 20px rgba(0,0,0,.55);
+  }
+  .exponat img{display:block;height:92px;width:auto;max-width:100%;filter:sepia(.18) contrast(1.02)}
+  .exponat:hover img{filter:none}
+
+  /* ---------- zaver ---------- */
+  .zaver{margin-top:clamp(50px,8vw,80px);text-align:center}
+  .zaver p{max-width:30em;margin:0 auto;font-size:1.2rem;font-style:italic;color:var(--umbra);text-wrap:balance}
+  .zaver p strong{display:block;margin-top:10px;font-style:normal;font-weight:600;color:var(--kost)}
+  .zaver a{
+    display:inline-block;margin-top:24px;font-family:var(--display);font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--zlato);text-decoration:none;border-bottom:1px solid var(--zlato-tmave);padding-bottom:4px;
+  }
+  .zaver a:hover{color:var(--kost);border-color:var(--zlato)}
+
+  @media (max-width:760px){
+    body{font-size:18px}
+    .sin{grid-template-columns:1fr}
+    .sin:nth-of-type(even) .obraz{order:0}
+    .obraz.na-vysku{max-width:260px}
+    .deska{text-align:center}
+    .rejstrik-vnitrek{grid-template-columns:1fr}
+    .proc{margin-inline:auto}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<style>
+  .hl{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;
+      padding:14px clamp(18px,4vw,28px);background:rgba(12,10,7,.82);backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(198,161,91,.16);margin:0 -18px}
+  .hl a{font-family:var(--display);text-decoration:none;letter-spacing:.2em;text-transform:uppercase}
+  .hl .zn{font-size:.82rem;font-weight:600;color:var(--zlato);letter-spacing:.24em}
+  .hl nav{display:flex;align-items:center;gap:clamp(12px,3vw,26px)}
+  .hl nav a{font-size:.68rem;color:var(--umbra)}
+  .hl nav a:hover{color:var(--kost)}
+  .hl .vst{color:var(--zlato);border:1px solid var(--zlato-tmave);padding:7px 14px}
+  .hl .vst:hover{background:rgba(198,161,91,.1);color:var(--kost)}
+  @media (max-width:640px){.hl nav a:not(.vst){display:none}}
+</style>
+<header class="hl">
+  <a class="zn" href="/">Život vysvětlen</a>
+  <nav>
+    <a href="/">Domů</a>
+    <a href="/pribeh.html">Příběh</a>
+    <a class="vst" href="https://www.skool.com/zivot-vysvetlen-1338">Vstoupit</a>
+  </nav>
+</header>
+<div class="obal">
+  <section class="vstup">
+    <h1 class="nadpis">Akademie</h1>
+    <p class="podnadpis">Život vysvětlen</p>
+    <p class="prvni">První terénní akademie v češtině</p>
+    <div class="ozdoba" aria-hidden="true">◆</div>
+    <p class="cisla"><span><b>6</b>modulů</span><span><b>23</b>submodulů</span><span><b>101</b>lekcí</span><span><b>21</b>hodin čtení</span></p>
+
+    <figure class="uvodni-obraz">
+      <div class="ram"><img src="mapa/hero.jpg" alt="Briton Rivière, Danielova odpověď králi: muž stojí klidně zády ke lvům" width="1600" height="1048"></div>
+      <figcaption class="stitek">Briton Rivière · Danielova odpověď králi</figcaption>
+    </figure>
+
+    <p class="uvod">Sedm síní a jedna cesta. <em>Popořadě</em>, protože každý modul stojí na tom předchozím. Vstup do kterékoli síně a uvidíš, co v ní je.</p>
+    <div class="ovladani"><button class="tlacitko" type="button" id="vse">Otevřít všechny síně</button></div>
+  </section>
+
+  <div class="galerie" id="galerie">
+    <article class="sin" id="sin-0">
+      <figure class="obraz">
+        <div class="ram"><img src="mapa/m0.jpg" alt="Ráno v Krkonoších" width="1100" height="690"></div>
+        <figcaption class="popisek">Caspar David Friedrich · Ráno v Krkonoších · 1810/11</figcaption>
+      </figure>
+      <div class="deska">
+        <p class="modul">Modul 0</p>
+        <h2 class="jmeno">Vstup</h2>
+        <p class="proc">Než začneš. Mapa a vstupní diagnostika, ze které ti vyjde, kterým modulem začínáš a jakým tempem.</p>
+        <p class="meta">2 lekce · 14 min čtení</p>
+        <button class="tlacitko" type="button" aria-expanded="false" aria-controls="rej-0">Vstoupit do síně</button>
+      </div>
+      <div class="rejstrik" id="rej-0"><div class="rejstrik-vnitrek"><section class="podsin"><h3><b>0.1</b>Začni zde</h3><p class="podpopis">Mapa, pět pravidel Akademie a první týden den po dni.</p><div class="exponaty"><figure class="exponat"><img src="mapa/nahledy/0.1--smycka-navyku-cesky.jpg" alt="smyčka návyku" width="420" height="323" loading="lazy"></figure></div></section><section class="podsin"><h3><b>0.2</b>Vstupní diagnostika</h3><p class="podpopis">Dvacet pět otázek. Vyjde ti, kterým modulem začínáš a jakým tempem.</p><div class="exponaty"><figure class="exponat"><img src="mapa/nahledy/0.2--mapa-vysledek-zacinas-modulem-1.jpg" alt="výsledek diagnostiky" width="347" height="420" loading="lazy"></figure></div></section></div></div>
+    </article>
+    <div class="predel" aria-hidden="true"><span>◆</span></div>
+    <article class="sin" id="sin-1">
+      <figure class="obraz">
+        <div class="ram"><img src="mapa/m1.jpg" alt="Anatomie doktora Tulpa" width="1100" height="829"></div>
+        <figcaption class="popisek">Rembrandt van Rijn · Anatomie doktora Tulpa · 1632</figcaption>
+      </figure>
+      <div class="deska">
+        <p class="modul">Modul 1</p>
+        <h2 class="jmeno">Terén vs. zárodek</h2>
+        <p class="proc">Proč je první: je to teorie, ze které si odvodíš zbytek sám. Bez ní zní všechno ostatní jako další dieta.</p>
+        <p class="meta">32 lekcí · 5 h 57 min čtení</p>
+        <button class="tlacitko" type="button" aria-expanded="false" aria-controls="rej-1">Vstoupit do síně</button>
+      </div>
+      <div class="rejstrik" id="rej-1"><div class="rejstrik-vnitrek"><section class="podsin"><h3><b>1.1</b>Co je nemoc</h3><p class="podpopis">Odkud se nemoc bere, když ne zvenku. Dvě příčiny, ze kterých plyne všechno ostatní.</p><ol class="lekce"><li><b>1.1.1</b>Dvanáct axiomů terénu</li><li><b>1.1.2</b>Co nemoc nezpůsobuje</li><li><b>1.1.3</b>Toxicita: skrytá zátěž</li><li><b>1.1.4</b>Deficit: co chybí</li><li><b>1.1.5</b>Fyzické trauma, jizvy a návrat toku</li><li><b>1.1.6</b>Trauma není kořenová příčina nemoci</li><li><b>1.1.7</b>Žádné zázračné pilulky</li><li><b>1.1.8</b>Spirála a kompas terénu</li></ol></section><section class="podsin"><h3><b>1.2</b>Terén vs. germ teorie</h3><p class="podpopis">Proč si myslíme, že nemoc přichází zvenčí, a kdo nás to naučil.</p><ol class="lekce"><li><b>1.2.1</b>Miescher 1869: co se vlastně našlo v hnisu</li><li><b>1.2.2</b>Kossel: odkud se vzala A, G, C, T a U</li><li><b>1.2.3</b>Chargaff 1950: čísla, která vyrábí metoda</li><li><b>1.2.4</b>Watson a Crick 1953: model jako fakt</li><li><b>1.2.5</b>Sto let pokusů o nakažení</li><li><b>1.2.6</b>Geny nezpůsobují nemoc</li></ol></section><section class="podsin"><h3><b>1.3</b>Imunitní systém jako čištění</h3><p class="podpopis">Co ty buňky doopravdy dělají, když nebojují.</p><ol class="lekce"><li><b>1.3.1</b>Imunitní systém jako obrana neexistuje</li><li><b>1.3.2</b>Úklidová četa, tolerance a lymfa</li><li><b>1.3.3</b>Protilátky nejsou specifické</li><li><b>1.3.4</b>Zánět není kořenová příčina</li><li><b>1.3.5</b>Autoimunita</li><li><b>1.3.6</b>Alergie</li><li><b>1.3.7</b>Dvacet dva přerámování</li></ol><div class="exponaty"><figure class="exponat"><img src="mapa/nahledy/1.3.2--lymfaticka-drenaz-hlavy.jpg" alt="lymfaticka drenaz hlavy" width="389" height="420" loading="lazy"></figure></div></section><section class="podsin"><h3><b>1.4</b>Symptomy a nosologie</h3><p class="podpopis">Jak vzniká diagnóza a proč to není totéž co nemoc.</p><ol class="lekce"><li><b>1.4.1</b>Základy: co je příznak</li><li><b>1.4.2</b>Nosologie: kdo rozhoduje, co je nemoc</li><li><b>1.4.3</b>Symptom jako uzdravování, ne nemoc</li><li><b>1.4.4</b>Příznaky: tělo, psychika, duch</li><li><b>1.4.5</b>Aplikované dekódování příznaků</li><li><b>1.4.6</b>Protokoly: když základy už nestačí</li></ol><div class="exponaty"><figure class="exponat"><img src="mapa/nahledy/1.4--sestifazova-tabulka-reckeweg.jpg" alt="sestifazova tabulka reckeweg" width="420" height="298" loading="lazy"></figure></div></section><section class="podsin"><h3><b></b>PLAYBOOK · Akutní nemoc: co dělat, když onemocním</h3><p class="podpopis">Co dělat, když onemocníš. Stránka, kterou si otevřeš s horečkou v posteli.</p></section></div></div>
+    </article>
+    <div class="predel" aria-hidden="true"><span>◆</span></div>
+    <article class="sin" id="sin-2">
+      <figure class="obraz">
+        <div class="ram"><img src="mapa/m-mikroby.jpg" alt="Blecha z Micrographie" width="1100" height="567"></div>
+        <figcaption class="popisek">Robert Hooke · Blecha · Micrographia · 1665</figcaption>
+      </figure>
+      <div class="deska">
+        <p class="modul">Modul 2</p>
+        <h2 class="jmeno">Mikroby</h2>
+        <p class="proc">Druhá polovina teorie. Viry, bakterie a paraziti. Tady se láme, co si o nemoci myslíš.</p>
+        <p class="meta">21 lekcí · 5 h 39 min čtení</p>
+        <button class="tlacitko" type="button" aria-expanded="false" aria-controls="rej-2">Vstoupit do síně</button>
+      </div>
+      <div class="rejstrik" id="rej-2"><div class="rejstrik-vnitrek"><section class="podsin"><h3><b>2.1</b>Viry</h3><p class="podpopis">Čím je to, čemu se říká virus. Nejsilnější materiál celé Akademie.</p><ol class="lekce"><li><b>2.1.1</b>Buňka, váček a dvě cesty ven</li><li><b>2.1.2</b>Jak váček vzniká a co ho žene nahoru</li><li><b>2.1.3</b>Proč to nikdo neumí odlišit</li><li><b>2.1.4</b>Co z toho plyne pro tebe</li><li><b>2.1.5</b>Epidemie a pandemie</li></ol></section><section class="podsin"><h3><b>2.2</b>Bakterie a paraziti jako čističi</h3><p class="podpopis">Organismy, které jsou vidět. Tady už se nedá schovat za „neizolovali to&quot;.</p><ol class="lekce"><li><b>2.2.1</b>Proč napadáme tohle paradigma</li><li><b>2.2.2</b>Co je parazit</li><li><b>2.2.3</b>Metodologie pod mikroskopem</li><li><b>2.2.4</b>Prvoci: fantomoví patogeni?</li><li><b>2.2.5</b>Helminti: vidíme je a nerozumíme jim</li><li><b>2.2.6</b>Ektoparaziti: vši, roztoči, klíšťata</li><li><b>2.2.7</b>Selhání pokusů a mýtus přenosu</li><li><b>2.2.8</b>Terén jako určující faktor</li><li><b>2.2.9</b>Co dělají čisticí kúry</li><li><b>2.2.10</b>Archetyp parazita: kdo koho vysává</li><li><b>2.2.11</b>Co je bakterie a čím se živí</li><li><b>2.2.12</b>Proč se někde přemnoží</li><li><b>2.2.13</b>Ten samý mikrob u zdravého člověka</li><li><b>2.2.14</b>Co s tím doopravdy dělat</li></ol><div class="exponaty"><figure class="exponat"><img src="mapa/nahledy/2.2--tri-kategorie-parazitu.jpg" alt="tri kategorie parazitu" width="420" height="157" loading="lazy"></figure><figure class="exponat"><img src="mapa/nahledy/2.2.3--zaludecni-kyselina-ph-podle-druhu.jpg" alt="zaludecni kyselina pH podle druhu" width="420" height="415" loading="lazy"></figure></div></section></div></div>
+    </article>
+    <div class="predel" aria-hidden="true"><span>◆</span></div>
+    <article class="sin" id="sin-3">
+      <figure class="obraz">
+        <div class="ram"><img src="mapa/m2.jpg" alt="Krajina s kamenným mostem" width="1100" height="769"></div>
+        <figcaption class="popisek">Rembrandt van Rijn · Krajina s kamenným mostem · kolem 1638</figcaption>
+      </figure>
+      <div class="deska">
+        <p class="modul">Modul 3</p>
+        <h2 class="jmeno">Prostředí</h2>
+        <p class="proc">Proč je třetí: je skoro celý zadarmo a řeší těch třiadvacet hodin denně, kdy netrénuješ.</p>
+        <p class="meta">11 lekcí · 1 h 35 min čtení</p>
+        <button class="tlacitko" type="button" aria-expanded="false" aria-controls="rej-3">Vstoupit do síně</button>
+      </div>
+      <div class="rejstrik" id="rej-3"><div class="rejstrik-vnitrek"><section class="podsin"><h3><b>3.1</b>Světlo a cirkadiánní rytmus</h3><p class="podpopis">Nejsilnější a nejlevnější páka, kterou člověk má. Proč se v Česku od října do března nedají vyrobit určité věci ze slunce, ať se snažíš jak chce, a co s tím.</p><div class="exponaty"><figure class="exponat"><img src="mapa/nahledy/3.1--uvb-na-50-rovnobezce.jpg" alt="uvb na 50 rovnobezce" width="420" height="260" loading="lazy"></figure></div></section><section class="podsin"><h3><b>3.2</b>Voda a elektřina</h3><p class="podpopis">Co je voda kromě H2O, proč není jedno, odkud je, české prameny a rozbory, a co s tím má společného elektřina v těle a kolem něj.</p></section><section class="podsin"><h3><b>3.3</b>Pohyb a dech</h3><p class="podpopis">Ne cvičení. Pohyb jako výchozí stav těla a dech jako věc, kterou většina lidí dělá špatně čtyriadvacet hodin denně.</p><ol class="lekce"><li><b>3.3.1</b>Pohyb není cvičení</li><li><b>3.3.2</b>Deset předkovských principů</li><li><b>3.3.3</b>Denní zdivčení</li><li><b>3.3.4</b>Chodidla jako základ</li><li><b>3.3.5</b>Výchozí pozice</li><li><b>3.3.6</b>Dech života a mozkomíšní mok</li></ol><div class="exponaty"><figure class="exponat"><img src="mapa/nahledy/3.3.4--otisk-chodidla-bose-a.jpg" alt="otisk chodidla bose A" width="226" height="223" loading="lazy"></figure><figure class="exponat"><img src="mapa/nahledy/3.3.5--gorila-odpocinkova-poloha.jpg" alt="gorila odpocinkova poloha" width="420" height="244" loading="lazy"></figure><figure class="exponat"><img src="mapa/nahledy/3.3.6--kraniosakralni-system-plakat.jpg" alt="kraniosakralni system plakat" width="325" height="420" loading="lazy"></figure></div></section><section class="podsin"><h3><b>3.4</b>Spánek</h3><p class="podpopis">Třetina života na jednom místě. Nejlepší poměr mezi úsilím a výsledkem v celé Akademii.</p><div class="exponaty"><figure class="exponat"><img src="mapa/nahledy/3.4--gorila-spanek-stocena.jpg" alt="gorila spanek stocena" width="420" height="264" loading="lazy"></figure></div></section><section class="podsin"><h3><b></b>Protokol PROSTŘEDÍ · světlo, spánek, uzemnění</h3><p class="podpopis">Světlo, spánek a uzemnění poskládané do jednoho týdne.</p></section></div></div>
+    </article>
+    <div class="predel" aria-hidden="true"><span>◆</span></div>
+    <article class="sin" id="sin-4">
+      <figure class="obraz na-vysku">
+        <div class="ram"><img src="mapa/m3.jpg" alt="Poražený vůl" width="674" height="900"></div>
+        <figcaption class="popisek">Rembrandt van Rijn · Poražený vůl · 1655</figcaption>
+      </figure>
+      <div class="deska">
+        <p class="modul">Modul 4</p>
+        <h2 class="jmeno">Výživa</h2>
+        <p class="proc">Proč až teď: bez spánku a světla ti jídlo samo nepomůže. Pak ale rozhoduje, z čeho se tělo staví.</p>
+        <p class="meta">17 lekcí · 2 h 54 min čtení</p>
+        <button class="tlacitko" type="button" aria-expanded="false" aria-controls="rej-4">Vstoupit do síně</button>
+      </div>
+      <div class="rejstrik" id="rej-4"><div class="rejstrik-vnitrek"><section class="podsin"><h3><b>4.1</b>Živočišný základ a syrová strava</h3><p class="podpopis">Co jsme jedli, než někdo začal psat doporučení. Proč je rozdíl mezi syrovým a vařeným větší, než se čeká. A český sourcing od A do Z.</p><div class="exponaty"><figure class="exponat"><img src="mapa/nahledy/4.1--herodotos-busta.jpg" alt="herodotos busta" width="302" height="420" loading="lazy"></figure><figure class="exponat"><img src="mapa/nahledy/4.1--krev-pod-mikroskopem-syrove-vs-uht.jpg" alt="krev pod mikroskopem syrove vs UHT" width="420" height="313" loading="lazy"></figure><figure class="exponat"><img src="mapa/nahledy/4.1--syrove-zivocisne-tradice-sveta.jpg" alt="syrove zivocisne tradice sveta" width="420" height="201" loading="lazy"></figure></div></section><section class="podsin"><h3><b>4.2</b>Minerály a sůl</h3><p class="podpopis">Rozdíl mezi minerálem a prvkem, který rozhoduje o všem ostatním. Proč horčík v kapsli něco dělá a přesto nic neřeší.</p><div class="exponaty"><figure class="exponat"><img src="mapa/nahledy/4.2--rene-quinton-morska-voda.jpg" alt="rene quinton morska voda" width="420" height="300" loading="lazy"></figure></div></section><section class="podsin"><h3><b>4.3</b>Tuky</h3><p class="podpopis">Nejvíc pomluvená živina v dějinách. Kdo napsal ta doporučení a co se děje, když se živočišný tuk nahradí průmyslovým olejem.</p><div class="exponaty"><figure class="exponat"><img src="mapa/nahledy/4.3--vyroba-repkoveho-oleje.jpg" alt="vyroba repkoveho oleje" width="420" height="243" loading="lazy"></figure></div></section><section class="podsin"><h3><b>4.4</b>Vitamínová lež</h3><p class="podpopis">Jak se vitamín stal myšlenkou, která nikdy nebyla viděna. Kde se doplňky reálně vyrábějí a komu patří. A čtrnáctidenní protokol na vysazení.</p><ol class="lekce"><li><b>4.4.1</b>Jak se vymyslel vitamín</li><li><b>4.4.2</b>Lekce o vědecké metodě</li><li><b>4.4.3</b>Deficitní nemoci: beri-beri, kurděje</li><li><b>4.4.4</b>Prvky, matrice a mýtus hořčíku</li><li><b>4.4.5</b>Odkud výživa opravdu přichází</li><li><b>4.4.6</b>Izolované chemikálie a „přírodní aroma“</li><li><b>4.4.7</b>Doplňky: dobré, ne tak špatné, ošklivé</li><li><b>4.4.8</b>Mám brát doplňky? Rozhodovací strom</li><li><b>4.4.9</b>Čtrnáctidenní protokol odchodu</li><li><b>4.4.10</b>Převodník: doplněk na potravinu</li></ol><div class="exponaty"><figure class="exponat"><img src="mapa/nahledy/4.4.5--weston-price-d-osm-tvari.jpg" alt="weston price D osm tvari" width="420" height="242" loading="lazy"></figure><figure class="exponat"><img src="mapa/nahledy/4.4.5--lebky-porovnani.jpg" alt="lebky porovnani" width="420" height="286" loading="lazy"></figure><figure class="exponat"><img src="mapa/nahledy/4.4.1--vlastnicka-struktura.jpg" alt="vlastnicka struktura" width="420" height="292" loading="lazy"></figure></div></section><section class="podsin"><h3><b></b>Protokol VÝŽIVY · český sourcing a první nákup</h3><p class="podpopis">Český sourcing a první nákup. Kde vzít mléko, maso a vejce, která za to stojí.</p></section><section class="podsin"><h3><b>4.9</b>Recepty a nákup</h3><p class="podpopis">Syrová kuchyně v receptech a co vzít do košíku v obyčejném řetězci.</p><ol class="lekce"><li><b>4.9.1</b>Syrová kuchyně: recepty</li><li><b>4.9.2</b>Nákup v řetězcích: co vzít do košíku</li></ol></section></div></div>
+    </article>
+    <div class="predel" aria-hidden="true"><span>◆</span></div>
+    <article class="sin" id="sin-5">
+      <figure class="obraz na-vysku">
+        <div class="ram"><img src="mapa/m4.jpg" alt="Diskobolos" width="489" height="837"></div>
+        <figcaption class="popisek">Myrón · Diskobolos · římská kopie bronzového originálu</figcaption>
+      </figure>
+      <div class="deska">
+        <p class="modul">Modul 5</p>
+        <h2 class="jmeno">Výkon a tělo</h2>
+        <p class="proc">Proč až teď: trénink je jen signál. Staví se ve spánku a z jídla, které už máš srovnané.</p>
+        <p class="meta">6 lekcí · 1 h 51 min čtení</p>
+        <button class="tlacitko" type="button" aria-expanded="false" aria-controls="rej-5">Vstoupit do síně</button>
+      </div>
+      <div class="rejstrik" id="rej-5"><div class="rejstrik-vnitrek"><section class="podsin"><h3><b>5.1</b>Trénink</h3><p class="podpopis">Splity, intenzita, objem a jedna nedořešená věc, kterou v tom submodulu najdeš označenou.</p><ol class="lekce"><li><b>5.1.1</b>Zbylých 38 mýtů</li></ol></section><section class="podsin"><h3><b>5.2</b>Hormony</h3><p class="podpopis">Ne jako pilulka, ale jako výstup toho, co dělá zbytek života. A proč se hormonální hodnota nedá číst sama.</p><div class="exponaty"><figure class="exponat"><img src="mapa/nahledy/5.2--lvi-hriva-hormonalni-znak.jpg" alt="lvi hriva hormonalni znak" width="362" height="420" loading="lazy"></figure></div></section><section class="podsin"><h3><b>5.3</b>Regenerace a detox</h3><p class="podpopis">Cesty, kterými tělo odvádí odpad, a rozdíl mezi podporou a násilím.</p><div class="exponaty"><figure class="exponat"><img src="mapa/nahledy/5.3--drenazni-cesty-poradi.jpg" alt="drenazni cesty poradi" width="420" height="387" loading="lazy"></figure></div></section><section class="podsin"><h3><b>5.4</b>Dlouhověkost</h3><p class="podpopis">Co ve skutečnosti odlišuje lidi, kteří se dožijí, a proč to není nic z toho, co se prodává. **A druhá půlka: vzhled jako viditelný výraz vnitřního terénu.** Čtyři síly, které stavějí obličej, Weston Price a sourozenci, kost a kolagen, lymfa.</p><div class="exponaty"><figure class="exponat"><img src="mapa/nahledy/5.4--zlaty-rez-v-prirode-mrizka.jpg" alt="zlaty rez v prirode mrizka" width="419" height="420" loading="lazy"></figure><figure class="exponat"><img src="mapa/nahledy/5.4--starci-tvare-tradicni-populace.jpg" alt="starci tvare tradicni populace" width="420" height="199" loading="lazy"></figure><figure class="exponat"><img src="mapa/nahledy/5.4--nautilus-rez.jpg" alt="nautilus rez" width="304" height="420" loading="lazy"></figure></div></section><section class="podsin"><h3><b></b>Protokol TRÉNINKU · výběr splitu</h3><p class="podpopis">Výběr splitu podle toho, kolik dní v týdnu doopravdy máš.</p></section></div></div>
+    </article>
+    <div class="predel" aria-hidden="true"><span>◆</span></div>
+    <article class="sin" id="sin-6">
+      <figure class="obraz">
+        <div class="ram"><img src="mapa/m5.jpg" alt="Filozof v meditaci" width="1100" height="943"></div>
+        <figcaption class="popisek">Rembrandt van Rijn · Filozof v meditaci · 1632</figcaption>
+      </figure>
+      <div class="deska">
+        <p class="modul">Modul 6</p>
+        <h2 class="jmeno">Mysl a duch</h2>
+        <p class="proc">Poslední a nejdůležitější. Člověk, který žije ve strachu, si nepomůže žádným jídlem.</p>
+        <p class="meta">12 lekcí · 2 h 37 min čtení</p>
+        <button class="tlacitko" type="button" aria-expanded="false" aria-controls="rej-6">Vstoupit do síně</button>
+      </div>
+      <div class="rejstrik" id="rej-6"><div class="rejstrik-vnitrek"><section class="podsin"><h3><b>6.1</b>Myšlenka a zkušenost</h3><p class="podpopis">Odkud se bere to, co prožíváš. A rozdíl mezi změnou myšlení a změnou vztahu k myšlení, který rozhoduje o všem.</p><ol class="lekce"><li><b>6.1.1</b>Myšlenky: nejsi ten, kdo je myslí</li></ol><div class="exponaty"><figure class="exponat"><img src="mapa/nahledy/6.1--mapa-vedomi-hawkins-kuzel.jpg" alt="mapa vedomi hawkins kuzel" width="420" height="277" loading="lazy"></figure></div></section><section class="podsin"><h3><b>6.2</b>Trauma a příběh, který si opakuješ</h3><p class="podpopis">Proč není pravda, že událost z dětství působí dodnes, a proč je pravda něco jiného, co je horší.</p><ol class="lekce"><li><b>6.2.1</b>Trauma: ne událost, ale vztah k ní</li><li><b>6.2.2</b>Trauma podruhé: příběh, co se opakuje</li></ol><div class="exponaty"><figure class="exponat"><img src="mapa/nahledy/6.2.1--paralela-s-germ-teorii.jpg" alt="paralela s germ teorii" width="420" height="302" loading="lazy"></figure></div></section><section class="podsin"><h3><b>6.3</b>Nervový systém a únik</h3><p class="podpopis">Nejostrší část celé Akademie. Proč regulace nervového systému funguje a přesto ne z toho důvodu, který se uvádí.</p><ol class="lekce"><li><b>6.3.1</b>Nervový systém není rozbitý</li><li><b>6.3.2</b>Otázka PROČ</li><li><b>6.3.3</b>Psychologie zvládání</li></ol><div class="exponaty"><figure class="exponat"><img src="mapa/nahledy/6.3.1--stresory-adaptovane-vs-ne-cesky.jpg" alt="stresory adaptovane vs ne CESKY" width="420" height="315" loading="lazy"></figure><figure class="exponat"><img src="mapa/nahledy/6.3--odolnost-vuci-manipulaci-strachem-cesky.jpg" alt="odolnost vuci manipulaci strachem CESKY" width="420" height="294" loading="lazy"></figure></div></section><section class="podsin"><h3><b>6.4</b>Víra a odevzdání</h3><p class="podpopis">Část, kterou většina zdravotních kurzů nemá, a přitom je to ta, která rozhoduje o zbytku.</p><ol class="lekce"><li><b>6.4.1</b>O víře</li></ol></section><section class="podsin"><h3><b>6.5</b>Protokol MYSLI</h3><p class="podpopis">Praktický týden. Šest kroků, jeden po druhém, včetně afirmací přepsaných podle toho, co skutečně funguje.</p></section></div></div>
+    </article>
+  </div>
+
+  <section class="zaver">
+    <div class="ozdoba" aria-hidden="true">◆</div>
+    <p>Každý modul staví na předchozím a nic v něm nezazní bez vysvětlení.<strong>Kdo přeskočí rovnou na viry, bude mít pocit, že tomu rozumí, a bude se mýlit.</strong></p>
+    <a href="https://www.skool.com/zivot-vysvetlen-1338">Vstoupit do Akademie</a>
+  </section>
+</div>
+
+<script>
+  (function () {
+    var galerie = document.getElementById('galerie');
+    var vse = document.getElementById('vse');
+    function nastav(sin, otevrit) {
+      sin.classList.toggle('otevrena', otevrit);
+      var b = sin.querySelector('.deska .tlacitko');
+      b.setAttribute('aria-expanded', otevrit ? 'true' : 'false');
+      b.textContent = otevrit ? 'Opustit síň' : 'Vstoupit do síně';
+    }
+    galerie.addEventListener('click', function (e) {
+      var b = e.target.closest('.deska .tlacitko');
+      var obraz = e.target.closest('.obraz');
+      var sin = (b || obraz) ? e.target.closest('.sin') : null;
+      if (!sin) return;
+      nastav(sin, !sin.classList.contains('otevrena'));
+    });
+    vse.addEventListener('click', function () {
+      var siny = galerie.querySelectorAll('.sin');
+      var otevrit = vse.getAttribute('data-otevreno') !== 'ano';
+      siny.forEach(function (s) { nastav(s, otevrit); });
+      vse.setAttribute('data-otevreno', otevrit ? 'ano' : 'ne');
+      vse.textContent = otevrit ? 'Zavřít všechny síně' : 'Otevřít všechny síně';
+    });
+  })();
+</script>
+
+</body>
+</html>
