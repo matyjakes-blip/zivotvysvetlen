@@ -192,3 +192,36 @@ h2{
   .nav a:not(.cta-maly){display:none}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+
+/* ---------- hosté v podcastech ---------- */
+.hoste-radek{margin-top:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.host{
+  display:block;padding:20px 22px;text-decoration:none;
+  border:1px solid rgba(198,161,91,.18);background:linear-gradient(180deg,rgba(29,22,14,.7),rgba(12,10,7,.4));
+  transition:border-color .2s,background .2s;
+}
+.host:hover{border-color:var(--zlato-tmave);background:rgba(29,22,14,.9)}
+.host b{display:block;font-family:var(--display);font-weight:600;font-size:1rem;letter-spacing:.06em;color:var(--kost)}
+.host span{display:block;margin-top:5px;color:var(--umbra);font-size:.98rem;line-height:1.45}
+
+/* ---------- 1:1 ---------- */
+.hero-uzsi{padding-block:clamp(44px,8vw,84px) clamp(28px,5vw,48px)}
+.hero-uzsi .nadpis-str{margin-top:4px}
+.kroky li{align-items:flex-start}
+.kroky b{font-size:1.3rem}
+.kroky strong{display:block;font-family:var(--display);font-weight:600;font-size:1.02rem;letter-spacing:.04em;color:var(--kost)}
+.kroky em{display:block;margin-top:5px;font-style:normal;color:var(--umbra);font-size:1rem;line-height:1.5}
+.neni{list-style:none;margin-top:28px;display:grid;gap:14px}
+.neni li{padding-left:24px;position:relative;color:var(--umbra);font-size:1.06rem}
+.neni li::before{content:"×";position:absolute;left:0;top:-1px;color:var(--zlato-tmave);font-size:1.2rem;line-height:1.3}
+
+/* ---------- kontakt ---------- */
+.kontakty{list-style:none;display:grid;gap:14px;margin-top:8px}
+.kontakty a{
+  display:block;padding:20px 22px;text-decoration:none;
+  border:1px solid rgba(198,161,91,.18);background:linear-gradient(180deg,rgba(29,22,14,.7),rgba(12,10,7,.4));
+  transition:border-color .2s,background .2s;
+}
+.kontakty a:hover{border-color:var(--zlato-tmave);background:rgba(29,22,14,.9)}
+.kontakty b{display:block;font-family:var(--display);font-weight:600;font-size:1rem;letter-spacing:.06em;color:var(--zlato)}
+.kontakty span{display:block;margin-top:4px;color:var(--umbra);font-size:1rem}

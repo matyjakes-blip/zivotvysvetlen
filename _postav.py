@@ -8,10 +8,19 @@ import os, re, html, glob
 TELO = os.path.expanduser("~/Work/skool/export-do-skoolu/telo")
 
 # ---- video: az bude VSL, sem prijde odkaz (YouTube/Vimeo embed) ----
-VIDEO = ""          # napr. "https://www.youtube.com/embed/XXXX"
-VIDEO_POPIS = "Než začneš, tohle je celé vysvětlené za pár minut."
+VIDEO = "https://www.youtube-nocookie.com/embed/JlXmno16D5s"
+VIDEO_POPIS = "Celá pravda k nejvyšší vitalitě · detailní rozbor"
 
 SKOOL = "https://www.skool.com/zivot-vysvetlen-1338"
+CALENDLY = "https://calendly.com/yacashh/1-1-osobni-kvalifikacni-hovor"
+INSTAGRAM = "https://www.instagram.com/yacashh/"
+MAIL = "mjmates@email.cz"
+
+# hosteni v podcastech (overeno na YouTube 25. 9. 2026)
+PODCASTY = [
+    ("Debatní deník", "Debata s odpůrcem moderní vědy a medicíny", "https://www.youtube.com/watch?v=CHxI8kVo_2Q"),
+    ("Světy proti sobě", "Grznár vs. Jakeš · sypač vs. naturál", "https://www.youtube.com/watch?v=bs12r6PMWC0"),
+]
 
 HLAVA = """<!doctype html>
 <html lang="cs">
@@ -41,6 +50,7 @@ HLAVA = """<!doctype html>
   <a class="znacka" href="/">Život vysvětlen</a>
   <nav class="nav">
     <a href="/mapa.html">Mapa</a>
+    <a href="/jedna-na-jedna.html">1:1</a>
     <a href="/pribeh.html">Příběh</a>
     <a class="cta-maly" href="{skool}">Vstoupit</a>
   </nav>
@@ -51,7 +61,7 @@ PATA = """
 <footer class="pata">
   <div class="ozdoba" aria-hidden="true">◆</div>
   <p class="znacka-pata">Život vysvětlen</p>
-  <p class="drobne">Matyáš Jakeš · <a href="{skool}">Akademie na Skoolu</a> · <a href="/mapa.html">Mapa</a> · <a href="/pribeh.html">Příběh</a></p>
+  <p class="drobne">Matyáš Jakeš · <a href="{skool}">Akademie na Skoolu</a> · <a href="/mapa.html">Mapa</a> · <a href="/jedna-na-jedna.html">1:1</a> · <a href="/pribeh.html">Příběh</a> · <a href="/kontakt.html">Kontakt</a></p>
 </footer>
 </body>
 </html>
@@ -160,6 +170,20 @@ MODULY = [
 ]
 
 
+def pas_podcasty():
+    polozky = "".join(
+        '<a class="host" href="%s"><b>%s</b><span>%s</span></a>' % (u, esc(n), esc(p))
+        for n, p, u in PODCASTY)
+    return """
+  <section class="pas hoste">
+    <div class="obal">
+      <p class="nadtitul">Byl jsem hostem</p>
+      <div class="hoste-radek">%s</div>
+    </div>
+  </section>
+""" % polozky
+
+
 def postav_index():
     video = ""
     if VIDEO:
@@ -194,11 +218,12 @@ def postav_index():
       <div class="tlacitka">
         <a class="cta" href="{skool}">Vstoupit do Akademie</a>
         <a class="cta-druhy" href="/mapa.html">Projít mapu</a>
+        <a class="cta-druhy" href="/jedna-na-jedna.html">Osobní vedení 1:1</a>
       </div>
       <p class="cisla"><span><b>6</b>modulů</span><span><b>23</b>submodulů</span><span><b>101</b>lekcí</span><span><b>21</b>hodin čtení</span></p>
     </div>
   </section>
-{video}
+{video}{podcasty}
   <section class="pas dukaz">
     <div class="obal uzky">
       <p class="nadtitul">Důkaz</p>
@@ -252,7 +277,7 @@ def postav_index():
     </div>
   </section>
 </main>
-""".format(skool=SKOOL, video=video, poradi=poradi, moduly=moduly, pravidla=pravidla)
+""".format(skool=SKOOL, video=video, podcasty=pas_podcasty(), poradi=poradi, moduly=moduly, pravidla=pravidla)
 
     stranka = HLAVA.format(titulek="Život vysvětlen · Akademie",
                            popis="Tohle není kurz o tom, jak být zdravý. Je to kurz o tom, jak zdraví vlastně funguje. První terénní akademie v češtině.",
@@ -260,8 +285,137 @@ def postav_index():
     open("index.html", "w", encoding="utf-8").write(stranka)
 
 
+
+
+# ---------------------------------------------------------------- 1:1
+KROKY = [
+    ("Kvalifikační hovor", "Zdarma, nezávazně. Projdeme, co řešíš a co už jsi zkoušel. Na konci oba víme, jestli to dává smysl."),
+    ("Vstupní dotazník", "Zdravotní historie, prostředí, spánek, jídlo, trénink, míry a fotky. Bez toho se nedá stavět nic osobního."),
+    ("Tvůj vlastní dokument", "Dostaneš svůj proces implementace. Tvoje situace, tvoje pořadí kroků, tvoje odůvodnění."),
+    ("Týdenní balíčky", "Každý týden jedna věc. Ne deset. Tempo se řídí podle toho, co ti reálně vychází."),
+    ("Kontrolní hovory", "Pravidelný check-in a hovor, když je potřeba něco přehodit."),
+]
+
+NENI = [
+    "Není to jídelníček, který vydrží týden a pak se vrátíš tam, kde jsi byl.",
+    "Nepočítáš makra ani kalorie. Kalorie jsou měřák, ne cíl.",
+    "Nedostaneš seznam doplňků, které si máš koupit.",
+]
+
+
+def postav_11():
+    kroky = "".join(
+        '<li><b>%d</b><span><strong>%s</strong><em>%s</em></span></li>' % (i + 1, esc(a), esc(b))
+        for i, (a, b) in enumerate(KROKY))
+    neni = "".join('<li>%s</li>' % esc(x) for x in NENI)
+
+    telo = """
+<main>
+  <section class="hero hero-uzsi">
+    <div class="obal uzky">
+      <p class="nadtitul">Osobní vedení</p>
+      <h1 class="nadpis-str">1:1</h1>
+      <p class="tvrzeni-pod">Akademie je ten systém napsaný. Tohle je ten samý systém aplikovaný na jednoho člověka.</p>
+      <div class="tlacitka"><a class="cta" href="{calendly}">Domluvit hovor</a></div>
+    </div>
+  </section>
+
+  <section class="pas">
+    <div class="obal uzky">
+      <p class="nadtitul">Pro koho to je</p>
+      <h2>Pro toho, komu běžná cesta nezabrala</h2>
+      <p class="text-stred">Byl jsi u doktora a vyšlo ti, že je všechno v pořádku, jenom se pořád necítíš dobře. Zkoušel jsi dietu, doplňky a protokoly z internetu. Něco na chvíli zabralo, nic nevydrželo. Tohle není o další dietě, ale o tom, proč to tělo dělá.</p>
+      <p class="text-stred">Sám jsem si tím prošel. Ve <a href="/pribeh.html">svém příběhu</a> je to celé, včetně toho, co jsem dělal špatně.</p>
+    </div>
+  </section>
+
+  <section class="pas">
+    <div class="obal uzky">
+      <p class="nadtitul">Jak to běží</p>
+      <h2>Pět kroků od hovoru k prvnímu týdnu</h2>
+      <ol class="poradi kroky">{kroky}</ol>
+    </div>
+  </section>
+
+  <section class="pas">
+    <div class="obal uzky">
+      <p class="nadtitul">Ať je jasno</p>
+      <h2>Co to není</h2>
+      <ul class="neni">{neni}</ul>
+    </div>
+  </section>
+
+  <section class="pas">
+    <div class="obal uzky stred">
+      <p class="nadtitul">Cena</p>
+      <h2>Domlouvá se na hovoru</h2>
+      <p class="text-stred">Podle toho, jak dlouhá spolupráce dává smysl a co konkrétně řešíš. Na hovoru se dozvíš číslo i to, co za něj dostaneš, a rozhodneš se potom.</p>
+    </div>
+  </section>
+
+  <section class="pas zaver-pas">
+    <div class="obal uzky stred">
+      <div class="ozdoba" aria-hidden="true">◆</div>
+      <p class="vyzva">Hovor je zdarma a k ničemu tě nezavazuje.<strong>Nejhorší, co se může stát, je že si ujasníš, co s tebou vlastně je.</strong></p>
+      <a class="cta" href="{calendly}">Domluvit hovor</a>
+      <p class="drobne"><a href="{skool}">Nebo začni Akademií</a></p>
+    </div>
+  </section>
+</main>
+""".format(calendly=CALENDLY, skool=SKOOL, kroky=kroky, neni=neni)
+
+    stranka = HLAVA.format(titulek="Osobní vedení 1:1 · Život vysvětlen",
+                           popis="Akademie je ten systém napsaný. 1:1 je ten samý systém aplikovaný na jednoho člověka. Hovor je zdarma.",
+                           kanon="jedna-na-jedna.html", ogobr="pribeh/0.0__09-porovnani-dvojice.jpg",
+                           skool=SKOOL) + telo + PATA.format(skool=SKOOL)
+    open("jedna-na-jedna.html", "w", encoding="utf-8").write(stranka)
+
+
+# ---------------------------------------------------------------- kontakt
+def postav_kontakt():
+    telo = """
+<main>
+  <section class="hero hero-uzsi">
+    <div class="obal uzky">
+      <p class="nadtitul">Kontakt</p>
+      <h1 class="nadpis-str">Kde mě najdeš</h1>
+      <p class="tvrzeni-pod">Nejrychleji na Instagramu. Píšu si tam sám.</p>
+    </div>
+  </section>
+
+  <section class="pas">
+    <div class="obal uzky">
+      <ul class="kontakty">
+        <li><a href="{instagram}"><b>Instagram</b><span>@yacashh · napiš do zpráv</span></a></li>
+        <li><a href="{calendly}"><b>Hovor 1:1</b><span>Zdarma a nezávazně, vybereš si termín</span></a></li>
+        <li><a href="{skool}"><b>Akademie</b><span>Skupina Život vysvětlen na Skoolu</span></a></li>
+        <li><a href="mailto:{mail}"><b>E-mail</b><span>{mail} · obchodní a formální věci</span></a></li>
+      </ul>
+      <p class="text-stred">Na zprávy odpovídám sám, ne asistent. Někdy to trvá den nebo dva.</p>
+    </div>
+  </section>
+
+  <section class="pas zaver-pas">
+    <div class="obal uzky stred">
+      <div class="ozdoba" aria-hidden="true">◆</div>
+      <a class="cta" href="{skool}">Vstoupit do Akademie</a>
+    </div>
+  </section>
+</main>
+""".format(instagram=INSTAGRAM, calendly=CALENDLY, skool=SKOOL, mail=MAIL)
+
+    stranka = HLAVA.format(titulek="Kontakt · Život vysvětlen",
+                           popis="Instagram, hovor 1:1, Akademie na Skoolu a e-mail.",
+                           kanon="kontakt.html", ogobr="mapa/hero.jpg",
+                           skool=SKOOL) + telo + PATA.format(skool=SKOOL)
+    open("kontakt.html", "w", encoding="utf-8").write(stranka)
+
+
 if __name__ == "__main__":
     n = postav_pribeh()
     postav_index()
+    postav_11()
+    postav_kontakt()
     print("pribeh.html: %d bloku" % n)
-    print("index.html: %d znaku" % os.path.getsize("index.html"))
+    for f in ("index.html", "jedna-na-jedna.html", "kontakt.html"):
+        print("%-22s %d znaku" % (f, os.path.getsize(f)))
