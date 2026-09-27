@@ -42,7 +42,8 @@ HLAVA = """<!doctype html>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/ikona-512.png" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
+<link rel="preload" href="/pisma/cinzel.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/pisma/cormorant.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/styl.css">
 </head>
 <body>
@@ -62,6 +63,7 @@ PATA = """
   <div class="ozdoba" aria-hidden="true">◆</div>
   <p class="znacka-pata">Život vysvětlen</p>
   <p class="drobne">Matyáš Jakeš · <a href="{skool}">Akademie na Skoolu</a> · <a href="/mapa.html">Mapa</a> · <a href="/jedna-na-jedna.html">1:1</a> · <a href="/pribeh.html">Příběh</a> · <a href="/kontakt.html">Kontakt</a></p>
+  <p class="drobne">IČO 23494204 · <a href="/pravni.html">Právní informace a zásady</a></p>
 </footer>
 </body>
 </html>
@@ -184,6 +186,69 @@ def pas_podcasty():
 """ % polozky
 
 
+# ---- tri cesty (produktove povedomi) ----
+# aktivni=False se nevykresli: mid ticket ceka na Matyasovo rozhodnuti
+CESTY = [
+    dict(aktivni=True, hlavni=False, znak="Nejdostupnější",
+         nazev="Akademie", vysvetleni="Celý systém napsaný, čteš vlastním tempem",
+         body=["Šest modulů, dvacet tři submodulů, sto jedna lekcí",
+               "Mapa, první týden den po dni a vstupní diagnostika",
+               "Komunita, kde se doptáváš, když něco nesedí",
+               "Zůstává ti to napořád, vracíš se k tomu kdykoli"],
+         pro="Pro toho, kdo si to chce odvodit sám a nechce, aby mu někdo stál za ramenem.",
+         odkaz=None, odkaz_text="Vstoupit do Akademie", pod=None),
+
+    dict(aktivni=False, hlavni=False, znak="Mezi tím",
+         nazev="Akademie a hovory", vysvetleni="Čteš sám, ale nejsi v tom sám",
+         body=["Celá Akademie",
+               "Tři hovory se mnou v průběhu prvních měsíců",
+               "Na každém si ověříš, že to aplikuješ na svoji situaci správně"],
+         pro="Pro toho, kdo si věří, že si to přečte sám, ale chce si to nechat zkontrolovat.",
+         odkaz=None, odkaz_text="Napsat mi", pod=None),
+
+    dict(aktivni=True, hlavni=True, znak="Nejhlubší",
+         nazev="Osobní vedení 1:1", vysvetleni="Ten samý systém aplikovaný na jednoho člověka",
+         body=["Vstupní dotazník: historie, prostředí, spánek, jídlo, trénink, míry",
+               "Tvůj vlastní dokument s tvým pořadím kroků a odůvodněním",
+               "Týdenní balíčky, každý týden jedna věc",
+               "Kontrolní hovory a přehazování tempa podle toho, co ti vychází"],
+         pro="Pro toho, komu běžná cesta nezabrala a chce vědět, proč to jeho tělo dělá.",
+         odkaz=None, odkaz_text="Domluvit hovor", pod="Hovor je zdarma a nezavazuje"),
+]
+
+
+def pas_cesty():
+    karty = []
+    for c in CESTY:
+        if not c["aktivni"]:
+            continue
+        body = "".join("<li>%s</li>" % esc(b) for b in c["body"])
+        odkaz = c["odkaz"] or (CALENDLY if c["hlavni"] else SKOOL)
+        pod = '<span class="pod">%s</span>' % esc(c["pod"]) if c["pod"] else ""
+        karty.append(
+            '<article class="cesta%s">'
+            '<p class="cesta-znak">%s</p>'
+            '<h3>%s</h3>'
+            '<p class="vysvetleni">%s</p>'
+            '<ul>%s</ul>'
+            '<p class="pro-koho">%s</p>'
+            '<div class="dole"><a href="%s">%s</a>%s</div>'
+            '</article>'
+            % (" hlavni" if c["hlavni"] else "", esc(c["znak"]), esc(c["nazev"]),
+               esc(c["vysvetleni"]), body, esc(c["pro"]), odkaz, esc(c["odkaz_text"]), pod))
+    return """
+  <section class="pas cesty-pas" id="cesty">
+    <div class="obal">
+      <p class="nadtitul">Jak se do toho dá jít</p>
+      <h2>Dvě cesty, jeden systém</h2>
+      <p class="text-stred">Je to pořád stejné vysvětlení. Rozdíl je jen v tom, jestli si ho přečteš sám, nebo ti ho na tebe někdo přeloží.</p>
+      <div class="cesty">%s</div>
+      <p class="text-stred" style="margin-top:26px">Nevíš, co z toho? Začni Akademií. Kdo pak chce jít hlouběji, přejde na osobní vedení.</p>
+    </div>
+  </section>
+""" % "".join(karty)
+
+
 def postav_index():
     video = ""
     if VIDEO:
@@ -218,7 +283,7 @@ def postav_index():
       <div class="tlacitka">
         <a class="cta" href="{skool}">Vstoupit do Akademie</a>
         <a class="cta-druhy" href="/mapa.html">Projít mapu</a>
-        <a class="cta-druhy" href="/jedna-na-jedna.html">Osobní vedení 1:1</a>
+        <a class="cta-druhy" href="#cesty">Co nabízím</a>
       </div>
       <p class="cisla"><span><b>6</b>modulů</span><span><b>23</b>submodulů</span><span><b>101</b>lekcí</span><span><b>21</b>hodin čtení</span></p>
     </div>
@@ -269,6 +334,7 @@ def postav_index():
     </div>
   </section>
 
+{cesty}
   <section class="pas zaver-pas">
     <div class="obal uzky stred">
       <div class="ozdoba" aria-hidden="true">◆</div>
@@ -277,7 +343,8 @@ def postav_index():
     </div>
   </section>
 </main>
-""".format(skool=SKOOL, video=video, podcasty=pas_podcasty(), poradi=poradi, moduly=moduly, pravidla=pravidla)
+""".format(skool=SKOOL, video=video, podcasty=pas_podcasty(), cesty=pas_cesty(),
+           poradi=poradi, moduly=moduly, pravidla=pravidla)
 
     stranka = HLAVA.format(titulek="Život vysvětlen · Akademie",
                            popis="Tohle není kurz o tom, jak být zdravý. Je to kurz o tom, jak zdraví vlastně funguje. První terénní akademie v češtině.",
@@ -347,9 +414,10 @@ def postav_11():
 
   <section class="pas">
     <div class="obal uzky stred">
-      <p class="nadtitul">Cena</p>
-      <h2>Domlouvá se na hovoru</h2>
-      <p class="text-stred">Podle toho, jak dlouhá spolupráce dává smysl a co konkrétně řešíš. Na hovoru se dozvíš číslo i to, co za něj dostaneš, a rozhodneš se potom.</p>
+      <p class="nadtitul">Hovor</p>
+      <h2>Co se na něm stane</h2>
+      <p class="text-stred">Zavoláme si a projdeme, co řešíš, co už jsi zkoušel a co ti z toho vyšlo. Ptám se na spánek, světlo, jídlo, trénink a na to, jak ti je. Na konci oba víme, jestli je osobní vedení to, co potřebuješ, nebo ti stačí Akademie.</p>
+      <p class="text-stred">Nic se na hovoru neplatí a nikam se nepřihlašuješ.</p>
     </div>
   </section>
 
@@ -411,11 +479,159 @@ def postav_kontakt():
     open("kontakt.html", "w", encoding="utf-8").write(stranka)
 
 
+# ---------------------------------------------------------------- pravni informace
+UDAJE = [
+    ("Jméno", "Matyáš Jakeš"),
+    ("IČO", "23494204"),
+    ("Právní forma", "Fyzická osoba podnikatel (OSVČ), nezapsaná v obchodním rejstříku"),
+    ("Zapsán", "V živnostenském rejstříku, Magistrát města Teplice"),
+    ("Sídlo", "Heydukova 1648/8, 415 01 Teplice"),
+    ("E-mail", "mjmates@email.cz"),
+]
+
+PRAVA = [
+    "Chtít po mně, ať ti řeknu, co o tobě mám.",
+    "Nechat si to opravit, když je to špatně.",
+    "Nechat si to smazat nebo omezit, pokud to nemusím ze zákona držet dál.",
+    "Dostat to ve strojově čitelné podobě a odnést si to jinam.",
+    "Odvolat souhlas, který jsi mi dal, a to kdykoli.",
+    "Stěžovat si na Úřad pro ochranu osobních údajů, Pplk. Sochora 27, 170 00 Praha 7.",
+]
+
+
+def postav_pravni():
+    udaje = "".join('<div><dt>%s</dt><dd>%s</dd></div>' % (esc(a), esc(b)) for a, b in UDAJE)
+    prava = "".join('<li>%s</li>' % esc(x) for x in PRAVA)
+
+    telo = """
+<main>
+  <section class="hero hero-uzsi">
+    <div class="obal uzky">
+      <p class="nadtitul">Právní informace</p>
+      <h1 class="nadpis-str">Kdo web provozuje a co se tu děje s údaji</h1>
+      <p class="tvrzeni-pod">Krátce a bez právničiny. Kdyby ti něco nebylo jasné, napiš mi.</p>
+    </div>
+  </section>
+
+  <div class="pravni">
+    <section>
+      <h2>Kdo tenhle web provozuje</h2>
+      <dl class="udaje">{udaje}</dl>
+    </section>
+
+    <section>
+      <h2>Co tenhle web o tobě sbírá</h2>
+      <p>Nic. Není tu žádný formulář, žádná analytika ani žádný reklamní kód a neukládám ti do prohlížeče vlastní cookies. Nemusíš tu nic odklikávat, protože tu není co povolovat.</p>
+      <p>Písma, obrázky i styly se načítají z tohoto webu, ne od Googlu ani odjinud. Tvoje IP adresa se tím pádem nikomu třetímu neposílá.</p>
+    </section>
+
+    <section>
+      <h2>Co je sem vložené odjinud</h2>
+      <ul>
+        <li><b>Video</b> je z YouTube v režimu bez cookies. Dokud na něj neklikneš, neposílá se nikam nic. Jak ho spustíš, dozví se Google tvoji IP adresu a že jsi ho pustil. Platí pak <a href="https://policies.google.com/privacy?hl=cs" rel="noopener">zásady Googlu</a>.</li>
+        <li><b>Server.</b> Web běží na GitHub Pages. Poskytovatel serveru vidí IP adresy návštěvníků v technických záznamech, stejně jako každý webový server na světě. Já se k nim nedostanu.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Kam vedou odkazy z webu</h2>
+      <p>Na Skool, na Calendly, na Instagram a na můj e-mail. Jak klikneš, jsi u nich a platí jejich pravidla, ne moje.</p>
+      <p>Když tam o sobě něco zadáš, třeba si na Calendly vybereš termín hovoru nebo mi napíšeš na Instagram, dostane se to ke mně. Pracuju s tím jen proto, abych se ti ozval a ten hovor s tebou odbyl. Držím si to po dobu, kdy to má smysl, nikomu to neprodávám a nikam to dál neposílám.</p>
+    </section>
+
+    <section>
+      <h2>Co s tím můžeš udělat</h2>
+      <p>Cokoli z tohohle a stačí mi napsat na <a href="mailto:{mail}">{mail}</a>:</p>
+      <ul>{prava}</ul>
+    </section>
+
+    <section>
+      <h2>Podmínky Akademie a osobního vedení</h2>
+      <p>Akademie i osobní vedení mají svoje obchodní podmínky a svoje zásady zpracování osobních údajů. Dostaneš je k přečtení dřív, než za cokoli zaplatíš. Jsou odkazované v nabídce a ve faktuře a bez nich se nic neuzavírá.</p>
+      <p>Tenhle web nic neprodává. Jenom vysvětluje, co dělám, a odkazuje tě dál.</p>
+    </section>
+
+    <section>
+      <h2>Obsah webu</h2>
+      <p>Texty, obrázky, mapa i celý obsah Akademie jsou moje autorské dílo. Číst si to můžeš kolikrát chceš. Kopírovat to jinam nebo to vydávat za svoje ne.</p>
+    </section>
+
+    <p class="datum">Naposledy upraveno 27. 9. 2026</p>
+  </div>
+
+  <section class="pas zaver-pas">
+    <div class="obal uzky stred">
+      <div class="ozdoba" aria-hidden="true">◆</div>
+      <a class="cta-druhy" href="/kontakt.html">Kontakt</a>
+    </div>
+  </section>
+</main>
+""".format(udaje=udaje, prava=prava, mail=MAIL)
+
+    stranka = HLAVA.format(titulek="Právní informace · Život vysvětlen",
+                           popis="Kdo web provozuje, co se tu děje s údaji a jaké máš práva.",
+                           kanon="pravni.html", ogobr="mapa/hero.jpg",
+                           skool=SKOOL) + telo + PATA.format(skool=SKOOL)
+    open("pravni.html", "w", encoding="utf-8").write(stranka)
+
+
+# ---------------------------------------------------------------- mapa.html
+# Mapa se sem kopiruje z ~/Work/skool/export-do-skoolu/mapa-akademie.html.
+# Ta ma vlastni inline CSS a tahne pisma od Googlu. Na verejnem webu to nechceme
+# (odesilalo by to IP navstevniku Googlu), takze to tady prepneme na nase pisma.
+PISMA_MISTNE = """<link rel="preload" href="/pisma/cinzel.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/pisma/cormorant.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Cinzel';src:url('/pisma/cinzel.woff2') format('woff2');font-weight:400 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Cormorant Garamond';src:url('/pisma/cormorant.woff2') format('woff2');font-weight:300 700;font-style:normal;font-display:swap}
+@font-face{font-family:'Cormorant Garamond';src:url('/pisma/cormorant-italic.woff2') format('woff2');font-weight:300 700;font-style:italic;font-display:swap}
+</style>"""
+
+
+def oprav_mapu():
+    """Vymeni Google Fonts v mape za pisma z tohoto webu. Da se poustet opakovane."""
+    if not os.path.exists("mapa.html"):
+        return "mapa.html chybi"
+    h = open("mapa.html", encoding="utf-8").read()
+    if "fonts.googleapis" not in h:
+        return "mapa.html: pisma uz jsou mistni"
+    h = re.sub(r'<link rel="stylesheet" href="https://fonts\.googleapis\.com[^"]*">',
+               PISMA_MISTNE, h, count=1)
+    open("mapa.html", "w", encoding="utf-8").write(h)
+    return "mapa.html: pisma prepnuta na mistni"
+
+
+PATA_MAPY = """<footer style="max-width:1060px;margin:0 auto;padding:44px clamp(18px,4vw,28px) 56px;\
+text-align:center;border-top:1px solid rgba(198,161,91,.14)">
+  <p style="font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:#6f6353">
+    Matyáš Jakeš · IČO 23494204 ·
+    <a href="/pravni.html" style="color:#7d6031">Právní informace a zásady</a> ·
+    <a href="/kontakt.html" style="color:#7d6031">Kontakt</a>
+  </p>
+</footer>
+</body>"""
+
+
+def pata_mapy():
+    """Doplni do mapy patu s odkazem na pravni informace. Da se poustet opakovane."""
+    if not os.path.exists("mapa.html"):
+        return "mapa.html chybi"
+    h = open("mapa.html", encoding="utf-8").read()
+    if "/pravni.html" in h:
+        return "mapa.html: pata uz tam je"
+    h = h.replace("</body>", PATA_MAPY, 1)
+    open("mapa.html", "w", encoding="utf-8").write(h)
+    return "mapa.html: pata s pravnimi informacemi doplnena"
+
+
 if __name__ == "__main__":
     n = postav_pribeh()
     postav_index()
     postav_11()
     postav_kontakt()
+    postav_pravni()
+    print(oprav_mapu())
+    print(pata_mapy())
     print("pribeh.html: %d bloku" % n)
-    for f in ("index.html", "jedna-na-jedna.html", "kontakt.html"):
+    for f in ("index.html", "jedna-na-jedna.html", "kontakt.html", "pravni.html"):
         print("%-22s %d znaku" % (f, os.path.getsize(f)))

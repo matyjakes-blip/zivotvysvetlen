@@ -1,3 +1,8 @@
+/* ---------- písma z tohoto webu (nic se nenačítá od Googlu) ---------- */
+@font-face{font-family:'Cinzel';src:url('/pisma/cinzel.woff2') format('woff2');font-weight:400 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Cormorant Garamond';src:url('/pisma/cormorant.woff2') format('woff2');font-weight:300 700;font-style:normal;font-display:swap}
+@font-face{font-family:'Cormorant Garamond';src:url('/pisma/cormorant-italic.woff2') format('woff2');font-weight:300 700;font-style:italic;font-display:swap}
+
 :root{
   --cern:#0c0a07;
   --zed:#15100a;
@@ -225,3 +230,68 @@ h2{
 .kontakty a:hover{border-color:var(--zlato-tmave);background:rgba(29,22,14,.9)}
 .kontakty b{display:block;font-family:var(--display);font-weight:600;font-size:1rem;letter-spacing:.06em;color:var(--zlato)}
 .kontakty span{display:block;margin-top:4px;color:var(--umbra);font-size:1rem}
+
+/* ---------- tři cesty ---------- */
+.cesty-pas{background:var(--zed)}
+.cesty{
+  display:grid;gap:18px;margin-top:34px;
+  grid-template-columns:repeat(auto-fit,minmax(272px,1fr));
+}
+.cesta{
+  display:flex;flex-direction:column;
+  padding:30px 26px 26px;
+  background:linear-gradient(180deg,rgba(29,22,14,.9),rgba(12,10,7,.6));
+  border:1px solid rgba(198,161,91,.2);
+}
+.cesta.hlavni{border-color:rgba(198,161,91,.55)}
+.cesta-znak{
+  font-family:var(--display);font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--zlato-tmave);
+}
+.cesta h3{
+  margin-top:12px;font-family:var(--display);font-weight:600;font-size:1.16rem;
+  letter-spacing:.04em;color:var(--zlato);line-height:1.3;
+}
+.cesta .vysvetleni{margin-top:6px;font-style:italic;color:var(--umbra);font-size:.98rem}
+.cesta ul{list-style:none;margin-top:18px;display:grid;gap:9px}
+.cesta ul li{position:relative;padding-left:19px;font-size:1rem;color:var(--kost)}
+.cesta ul li::before{content:"◆";position:absolute;left:0;top:-1px;font-size:.5rem;color:var(--zlato-tmave)}
+.cesta .pro-koho{
+  margin-top:18px;padding-top:16px;border-top:1px solid rgba(198,161,91,.14);
+  font-size:.96rem;color:var(--umbra);
+}
+.cesta .dole{margin-top:auto;padding-top:22px}
+.cesta .dole a{
+  display:block;text-align:center;font-family:var(--display);font-size:.72rem;
+  letter-spacing:.18em;text-transform:uppercase;text-decoration:none;
+  padding:13px 16px;border:1px solid var(--zlato-tmave);color:var(--zlato);
+}
+.cesta.hlavni .dole a{background:var(--zlato);border-color:var(--zlato);color:var(--cern);font-weight:600}
+.cesta .dole a:hover{border-color:var(--zlato)}
+.cesta .dole .pod{
+  display:block;margin-top:10px;text-align:center;font-family:var(--text);
+  font-size:.86rem;letter-spacing:0;text-transform:none;color:var(--umbra-tmava);
+  border:0;padding:0;
+}
+
+/* ---------- právní stránka ---------- */
+.pravni{max-width:720px;margin:0 auto;padding-inline:clamp(18px,4vw,28px)}
+.pravni section{margin-top:44px}
+.pravni h2{
+  font-family:var(--display);font-weight:600;font-size:1.08rem;letter-spacing:.05em;
+  color:var(--zlato);padding-bottom:10px;border-bottom:1px solid rgba(198,161,91,.18);
+}
+.pravni p{margin-top:14px;color:var(--kost)}
+.pravni ul{list-style:none;margin-top:14px;display:grid;gap:8px}
+.pravni ul li{position:relative;padding-left:19px;color:var(--kost)}
+.pravni ul li::before{content:"◆";position:absolute;left:0;top:.35em;font-size:.5rem;color:var(--zlato-tmave)}
+.pravni .udaje{margin-top:16px;display:grid;gap:7px}
+.pravni .udaje div{display:grid;grid-template-columns:168px 1fr;gap:12px;align-items:baseline}
+.pravni .udaje dt{
+  font-family:var(--display);font-size:.68rem;letter-spacing:.16em;line-height:1.5;
+  text-transform:uppercase;color:var(--umbra-tmava);
+}
+@media (max-width:560px){.pravni .udaje div{grid-template-columns:1fr;gap:1px}
+  .pravni .udaje{gap:14px}}
+.pravni .udaje dd{color:var(--kost)}
+.pravni .datum{margin-top:40px;font-size:.9rem;color:var(--umbra-tmava);text-align:center}

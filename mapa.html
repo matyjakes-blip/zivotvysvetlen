@@ -22,7 +22,13 @@
 <link rel="icon" href="/ikona-512.png" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>Mapa Akademie · Život vysvětlen</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
+<link rel="preload" href="/pisma/cinzel.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/pisma/cormorant.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Cinzel';src:url('/pisma/cinzel.woff2') format('woff2');font-weight:400 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Cormorant Garamond';src:url('/pisma/cormorant.woff2') format('woff2');font-weight:300 700;font-style:normal;font-display:swap}
+@font-face{font-family:'Cormorant Garamond';src:url('/pisma/cormorant-italic.woff2') format('woff2');font-weight:300 700;font-style:italic;font-display:swap}
+</style>
 <style>
   html{-webkit-text-size-adjust:100%}
   img{max-width:100%}
@@ -378,5 +384,12 @@
   })();
 </script>
 
+<footer style="max-width:1060px;margin:0 auto;padding:44px clamp(18px,4vw,28px) 56px;text-align:center;border-top:1px solid rgba(198,161,91,.14)">
+  <p style="font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:#6f6353">
+    Matyáš Jakeš · IČO 23494204 ·
+    <a href="/pravni.html" style="color:#7d6031">Právní informace a zásady</a> ·
+    <a href="/kontakt.html" style="color:#7d6031">Kontakt</a>
+  </p>
+</footer>
 </body>
 </html>
