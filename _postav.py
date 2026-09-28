@@ -15,6 +15,7 @@ SKOOL = "https://www.skool.com/zivot-vysvetlen-1338"
 CALENDLY = "https://calendly.com/yacashh/1-1-osobni-kvalifikacni-hovor"
 INSTAGRAM = "https://www.instagram.com/yacashh/"
 MAIL = "mjmates@email.cz"
+FORMULAR_EMAIL = "https://indecisive-zenobia-f04.notion.site/7a88bd5ce2bd47e8ba84dd5e08d059f3"
 
 # hosteni v podcastech (overeno na YouTube 25. 9. 2026)
 PODCASTY = [
@@ -334,6 +335,15 @@ def postav_index():
     </div>
   </section>
 
+
+  <section class="pas sourcing-pas">
+    <div class="obal uzky stred">
+      <p class="nadtitul">Zdarma</p>
+      <h2>Kde to všechno koupit</h2>
+      <p class="text-stred">Přes tři tisíce míst v Česku, kde se dá koupit syrové mléko, maso, zvěřina, med a ryby přímo od chovatele. Všechno na jedné mapě.</p>
+      <a class="cta-druhy" href="/sourcing.html">Otevřít sourcing mapu</a>
+    </div>
+  </section>
 {cesty}
   <section class="pas zaver-pas">
     <div class="obal uzky stred">
@@ -521,7 +531,7 @@ def postav_pravni():
 
     <section>
       <h2>Co tenhle web o tobě sbírá</h2>
-      <p>Nic. Není tu žádný formulář, žádná analytika ani žádný reklamní kód a neukládám ti do prohlížeče vlastní cookies. Nemusíš tu nic odklikávat, protože tu není co povolovat.</p>
+      <p>Sám o sobě nic. Není tu žádná analytika ani žádný reklamní kód a neukládám ti do prohlížeče vlastní cookies. Nemusíš tu nic odklikávat, protože tu není co povolovat. Jediná výjimka je odběr novinek níž, a ten běží mimo tenhle web a jen když se k němu sám přihlásíš.</p>
       <p>Písma, obrázky i styly se načítají z tohoto webu, ne od Googlu ani odjinud. Tvoje IP adresa se tím pádem nikomu třetímu neposílá.</p>
     </section>
 
@@ -537,6 +547,17 @@ def postav_pravni():
       <h2>Kam vedou odkazy z webu</h2>
       <p>Na Skool, na Calendly, na Instagram a na můj e-mail. Jak klikneš, jsi u nich a platí jejich pravidla, ne moje.</p>
       <p>Když tam o sobě něco zadáš, třeba si na Calendly vybereš termín hovoru nebo mi napíšeš na Instagram, dostane se to ke mně. Pracuju s tím jen proto, abych se ti ozval a ten hovor s tebou odbyl. Držím si to po dobu, kdy to má smysl, nikomu to neprodávám a nikam to dál neposílám.</p>
+    </section>
+
+    <section id="emaily">
+      <h2>E-maily o sourcing mapě</h2>
+      <p>Když se přihlásíš k odběru, uložím si tvůj e-mail a kraj, pokud ho vyplníš. Použiju je jen k tomu, abych ti napsal, až na sourcing mapu přibydou místa, případně místa u tebe. Nic jiného ti posílat nebudu a nikomu je nedám.</p>
+      <ul>
+        <li><b>Právní základ</b> je tvůj souhlas, který dáváš zaškrtnutím ve formuláři.</li>
+        <li><b>Kde to leží:</b> formulář i seznam běží v Notionu (Notion Labs, Inc.), který pro mě data zpracovává.</li>
+        <li><b>Jak dlouho:</b> dokud se neodhlásíš.</li>
+        <li><b>Odhlášení:</b> stačí odpovědět na kterýkoli můj e-mail, nebo napsat na <a href="mailto:{mail}">{mail}</a>. Pak ti už nic nepřijde a e-mail ze seznamu smažu.</li>
+      </ul>
     </section>
 
     <section>
