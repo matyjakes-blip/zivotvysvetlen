@@ -19,6 +19,8 @@ FORMULAR_EMAIL = "https://indecisive-zenobia-f04.notion.site/7a88bd5ce2bd47e8ba8
 
 # hosteni v podcastech (overeno na YouTube 25. 9. 2026)
 PODCASTY = [
+    # clanek v tydeniku Respekt 32/2025 (4.-10. 8. 2025), pridano 28. 9. 2026 na Matyasovo prani
+    ("Respekt 32/2025", "Článek v týdeníku · Najednou jsem měl chuť do života", "https://www.respekt.cz/tydenik/2025/32/najednou-jsem-mel-chut-do-zivota"),
     ("Debatní deník", "Debata s odpůrcem moderní vědy a medicíny", "https://www.youtube.com/watch?v=CHxI8kVo_2Q"),
     ("Světy proti sobě", "Grznár vs. Jakeš · sypač vs. naturál", "https://www.youtube.com/watch?v=bs12r6PMWC0"),
 ]
@@ -180,7 +182,7 @@ def pas_podcasty():
     return """
   <section class="pas hoste">
     <div class="obal">
-      <p class="nadtitul">Byl jsem hostem</p>
+      <p class="nadtitul">Psali o mně · byl jsem hostem</p>
       <div class="hoste-radek">%s</div>
     </div>
   </section>
