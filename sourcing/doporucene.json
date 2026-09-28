@@ -1,0 +1,12 @@
+[
+ {"nazev": "Farma Vojtěška", "adresa": "Klíčnov 274, 468 02 Pulečný", "kategorie": "maso",
+  "co": "Hovězí z pastvy, Highland a Angus, 100 % tráva a seno. E-shop a rozvoz.", "odkaz": "https://www.farmavojteska.cz/vyzralehovezimaso/"},
+ {"nazev": "Maso z pastvin", "adresa": "Hradové Střimelice 38, 281 63 Stříbrná Skalice", "kategorie": "maso",
+  "co": "Hovězí z pastvy. E-shop a rozvoz.", "odkaz": "https://www.masozpastvin.cz/"},
+ {"nazev": "Horňácká farma", "adresa": "Hrubá Vrbka 253, 696 73 Hrubá Vrbka", "kategorie": "maso",
+  "co": "Bio hovězí z pastvy. E-shop, výdejní místo na farmě.", "odkaz": "https://www.hornackafarma.cz/bio-hovezi-maso/"},
+ {"nazev": "Naše Farma", "adresa": "Žár 70, 374 01 Trhové Sviny", "kategorie": "maso",
+  "co": "Bio hovězí, farmářské vepřové a sádlo. E-shop a rozvoz.", "odkaz": "https://eshop.nasefarma.cz/"},
+ {"nazev": "Farma EHL", "adresa": "Lukavice 46, 516 03 Lukavice", "kategorie": "maso",
+  "co": "Hovězí z pastvy.", "odkaz": "http://farmaehl.cz/nase-nabidka/"}
+]

@@ -332,3 +332,21 @@ h2{
 @media (max-width:640px){
   .karta{position:static;max-width:none;margin-top:12px}
 }
+.filtr-dop{color:var(--zlato)}
+.hledani{display:flex;justify-content:center;margin:-8px 0 18px}
+.hledani input{
+  width:min(320px,100%);padding:10px 14px;background:rgba(12,10,7,.7);color:var(--kost);
+  border:1px solid rgba(198,161,91,.25);font-family:var(--text);font-size:1rem;
+}
+.hledani input::placeholder{color:var(--umbra-tmava)}
+.hledani input:focus{outline:none;border-color:var(--zlato-tmave)}
+.mapa-svg .misto{fill:rgba(198,161,91,.72);stroke:rgba(12,10,7,.9);stroke-width:.8}
+.mapa-svg .misto.dop{fill:var(--zlato-svetle);stroke:var(--zlato);stroke-width:2.2;r:7}
+.karta{max-height:calc(100% - 28px);overflow:auto}
+.karta-seznam{margin-top:10px;display:grid;gap:12px}
+.polozka{padding-top:10px;border-top:1px solid rgba(198,161,91,.14)}
+.karta .polozka-typ{font-family:var(--display);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--zlato-tmave)}
+.karta .polozka-dop .polozka-typ{color:var(--zlato)}
+.karta .polozka-nazev{margin-top:3px;color:var(--kost);font-size:1rem;line-height:1.3}
+.karta .polozka-adresa{margin-top:2px;color:var(--umbra);font-size:.9rem;line-height:1.3}
+.karta .polozka-odkaz{display:inline-block;margin-top:4px;font-size:.86rem}
