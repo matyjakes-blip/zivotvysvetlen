@@ -62,7 +62,7 @@ PATA = """
 <footer class="pata">
   <div class="ozdoba" aria-hidden="true">◆</div>
   <p class="znacka-pata">Život vysvětlen</p>
-  <p class="drobne">Matyáš Jakeš · <a href="{skool}">Akademie na Skoolu</a> · <a href="/mapa.html">Mapa</a> · <a href="/jedna-na-jedna.html">1:1</a> · <a href="/pribeh.html">Příběh</a> · <a href="/kontakt.html">Kontakt</a></p>
+  <p class="drobne">Matyáš Jakeš · <a href="{skool}">Akademie na Skoolu</a> · <a href="/mapa.html">Mapa</a> · <a href="/jedna-na-jedna.html">1:1</a> · <a href="/pribeh.html">Příběh</a> · <a href="/sourcing.html">Sourcing mapa</a> · <a href="/kontakt.html">Kontakt</a></p>
   <p class="drobne">IČO 23494204 · <a href="/pravni.html">Právní informace a zásady</a></p>
 </footer>
 </body>
@@ -629,6 +629,9 @@ def pata_mapy():
     return "mapa.html: pata s pravnimi informacemi doplnena"
 
 
+import _sourcing
+
+
 if __name__ == "__main__":
     n = postav_pribeh()
     postav_index()
@@ -637,6 +640,7 @@ if __name__ == "__main__":
     postav_pravni()
     print(oprav_mapu())
     print(pata_mapy())
+    print("sourcing.html: %d mist" % _sourcing.postav(HLAVA, PATA, SKOOL, esc))
     print("pribeh.html: %d bloku" % n)
     for f in ("index.html", "jedna-na-jedna.html", "kontakt.html", "pravni.html"):
         print("%-22s %d znaku" % (f, os.path.getsize(f)))

@@ -17,6 +17,7 @@
   --text:'Cormorant Garamond','Baskerville','Hoefler Text',Georgia,serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
+[hidden]{display:none!important}
 html{background:var(--cern);scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
   background:var(--cern);
@@ -295,3 +296,39 @@ h2{
   .pravni .udaje{gap:14px}}
 .pravni .udaje dd{color:var(--kost)}
 .pravni .datum{margin-top:40px;font-size:.9rem;color:var(--umbra-tmava);text-align:center}
+
+/* ---------- sourcing mapa ---------- */
+.mapa-pas{background:var(--zed)}
+.filtry{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:22px}
+.filtr{
+  font-family:var(--display);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:8px 13px;background:transparent;border:1px solid rgba(198,161,91,.22);
+  color:var(--umbra);cursor:pointer;
+}
+.filtr:hover{border-color:var(--zlato-tmave);color:var(--kost)}
+.filtr.aktivni{background:var(--zlato);border-color:var(--zlato);color:var(--cern);font-weight:600}
+.mapa-ram{position:relative;border:1px solid rgba(198,161,91,.2);background:rgba(12,10,7,.55)}
+.mapa-svg{display:block;width:100%;height:auto}
+.mapa-svg .zeme{fill:rgba(198,161,91,.055);stroke:var(--zlato-tmave);stroke-width:1.1}
+.mapa-svg .misto{fill:var(--zlato);stroke:var(--cern);stroke-width:1.2;cursor:pointer}
+.mapa-svg .misto:hover{fill:var(--zlato-svetle);r:7}
+.karta{
+  position:absolute;right:14px;top:14px;max-width:320px;
+  padding:18px 20px;background:rgba(21,16,10,.97);border:1px solid rgba(198,161,91,.38);
+}
+.karta-zavrit{
+  position:absolute;right:8px;top:4px;background:none;border:0;color:var(--umbra);
+  font-size:1.3rem;line-height:1;cursor:pointer;
+}
+.karta-kat{font-family:var(--display);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--zlato-tmave)}
+.karta h3{margin-top:6px;font-family:var(--display);font-weight:600;font-size:1.02rem;color:var(--zlato)}
+.karta p{margin-top:6px;font-size:.95rem;color:var(--kost)}
+.karta-obec{color:var(--umbra)!important}
+.karta-odkaz{display:inline-block;margin-top:12px;font-size:.9rem}
+.prazdno{margin-top:14px;color:var(--umbra)}
+.formular-misto{
+  margin-top:22px;padding:26px 20px;border:1px dashed rgba(198,161,91,.3);
+}
+@media (max-width:640px){
+  .karta{position:static;max-width:none;margin-top:12px}
+}
