@@ -552,9 +552,9 @@ def postav_pravni():
     </section>
 
     <section>
-      <h2>Co tenhle web není</h2>
-      <p>Nejsem lékař a Akademie ani tenhle web nejsou zdravotní služba. Je to vzdělávací obsah a moje vlastní zkušenost, ne diagnóza a ne léčba tvojí konkrétní situace. Co se svým zdravím uděláš, je tvoje rozhodnutí a tvoje odpovědnost.</p>
-      <p>Jestli bereš léky nebo máš diagnózu, neměň to ze dne na den jenom proto, že sis něco přečetl. A když ti náhle výrazně přitíží, volej 155.</p>
+      <h2>Povaha obsahu</h2>
+      <p>Obsah tohoto webu a Akademie má informativní a vzdělávací charakter. Nejde o poskytování zdravotních služeb ve smyslu zákona č. 372/2011 Sb. a provozovatel není poskytovatelem zdravotních služeb. Využití uvedených informací je na vlastní odpovědnost čtenáře.</p>
+      <p>V případě akutních nebo závažných obtíží kontaktujte lékaře nebo linku 155.</p>
     </section>
 
     <section>
