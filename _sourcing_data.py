@@ -165,8 +165,9 @@ if __name__ == "__main__":
         klic_obce = o["obec"] + "|" + o["okres"]
         ob = obce.setdefault(klic_obce, {"obec": o["obec"], "okres": o["okres"], "kraj": o["kraj"],
                                          "lat": o["lat"], "lon": o["lon"], "m": []})
+        n = int(t.get("pocet", 1) or 1)
         popis = " · ".join(x for x in [t.get("co", ""), ("pastva: " + t["pastva"]) if t.get("pastva") else "",
-                                        t.get("jak", "")] if x)
+                                        t.get("jak", ""), ("doporučuje %d lidí" % n) if n > 1 else ""] if x)
         ob["m"].insert(0, {"n": "Soukromý chovatel" if t.get("soukromy") else t["nazev"],
                            "a": "" if t.get("soukromy") else t.get("adresa", ""),
                            "t": "Tip od lidí", "k": t.get("kategorie", "ostatni"), "r": "",
