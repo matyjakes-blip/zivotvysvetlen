@@ -59,6 +59,10 @@
         </div>
       </div>
       <p class="popisek"><span class="pocet">Načítám…</span> · klikni na bod</p>
+      <div class="pridej">
+        <p><strong>Chybí tu místo, kam chodíš?</strong> Registr říká jen, kdo smí prodávat. Jestli je to dobré, víš ty.</p>
+        <a class="cta" href="https://indecisive-zenobia-f04.notion.site/ce110a2416d64dbbbbf337d14894c801" target="_blank" rel="noopener">Přidej místo</a>
+      </div>
     </div>
   </section>
 
@@ -104,6 +108,7 @@
   function odpovida(m) {
     if (filtr === 'vse') return true;
     if (filtr === 'dop') return !!m.d;
+    if (filtr === 'lide') return !!m.l;
     return m.k === filtr;
   }
   function slovo(n) { return n === 1 ? 'místo' : (n >= 2 && n <= 4 ? 'místa' : 'míst'); }
@@ -117,13 +122,14 @@
       o.m.forEach(function (m) { if (odpovida(m)) { n++; if (m.d) maDop = true; } });
       if (!n) return;
       celkem += n;
+      var maLidi = o.m.some(function (m) { return m.l && odpovida(m); });
       var p = xy(o.lon, o.lat);
       var c = document.createElementNS(NS, 'circle');
       c.setAttribute('cx', p[0].toFixed(1)); c.setAttribute('cy', p[1].toFixed(1));
       c.setAttribute('r', Math.min(8, 1.9 + 1.1 * Math.sqrt(n)).toFixed(2));
-      c.setAttribute('class', 'misto' + (maDop ? ' dop' : ''));
+      c.setAttribute('class', 'misto' + (maDop ? ' dop' : '') + (maLidi ? ' lide' : ''));
       c.setAttribute('data-i', i);
-      if (maDop) dop.push(c); else vrstva.appendChild(c);
+      if (maDop || maLidi) dop.push(c); else vrstva.appendChild(c);
     });
     dop.forEach(function (c) { vrstva.appendChild(c); });
     pocetEl.textContent = cislo(celkem) + ' ' + slovo(celkem);
@@ -143,11 +149,13 @@
     o.m.filter(odpovida).forEach(function (m) {
       var b = el('div', 'polozka' + (m.d ? ' polozka-dop' : ''));
       b.appendChild(el('p', 'polozka-typ', (m.d ? '◆ Doporučeno v Akademii · ' : '') + (DATA.typy[m.t] || '')));
+      if (m.p) b.appendChild(el('p', 'polozka-adresa', m.p));
+      if (m.q) b.appendChild(el('p', 'polozka-adresa', '„' + m.q + '“'));
       b.appendChild(el('p', 'polozka-nazev', m.n));
       if (m.a) b.appendChild(el('p', 'polozka-adresa', m.a));
       var u = typeof m.u === 'number' ? DATA.registry[m.u] : m.u;
       if (u) {
-        var a = el('a', 'polozka-odkaz', m.d ? 'Otevřít web farmy' : ('V registru SVS' + (m.r ? ' · ' + m.r : '')));
+        var a = el('a', 'polozka-odkaz', m.d ? 'Otevřít web farmy' : (m.l ? 'Otevřít' : ('V registru SVS' + (m.r ? ' · ' + m.r : ''))));
         a.href = u; a.target = '_blank'; a.rel = 'noopener';
         b.appendChild(a);
       }

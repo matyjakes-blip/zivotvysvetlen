@@ -101,6 +101,12 @@ def kategorie_mleko(zaznam):
     return "mleko", "Syrové mléko ze dvora"
 
 
+def tipy():
+    """overene tipy od lidi (plni tydenni agent sourcing-tipy z Notionu)"""
+    p = "sourcing/tipy.json"
+    return json.load(open(p, encoding="utf-8")) if os.path.exists(p) else []
+
+
 def doporucene():
     p = "sourcing/doporucene.json"
     return json.load(open(p, encoding="utf-8")) if os.path.exists(p) else []
@@ -151,6 +157,21 @@ if __name__ == "__main__":
                                          "lat": o["lat"], "lon": o["lon"], "m": []})
         ob["m"].insert(0, {"n": d["nazev"], "a": d["adresa"], "t": d["co"], "k": d["kategorie"],
                            "r": "", "u": d.get("odkaz", ""), "z": "Doporučeno v Akademii", "d": 1})
+        celkem += 1
+    for t in tipy():
+        o = najdi_obec((t.get("adresa") or "") + ", " + t.get("obec", ""), podle_nazvu, podle_psc)
+        if not o:
+            nenalezeno.append("TIP: " + t.get("obec", "")); continue
+        klic_obce = o["obec"] + "|" + o["okres"]
+        ob = obce.setdefault(klic_obce, {"obec": o["obec"], "okres": o["okres"], "kraj": o["kraj"],
+                                         "lat": o["lat"], "lon": o["lon"], "m": []})
+        popis = " · ".join(x for x in [t.get("co", ""), ("pastva: " + t["pastva"]) if t.get("pastva") else "",
+                                        t.get("jak", "")] if x)
+        ob["m"].insert(0, {"n": "Soukromý chovatel" if t.get("soukromy") else t["nazev"],
+                           "a": "" if t.get("soukromy") else t.get("adresa", ""),
+                           "t": "Tip od lidí", "k": t.get("kategorie", "ostatni"), "r": "",
+                           "u": "" if t.get("soukromy") else t.get("odkaz", ""),
+                           "z": "Tip od lidí", "l": 1, "p": popis, "q": t.get("poznamka", "")})
         celkem += 1
     ven = sorted(obce.values(), key=lambda o: -len(o["m"]))
     registry = [SVS_MLEKO, SVS_PP]

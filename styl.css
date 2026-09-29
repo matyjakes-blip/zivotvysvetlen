@@ -364,3 +364,6 @@ h2{
 @media (max-width:560px){.clanek .dvojice{grid-template-columns:1fr}}
 @media (min-width:980px){.hoste-radek{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (min-width:560px) and (max-width:979px){.hoste-radek{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pridej{margin:26px auto 0;max-width:640px;text-align:center;padding:22px 20px;border:1px solid rgba(198,161,91,.22)}
+.pridej p{margin-bottom:14px;color:var(--kost)}
+.mapa-svg .misto.lide{fill:var(--kost);stroke:var(--zlato);stroke-width:1.6}

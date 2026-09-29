@@ -5,6 +5,8 @@ Obrysy: sourcing/obrysy.json. Mista: sourcing/data.json (stavi _sourcing_data.py
 Body se kresli v prohlizeci, stranka sama zustava lehka."""
 import json, math
 
+FORM_TIPY = "https://indecisive-zenobia-f04.notion.site/ce110a2416d64dbbbbf337d14894c801"
+
 W, H = 1000, 560
 OKRAJ = 26
 
@@ -53,6 +55,9 @@ def postav(HLAVA, PATA, SKOOL, esc):
     tvary = "".join('<path class="zeme" d="%s"></path>' % d for d in cesty(obrysy, bod))
     pocet = sum(len(o["m"]) for o in data["obce"])
     filtry = "".join('<button class="filtr" data-kat="%s">%s</button>' % (k, esc(n)) for k, n in KATEGORIE)
+    pocet_tipu = sum(1 for o in data["obce"] for m in o["m"] if m.get("l"))
+    if pocet_tipu:
+        filtry += '<button class="filtr filtr-dop" data-kat="lide">Od lidí</button>'
 
     telo = """
 <main>
@@ -81,6 +86,10 @@ def postav(HLAVA, PATA, SKOOL, esc):
         </div>
       </div>
       <p class="popisek"><span class="pocet">Načítám…</span> · klikni na bod</p>
+      <div class="pridej">
+        <p><strong>Chybí tu místo, kam chodíš?</strong> Registr říká jen, kdo smí prodávat. Jestli je to dobré, víš ty.</p>
+        <a class="cta" href="{form_tipy}" target="_blank" rel="noopener">Přidej místo</a>
+      </div>
     </div>
   </section>
 
@@ -126,6 +135,7 @@ def postav(HLAVA, PATA, SKOOL, esc):
   function odpovida(m) {{
     if (filtr === 'vse') return true;
     if (filtr === 'dop') return !!m.d;
+    if (filtr === 'lide') return !!m.l;
     return m.k === filtr;
   }}
   function slovo(n) {{ return n === 1 ? 'místo' : (n >= 2 && n <= 4 ? 'místa' : 'míst'); }}
@@ -139,13 +149,14 @@ def postav(HLAVA, PATA, SKOOL, esc):
       o.m.forEach(function (m) {{ if (odpovida(m)) {{ n++; if (m.d) maDop = true; }} }});
       if (!n) return;
       celkem += n;
+      var maLidi = o.m.some(function (m) {{ return m.l && odpovida(m); }});
       var p = xy(o.lon, o.lat);
       var c = document.createElementNS(NS, 'circle');
       c.setAttribute('cx', p[0].toFixed(1)); c.setAttribute('cy', p[1].toFixed(1));
       c.setAttribute('r', Math.min(8, 1.9 + 1.1 * Math.sqrt(n)).toFixed(2));
-      c.setAttribute('class', 'misto' + (maDop ? ' dop' : ''));
+      c.setAttribute('class', 'misto' + (maDop ? ' dop' : '') + (maLidi ? ' lide' : ''));
       c.setAttribute('data-i', i);
-      if (maDop) dop.push(c); else vrstva.appendChild(c);
+      if (maDop || maLidi) dop.push(c); else vrstva.appendChild(c);
     }});
     dop.forEach(function (c) {{ vrstva.appendChild(c); }});
     pocetEl.textContent = cislo(celkem) + ' ' + slovo(celkem);
@@ -165,11 +176,13 @@ def postav(HLAVA, PATA, SKOOL, esc):
     o.m.filter(odpovida).forEach(function (m) {{
       var b = el('div', 'polozka' + (m.d ? ' polozka-dop' : ''));
       b.appendChild(el('p', 'polozka-typ', (m.d ? '◆ Doporučeno v Akademii · ' : '') + (DATA.typy[m.t] || '')));
+      if (m.p) b.appendChild(el('p', 'polozka-adresa', m.p));
+      if (m.q) b.appendChild(el('p', 'polozka-adresa', '„' + m.q + '“'));
       b.appendChild(el('p', 'polozka-nazev', m.n));
       if (m.a) b.appendChild(el('p', 'polozka-adresa', m.a));
       var u = typeof m.u === 'number' ? DATA.registry[m.u] : m.u;
       if (u) {{
-        var a = el('a', 'polozka-odkaz', m.d ? 'Otevřít web farmy' : ('V registru SVS' + (m.r ? ' · ' + m.r : '')));
+        var a = el('a', 'polozka-odkaz', m.d ? 'Otevřít web farmy' : (m.l ? 'Otevřít' : ('V registru SVS' + (m.r ? ' · ' + m.r : ''))));
         a.href = u; a.target = '_blank'; a.rel = 'noopener';
         b.appendChild(a);
       }}
@@ -209,7 +222,7 @@ def postav(HLAVA, PATA, SKOOL, esc):
   }}).catch(function () {{ pocetEl.textContent = 'Mapu se nepodařilo načíst.'; }});
 }})();
 </script>
-""".format(W=W, H=H, tvary=tvary, filtry=filtry, skool=SKOOL,
+""".format(W=W, H=H, tvary=tvary, filtry=filtry, skool=SKOOL, form_tipy=FORM_TIPY,
            pocet_slovy=("Přes %d 000" % (pocet // 1000)) if pocet >= 1000 else str(pocet),
            aktualizace=data.get("aktualizace", ""),
            par=json.dumps({k: round(v, 6) for k, v in par.items()}),
