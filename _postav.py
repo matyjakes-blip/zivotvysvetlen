@@ -178,23 +178,29 @@ MODULY = [
 
 
 def pas_podcasty():
+    # Respekt se neotevira hned na respekt.cz: klik ukaze dvojstranu v okne (#respekt), odkaz na clanek je uvnitr
     polozky = "".join(
-        '<a class="host" href="%s"><b>%s</b><span>%s</span></a>' % (u, esc(n), esc(p))
+        '<a class="host" href="%s"><b>%s</b><span>%s</span></a>' % ("#respekt" if n.startswith("Respekt") else u, esc(n), esc(p))
         for n, p, u in PODCASTY)
     return """
-  <section class="pas hoste">
+  <section class="pas hoste" id="hoste">
     <div class="obal">
       <p class="nadtitul">Psali o mně · byl jsem hostem</p>
       <div class="hoste-radek">%s</div>
-      <div class="clanek">
-        <div class="dvojice">
-          <a class="ram" href="/media/respekt-32-2025-str14.jpg"><img src="/media/respekt-32-2025-str14.jpg" alt="Respekt 32/2025, strana 14: článek o Matyášovi" loading="lazy"></a>
-          <a class="ram" href="/media/respekt-32-2025-str15.jpg"><img src="/media/respekt-32-2025-str15.jpg" alt="Respekt 32/2025, strana 15" loading="lazy"></a>
-        </div>
-        <p class="popisek">Respekt 32/2025 · 4. až 10. srpna 2025 · <a href="https://www.respekt.cz/tydenik/2025/32/najednou-jsem-mel-chut-do-zivota">celý článek</a></p>
-      </div>
     </div>
   </section>
+  <div class="clanek" id="respekt" role="dialog" aria-modal="true" aria-label="Respekt 32/2025">
+    <a class="clanek-pozadi" href="#hoste" aria-label="Zavřít"></a>
+    <div class="clanek-okno">
+      <a class="clanek-zavrit" href="#hoste" aria-label="Zavřít">×</a>
+      <p class="nadtitul">Respekt 32/2025 · 4. až 10. srpna 2025</p>
+      <div class="dvojice">
+        <a class="ram" href="/media/respekt-32-2025-str14.jpg"><img src="/media/respekt-32-2025-str14.jpg" alt="Respekt 32/2025, strana 14: článek o Matyášovi" loading="lazy"></a>
+        <a class="ram" href="/media/respekt-32-2025-str15.jpg"><img src="/media/respekt-32-2025-str15.jpg" alt="Respekt 32/2025, strana 15" loading="lazy"></a>
+      </div>
+      <p class="popisek"><a href="https://www.respekt.cz/tydenik/2025/32/najednou-jsem-mel-chut-do-zivota">Celý článek na respekt.cz</a></p>
+    </div>
+  </div>
 """ % polozky
 
 

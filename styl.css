@@ -352,10 +352,15 @@ h2{
 .karta .polozka-odkaz{display:inline-block;margin-top:4px;font-size:.86rem}
 .sourcing-pas{background:var(--zed)}
 
-/* Respekt dvojstrana (29. 9. 2026) */
-.clanek{max-width:820px;margin:34px auto 0}
-.clanek .dvojice{margin-top:0;align-items:start}
+/* Respekt dvojstrana: okno az po kliknuti na kartu (29. 9. 2026) */
+.clanek{display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) 16px max(16px,env(safe-area-inset-bottom,0px))}
+.clanek:target{display:flex}
+.clanek-pozadi{position:absolute;inset:0;background:rgba(6,5,3,.9)}
+.clanek-okno{position:relative;width:min(100%,920px);max-height:100%;overflow:auto;background:#0f0c08;border:1px solid #3a2a12;border-radius:6px;padding:clamp(18px,3vw,32px)}
+.clanek-zavrit{position:absolute;top:6px;right:12px;font-size:2rem;line-height:1;color:var(--kost);text-decoration:none}
+.clanek .dvojice{margin-top:14px;align-items:start}
 .clanek .dvojice .ram img{aspect-ratio:auto;object-fit:initial;background:none}
 .clanek .popisek a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+@media (max-width:560px){.clanek .dvojice{grid-template-columns:1fr}}
 @media (min-width:980px){.hoste-radek{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (min-width:560px) and (max-width:979px){.hoste-radek{grid-template-columns:repeat(2,minmax(0,1fr))}}
