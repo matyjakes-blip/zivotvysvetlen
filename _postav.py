@@ -573,7 +573,7 @@ def postav_pravni():
         <li><b>Právní základ</b> je tvůj souhlas, který dáváš zaškrtnutím ve formuláři.</li>
         <li><b>Kde to leží:</b> formulář i seznam běží v Notionu (Notion Labs, Inc.), který pro mě data zpracovává.</li>
         <li><b>Jak dlouho:</b> dokud se neodhlásíš.</li>
-        <li><b>Odhlášení:</b> stačí odpovědět na kterýkoli můj e-mail, nebo napsat na <a href="mailto:{mail}">{mail}</a>. Pak ti už nic nepřijde a e-mail ze seznamu smažu.</li>
+        <li><b>Odhlášení:</b> stačí odpovědět na kterýkoli můj e-mail, nebo napsat na <a href="mailto:{mail}">{mail}</a>. Pak ti už nic nepřijde. E-mail si nechám jen s poznámkou, že nechceš nic dostávat, aby ti omylem nic nepřišlo znovu.</li>
       </ul>
     </section>
 
