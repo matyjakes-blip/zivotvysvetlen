@@ -22,6 +22,8 @@ PODCASTY = [
     # clanek v tydeniku Respekt 32/2025 (4.-10. 8. 2025), pridano 28. 9. 2026 na Matyasovo prani
     ("Respekt 32/2025", "Článek v týdeníku · Najednou jsem měl chuť do života", "https://www.respekt.cz/tydenik/2025/32/najednou-jsem-mel-chut-do-zivota"),
     ("Debatní deník", "Debata s odpůrcem moderní vědy a medicíny", "https://www.youtube.com/watch?v=CHxI8kVo_2Q"),
+    # POD 10, overeno na YouTube 29. 9. 2026 (2. dil, 1. dil se na YouTube nenasel)
+    ("POD 10", "Nejezte zeleninu · kontroverzní výživový poradce", "https://www.youtube.com/watch?v=xNz05rFzncQ"),
     ("Světy proti sobě", "Grznár vs. Jakeš · sypač vs. naturál", "https://www.youtube.com/watch?v=bs12r6PMWC0"),
 ]
 
@@ -184,6 +186,13 @@ def pas_podcasty():
     <div class="obal">
       <p class="nadtitul">Psali o mně · byl jsem hostem</p>
       <div class="hoste-radek">%s</div>
+      <div class="clanek">
+        <div class="dvojice">
+          <a class="ram" href="/media/respekt-32-2025-str14.jpg"><img src="/media/respekt-32-2025-str14.jpg" alt="Respekt 32/2025, strana 14: článek o Matyášovi" loading="lazy"></a>
+          <a class="ram" href="/media/respekt-32-2025-str15.jpg"><img src="/media/respekt-32-2025-str15.jpg" alt="Respekt 32/2025, strana 15" loading="lazy"></a>
+        </div>
+        <p class="popisek">Respekt 32/2025 · 4. až 10. srpna 2025 · <a href="https://www.respekt.cz/tydenik/2025/32/najednou-jsem-mel-chut-do-zivota">celý článek</a></p>
+      </div>
     </div>
   </section>
 """ % polozky
