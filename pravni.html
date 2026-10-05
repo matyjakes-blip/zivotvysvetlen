@@ -18,19 +18,33 @@
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/ikona-512.png" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" href="/pisma/cinzel.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/pisma/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/pisma/cormorant.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/styl.css">
 </head>
 <body>
 <header class="hlavicka">
   <a class="znacka" href="/">Život vysvětlen</a>
-  <nav class="nav">
-    <a href="/mapa.html">Mapa</a>
-    <a href="/jedna-na-jedna.html">1:1</a>
-    <a href="/pribeh.html">Příběh</a>
-    <a class="cta-maly" href="https://www.skool.com/zivot-vysvetlen-1338">Vstoupit</a>
+  <nav class="nav" aria-label="Hlavní">
+    <a href="/mapa.html">Mapa Akademie</a>
+    <a href="/sourcing.html">Sourcing mapa</a>
+    <a href="/jedna-na-jedna.html">Osobní vedení</a>
+    <a href="/pribeh.html">O mně</a>
   </nav>
+  <div class="hlavicka-vpravo">
+    <a class="cta-maly" href="https://www.skool.com/zivot-vysvetlen-1338">Vstoupit</a>
+    <details class="menu">
+      <summary aria-label="Menu"><span></span></summary>
+      <div class="menu-obsah">
+        <a href="/">Úvod</a>
+        <a href="/mapa.html">Mapa Akademie</a>
+        <a href="/sourcing.html">Sourcing mapa</a>
+        <a href="/jedna-na-jedna.html">Osobní vedení 1:1</a>
+        <a href="/pribeh.html">O mně</a>
+        <a href="/kontakt.html">Kontakt</a>
+      </div>
+    </details>
+  </div>
 </header>
 
 <main>
@@ -121,8 +135,9 @@
 <footer class="pata">
   <div class="ozdoba" aria-hidden="true">◆</div>
   <p class="znacka-pata">Život vysvětlen</p>
-  <p class="drobne">Matyáš Jakeš · <a href="https://www.skool.com/zivot-vysvetlen-1338">Akademie na Skoolu</a> · <a href="/mapa.html">Mapa</a> · <a href="/jedna-na-jedna.html">1:1</a> · <a href="/pribeh.html">Příběh</a> · <a href="/sourcing.html">Sourcing mapa</a> · <a href="/kontakt.html">Kontakt</a></p>
+  <p class="drobne">Matyáš Jakeš · <a href="https://www.skool.com/zivot-vysvetlen-1338">Akademie na Skoolu</a> · <a href="/mapa.html">Mapa Akademie</a> · <a href="/jedna-na-jedna.html">Osobní vedení 1:1</a> · <a href="/pribeh.html">O mně</a> · <a href="/sourcing.html">Sourcing mapa</a> · <a href="/kontakt.html">Kontakt</a></p>
   <p class="drobne">IČO 23494204 · <a href="/pravni.html">Právní informace a zásady</a></p>
 </footer>
+<script src="/web.js" defer></script>
 </body>
 </html>

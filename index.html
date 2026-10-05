@@ -18,41 +18,65 @@
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/ikona-512.png" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" href="/pisma/cinzel.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/pisma/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/pisma/cormorant.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/styl.css">
 </head>
 <body>
 <header class="hlavicka">
   <a class="znacka" href="/">Život vysvětlen</a>
-  <nav class="nav">
-    <a href="/mapa.html">Mapa</a>
-    <a href="/jedna-na-jedna.html">1:1</a>
-    <a href="/pribeh.html">Příběh</a>
-    <a class="cta-maly" href="https://www.skool.com/zivot-vysvetlen-1338">Vstoupit</a>
+  <nav class="nav" aria-label="Hlavní">
+    <a href="/mapa.html">Mapa Akademie</a>
+    <a href="/sourcing.html">Sourcing mapa</a>
+    <a href="/jedna-na-jedna.html">Osobní vedení</a>
+    <a href="/pribeh.html">O mně</a>
   </nav>
+  <div class="hlavicka-vpravo">
+    <a class="cta-maly" href="https://www.skool.com/zivot-vysvetlen-1338">Vstoupit</a>
+    <details class="menu">
+      <summary aria-label="Menu"><span></span></summary>
+      <div class="menu-obsah">
+        <a href="/">Úvod</a>
+        <a href="/mapa.html">Mapa Akademie</a>
+        <a href="/sourcing.html">Sourcing mapa</a>
+        <a href="/jedna-na-jedna.html">Osobní vedení 1:1</a>
+        <a href="/pribeh.html">O mně</a>
+        <a href="/kontakt.html">Kontakt</a>
+      </div>
+    </details>
+  </div>
 </header>
 
 <main>
-  <section class="hero">
-    <div class="obal">
-      <h1 class="znacka-velka">Život vysvětlen</h1>
-      <p class="podtitul">První terénní akademie v češtině</p>
-      <div class="ozdoba" aria-hidden="true">◆</div>
-      <p class="tvrzeni">Tohle není kurz o tom, jak být zdravý.<strong>Tohle je kurz o tom, jak zdraví vlastně funguje.</strong></p>
-      <p class="tvrzeni-pod">Člověk, který zná sto protokolů a nerozumí principu, je závislý na tom, kdo mu ten sto první řekne.</p>
-      <div class="tlacitka">
-        <a class="cta" href="https://www.skool.com/zivot-vysvetlen-1338">Vstoupit do Akademie</a>
-        <a class="cta-druhy" href="/mapa.html">Projít mapu</a>
-        <a class="cta-druhy" href="#cesty">Co nabízím</a>
+  <section class="uvod">
+    <div class="obal uvod-mriz">
+      <div class="uvod-text">
+        <p class="nadtitul">Život vysvětlen · první terénní akademie v češtině</p>
+        <h1>Matyáš Jakeš</h1>
+        <p class="tvrzeni">Tohle není kurz o tom, jak být zdravý.<strong>Tohle je kurz o tom, jak zdraví vlastně funguje.</strong></p>
+        <p class="tvrzeni-pod">Člověk, který zná sto protokolů a nerozumí principu, je závislý na tom, kdo mu ten sto první řekne.</p>
+        <div class="tlacitka">
+          <a class="cta" href="https://www.skool.com/zivot-vysvetlen-1338">Vstoupit do Akademie</a>
+          <a class="cta-druhy" href="/jedna-na-jedna.html">Osobní vedení 1:1</a>
+        </div>
+        <p class="cisla"><span><b>6</b>modulů</span><span><b>24</b>submodulů</span><span><b>102</b>lekcí</span><span><b>21</b>hodin čtení</span></p>
       </div>
-      <p class="cisla"><span><b>6</b>modulů</span><span><b>24</b>submodulů</span><span><b>102</b>lekcí</span><span><b>21</b>hodin čtení</span></p>
+      <figure class="uvod-foto"><div class="foto-misto"><b>Sem přijde tvoje fotka</b><small>portrét na výšku, poměr 4 : 5</small></div></figure>
     </div>
   </section>
 
-  <section class="video">
-    <div class="ram-video"><iframe src="https://www.youtube-nocookie.com/embed/JlXmno16D5s" title="Život vysvětlen" loading="lazy" allowfullscreen></iframe></div>
-    <p class="popisek">Celá pravda k nejvyšší vitalitě · detailní rozbor</p>
+  <section class="pas video-pas">
+    <div class="obal">
+      <div class="video-ram">
+        <a class="video-spust" href="https://www.youtube.com/watch?v=JlXmno16D5s" data-video="https://www.youtube-nocookie.com/embed/JlXmno16D5s?autoplay=1&amp;rel=0">
+          <img src="/media/video-nahled.jpg" alt="" width="960" height="540" loading="lazy">
+          <span class="video-play" aria-hidden="true"></span>
+          <span class="sr">Přehrát video: Celá pravda k nejvyšší vitalitě · detailní rozbor</span>
+        </a>
+      </div>
+      <p class="popisek">Celá pravda k nejvyšší vitalitě · detailní rozbor</p>
+      <p class="drobne">Video se načte z YouTube až po kliknutí.</p>
+    </div>
   </section>
 
   <section class="pas hoste" id="hoste">
@@ -151,8 +175,9 @@
 <footer class="pata">
   <div class="ozdoba" aria-hidden="true">◆</div>
   <p class="znacka-pata">Život vysvětlen</p>
-  <p class="drobne">Matyáš Jakeš · <a href="https://www.skool.com/zivot-vysvetlen-1338">Akademie na Skoolu</a> · <a href="/mapa.html">Mapa</a> · <a href="/jedna-na-jedna.html">1:1</a> · <a href="/pribeh.html">Příběh</a> · <a href="/sourcing.html">Sourcing mapa</a> · <a href="/kontakt.html">Kontakt</a></p>
+  <p class="drobne">Matyáš Jakeš · <a href="https://www.skool.com/zivot-vysvetlen-1338">Akademie na Skoolu</a> · <a href="/mapa.html">Mapa Akademie</a> · <a href="/jedna-na-jedna.html">Osobní vedení 1:1</a> · <a href="/pribeh.html">O mně</a> · <a href="/sourcing.html">Sourcing mapa</a> · <a href="/kontakt.html">Kontakt</a></p>
   <p class="drobne">IČO 23494204 · <a href="/pravni.html">Právní informace a zásady</a></p>
 </footer>
+<script src="/web.js" defer></script>
 </body>
 </html>

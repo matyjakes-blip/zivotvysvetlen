@@ -11,6 +11,11 @@ TELO = os.path.expanduser("~/Work/skool/export-do-skoolu/telo")
 VIDEO = "https://www.youtube-nocookie.com/embed/JlXmno16D5s"
 VIDEO_POPIS = "Celá pravda k nejvyšší vitalitě · detailní rozbor"
 
+# ---- uvodni fotka (Matyas dodá portrét dle vkusu, 5. 10. 2026) ----
+# None = na webu je prázdné políčko. Až ji dodá: uložit do media/ a sem napsat cestu, např. "/media/matyas-uvod.jpg"
+FOTO_UVOD = None
+FOTO_UVOD_POPIS = "Matyáš Jakeš"
+
 SKOOL = "https://www.skool.com/zivot-vysvetlen-1338"
 CALENDLY = "https://calendly.com/yacashh/1-1-osobni-kvalifikacni-hovor"
 INSTAGRAM = "https://www.instagram.com/yacashh/"
@@ -47,19 +52,33 @@ HLAVA = """<!doctype html>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/ikona-512.png" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" href="/pisma/cinzel.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/pisma/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/pisma/cormorant.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/styl.css">
 </head>
 <body>
 <header class="hlavicka">
   <a class="znacka" href="/">Život vysvětlen</a>
-  <nav class="nav">
-    <a href="/mapa.html">Mapa</a>
-    <a href="/jedna-na-jedna.html">1:1</a>
-    <a href="/pribeh.html">Příběh</a>
-    <a class="cta-maly" href="{skool}">Vstoupit</a>
+  <nav class="nav" aria-label="Hlavní">
+    <a href="/mapa.html">Mapa Akademie</a>
+    <a href="/sourcing.html">Sourcing mapa</a>
+    <a href="/jedna-na-jedna.html">Osobní vedení</a>
+    <a href="/pribeh.html">O mně</a>
   </nav>
+  <div class="hlavicka-vpravo">
+    <a class="cta-maly" href="{skool}">Vstoupit</a>
+    <details class="menu">
+      <summary aria-label="Menu"><span></span></summary>
+      <div class="menu-obsah">
+        <a href="/">Úvod</a>
+        <a href="/mapa.html">Mapa Akademie</a>
+        <a href="/sourcing.html">Sourcing mapa</a>
+        <a href="/jedna-na-jedna.html">Osobní vedení 1:1</a>
+        <a href="/pribeh.html">O mně</a>
+        <a href="/kontakt.html">Kontakt</a>
+      </div>
+    </details>
+  </div>
 </header>
 """
 
@@ -67,9 +86,10 @@ PATA = """
 <footer class="pata">
   <div class="ozdoba" aria-hidden="true">◆</div>
   <p class="znacka-pata">Život vysvětlen</p>
-  <p class="drobne">Matyáš Jakeš · <a href="{skool}">Akademie na Skoolu</a> · <a href="/mapa.html">Mapa</a> · <a href="/jedna-na-jedna.html">1:1</a> · <a href="/pribeh.html">Příběh</a> · <a href="/sourcing.html">Sourcing mapa</a> · <a href="/kontakt.html">Kontakt</a></p>
+  <p class="drobne">Matyáš Jakeš · <a href="{skool}">Akademie na Skoolu</a> · <a href="/mapa.html">Mapa Akademie</a> · <a href="/jedna-na-jedna.html">Osobní vedení 1:1</a> · <a href="/pribeh.html">O mně</a> · <a href="/sourcing.html">Sourcing mapa</a> · <a href="/kontakt.html">Kontakt</a></p>
   <p class="drobne">IČO 23494204 · <a href="/pravni.html">Právní informace a zásady</a></p>
 </footer>
+<script src="/web.js" defer></script>
 </body>
 </html>
 """
@@ -267,15 +287,37 @@ def pas_cesty():
 """ % "".join(karty)
 
 
-def postav_index():
-    video = ""
-    if VIDEO:
-        video = """
-  <section class="video">
-    <div class="ram-video"><iframe src="%s" title="Život vysvětlen" loading="lazy" allowfullscreen></iframe></div>
-    <p class="popisek">%s</p>
+def uvod_foto():
+    if FOTO_UVOD:
+        return '<img src="%s" alt="%s" width="800" height="1000" fetchpriority="high">' % (FOTO_UVOD, esc(FOTO_UVOD_POPIS))
+    # prázdné políčko, dokud Matyáš nedodá fotku (na živý web takhle nepouštět)
+    return '<div class="foto-misto"><b>Sem přijde tvoje fotka</b><small>portrét na výšku, poměr 4 : 5</small></div>'
+
+
+def pas_video():
+    # video se z YouTube načte až po kliknutí (web.js); do té doby jen místní náhled, nic se neposílá Googlu
+    if not VIDEO:
+        return ""
+    vid = VIDEO.rstrip("/").split("/")[-1].split("?")[0]
+    return """
+  <section class="pas video-pas">
+    <div class="obal">
+      <div class="video-ram">
+        <a class="video-spust" href="https://www.youtube.com/watch?v=%s" data-video="%s?autoplay=1&amp;rel=0">
+          <img src="/media/video-nahled.jpg" alt="" width="960" height="540" loading="lazy">
+          <span class="video-play" aria-hidden="true"></span>
+          <span class="sr">Přehrát video: %s</span>
+        </a>
+      </div>
+      <p class="popisek">%s</p>
+      <p class="drobne">Video se načte z YouTube až po kliknutí.</p>
+    </div>
   </section>
-""" % (VIDEO, esc(VIDEO_POPIS))
+""" % (vid, VIDEO, esc(VIDEO_POPIS), esc(VIDEO_POPIS))
+
+
+def postav_index():
+    video = pas_video()
 
     poradi = "".join(
         '<li><b>%d</b><span><strong>%s.</strong> %s</span></li>' % (i + 1, esc(a), esc(b))
@@ -291,19 +333,20 @@ def postav_index():
 
     telo = """
 <main>
-  <section class="hero">
-    <div class="obal">
-      <h1 class="znacka-velka">Život vysvětlen</h1>
-      <p class="podtitul">První terénní akademie v češtině</p>
-      <div class="ozdoba" aria-hidden="true">◆</div>
-      <p class="tvrzeni">Tohle není kurz o tom, jak být zdravý.<strong>Tohle je kurz o tom, jak zdraví vlastně funguje.</strong></p>
-      <p class="tvrzeni-pod">Člověk, který zná sto protokolů a nerozumí principu, je závislý na tom, kdo mu ten sto první řekne.</p>
-      <div class="tlacitka">
-        <a class="cta" href="{skool}">Vstoupit do Akademie</a>
-        <a class="cta-druhy" href="/mapa.html">Projít mapu</a>
-        <a class="cta-druhy" href="#cesty">Co nabízím</a>
+  <section class="uvod">
+    <div class="obal uvod-mriz">
+      <div class="uvod-text">
+        <p class="nadtitul">Život vysvětlen · první terénní akademie v češtině</p>
+        <h1>Matyáš Jakeš</h1>
+        <p class="tvrzeni">Tohle není kurz o tom, jak být zdravý.<strong>Tohle je kurz o tom, jak zdraví vlastně funguje.</strong></p>
+        <p class="tvrzeni-pod">Člověk, který zná sto protokolů a nerozumí principu, je závislý na tom, kdo mu ten sto první řekne.</p>
+        <div class="tlacitka">
+          <a class="cta" href="{skool}">Vstoupit do Akademie</a>
+          <a class="cta-druhy" href="/jedna-na-jedna.html">Osobní vedení 1:1</a>
+        </div>
+        <p class="cisla"><span><b>6</b>modulů</span><span><b>24</b>submodulů</span><span><b>102</b>lekcí</span><span><b>21</b>hodin čtení</span></p>
       </div>
-      <p class="cisla"><span><b>6</b>modulů</span><span><b>24</b>submodulů</span><span><b>102</b>lekcí</span><span><b>21</b>hodin čtení</span></p>
+      <figure class="uvod-foto">{foto}</figure>
     </div>
   </section>
 {video}{podcasty}
@@ -370,7 +413,7 @@ def postav_index():
     </div>
   </section>
 </main>
-""".format(skool=SKOOL, video=video, podcasty=pas_podcasty(), cesty=pas_cesty(),
+""".format(skool=SKOOL, video=video, podcasty=pas_podcasty(), cesty=pas_cesty(), foto=uvod_foto(),
            poradi=poradi, moduly=moduly, pravidla=pravidla)
 
     stranka = HLAVA.format(titulek="Život vysvětlen · Akademie",
@@ -688,3 +731,5 @@ if __name__ == "__main__":
     print("pribeh.html: %d bloku" % n)
     for f in ("index.html", "jedna-na-jedna.html", "kontakt.html", "pravni.html"):
         print("%-22s %d znaku" % (f, os.path.getsize(f)))
+    if not FOTO_UVOD:
+        print("POZOR: úvodní fotka chybí (FOTO_UVOD = None), na hlavní stránce je prázdné políčko. Takhle nepushovat na main.")
