@@ -209,7 +209,7 @@ def pas_podcasty():
 CESTY = [
     dict(aktivni=True, hlavni=False, znak="Nejdostupnější",
          nazev="Akademie", vysvetleni="Celý systém napsaný, čteš vlastním tempem",
-         body=["Šest modulů, dvacet tři submodulů, sto jedna lekcí",
+         body=["Šest modulů, čtyřiadvacet submodulů, sto dvě lekce",
                "Mapa, první týden den po dni a vstupní diagnostika",
                "Komunita, kde se doptáváš, když něco nesedí",
                "Zůstává ti to napořád, vracíš se k tomu kdykoli"],
@@ -338,7 +338,7 @@ def postav_index():
   <section class="pas moduly-pas">
     <div class="obal">
       <p class="nadtitul">Co je uvnitř</p>
-      <h2>Šest modulů, dvacet tři submodulů</h2>
+      <h2>Šest modulů, čtyřiadvacet submodulů</h2>
       <ol class="moduly">{moduly}</ol>
       <div class="stred"><a class="cta-druhy" href="/mapa.html">Otevřít mapu Akademie</a></div>
     </div>
