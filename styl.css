@@ -41,6 +41,7 @@ a{color:var(--zlato);text-underline-offset:3px;text-decoration-thickness:1px}
 .obal{max-width:1120px;margin:0 auto;padding-inline:clamp(16px,4vw,32px)}
 .obal.uzky{max-width:740px}
 .stred{text-align:center}
+section[id]{scroll-margin-top:72px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* ---------- hlavička ---------- */
@@ -116,8 +117,8 @@ a{color:var(--zlato);text-underline-offset:3px;text-decoration-thickness:1px}
 .uvod .tvrzeni strong{display:block;margin-top:4px;font-weight:600;color:var(--inkoust)}
 .uvod .tvrzeni-pod{margin-top:18px;max-width:31em;font-size:1.02rem;color:var(--tlumeny);text-wrap:pretty}
 .uvod .cisla{justify-content:flex-start}
-.uvod-foto{position:relative;margin:0}
-.uvod-foto img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:22px;box-shadow:var(--stin)}
+.uvod-foto{position:relative;margin:0;width:100%;max-width:440px;justify-self:end}
+.uvod-foto img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:22px;box-shadow:var(--stin)}
 .foto-misto{
   aspect-ratio:4/5;border-radius:22px;border:1.5px dashed var(--linka2);
   background:repeating-linear-gradient(135deg,rgba(184,147,76,.05) 0 14px,transparent 14px 28px),var(--plocha);
@@ -401,6 +402,72 @@ h3{font-family:var(--nadpis);font-weight:600;color:var(--inkoust)}
 .clanek .dvojice .ram img{aspect-ratio:auto;object-fit:initial;background:none}
 .clanek .popisek a{color:inherit;text-decoration:underline}
 @media (max-width:560px){.clanek .dvojice{grid-template-columns:1fr}}
+
+/* ---------- proměna: posuvník před / po ---------- */
+.promena-mriz{
+  display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);grid-template-areas:"obr hlava" "obr text";
+  column-gap:clamp(28px,5vw,72px);row-gap:0;align-items:center;
+}
+.promena-hlava{grid-area:hlava;align-self:end}
+.promena-obr{grid-area:obr}
+.promena-text{grid-area:text;align-self:start}
+.promena-hlava .nadtitul,.promena-hlava h2{text-align:left}
+.promena-text > p{margin-top:20px;max-width:32em;color:var(--text2);font-size:1.04rem}
+.promena-text .tlacitka{margin-top:26px}
+.prepinac{display:inline-flex;gap:4px;padding:4px;margin-bottom:14px;background:var(--pas);border:1px solid var(--linka);border-radius:999px}
+.prepinac-tl{
+  font-family:var(--text);font-size:.9rem;font-weight:600;color:var(--text2);background:transparent;border:0;
+  padding:8px 18px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s;
+}
+.prepinac-tl[aria-pressed="true"]{background:var(--inkoust);color:var(--pozadi)}
+.posuvnik{
+  --pozice:50%;position:relative;aspect-ratio:3/4;border-radius:20px;overflow:hidden;background:#e7dfcf;
+  box-shadow:var(--stin);touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:ew-resize;
+}
+.posuvnik + .posuvnik{margin-top:14px}
+.posuvnik img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.pred-obal{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--pozice)) 0 0)}
+.stitek{
+  position:absolute;top:14px;z-index:2;padding:6px 12px;border-radius:999px;font-size:.78rem;font-weight:600;
+  background:rgba(253,251,246,.92);color:var(--inkoust);box-shadow:0 2px 10px rgba(0,0,0,.12);pointer-events:none;
+}
+.stitek-pred{left:14px}
+.stitek-po{right:14px;background:var(--inkoust);color:var(--pozadi)}
+.predel{position:absolute;top:0;bottom:0;left:var(--pozice);z-index:3;width:2px;margin-left:-1px;background:#fdfbf6;pointer-events:none;box-shadow:0 0 12px rgba(0,0,0,.25)}
+.madlo{
+  position:absolute;top:50%;left:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;
+  background:#fdfbf6;box-shadow:0 6px 20px rgba(0,0,0,.25);
+}
+.madlo::before,.madlo::after{content:"";position:absolute;top:50%;margin-top:-6px;border-style:solid;border-width:6px 0 6px 8px;border-color:transparent transparent transparent var(--inkoust)}
+.madlo::before{left:10px;transform:rotate(180deg)}
+.madlo::after{right:10px}
+.posuvnik-ovladac{position:absolute;inset:auto 0 0 0;width:100%;height:1px;opacity:0;pointer-events:none}
+.posuvnik:focus-within{outline:2px solid var(--zlato);outline-offset:3px}
+.promena-obr .popisek{margin-top:14px}
+
+/* okno „Co se změnilo a proč" */
+.okno-proc .clanek-okno{width:min(100%,760px);padding:clamp(22px,4vw,40px)}
+.okno-proc .nadtitul{text-align:left;padding-right:36px}
+.zalozky{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;padding-bottom:16px;border-bottom:1px solid var(--linka)}
+.zalozka{
+  font-family:var(--text);font-size:.9rem;font-weight:600;padding:8px 16px;border-radius:999px;cursor:pointer;
+  background:var(--pozadi);border:1px solid var(--linka2);color:var(--text2);transition:all .2s;
+}
+.zalozka:hover{border-color:var(--inkoust);color:var(--inkoust)}
+.zalozka[aria-selected="true"]{background:var(--inkoust);border-color:var(--inkoust);color:var(--pozadi)}
+.panel{margin-top:22px}
+.panel h3{font-size:1.7rem;line-height:1.15}
+.panel p{margin-top:12px;color:#2e2a23;font-size:1.03rem;line-height:1.7}
+.panel .zdroj{margin-top:18px;font-size:.88rem}
+.panel .zdroj a{color:var(--zlato);font-weight:600}
+.panel .zdroj a::after{content:" →"}
+.js .zalozky ~ .panely .panel[hidden]{display:none}
+@media (max-width:860px){
+  .promena-mriz{grid-template-columns:1fr;grid-template-areas:"hlava" "obr" "text"}
+  .promena-hlava{margin-bottom:24px}
+  .promena-hlava .nadtitul,.promena-hlava h2{text-align:center}
+  .promena-obr{max-width:460px;width:100%;margin-inline:auto;text-align:center}
+}
 
 /* ---------- telefon ---------- */
 @media (max-width:860px){

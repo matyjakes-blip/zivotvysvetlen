@@ -13,7 +13,7 @@ VIDEO_POPIS = "Celá pravda k nejvyšší vitalitě · detailní rozbor"
 
 # ---- uvodni fotka (Matyas dodá portrét dle vkusu, 5. 10. 2026) ----
 # None = na webu je prázdné políčko. Až ji dodá: uložit do media/ a sem napsat cestu, např. "/media/matyas-uvod.jpg"
-FOTO_UVOD = None
+FOTO_UVOD = "/media/matyas-uvod.jpg"   # 6. 10. 2026: „prozatím tyto fotky, od budoucna přidám / změním"
 FOTO_UVOD_POPIS = "Matyáš Jakeš"
 
 SKOOL = "https://www.skool.com/zivot-vysvetlen-1338"
@@ -287,6 +287,93 @@ def pas_cesty():
 """ % "".join(karty)
 
 
+# ---- proměna: posuvník před / po (krok 2 přestavby, 6. 10. 2026) ----
+# štítky jen z faktů v lekci 0.0; "Teď" = fotka, kterou Matyáš poslal 6. 10. (věk doplnit, až ho řekne)
+PROMENA = [
+    dict(klic="plet", nazev="Pleť",
+         pred="/media/promena-plet-pred.jpg", po="/media/promena-plet-po.jpg",
+         stitek_pred="Před · 17 let", stitek_po="Teď"),
+    dict(klic="telo", nazev="Postava",
+         pred="/media/promena-telo-pred.jpg", po="/media/promena-telo-po.jpg",
+         stitek_pred="Před", stitek_po="Po 4 měsících"),
+]
+
+# okno „Co se změnilo a proč": jen jeho věty (lekce 0.0 a 1.4.5), nic dopsaného; názvy záložek jsou moje
+PROC = [
+    ("zkousel", "Co jsem zkoušel", [
+        "A jako by toho nebylo málo, o pár měsíců později se mi brutálně rozjelo akné. Totální breakout. Psychicky mě to úplně ničilo. Zkoušel jsem všechno – drahý skincare, červený lampy, celerový džusy, kosmetičky, různé detox kůry... a nic. **Jen se to horšilo.** Až mi došlo, že všechny ty chemický přípravky vlastně tělo jen ještě víc zanáší.",
+     ], "Lekce 0.0 · Můj příběh", "/pribeh.html"),
+    ("testy", "Co ukázaly testy", [
+        "Šel jsem k doktorce na krevní testy, protože už jsem fakt nevěděl, co se se mnou děje – a byla úplně v šoku. Řekla mi, že mám hyperurikémii – zvýšenou hladinu kyseliny močový, a to na úrovni 60letýho chlapa. Zároveň jsem si nechal zkontrolovat i testosteron, a ten byl taky úplně na dně.",
+     ], "Lekce 0.0 · Můj příběh", "/pribeh.html"),
+    ("zmena", "Co se změnilo", [
+        "Okamžitě po správné dietě se mi zastavil zánět, kyselina močová a močovina se vrátili do normálu. Můj testosteron vystřelil, můj metabolismus se dal zpátky do normálu, vysekal jsem 15 kilo a vypadal 10 krát lépe. Od té doby jsem nikdy nebyl šťastnější.",
+        "Hormony mají neskutečný vliv na člověka a hrají zásadní roli ve vývinu jeho vzhledu, zdraví orgánů, metabolismu, a psychiky.",
+     ], "Lekce 0.0 · Můj příběh", "/pribeh.html"),
+    ("akne", "Proč akné", [
+        "**Znamená:** chronické vylučování kůží a ukládání navázané na hormony, na střevní stagnaci a na psychický terén.",
+        "**Pohaní:** zpracované potraviny, semenné oleje, rafinované sacharidy · hormonální stres, tedy antikoncepce, endokrinní disruptory, narušený spánek · chronická zácpa nebo líná játra · sebekritika, stud, srovnávání, starosti.",
+        "**Podpora:** úplný reset stravy · denní průchodné střevo, podpora lymfy pohybem · přírodní péče o pleť, tedy syrové tuky a prosté mytí bez odmastení · medové nebo jílové masky · méně obrazovek a srovnávání, léčení sebeobrazu · dost slunce a spánku.",
+     ], "Lekce 1.4.5 · Aplikované dekódování příznaků", SKOOL),
+]
+
+
+def pas_promena():
+    prep = "".join(
+        '<button type="button" class="prepinac-tl" data-par="%s" aria-pressed="%s">%s</button>'
+        % (p["klic"], "true" if i == 0 else "false", esc(p["nazev"])) for i, p in enumerate(PROMENA))
+    posuvniky = "".join(
+        '<div class="posuvnik" data-par="%s">'
+        '<img class="po" src="%s" alt="%s: %s" width="720" height="960" loading="lazy">'
+        '<div class="pred-obal"><img src="%s" alt="%s: %s" width="720" height="960" loading="lazy"></div>'
+        '<span class="stitek stitek-pred">%s</span><span class="stitek stitek-po">%s</span>'
+        '<span class="predel" aria-hidden="true"><span class="madlo"></span></span>'
+        '<input class="posuvnik-ovladac" type="range" min="0" max="100" value="50" aria-label="%s: posunout předěl mezi před a po">'
+        '</div>'
+        % (p["klic"], p["po"], esc(p["nazev"]), esc(p["stitek_po"]), p["pred"], esc(p["nazev"]), esc(p["stitek_pred"]),
+           esc(p["stitek_pred"]), esc(p["stitek_po"]), esc(p["nazev"])) for p in PROMENA)
+    zalozky = "".join(
+        '<button type="button" class="zalozka" data-zalozka="%s" aria-selected="%s">%s</button>'
+        % (k, "true" if i == 0 else "false", esc(n)) for i, (k, n, _, _, _) in enumerate(PROC))
+    panely = "".join(
+        '<section class="panel" data-panel="%s"><h3>%s</h3>%s<p class="zdroj"><a href="%s">%s</a></p></section>'
+        % (k, esc(n), "".join("<p>%s</p>" % md_inline(t) for t in texty), odkaz, esc(zdroj))
+        for k, n, texty, zdroj, odkaz in PROC)
+    return """
+  <section class="pas promena" id="promena">
+    <div class="obal">
+      <div class="promena-mriz">
+        <div class="promena-hlava">
+          <p class="nadtitul">Důkaz</p>
+          <h2>Nejdřív jsem to zkusil na sobě</h2>
+        </div>
+        <div class="promena-obr">
+          <div class="prepinac" role="group" aria-label="Co porovnat">%s</div>
+          %s
+          <p class="popisek">Táhni předělem do stran · výsledky jsou individuální</p>
+        </div>
+        <div class="promena-text">
+          <p>V patnácti jsem měl 167 centimetrů a 55 kilo, ženské rysy, nulovou energii a byl jsem v podstatě neplodný. V osmnácti jsem vážil 110 kilo, měl kyselinu močovou na úrovni šedesátiletého chlapa a testosteron na dně.</p>
+          <div class="tlacitka">
+            <a class="cta" href="#proc">Co se změnilo a proč</a>
+            <a class="cta-druhy" href="/pribeh.html">Celý příběh</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="clanek okno-proc" id="proc" role="dialog" aria-modal="true" aria-labelledby="proc-nadpis">
+    <a class="clanek-pozadi" href="#promena" aria-label="Zavřít"></a>
+    <div class="clanek-okno">
+      <a class="clanek-zavrit" href="#promena" aria-label="Zavřít">×</a>
+      <p class="nadtitul" id="proc-nadpis">Co se změnilo a proč</p>
+      <div class="zalozky" role="tablist">%s</div>
+      <div class="panely">%s</div>
+    </div>
+  </div>
+""" % (prep, posuvniky, zalozky, panely)
+
+
 def uvod_foto():
     if FOTO_UVOD:
         return '<img src="%s" alt="%s" width="800" height="1000" fetchpriority="high">' % (FOTO_UVOD, esc(FOTO_UVOD_POPIS))
@@ -350,25 +437,7 @@ def postav_index():
     </div>
   </section>
 {video}{podcasty}
-  <section class="pas dukaz">
-    <div class="obal uzky">
-      <p class="nadtitul">Důkaz</p>
-      <h2>Nejdřív jsem to zkusil na sobě</h2>
-      <div class="dvojice">
-        <figure class="ram"><img src="/pribeh/0.0__11-pred-ctyri-mesice.jpg" alt="před" loading="lazy"></figure>
-        <figure class="ram"><img src="/pribeh/0.0__12-po-ctyrech-mesicich.jpg" alt="po" loading="lazy"></figure>
-      </div>
-      <p class="popisek">Rozdíl čtyři měsíce</p>
-      <div class="dvojice">
-        <figure class="ram"><img src="/pribeh/0.0__13-pred-dva-a-pul-roku.jpg" alt="před" loading="lazy"></figure>
-        <figure class="ram"><img src="/pribeh/0.0__14-po-dvou-a-pul-roce.jpg" alt="po" loading="lazy"></figure>
-      </div>
-      <p class="popisek">Rozdíl dva a půl roku</p>
-      <p class="text-stred">V patnácti jsem měl 167 centimetrů a 55 kilo, ženské rysy, nulovou energii a byl jsem v podstatě neplodný. V osmnácti jsem vážil 110 kilo, měl kyselinu močovou na úrovni šedesátiletého chlapa a testosteron na dně.</p>
-      <a class="odkaz-dal" href="/pribeh.html">Celý příběh, bez vynechání</a>
-    </div>
-  </section>
-
+{promena}
   <section class="pas">
     <div class="obal uzky">
       <p class="nadtitul">Proč zrovna v tomhle pořadí</p>
@@ -413,7 +482,7 @@ def postav_index():
     </div>
   </section>
 </main>
-""".format(skool=SKOOL, video=video, podcasty=pas_podcasty(), cesty=pas_cesty(), foto=uvod_foto(),
+""".format(skool=SKOOL, video=video, podcasty=pas_podcasty(), cesty=pas_cesty(), foto=uvod_foto(), promena=pas_promena(),
            poradi=poradi, moduly=moduly, pravidla=pravidla)
 
     stranka = HLAVA.format(titulek="Život vysvětlen · Akademie",
