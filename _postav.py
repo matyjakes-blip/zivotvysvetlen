@@ -288,11 +288,11 @@ def pas_cesty():
 
 
 # ---- proměna: posuvník před / po (krok 2 přestavby, 6. 10. 2026) ----
-# štítky jen z faktů v lekci 0.0; "Teď" = fotka, kterou Matyáš poslal 6. 10. (věk doplnit, až ho řekne)
+# štítky jen z faktů v lekci 0.0; "Teď · 20 let" = selfie od Matyáše 6. 10. (věk řekl 6. 10.)
 PROMENA = [
     dict(klic="plet", nazev="Pleť",
          pred="/media/promena-plet-pred.jpg", po="/media/promena-plet-po.jpg",
-         stitek_pred="Před · 17 let", stitek_po="Teď"),
+         stitek_pred="Před · 17 let", stitek_po="Teď · 20 let"),
     dict(klic="telo", nazev="Postava",
          pred="/media/promena-telo-pred.jpg", po="/media/promena-telo-po.jpg",
          stitek_pred="Před", stitek_po="Po 4 měsících"),
@@ -312,7 +312,7 @@ PROC = [
      ], "Lekce 0.0 · Můj příběh", "/pribeh.html"),
     ("akne", "Proč akné", [
         "**Znamená:** chronické vylučování kůží a ukládání navázané na hormony, na střevní stagnaci a na psychický terén.",
-        "**Pohaní:** zpracované potraviny, semenné oleje, rafinované sacharidy · hormonální stres, tedy antikoncepce, endokrinní disruptory, narušený spánek · chronická zácpa nebo líná játra · sebekritika, stud, srovnávání, starosti.",
+        "**Pohání:** zpracované potraviny, semenné oleje, rafinované sacharidy · hormonální stres, tedy antikoncepce, endokrinní disruptory, narušený spánek · chronická zácpa nebo líná játra · sebekritika, stud, srovnávání, starosti.",
         "**Podpora:** úplný reset stravy · denní průchodné střevo, podpora lymfy pohybem · přírodní péče o pleť, tedy syrové tuky a prosté mytí bez odmastení · medové nebo jílové masky · méně obrazovek a srovnávání, léčení sebeobrazu · dost slunce a spánku.",
      ], "Lekce 1.4.5 · Aplikované dekódování příznaků", SKOOL),
 ]
