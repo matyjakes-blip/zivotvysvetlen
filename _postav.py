@@ -95,6 +95,17 @@ PATA = """
 """
 
 
+# verze stylu a skriptu v odkazu: po každé změně se v prohlížečích načte nový soubor, ne starý z mezipaměti
+import hashlib
+def _verze(soubor):
+    try:
+        return hashlib.md5(open(soubor, "rb").read()).hexdigest()[:8]
+    except OSError:
+        return "0"
+HLAVA = HLAVA.replace('href="/styl.css"', 'href="/styl.css?v=%s"' % _verze("styl.css"))
+PATA = PATA.replace('src="/web.js"', 'src="/web.js?v=%s"' % _verze("web.js"))
+
+
 def esc(t):
     return html.escape(t, quote=False)
 
