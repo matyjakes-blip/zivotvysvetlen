@@ -469,6 +469,35 @@ h3{font-family:var(--nadpis);font-weight:600;color:var(--inkoust)}
   .promena-obr{max-width:460px;width:100%;margin-inline:auto;text-align:center}
 }
 
+/* ---------- starý × nový způsob ---------- */
+.zpusob-tabulka{max-width:980px;margin:38px auto 0;border-radius:20px;overflow:hidden;border:1px solid var(--linka);box-shadow:var(--stin)}
+.zpusob-hlava,.zpusob-radek{display:grid;grid-template-columns:1fr 1fr}
+.zpusob-hlava span{padding:16px 28px;font-size:.76rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.zpusob-hlava span:first-child{background:var(--plocha);color:var(--tlumeny)}
+.zpusob-hlava span:last-child{background:var(--tma);color:var(--zlato-svetle)}
+.zpusob-radek p{position:relative;margin:0;padding:20px 28px 20px 58px;font-size:1.02rem;line-height:1.55}
+.zpusob-radek .bezne{background:var(--plocha);color:var(--tlumeny);border-top:1px solid var(--linka)}
+.zpusob-radek .tady{background:var(--tma);color:#efe8da;border-top:1px solid rgba(239,232,218,.1)}
+.zpusob-radek .znak{position:absolute;left:26px;top:19px;width:20px;text-align:center;font-size:1.15rem;line-height:1.4}
+.zpusob-radek .bezne .znak{color:#b3a894}
+.zpusob-radek .tady .znak::before{
+  content:"";position:absolute;left:4px;top:8px;width:12px;height:7px;
+  border-left:2px solid var(--zlato-svetle);border-bottom:2px solid var(--zlato-svetle);transform:rotate(-45deg);
+}
+.zpusob-stitek{display:none}
+@media (max-width:700px){
+  .zpusob-tabulka{border:0;box-shadow:none;border-radius:0;overflow:visible;display:grid;gap:14px}
+  .zpusob-hlava{display:none}
+  .zpusob-radek{grid-template-columns:1fr;border-radius:16px;overflow:hidden;border:1px solid var(--linka);box-shadow:var(--stin)}
+  .zpusob-radek p{padding:16px 18px 16px 46px}
+  .zpusob-radek .bezne{border-top:0}
+  .zpusob-radek .tady{border-top:0}
+  .zpusob-radek .znak{left:16px;top:35px}
+  .zpusob-stitek{display:block;margin-bottom:4px;font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+  .bezne .zpusob-stitek{color:var(--tlumeny)}
+  .tady .zpusob-stitek{color:var(--zlato-svetle)}
+}
+
 /* ---------- telefon ---------- */
 @media (max-width:860px){
   .uvod-mriz{grid-template-columns:1fr}

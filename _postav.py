@@ -385,6 +385,44 @@ def pas_promena():
 """ % (prep, posuvniky, zalozky, panely)
 
 
+# ---- starý × nový způsob (krok 3 přestavby, návrh 7. 10. 2026) ----
+# jen jeho věty z lekcí 0.1 a 1.4.3, ubraná slova na začátku vět (viz chat 7. 10.); moje jsou jen slova Běžně / Tady
+ZPUSOB_NADPIS = "Rozdíl je zásadní"
+ZPUSOB_POD = "Tohle je ten hlavní rozdíl proti všemu ostatnímu, co se v téhle oblasti prodává."
+ZPUSOB = [
+    ("Moderní medicína se ptá: jak ten příznak zastavíme?",
+     "Terénní myšlení se ptá: jak pomůžeme tělu dokončit, co začalo?"),
+    ("Kurzů o tom, jak být zdravý, jsou tisíce a většina z nich ti prodá další protokol.",
+     "Tady nikdy nedostaneš odpověď typu „ber tohle“. Vždycky dostaneš proč."),
+    ("Seznam si musíš pamatovat.",
+     "Mechanismus si pamatovat nemusíš. Ten pochopíš jednou a od té chvíle si každou další otázku zodpovíš sám."),
+    ("Jídelníček přestane platit v okamžiku, kdy ti dojde jedna surovina.",
+     "Princip platí i v cizí zemi na dovolené."),
+    ("Přidat si do života dvacet nových povinností.",
+     "Odebrat věci, které tělu překážejí, a vrátit mu podmínky, se kterými počítá."),
+]
+
+
+def pas_zpusob():
+    radky = "".join(
+        '<div class="zpusob-radek">'
+        '<p class="bezne"><span class="zpusob-stitek">Běžně</span><span class="znak" aria-hidden="true">×</span>%s</p>'
+        '<p class="tady"><span class="zpusob-stitek">Tady</span><span class="znak" aria-hidden="true"></span>%s</p>'
+        '</div>' % (esc(a), esc(b)) for a, b in ZPUSOB)
+    return """
+  <section class="pas zpusob" id="rozdil">
+    <div class="obal">
+      <h2>%s</h2>
+      <p class="text-stred">%s</p>
+      <div class="zpusob-tabulka">
+        <div class="zpusob-hlava" aria-hidden="true"><span>Běžně</span><span>Tady</span></div>
+        %s
+      </div>
+    </div>
+  </section>
+""" % (esc(ZPUSOB_NADPIS), esc(ZPUSOB_POD), radky)
+
+
 def uvod_foto():
     if FOTO_UVOD:
         return '<img src="%s" alt="%s" width="800" height="1000" fetchpriority="high">' % (FOTO_UVOD, esc(FOTO_UVOD_POPIS))
@@ -418,7 +456,7 @@ def postav_index():
     video = pas_video()
 
     poradi = "".join(
-        '<li><b>%d</b><span><strong>%s.</strong> %s</span></li>' % (i + 1, esc(a), esc(b))
+        '<li><b>%d</b><span><strong>%s</strong>, %s</span></li>' % (i + 1, esc(a), esc(b))
         for i, (a, b) in enumerate(PORADI))
 
     pravidla = "".join(
@@ -448,7 +486,7 @@ def postav_index():
     </div>
   </section>
 {video}{podcasty}
-{promena}
+{promena}{zpusob}
   <section class="pas">
     <div class="obal uzky">
       <p class="nadtitul">Proč zrovna v tomhle pořadí</p>
@@ -493,7 +531,7 @@ def postav_index():
     </div>
   </section>
 </main>
-""".format(skool=SKOOL, video=video, podcasty=pas_podcasty(), cesty=pas_cesty(), foto=uvod_foto(), promena=pas_promena(),
+""".format(skool=SKOOL, video=video, podcasty=pas_podcasty(), cesty=pas_cesty(), foto=uvod_foto(), promena=pas_promena(), zpusob=pas_zpusob(),
            poradi=poradi, moduly=moduly, pravidla=pravidla)
 
     stranka = HLAVA.format(titulek="Život vysvětlen · Akademie",
