@@ -60,7 +60,7 @@ HLAVA = """<!doctype html>
 <header class="hlavicka">
   <a class="znacka" href="/">Život vysvětlen</a>
   <nav class="nav" aria-label="Hlavní">
-    <a href="/mapa.html">Mapa Akademie</a>
+    <a href="/akademie.html">Akademie</a>
     <a href="/sourcing.html">Sourcing mapa</a>
     <a href="/jedna-na-jedna.html">Osobní vedení</a>
     <a href="/pribeh.html">O mně</a>
@@ -71,7 +71,7 @@ HLAVA = """<!doctype html>
       <summary aria-label="Menu"><span></span></summary>
       <div class="menu-obsah">
         <a href="/">Úvod</a>
-        <a href="/mapa.html">Mapa Akademie</a>
+        <a href="/akademie.html">Akademie</a>
         <a href="/sourcing.html">Sourcing mapa</a>
         <a href="/jedna-na-jedna.html">Osobní vedení 1:1</a>
         <a href="/pribeh.html">O mně</a>
@@ -86,7 +86,7 @@ PATA = """
 <footer class="pata">
   <div class="ozdoba" aria-hidden="true">◆</div>
   <p class="znacka-pata">Život vysvětlen</p>
-  <p class="drobne">Matyáš Jakeš · <a href="{skool}">Akademie na Skoolu</a> · <a href="/mapa.html">Mapa Akademie</a> · <a href="/jedna-na-jedna.html">Osobní vedení 1:1</a> · <a href="/pribeh.html">O mně</a> · <a href="/sourcing.html">Sourcing mapa</a> · <a href="/kontakt.html">Kontakt</a></p>
+  <p class="drobne">Matyáš Jakeš · <a href="{skool}">Akademie na Skoolu</a> · <a href="/akademie.html">Akademie</a> · <a href="/jedna-na-jedna.html">Osobní vedení 1:1</a> · <a href="/pribeh.html">O mně</a> · <a href="/sourcing.html">Sourcing mapa</a> · <a href="/kontakt.html">Kontakt</a></p>
   <p class="drobne">IČO 23494204 · <a href="/pravni.html">Právní informace a zásady</a></p>
 </footer>
 <script src="/web.js" defer></script>
@@ -137,6 +137,23 @@ def galerie(soubory, popisek=None):
     figs = "".join('<figure class="ram"><img src="/pribeh/%s" alt="" loading="lazy"></figure>' % s for s in soubory)
     pop = '<figcaption class="popisek">%s</figcaption>' % esc(popisek) if popisek else ""
     return '<div class="dvojice">%s</div>%s' % (figs, pop)
+
+
+def pribeh_html():
+    """celý text lekce 0.0 s fotkami na původních místech (pro rozbalovací „Celý příběh")"""
+    kusy = nacti_pribeh()
+    ven, i = [], 0
+    while i < len(kusy):
+        typ, v = kusy[i]
+        if typ == "obr":
+            skupina = []
+            while i < len(kusy) and kusy[i][0] == "obr":
+                skupina.append(kusy[i][1]); i += 1
+            ven.append('<div class="obrazy">%s</div>' % "".join(
+                '<figure class="ram"><img src="/pribeh/%s" alt="" loading="lazy"></figure>' % s for s in skupina))
+            continue
+        ven.append("<p>%s</p>" % v); i += 1
+    return "\n".join(ven)
 
 
 # ---------------------------------------------------------------- příběh
@@ -355,7 +372,7 @@ def pas_promena():
     <div class="obal">
       <div class="promena-mriz">
         <div class="promena-hlava">
-          <p class="nadtitul">Důkaz</p>
+          <p class="nadtitul">Proměna</p>
           <h2>Nejdřív jsem to zkusil na sobě</h2>
         </div>
         <div class="promena-obr">
@@ -364,7 +381,12 @@ def pas_promena():
           <p class="popisek">Táhni předělem do stran · výsledky jsou individuální</p>
         </div>
         <div class="promena-text">
-          <p>V patnácti jsem měl 167 centimetrů a 55 kilo, ženské rysy, nulovou energii a byl jsem v podstatě neplodný. V osmnácti jsem vážil 110 kilo, měl kyselinu močovou na úrovni šedesátiletého chlapa a testosteron na dně.</p>
+          <ol class="osa">
+            <li><b>15 let</b><span>167 cm · 55 kg</span></li>
+            <li><b>18 let</b><span>182 cm · 110 kg</span></li>
+            <li><b>20 let</b><span>dnes · __ kg</span></li>
+          </ol>
+          <p>Moje důvěryhodnost není v tom, že jsem to vždycky věděl. Je v tom, že jsem si tu špatnou cestu prošel celou.</p>
           <div class="tlacitka">
             <a class="cta" href="#proc">Co se změnilo a proč</a>
             <a class="cta-druhy" href="/pribeh.html">Celý příběh</a>
@@ -423,6 +445,25 @@ def pas_zpusob():
 """ % (esc(ZPUSOB_NADPIS), esc(ZPUSOB_POD), radky)
 
 
+# ---- galerie nejlepších fotek (návrh 7. 10.; fotky dodá Matyáš, teď jen zástupné z _nahledy) ----
+GALERIE = ["/_nahledy/galerie/g%d.jpg" % i for i in range(1, 7)]
+
+
+def pas_galerie():
+    if not GALERIE:
+        return ""
+    fotky = "".join('<figure><img src="%s" alt="Matyáš Jakeš" loading="lazy" width="640" height="800"></figure>' % f for f in GALERIE)
+    return """
+  <section class="pas galerie-pas">
+    <div class="obal">
+      <p class="nadtitul">Galerie</p>
+      <h2>Zdraví je vidět</h2>
+    </div>
+    <div class="galerie-pruh">%s</div>
+  </section>
+""" % fotky
+
+
 def uvod_foto():
     if FOTO_UVOD:
         return '<img src="%s" alt="%s" width="800" height="1000" fetchpriority="high">' % (FOTO_UVOD, esc(FOTO_UVOD_POPIS))
@@ -472,48 +513,22 @@ def postav_index():
   <section class="uvod">
     <div class="obal uvod-mriz">
       <div class="uvod-text">
-        <p class="nadtitul">Život vysvětlen · první terénní akademie v češtině</p>
+        <p class="nadtitul">Život vysvětlen</p>
         <h1>Matyáš Jakeš</h1>
-        <p class="tvrzeni">Tohle není kurz o tom, jak být zdravý.<strong>Tohle je kurz o tom, jak zdraví vlastně funguje.</strong></p>
-        <p class="tvrzeni-pod">Člověk, který zná sto protokolů a nerozumí principu, je závislý na tom, kdo mu ten sto první řekne.</p>
+        <p class="tvrzeni">Postava, energie, klid i vzhled jsou vedlejší produkty.<strong>Ne cíl.</strong></p>
+        <p class="tvrzeni-pod">Oprav terén a biologie, psychika i to, kdo jsi, začnou vyjadřovat to, co měly celou dobu.</p>
         <div class="tlacitka">
-          <a class="cta" href="{skool}">Vstoupit do Akademie</a>
+          <a class="cta" href="/akademie.html">Prohlédnout Akademii</a>
           <a class="cta-druhy" href="/jedna-na-jedna.html">Osobní vedení 1:1</a>
         </div>
-        <p class="cisla"><span><b>6</b>modulů</span><span><b>24</b>submodulů</span><span><b>102</b>lekcí</span><span><b>21</b>hodin čtení</span></p>
+        <p class="psali"><span>Psali o mně a byl jsem hostem</span><a href="#respekt">Respekt</a><a href="https://www.youtube.com/watch?v=CHxI8kVo_2Q">Debatní deník</a><a href="https://www.youtube.com/watch?v=xNz05rFzncQ">POD 10</a><a href="https://www.youtube.com/watch?v=bs12r6PMWC0">Světy proti sobě</a></p>
       </div>
       <figure class="uvod-foto">{foto}</figure>
     </div>
   </section>
-{video}{podcasty}
+{video}
 {promena}{zpusob}
-  <section class="pas">
-    <div class="obal uzky">
-      <p class="nadtitul">Proč zrovna v tomhle pořadí</p>
-      <h2>Každý modul stojí na tom předchozím</h2>
-      <ol class="poradi">{poradi}</ol>
-      <p class="text-stred">Když chceš číst na přeskočku, klidně. Jenom Modul 1 nepřeskakuj.</p>
-    </div>
-  </section>
-
-  <section class="pas moduly-pas">
-    <div class="obal">
-      <p class="nadtitul">Co je uvnitř</p>
-      <h2>Šest modulů, čtyřiadvacet submodulů</h2>
-      <ol class="moduly">{moduly}</ol>
-      <div class="stred"><a class="cta-druhy" href="/mapa.html">Otevřít mapu Akademie</a></div>
-    </div>
-  </section>
-
-  <section class="pas">
-    <div class="obal uzky">
-      <p class="nadtitul">Jak to běží</p>
-      <h2>Pět pravidel Akademie</h2>
-      <div class="pravidla">{pravidla}</div>
-    </div>
-  </section>
-
-
+{akademie}{galerie}
   <section class="pas sourcing-pas">
     <div class="obal uzky stred">
       <p class="nadtitul">Zdarma</p>
@@ -522,16 +537,16 @@ def postav_index():
       <a class="cta-druhy" href="/sourcing.html">Otevřít sourcing mapu</a>
     </div>
   </section>
-{cesty}
+{cesty}{podcasty}
   <section class="pas zaver-pas">
     <div class="obal uzky stred">
       <div class="ozdoba" aria-hidden="true">◆</div>
       <p class="vyzva">Každý modul staví na předchozím a nic v něm nezazní bez vysvětlení.<strong>Kdo přeskočí rovnou na viry, bude mít pocit, že tomu rozumí, a bude se mýlit.</strong></p>
-      <a class="cta" href="{skool}">Vstoupit do Akademie</a>
+      <div class="tlacitka" style="justify-content:center"><a class="cta" href="/akademie.html">Prohlédnout Akademii</a><a class="cta-druhy" href="/jedna-na-jedna.html">Osobní vedení 1:1</a></div>
     </div>
   </section>
 </main>
-""".format(skool=SKOOL, video=video, podcasty=pas_podcasty(), cesty=pas_cesty(), foto=uvod_foto(), promena=pas_promena(), zpusob=pas_zpusob(),
+""".format(skool=SKOOL, video=video, podcasty=pas_podcasty(), cesty=pas_cesty(), foto=uvod_foto(), promena=pas_promena(), zpusob=pas_zpusob(), akademie=_akademie.pas_akademie(_akademie.data()), galerie=pas_galerie(),
            poradi=poradi, moduly=moduly, pravidla=pravidla)
 
     stranka = HLAVA.format(titulek="Život vysvětlen · Akademie",
@@ -835,17 +850,23 @@ def pata_mapy():
 
 
 import _sourcing
+import _akademie
 
 
 if __name__ == "__main__":
     n = postav_pribeh()
     postav_index()
     postav_11()
+    # návrhy v2 (větev navrhy-v2): nové 1:1 a O mně přepíšou staré
+    import _stranky_v2
+    _stranky_v2.postav_11_v2(HLAVA, PATA, SKOOL, CALENDLY)
+    _stranky_v2.postav_pribeh_v2(HLAVA, PATA, SKOOL, pribeh_html())
     postav_kontakt()
     postav_pravni()
     print(oprav_mapu())
     print(pata_mapy())
     print("sourcing.html: %d mist" % _sourcing.postav(HLAVA, PATA, SKOOL, esc))
+    print("akademie.html:", _akademie.postav_stranku(HLAVA, PATA, SKOOL))
     print("pribeh.html: %d bloku" % n)
     for f in ("index.html", "jedna-na-jedna.html", "kontakt.html", "pravni.html"):
         print("%-22s %d znaku" % (f, os.path.getsize(f)))

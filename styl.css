@@ -498,6 +498,200 @@ h3{font-family:var(--nadpis);font-weight:600;color:var(--inkoust)}
   .tady .zpusob-stitek{color:var(--zlato-svetle)}
 }
 
+/* ================= návrhy v2 (7. 10. 2026) ================= */
+/* úvod: řádek „Psali o mně" místo čísel Akademie */
+.psali{margin-top:30px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;font-size:.88rem;color:var(--tlumeny)}
+.psali span{width:100%;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--tlumeny)}
+.psali a{font-family:var(--nadpis);font-size:1.25rem;font-weight:600;color:var(--text2);text-decoration:none;border-bottom:1px solid transparent}
+.psali a:hover{color:var(--inkoust);border-color:var(--linka2)}
+
+/* proměna: věcná osa místo dramatického odstavce */
+.osa{list-style:none;margin-top:22px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:520px}
+.osa li{padding:14px 16px;border:1px solid var(--linka);border-radius:14px;background:var(--plocha)}
+.osa li:last-child{background:var(--tma);border-color:var(--tma)}
+.osa b{display:block;font-family:var(--nadpis);font-size:1.5rem;line-height:1;color:var(--inkoust)}
+.osa li:last-child b{color:#fbf6ec}
+.osa span{display:block;margin-top:6px;font-size:.86rem;color:var(--tlumeny)}
+.osa li:last-child span{color:#cfc5b3}
+.promena-text > p{font-family:var(--nadpis);font-size:1.35rem;line-height:1.35;color:var(--text2);font-style:italic}
+
+/* blok Akademie na hlavní stránce */
+.moduly-mriz{margin-top:38px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
+.modul-karta{background:var(--plocha);border:1px solid var(--linka);border-radius:18px;overflow:hidden;transition:box-shadow .2s,transform .2s}
+.modul-karta:hover{box-shadow:var(--stin);transform:translateY(-2px)}
+.modul-karta summary{list-style:none;cursor:pointer;display:block}
+.modul-karta summary::-webkit-details-marker{display:none}
+.modul-obr{display:block;aspect-ratio:16/10;overflow:hidden;background:#1d1a15}
+.modul-obr img{width:100%;height:100%;object-fit:cover;filter:sepia(.25) saturate(.85);transition:transform .6s}
+.modul-karta:hover .modul-obr img{transform:scale(1.03)}
+.modul-telo{display:block;padding:18px 20px 20px}
+.modul-cislo{display:block;font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--zlato)}
+.modul-jmeno{display:block;margin-top:4px;font-family:var(--znacka);font-weight:600;font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;color:var(--inkoust)}
+.modul-proc{display:block;margin-top:8px;font-size:.94rem;line-height:1.5;color:var(--text2)}
+.modul-meta{display:block;margin-top:12px;font-size:.8rem;color:var(--tlumeny)}
+.modul-vic{display:inline-block;margin-top:12px;font-size:.86rem;font-weight:600;color:var(--inkoust);border-bottom:1px solid var(--zlato-ozdoba)}
+.modul-vic::after{content:" +"}
+.modul-karta[open] .modul-vic::after{content:" −"}
+.modul-sub{list-style:none;padding:0 20px 18px;display:grid;gap:10px;border-top:1px solid var(--linka);padding-top:14px}
+.modul-sub li b{display:block;font-size:.9rem;color:var(--inkoust)}
+.modul-sub li span{display:block;font-size:.86rem;color:var(--tlumeny);line-height:1.45}
+.akademie-pozn{margin-top:26px}
+.akademie-pas .stred{margin-top:24px}
+/* varianta B: tmavá „síň" jako v Akademii */
+.akademie-tmava{background:#0c0a07;color:#ece2cf}
+.akademie-tmava h2{color:#ece2cf;font-family:var(--znacka);font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:clamp(1.5rem,3.4vw,2.2rem)}
+.akademie-tmava .nadtitul{color:#c6a15b}
+.akademie-tmava .text-stred{color:#a0907a}
+.akademie-tmava .modul-karta{background:#15100a;border-color:rgba(198,161,91,.25)}
+.akademie-tmava .modul-jmeno{color:#c6a15b}
+.akademie-tmava .modul-proc{color:#cfc2ab}
+.akademie-tmava .modul-meta{color:#8a7d68}
+.akademie-tmava .modul-vic{color:#ece2cf}
+.akademie-tmava .modul-sub{border-color:rgba(198,161,91,.18)}
+.akademie-tmava .modul-sub li b{color:#ece2cf}
+.akademie-tmava .modul-sub li span{color:#a0907a}
+.akademie-tmava .cta{background:#c6a15b;border-color:#c6a15b;color:#0c0a07}
+.akademie-tmava .modul-obr img{filter:none}
+
+/* galerie */
+.galerie-pruh{margin-top:30px;display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px clamp(16px,4vw,32px) 14px;scrollbar-width:none}
+.galerie-pruh::-webkit-scrollbar{display:none}
+.galerie-pruh figure{flex:0 0 clamp(220px,26vw,300px);margin:0;scroll-snap-align:start;border-radius:18px;overflow:hidden;box-shadow:var(--stin)}
+.galerie-pruh img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
+
+/* stránka Akademie */
+.ak-uvod{padding-block:clamp(32px,6vw,80px) clamp(24px,4vw,48px)}
+.ak-uvod-mriz{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:center}
+.ak-uvod .nadtitul{text-align:left}
+.ak-nadpis{margin-top:12px;font-family:var(--znacka);font-weight:600;font-size:clamp(2.2rem,5.4vw,3.8rem);letter-spacing:.1em;line-height:1.05;text-transform:uppercase;color:var(--inkoust)}
+.ak-veta{margin-top:18px;max-width:26em;font-family:var(--nadpis);font-size:clamp(1.3rem,2.2vw,1.6rem);line-height:1.3;color:var(--text2)}
+.ak-cisla{justify-content:flex-start}
+.ak-uvod-obr{margin:0;border-radius:20px;overflow:hidden;box-shadow:var(--stin)}
+.ak-uvod-obr img{width:100%;height:auto}
+.dlazdice-mriz{margin-top:36px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.dlazdice{background:var(--plocha);border:1px solid var(--linka);border-radius:18px;padding:14px 14px 20px}
+.dlazdice-nahled{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#1d1a15}
+.dlazdice-nahled img{width:100%;height:100%;object-fit:cover;filter:blur(7px) saturate(.8);transform:scale(1.12)}
+.zamek{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);padding:7px 14px 7px 32px;border-radius:999px;background:rgba(253,251,246,.94);font-size:.8rem;font-weight:600;color:var(--inkoust);white-space:nowrap}
+.zamek::before{content:"";position:absolute;left:13px;top:50%;width:10px;height:8px;margin-top:-2px;border-radius:2px;background:var(--inkoust)}
+.zamek::after{content:"";position:absolute;left:14.5px;top:50%;width:7px;height:7px;margin-top:-8px;border:1.6px solid var(--inkoust);border-bottom:0;border-radius:5px 5px 0 0}
+.dlazdice h3{margin-top:14px;padding-inline:6px;font-size:1.45rem;line-height:1.15}
+.dlazdice p{margin-top:6px;padding-inline:6px;font-size:.94rem;color:var(--text2)}
+.sine-pas{background:var(--pas)}
+.sin{margin-top:28px;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(20px,4vw,48px);align-items:start;padding:clamp(18px,3vw,28px);background:var(--plocha);border:1px solid var(--linka);border-radius:22px}
+.sin-obr{margin:0;position:sticky;top:90px}
+.sin-obr img{width:100%;height:auto;border-radius:14px;filter:sepia(.2) saturate(.9)}
+.sin-obr figcaption{margin-top:8px;font-size:.76rem;color:var(--tlumeny)}
+.sin-text h3{margin-top:4px;font-family:var(--znacka);font-weight:600;font-size:clamp(1.3rem,2.6vw,1.7rem);letter-spacing:.06em;text-transform:uppercase}
+.sin-proc{margin-top:10px;font-family:var(--nadpis);font-size:1.3rem;line-height:1.35;color:var(--text2)}
+.sin-text .modul-meta{margin-top:10px}
+.sine-sub{list-style:none;margin-top:18px;display:grid;gap:12px}
+.sub{padding:14px 16px;border:1px solid var(--linka);border-radius:14px;background:var(--pozadi)}
+.sub-hlava b{display:block;font-size:.96rem;color:var(--inkoust)}
+.sub-hlava span{display:block;margin-top:3px;font-size:.9rem;color:var(--text2);line-height:1.45}
+.sub.protokol{background:var(--tma);border-color:var(--tma)}
+.sub.protokol b{color:#fbf6ec}.sub.protokol span{color:#cfc5b3}
+.lekce{list-style:none;margin-top:10px;padding-top:10px;border-top:1px dashed var(--linka2);display:grid;gap:4px;counter-reset:l}
+.lekce li{position:relative;padding-left:22px;font-size:.86rem;color:var(--tlumeny)}
+.lekce li::before{content:"";position:absolute;left:3px;top:.45em;width:8px;height:7px;border-radius:2px;background:var(--linka2)}
+.lekce li.dalsi{font-weight:600;color:var(--zlato)}
+.lekce li.dalsi::before{display:none}
+.ukazka{position:relative;margin-top:28px;background:var(--plocha);border:1px solid var(--linka);border-radius:20px;padding:clamp(20px,4vw,40px);overflow:hidden;max-height:560px}
+.ukazka-text h4{margin-top:18px;font-family:var(--nadpis);font-size:1.5rem}
+.ukazka-text p{margin-top:12px;color:#2e2a23;line-height:1.7}
+.ukazka-zamek{position:absolute;left:0;right:0;bottom:0;padding:120px 20px 28px;text-align:center;background:linear-gradient(180deg,rgba(253,251,246,0),var(--plocha) 55%)}
+.ukazka-zamek p{margin-bottom:14px;font-weight:600;color:var(--inkoust)}
+.ak-neni li{font-size:1.02rem}
+.ak-neni li b{color:var(--inkoust)}
+@media (max-width:900px){
+  .moduly-mriz,.dlazdice-mriz{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ak-uvod-mriz,.sin{grid-template-columns:1fr}
+  .sin-obr{position:static}
+}
+@media (max-width:600px){
+  .moduly-mriz,.dlazdice-mriz{grid-template-columns:1fr}
+  .osa{grid-template-columns:1fr 1fr 1fr;gap:6px}
+  .osa li{padding:10px}
+  .osa b{font-size:1.2rem}
+}
+
+/* stránka 1:1 v2 */
+.v11-h1{margin-top:14px;font-family:var(--nadpis);font-weight:600;font-size:clamp(2rem,3.6vw,3rem);line-height:1.04;letter-spacing:-.01em;color:var(--inkoust)}
+.v11-h1 span{display:block;color:var(--text2);font-weight:500}
+.v11-uvod .tvrzeni-pod{margin-top:20px;font-size:1.06rem;color:var(--text2)}
+.v11-uvod .drobne{margin-top:12px}
+.nb{background:var(--plocha);border:1px solid var(--linka);border-radius:18px;box-shadow:var(--stin);overflow:hidden}
+.nb-lista{display:flex;align-items:center;gap:6px;padding:10px 14px;background:#efe8da;border-bottom:1px solid var(--linka);font-size:.78rem;color:var(--tlumeny)}
+.nb-lista i{width:9px;height:9px;border-radius:50%;background:#d6cbb6}
+.nb-lista span{margin-left:8px}
+.nb-stranka{padding:18px 18px 20px;background:#fff}
+.nb-titul{display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:center;margin-bottom:14px}
+.nb-velka-ikona{grid-row:span 2;font-size:2rem}
+.nb-titul b{font-size:1.25rem;color:#37352f;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+.nb-titul small{font-size:.78rem;color:#9b9a97}
+.nb-mriz{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.nb-blok{border:1px solid #ebe9e4;border-radius:10px;padding:10px 12px;background:#fbfbfa}
+.nb-hlava{display:flex;align-items:center;gap:8px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.84rem;color:#37352f}
+.nb-obsah{margin-top:8px;display:grid;gap:5px}
+.nb-obsah span{height:6px;border-radius:4px;background:#ebe9e4}
+.nb-obsah span.kratka{width:60%}
+.nb-pozn{padding:8px 14px;font-size:.74rem;color:var(--tlumeny);background:#efe8da;border-top:1px solid var(--linka)}
+.v11-bolest p{font-family:var(--nadpis);font-size:clamp(1.5rem,3vw,2.1rem);line-height:1.25;color:var(--inkoust);margin-top:24px}
+.v11-bolest p:first-child{margin-top:0}
+.v11-bolest p:nth-child(-n+2){color:var(--tlumeny)}
+.v11-dostanes{margin-top:36px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,4vw,56px);align-items:center}
+.v11-popisy{list-style:none;display:grid;gap:16px}
+.v11-popisy li{display:flex;gap:14px;align-items:flex-start}
+.v11-popisy .nb-ikona{font-size:1.4rem;line-height:1.2}
+.v11-popisy b{display:block;font-family:var(--nadpis);font-size:1.3rem;line-height:1.2;color:var(--inkoust)}
+.v11-popisy span{display:block;margin-top:2px;font-size:.96rem;color:var(--text2)}
+.v11-prubeh-pas{background:var(--pas)}
+.v11-osa{list-style:none;margin-top:36px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;counter-reset:k}
+.v11-osa li{position:relative;padding:18px 16px;background:var(--plocha);border:1px solid var(--linka);border-radius:16px}
+.v11-osa li b{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--inkoust);color:var(--pozadi);font-size:.86rem}
+.v11-osa strong{display:block;margin-top:12px;font-family:var(--nadpis);font-size:1.3rem;line-height:1.15}
+.v11-osa span{display:block;margin-top:4px;font-size:.88rem;color:var(--text2)}
+.v11-ref{margin-top:34px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.v11-ref div{aspect-ratio:4/5;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;border:1.5px dashed var(--linka2);border-radius:18px;color:var(--tlumeny);background:var(--plocha)}
+.v11-zadost-pas{background:var(--pas)}
+.v11-form{margin-top:28px;padding:clamp(20px,4vw,34px);background:var(--plocha);border:1px solid var(--linka);border-radius:20px;box-shadow:var(--stin);display:grid;gap:14px}
+.v11-krok{font-size:.76rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--zlato)}
+.v11-form label{display:grid;gap:6px;font-weight:600;font-size:.92rem}
+.v11-form input{padding:12px 14px;border:1px solid var(--linka2);border-radius:12px;font:inherit;background:#fff}
+.v11-form-dalsi{display:grid;gap:6px;font-size:.88rem;color:var(--tlumeny)}
+.v11-form .cta{justify-self:start}
+
+/* stránka O mně v2 */
+.kapitoly{max-width:1000px}
+.kap{display:grid;grid-template-columns:150px minmax(0,1fr);gap:clamp(16px,4vw,48px);padding-block:clamp(36px,6vw,64px);border-top:1px solid var(--linka)}
+.kap-vek{position:sticky;top:90px;align-self:start;white-space:nowrap;font-family:var(--nadpis);font-weight:600;font-size:clamp(2.2rem,4.4vw,3.2rem);line-height:1;color:var(--zlato-ozdoba)}
+.kap-telo h2{text-align:left;font-size:clamp(1.7rem,3.4vw,2.4rem)}
+.kap-telo p{margin-top:14px;max-width:38em;color:#2e2a23;font-size:1.04rem;line-height:1.7}
+.kap-fotky{margin-top:22px;display:grid;gap:12px}
+.kap-fotky.n1{grid-template-columns:minmax(0,.6fr)}
+.kap-fotky.n2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.kap-fotky.n3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.kap-fotky figure{margin:0;border-radius:16px;overflow:hidden;background:#ebe3d4;box-shadow:var(--stin)}
+.kap-fotky img{width:100%;aspect-ratio:3/4;object-fit:cover}
+.kap .popisek{text-align:left}
+.citat-pas{background:var(--tma)}
+.citat{font-family:var(--nadpis);font-style:italic;font-size:clamp(1.5rem,3.2vw,2.2rem);line-height:1.3;color:#efe8da}
+.cely-text summary{cursor:pointer;font-weight:600;padding:14px 18px;border:1px solid var(--linka2);border-radius:999px;display:inline-block}
+@media (max-width:900px){
+  .v11-dostanes{grid-template-columns:1fr}
+  .v11-osa{grid-template-columns:1fr 1fr}
+  .v11-ref{grid-template-columns:1fr}
+  .v11-ref div{aspect-ratio:auto;min-height:140px}
+}
+@media (max-width:600px){
+  .kap{grid-template-columns:1fr;gap:6px}
+  .kap-vek{position:static;font-size:2.2rem}
+  .kap-fotky.n3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kap-fotky.n1{grid-template-columns:minmax(0,.8fr)}
+  .nb-mriz{grid-template-columns:1fr 1fr}
+  .v11-osa{grid-template-columns:1fr}
+}
+
 /* ---------- telefon ---------- */
 @media (max-width:860px){
   .uvod-mriz{grid-template-columns:1fr}
