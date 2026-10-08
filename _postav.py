@@ -318,14 +318,20 @@ def pas_cesty():
 # ---- proměna: posuvník před / po (krok 2 přestavby, 6. 10. 2026) ----
 # štítky jen z faktů v lekci 0.0; "Teď · 20 let" = selfie od Matyáše 6. 10. (věk řekl 6. 10.)
 PROMENA = [
-    # před = 15 nebo 18 let, po = 20 let; teď zástupné skutečné fotky, sem přijdou AI vizualizace na čistém pozadí
-    dict(klic="v15", nazev="15 let",
+    # AI vizualizace z jeho skutečných fotek (Gemini, 8. 10. 2026); obličej 15/18 → 20, postava jen 18 → 20
+    # (v 15 byl nezletilý: žádné AI tělo z té doby). Do schválení leží v _nahledy/vek/, pak přesunout do media/.
+    dict(klic="o15", rezim="o", vek="15", nazev="Obličej, 15 let",
          pred="/_nahledy/vek/15.jpg", po="/_nahledy/vek/20.jpg",
          stitek_pred="15 let · 55 kg", stitek_po="20 let · 94 kg"),
-    dict(klic="v18", nazev="18 let",
+    dict(klic="o18", rezim="o", vek="18", nazev="Obličej, 18 let",
          pred="/_nahledy/vek/18.jpg", po="/_nahledy/vek/20.jpg",
          stitek_pred="18 let · 106 kg", stitek_po="20 let · 94 kg"),
+    dict(klic="p18", rezim="p", vek="18", nazev="Postava, 18 let",
+         pred="/_nahledy/vek/p18.jpg", po="/_nahledy/vek/p20.jpg",
+         stitek_pred="18 let · 106 kg", stitek_po="20 let · 94 kg"),
 ]
+REZIMY = [("o", "Obličej"), ("p", "Postava")]
+VEKY = [("15", "15 let"), ("18", "18 let")]
 
 # skutečné fotky pod posuvníkem: (soubor, věk, údaj, poznámka)
 SKUTECNE = [
@@ -359,18 +365,22 @@ PROC = [
 
 
 def pas_promena():
-    prep = "".join(
-        '<button type="button" class="prepinac-tl" data-par="%s" aria-pressed="%s">%s</button>'
-        % (p["klic"], "true" if i == 0 else "false", esc(p["nazev"])) for i, p in enumerate(PROMENA))
+    prep_rezim = "".join(
+        '<button type="button" class="prepinac-tl" data-rezim="%s" aria-pressed="%s">%s</button>'
+        % (k, "true" if i == 0 else "false", esc(n)) for i, (k, n) in enumerate(REZIMY))
+    prep_vek = "".join(
+        '<button type="button" class="prepinac-tl" data-vek="%s" aria-pressed="%s">%s</button>'
+        % (k, "true" if k == "18" else "false", esc(n)) for k, n in VEKY)
     posuvniky = "".join(
-        '<div class="posuvnik" data-par="%s">'
+        '<div class="posuvnik" data-par="%s" data-rezim="%s" data-vek="%s">'
         '<img class="po" src="%s" alt="%s: %s" width="720" height="960" loading="lazy">'
         '<div class="pred-obal"><img src="%s" alt="%s: %s" width="720" height="960" loading="lazy"></div>'
         '<span class="stitek stitek-pred">%s</span><span class="stitek stitek-po">%s</span>'
+        '<span class="stitek-ai">Vizualizace AI</span>'
         '<span class="predel" aria-hidden="true"><span class="madlo"></span></span>'
         '<input class="posuvnik-ovladac" type="range" min="0" max="100" value="50" aria-label="%s: posunout předěl mezi před a po">'
         '</div>'
-        % (p["klic"], p["po"], esc(p["nazev"]), esc(p["stitek_po"]), p["pred"], esc(p["nazev"]), esc(p["stitek_pred"]),
+        % (p["klic"], p["rezim"], p["vek"], p["po"], esc(p["nazev"]), esc(p["stitek_po"]), p["pred"], esc(p["nazev"]), esc(p["stitek_pred"]),
            esc(p["stitek_pred"]), esc(p["stitek_po"]), esc(p["nazev"])) for p in PROMENA)
     skutecne = "".join(
         '<figure><img src="%s" alt="Matyáš, %s" loading="lazy" width="300" height="400"><figcaption><b>%s</b><span>%s</span>%s<em>kdy: doplníš</em></figcaption></figure>'
@@ -391,9 +401,10 @@ def pas_promena():
           <h2>Nejdřív jsem to zkusil na sobě</h2>
         </div>
         <div class="promena-obr">
+          <div class="prepinac-radek"><div class="prepinac" role="group" aria-label="Co porovnat">%s</div></div>
           <div class="prepinac-radek"><span>Před:</span><div class="prepinac" role="group" aria-label="Věk před">%s</div><span>Po: 20 let</span></div>
           %s
-          <p class="popisek">Táhni předělem do stran · zástupné fotky, sem přijdou vizualizace · výsledky jsou individuální</p>
+          <p class="popisek">Táhni předělem do stran · Vizualizace vytvořená AI z mých skutečných fotek · výsledky jsou individuální</p>
         </div>
         <div class="promena-text">
           <ol class="osa">
@@ -421,7 +432,7 @@ def pas_promena():
       <div class="panely">%s</div>
     </div>
   </div>
-""" % (prep, posuvniky, skutecne, zalozky, panely)
+""" % (prep_rezim, prep_vek, posuvniky, skutecne, zalozky, panely)
 
 
 # ---- starý × nový způsob (krok 3 přestavby, návrh 7. 10. 2026) ----

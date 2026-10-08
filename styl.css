@@ -444,6 +444,12 @@ h3{font-family:var(--nadpis);font-weight:600;color:var(--inkoust)}
 .posuvnik-ovladac{position:absolute;inset:auto 0 0 0;width:100%;height:1px;opacity:0;pointer-events:none}
 .posuvnik:focus-within{outline:2px solid var(--zlato);outline-offset:3px}
 .promena-obr .popisek{margin-top:14px}
+.stitek-ai{
+  position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:2;padding:5px 11px;border-radius:999px;
+  font-size:.72rem;font-weight:600;letter-spacing:.02em;white-space:nowrap;background:rgba(29,26,21,.6);color:#fdfbf6;pointer-events:none;
+}
+.prepinac-radek + .prepinac-radek{margin-top:-4px}
+.prepinac-tl[hidden]{display:none}
 
 /* okno „Co se změnilo a proč" */
 .okno-proc .clanek-okno{width:min(100%,760px);padding:clamp(22px,4vw,40px)}

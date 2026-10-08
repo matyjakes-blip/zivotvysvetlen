@@ -40,8 +40,8 @@
     if (vstup) vstup.addEventListener('input', function () { nastav(+vstup.value); });
   });
 
-  // proměna: přepínač Pleť / Postava (bez JavaScriptu jsou vidět oba posuvníky pod sebou)
-  var tlacitka = document.querySelectorAll('.prepinac-tl');
+  // proměna: přepínač (starý: data-par; nový: Obličej / Postava + věk). Bez JavaScriptu jsou vidět všechny posuvníky pod sebou.
+  var tlacitka = document.querySelectorAll('.prepinac-tl[data-par]');
   function ukazPar(klic) {
     document.querySelectorAll('.promena .posuvnik').forEach(function (p) { p.hidden = p.getAttribute('data-par') !== klic; });
     tlacitka.forEach(function (t) { t.setAttribute('aria-pressed', t.getAttribute('data-par') === klic ? 'true' : 'false'); });
@@ -49,6 +49,28 @@
   if (tlacitka.length) {
     tlacitka.forEach(function (t) { t.addEventListener('click', function () { ukazPar(t.getAttribute('data-par')); }); });
     ukazPar(tlacitka[0].getAttribute('data-par'));
+  }
+  var rezTl = document.querySelectorAll('.prepinac-tl[data-rezim]'), vekTl = document.querySelectorAll('.prepinac-tl[data-vek]');
+  var pary = document.querySelectorAll('.promena .posuvnik[data-rezim]');
+  if (rezTl.length && pary.length) {
+    var stav = { rezim: rezTl[0].getAttribute('data-rezim'), vek: '18' };
+    var existuje = function (r, v) {
+      return [].some.call(pary, function (p) { return p.getAttribute('data-rezim') === r && p.getAttribute('data-vek') === v; });
+    };
+    var ukaz = function () {
+      if (!existuje(stav.rezim, stav.vek)) {
+        [].some.call(vekTl, function (t) { if (existuje(stav.rezim, t.getAttribute('data-vek'))) { stav.vek = t.getAttribute('data-vek'); return true; } });
+      }
+      pary.forEach(function (p) { p.hidden = !(p.getAttribute('data-rezim') === stav.rezim && p.getAttribute('data-vek') === stav.vek); });
+      rezTl.forEach(function (t) { t.setAttribute('aria-pressed', t.getAttribute('data-rezim') === stav.rezim ? 'true' : 'false'); });
+      vekTl.forEach(function (t) {
+        t.hidden = !existuje(stav.rezim, t.getAttribute('data-vek'));
+        t.setAttribute('aria-pressed', t.getAttribute('data-vek') === stav.vek ? 'true' : 'false');
+      });
+    };
+    rezTl.forEach(function (t) { t.addEventListener('click', function () { stav.rezim = t.getAttribute('data-rezim'); ukaz(); }); });
+    vekTl.forEach(function (t) { t.addEventListener('click', function () { stav.vek = t.getAttribute('data-vek'); ukaz(); }); });
+    ukaz();
   }
 
   // okno „Co se změnilo a proč": záložky (bez JavaScriptu jsou všechny texty pod sebou)
