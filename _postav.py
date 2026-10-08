@@ -97,6 +97,8 @@ PATA = """
 
 # verze stylu a skriptu v odkazu: po každé změně se v prohlížečích načte nový soubor, ne starý z mezipaměti
 import hashlib
+# NAHLED=1 python3 _postav.py → i zástupná místa (jen pro náhledy); bez toho vznikne verze bezpečná pro živý web
+NAHLED = os.environ.get("NAHLED") == "1"
 def _verze(soubor):
     try:
         return hashlib.md5(open(soubor, "rb").read()).hexdigest()[:8]
@@ -319,15 +321,15 @@ def pas_cesty():
 # štítky jen z faktů v lekci 0.0; "Teď · 20 let" = selfie od Matyáše 6. 10. (věk řekl 6. 10.)
 PROMENA = [
     # AI vizualizace z jeho skutečných fotek (Gemini, 8. 10. 2026); obličej 15/18 → 20, postava jen 18 → 20
-    # (v 15 byl nezletilý: žádné AI tělo z té doby). Do schválení leží v _nahledy/vek/, pak přesunout do media/.
+    # (v 15 byl nezletilý: žádné AI tělo z té doby). Originály v _fotky/ai-vystupy/ (mimo git), výtky k dalšímu kolu v POZNAMKY.md.
     dict(klic="o15", rezim="o", vek="15", nazev="Obličej, 15 let",
-         pred="/_nahledy/vek/15.jpg", po="/_nahledy/vek/20.jpg",
+         pred="/media/dukaz/ai-15.jpg", po="/media/dukaz/ai-20.jpg",
          stitek_pred="15 let · 55 kg", stitek_po="20 let · 94 kg"),
     dict(klic="o18", rezim="o", vek="18", nazev="Obličej, 18 let",
-         pred="/_nahledy/vek/18.jpg", po="/_nahledy/vek/20.jpg",
+         pred="/media/dukaz/ai-18.jpg", po="/media/dukaz/ai-20.jpg",
          stitek_pred="18 let · 106 kg", stitek_po="20 let · 94 kg"),
     dict(klic="p18", rezim="p", vek="18", nazev="Postava, 18 let",
-         pred="/_nahledy/vek/p18.jpg", po="/_nahledy/vek/p20.jpg",
+         pred="/media/dukaz/ai-p18.jpg", po="/media/dukaz/ai-p20.jpg",
          stitek_pred="18 let · 106 kg", stitek_po="20 let · 94 kg"),
 ]
 REZIMY = [("o", "Obličej"), ("p", "Postava")]
@@ -383,8 +385,9 @@ def pas_promena():
         % (p["klic"], p["rezim"], p["vek"], p["po"], esc(p["nazev"]), esc(p["stitek_po"]), p["pred"], esc(p["nazev"]), esc(p["stitek_pred"]),
            esc(p["stitek_pred"]), esc(p["stitek_po"]), esc(p["nazev"])) for p in PROMENA)
     skutecne = "".join(
-        '<figure><img src="%s" alt="Matyáš, %s" loading="lazy" width="300" height="400"><figcaption><b>%s</b><span>%s</span>%s<em>kdy: doplníš</em></figcaption></figure>'
-        % (f, esc(v), esc(v), esc(u), ('<span>%s</span>' % esc(p)) if p else "") for f, v, u, p in SKUTECNE)
+        '<figure><img src="%s" alt="Matyáš, %s" loading="lazy" width="300" height="400"><figcaption><b>%s</b><span>%s</span>%s%s</figcaption></figure>'
+        % (f, esc(v), esc(v), esc(u), ('<span>%s</span>' % esc(p)) if p else "", "<em>kdy: doplníš</em>" if NAHLED else "")
+        for f, v, u, p in SKUTECNE)
     zalozky = "".join(
         '<button type="button" class="zalozka" data-zalozka="%s" aria-selected="%s">%s</button>'
         % (k, "true" if i == 0 else "false", esc(n)) for i, (k, n, _, _, _) in enumerate(PROC))
@@ -474,7 +477,7 @@ def pas_zpusob():
 
 
 # ---- galerie nejlepších fotek (návrh 7. 10.; fotky dodá Matyáš, teď jen zástupné z _nahledy) ----
-GALERIE = ["/_nahledy/galerie/g%d.jpg" % i for i in range(1, 7)]
+GALERIE = ["/_nahledy/galerie/g%d.jpg" % i for i in range(1, 7)] if NAHLED else []
 
 
 def pas_galerie():
@@ -493,10 +496,12 @@ def pas_galerie():
 
 
 # fotky za hlavní fotkou v úvodu (6 až 12, dodá Matyáš; teď zástupné z _nahledy, na živý web nepouštět)
-FOTKY_UVOD = ["/_nahledy/galerie/g%d.jpg" % i for i in (2, 3, 4, 5, 6)]
+FOTKY_UVOD = ["/_nahledy/galerie/g%d.jpg" % i for i in (2, 3, 4, 5, 6)] if NAHLED else []
 
 
 def uvod_foto():
+    if FOTO_UVOD and not FOTKY_UVOD:
+        return '<img src="%s" alt="%s" width="800" height="1000" fetchpriority="high">' % (FOTO_UVOD, esc(FOTO_UVOD_POPIS))
     if FOTO_UVOD:
         vse = [FOTO_UVOD] + FOTKY_UVOD
         snimky = "".join('<div class="uvod-snimek"><img src="%s" alt="%s" width="800" height="1000"%s></div>'
@@ -917,3 +922,12 @@ if __name__ == "__main__":
         print("%-22s %d znaku" % (f, os.path.getsize(f)))
     if not FOTO_UVOD:
         print("POZOR: úvodní fotka chybí (FOTO_UVOD = None), na hlavní stránce je prázdné políčko. Takhle nepushovat na main.")
+    if not NAHLED:
+        # pojistka před pushem: na živých stránkách nesmí zůstat nic zástupného
+        spatne = []
+        for f in glob.glob("*.html") + glob.glob("sourcing/**/*.html", recursive=True) + glob.glob("mapa/**/*.html", recursive=True):
+            t = open(f, encoding="utf-8").read()
+            for znak in ("/_nahledy/", "doplníš", "recenze zastupna", "foto-misto"):
+                if znak in t:
+                    spatne.append("%s: %s" % (f, znak))
+        print("POZOR, zástupné věci na živých stránkách: " + "; ".join(spatne) if spatne else "kontrola živých stránek: čisto")

@@ -3,7 +3,7 @@
 """Recenze ve stylu Beyond Terrain: pás karet, který sám jede do strany (zastaví se pod prstem nebo myší).
 Pravidlo od Matyáše (7. 10. 2026): každá recenze nese, čím člověk prošel. KLIENT = 1:1, STUDENT = jen Akademie.
 Dokud nejsou skutečné recenze se souhlasem, RECENZE je prázdný a ukazují se zástupné karty (na živý web nepouštět)."""
-import html
+import html, os
 
 def esc(t):
     return html.escape(t, quote=False)
@@ -25,6 +25,8 @@ def pas_recenze(nadpis="Co říkají klienti a studenti", jen=None):
         polozky = [(t, i, typ) for t, i, typ in RECENZE if not jen or typ == jen]
         karty = "".join('<figure class="recenze"><blockquote>%s</blockquote><figcaption><b>%s</b> · %s</figcaption></figure>'
                         % (esc(t), esc(i), TYPY[typ]) for t, i, typ in polozky)
+    elif os.environ.get("NAHLED") != "1":
+        return ""  # bez skutečných recenzí se souhlasem se sekce na živém webu neukazuje
     else:
         polozky = [(typ, t) for typ, t in ZASTUPNE if not jen or typ == jen]
         karty = "".join('<figure class="recenze zastupna"><blockquote>%s</blockquote><figcaption><b>XY</b> · %s</figcaption></figure>'

@@ -3,7 +3,8 @@
 """Návrhy v2 (7. 10. 2026): stránka Osobní vedení 1:1 a stránka O mně.
 Texty: jeho věty ze schválených karuselů (kit/content/pinned-carousels.md, 21. 7.) a z lekce 0.0,
 zkrácené jen ubráním. Popisy u ukázky boardu a nadpisy kapitol jsou MOJE, k jeho schválení."""
-import html, re
+import html, os, re
+NAHLED = os.environ.get("NAHLED") == "1"
 
 def esc(t):
     return html.escape(t, quote=False)
@@ -189,6 +190,22 @@ KAPITOLY = [
 ]
 
 
+# „Odkud to vím": zatím zástupné texty, na živý web až s jeho údaji
+ODKUD = """  <section class="pas autorita-pas" id="odkud">
+    <div class="obal uzky">
+      <p class="nadtitul">Odkud to vím</p>
+      <h2>Co jsem studoval a z čeho čerpám</h2>
+      <div class="autorita-mriz">
+        <div><b>Studium</b><span>doplníš: co a kde jsi studoval, kurzy, certifikáty</span></div>
+        <div><b>Zdroje</b><span>doplníš: autoři a knihy, ze kterých stavíš (Weston Price, Pottenger…)</span></div>
+        <div><b>Praxe</b><span>doplníš: od kdy pracuješ s klienty, kolik lidí jsi vedl</span></div>
+        <div><b>Akademie</b><span>6 modulů, 102 lekcí, u každé napsané, odkud informace je</span></div>
+      </div>
+    </div>
+  </section>
+"""
+
+
 def postav_pribeh_v2(HLAVA, PATA, SKOOL, cely_text_html):
     kap = []
     for vek, nadpis, vety, fotky, popisek in KAPITOLY:
@@ -207,7 +224,7 @@ def postav_pribeh_v2(HLAVA, PATA, SKOOL, cely_text_html):
         <p class="tvrzeni">Moje důvěryhodnost není v tom, že jsem to vždycky věděl.<strong>Je v tom, že jsem si tu špatnou cestu prošel celou.</strong></p>
         <ol class="osa"><li><b>15 let</b><span>167 cm · 55 kg</span></li><li><b>18 let</b><span>182 cm · 106 kg</span></li><li><b>20 let</b><span>191 cm · 94 kg</span></li></ol>
       </div>
-      <figure class="uvod-foto"><img src="/_nahledy/galerie/g2.jpg" alt="Matyáš Jakeš" width="640" height="800"></figure>
+      <figure class="uvod-foto"><img src="{foto_omne}" alt="Matyáš Jakeš" width="640" height="800"></figure>
     </div>
   </section>
   <section class="pas omne-mel" id="prosel">
@@ -217,23 +234,13 @@ def postav_pribeh_v2(HLAVA, PATA, SKOOL, cely_text_html):
     </div>
   </section>
   <div class="obal kapitoly">{kapitoly}</div>
-  <section class="pas autorita-pas" id="odkud">
-    <div class="obal uzky">
-      <p class="nadtitul">Odkud to vím</p>
-      <h2>Co jsem studoval a z čeho čerpám</h2>
-      <div class="autorita-mriz">
-        <div><b>Studium</b><span>doplníš: co a kde jsi studoval, kurzy, certifikáty</span></div>
-        <div><b>Zdroje</b><span>doplníš: autoři a knihy, ze kterých stavíš (Weston Price, Pottenger…)</span></div>
-        <div><b>Praxe</b><span>doplníš: od kdy pracuješ s klienty, kolik lidí jsi vedl</span></div>
-        <div><b>Akademie</b><span>6 modulů, 102 lekcí, u každé napsané, odkud informace je</span></div>
-      </div>
-    </div>
-  </section>
-  <section class="pas citat-pas"><div class="obal uzky stred"><p class="citat">Hormony mají neskutečný vliv na člověka a hrají zásadní roli ve vývinu jeho vzhledu, zdraví orgánů, metabolismu, a psychiky.</p></div></section>
+{odkud}  <section class="pas citat-pas"><div class="obal uzky stred"><p class="citat">Hormony mají neskutečný vliv na člověka a hrají zásadní roli ve vývinu jeho vzhledu, zdraví orgánů, metabolismu, a psychiky.</p></div></section>
   <section class="pas"><div class="obal uzky"><details class="cely-text"><summary>Celý příběh, jak jsem ho napsal</summary><div class="text">{cely}</div></details></div></section>
   <section class="pas zaver-pas"><div class="obal uzky stred"><div class="tlacitka" style="justify-content:center"><a class="cta" href="/akademie.html">Prohlédnout Akademii</a><a class="cta-druhy" href="/jedna-na-jedna.html">Osobní vedení 1:1</a></div></div></section>
 </main>
-""".format(kapitoly="".join(kap), cely=cely_text_html)
+""".format(kapitoly="".join(kap), cely=cely_text_html,
+               foto_omne="/_nahledy/galerie/g2.jpg" if NAHLED else "/media/matyas-uvod.jpg",
+               odkud=ODKUD if NAHLED else "")
     stranka = HLAVA.format(titulek="O mně · Život vysvětlen",
                            popis="Od 55 kilo přes 106 kilo a akné až sem. Celá cesta.",
                            kanon="pribeh.html", ogobr="pribeh/0.0__09-porovnani-dvojice.jpg", skool=SKOOL) + telo + PATA.format(skool=SKOOL)
