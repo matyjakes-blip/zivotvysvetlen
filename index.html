@@ -20,7 +20,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/pisma/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/pisma/cormorant.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/styl.css?v=97fbed00">
+<link rel="stylesheet" href="/styl.css?v=1640bc9c">
 </head>
 <body>
 <header class="hlavicka">
@@ -56,12 +56,12 @@
         <p class="tvrzeni">Postava, energie, klid i vzhled jsou vedlejší produkty.<strong>Ne cíl.</strong></p>
         <p class="tvrzeni-pod">Oprav terén a biologie, psychika i to, kdo jsi, začnou vyjadřovat to, co měly celou dobu.</p>
         <div class="tlacitka">
-          <a class="cta" href="/akademie.html">Prohlédnout Akademii</a>
+          <a class="cta" href="/akademie.html">Vstoupit do Akademie</a>
           <a class="cta-druhy" href="/jedna-na-jedna.html">Osobní vedení 1:1</a>
         </div>
-        <p class="psali"><span>Psali o mně a byl jsem hostem</span><a href="#respekt">Respekt</a><a href="https://www.youtube.com/watch?v=CHxI8kVo_2Q">Debatní deník</a><a href="https://www.youtube.com/watch?v=xNz05rFzncQ">POD 10</a><a href="https://www.youtube.com/watch?v=bs12r6PMWC0">Světy proti sobě</a></p>
+        <p class="psali"><a class="psali-titul" href="#hoste">Psali o mně a byl jsem hostem</a><a href="#respekt">Respekt</a><a href="#hoste">Debatní deník</a><a href="#hoste">POD 10</a><a href="#hoste">Světy proti sobě</a></p>
       </div>
-      <figure class="uvod-foto"><img src="/media/matyas-uvod.jpg" alt="Matyáš Jakeš" width="800" height="1000" fetchpriority="high"></figure>
+      <figure class="uvod-foto"><div class="uvod-karusel"><div class="uvod-pas"><div class="uvod-snimek"><img src="/media/matyas-uvod.jpg" alt="Matyáš Jakeš" width="800" height="1000" fetchpriority="high"></div><div class="uvod-snimek"><img src="/_nahledy/galerie/g2.jpg" alt="Matyáš Jakeš" width="800" height="1000" loading="lazy"></div><div class="uvod-snimek"><img src="/_nahledy/galerie/g3.jpg" alt="Matyáš Jakeš" width="800" height="1000" loading="lazy"></div><div class="uvod-snimek"><img src="/_nahledy/galerie/g4.jpg" alt="Matyáš Jakeš" width="800" height="1000" loading="lazy"></div><div class="uvod-snimek"><img src="/_nahledy/galerie/g5.jpg" alt="Matyáš Jakeš" width="800" height="1000" loading="lazy"></div><div class="uvod-snimek"><img src="/_nahledy/galerie/g6.jpg" alt="Matyáš Jakeš" width="800" height="1000" loading="lazy"></div></div><button type="button" class="uvod-sipka predchozi" aria-label="Předchozí fotka"></button><button type="button" class="uvod-sipka dalsi" aria-label="Další fotka"></button><div class="uvod-tecky"><button type="button" aria-label="Fotka 1" aria-current="true"></button><button type="button" aria-label="Fotka 2"></button><button type="button" aria-label="Fotka 3"></button><button type="button" aria-label="Fotka 4"></button><button type="button" aria-label="Fotka 5"></button><button type="button" aria-label="Fotka 6"></button></div></div></figure>
     </div>
   </section>
 
@@ -84,19 +84,19 @@
     <div class="obal">
       <div class="promena-mriz">
         <div class="promena-hlava">
-          <p class="nadtitul">Proměna</p>
+          <p class="nadtitul">Důkaz</p>
           <h2>Nejdřív jsem to zkusil na sobě</h2>
         </div>
         <div class="promena-obr">
-          <div class="prepinac" role="group" aria-label="Co porovnat"><button type="button" class="prepinac-tl" data-par="plet" aria-pressed="true">Pleť</button><button type="button" class="prepinac-tl" data-par="telo" aria-pressed="false">Postava</button></div>
-          <div class="posuvnik" data-par="plet"><img class="po" src="/media/promena-plet-po.jpg" alt="Pleť: Teď · 20 let" width="720" height="960" loading="lazy"><div class="pred-obal"><img src="/media/promena-plet-pred.jpg" alt="Pleť: Před · 17 let" width="720" height="960" loading="lazy"></div><span class="stitek stitek-pred">Před · 17 let</span><span class="stitek stitek-po">Teď · 20 let</span><span class="predel" aria-hidden="true"><span class="madlo"></span></span><input class="posuvnik-ovladac" type="range" min="0" max="100" value="50" aria-label="Pleť: posunout předěl mezi před a po"></div><div class="posuvnik" data-par="telo"><img class="po" src="/media/promena-telo-po.jpg" alt="Postava: Po 4 měsících" width="720" height="960" loading="lazy"><div class="pred-obal"><img src="/media/promena-telo-pred.jpg" alt="Postava: Před" width="720" height="960" loading="lazy"></div><span class="stitek stitek-pred">Před</span><span class="stitek stitek-po">Po 4 měsících</span><span class="predel" aria-hidden="true"><span class="madlo"></span></span><input class="posuvnik-ovladac" type="range" min="0" max="100" value="50" aria-label="Postava: posunout předěl mezi před a po"></div>
-          <p class="popisek">Táhni předělem do stran · výsledky jsou individuální</p>
+          <div class="prepinac-radek"><span>Před:</span><div class="prepinac" role="group" aria-label="Věk před"><button type="button" class="prepinac-tl" data-par="v15" aria-pressed="true">15 let</button><button type="button" class="prepinac-tl" data-par="v18" aria-pressed="false">18 let</button></div><span>Po: 20 let</span></div>
+          <div class="posuvnik" data-par="v15"><img class="po" src="/_nahledy/vek/20.jpg" alt="15 let: 20 let · 94 kg" width="720" height="960" loading="lazy"><div class="pred-obal"><img src="/_nahledy/vek/15.jpg" alt="15 let: 15 let · 55 kg" width="720" height="960" loading="lazy"></div><span class="stitek stitek-pred">15 let · 55 kg</span><span class="stitek stitek-po">20 let · 94 kg</span><span class="predel" aria-hidden="true"><span class="madlo"></span></span><input class="posuvnik-ovladac" type="range" min="0" max="100" value="50" aria-label="15 let: posunout předěl mezi před a po"></div><div class="posuvnik" data-par="v18"><img class="po" src="/_nahledy/vek/20.jpg" alt="18 let: 20 let · 94 kg" width="720" height="960" loading="lazy"><div class="pred-obal"><img src="/_nahledy/vek/18.jpg" alt="18 let: 18 let · 110 kg" width="720" height="960" loading="lazy"></div><span class="stitek stitek-pred">18 let · 110 kg</span><span class="stitek stitek-po">20 let · 94 kg</span><span class="predel" aria-hidden="true"><span class="madlo"></span></span><input class="posuvnik-ovladac" type="range" min="0" max="100" value="50" aria-label="18 let: posunout předěl mezi před a po"></div>
+          <p class="popisek">Táhni předělem do stran · zástupné fotky, sem přijdou vizualizace · výsledky jsou individuální</p>
         </div>
         <div class="promena-text">
           <ol class="osa">
             <li><b>15 let</b><span>167 cm · 55 kg</span></li>
             <li><b>18 let</b><span>182 cm · 110 kg</span></li>
-            <li><b>20 let</b><span>dnes · __ kg</span></li>
+            <li><b>20 let</b><span>191 cm · 94 kg</span></li>
           </ol>
           <p>Moje důvěryhodnost není v tom, že jsem to vždycky věděl. Je v tom, že jsem si tu špatnou cestu prošel celou.</p>
           <div class="tlacitka">
@@ -105,6 +105,8 @@
           </div>
         </div>
       </div>
+      <p class="nadtitul skutecne-titul">Skutečné fotky, nic upraveného</p>
+      <div class="skutecne"><figure><img src="/pribeh/0.0__01-patnact-selfie.jpg" alt="Matyáš, 15 let" loading="lazy" width="300" height="400"><figcaption><b>15 let</b><span>55 kg</span><em>kdy: doplníš</em></figcaption></figure><figure><img src="/pribeh/0.0__03-patnact-postava.jpg" alt="Matyáš, 15 let" loading="lazy" width="300" height="400"><figcaption><b>15 let</b><span>167 cm · 55 kg</span><em>kdy: doplníš</em></figcaption></figure><figure><img src="/pribeh/0.0__06-sedmnact-bulk.jpg" alt="Matyáš, 16 let" loading="lazy" width="300" height="400"><figcaption><b>16 let</b><span>182 cm · 95 kg</span><span>+40 kg za rok</span><em>kdy: doplníš</em></figcaption></figure><figure><img src="/pribeh/0.0__07-akne-zblizka.jpg" alt="Matyáš, 17 let" loading="lazy" width="300" height="400"><figcaption><b>17 let</b><span>akné</span><em>kdy: doplníš</em></figcaption></figure><figure><img src="/pribeh/0.0__11-pred-ctyri-mesice.jpg" alt="Matyáš, 18 let" loading="lazy" width="300" height="400"><figcaption><b>18 let</b><span>110 kg</span><span>před změnou stravy</span><em>kdy: doplníš</em></figcaption></figure><figure><img src="/pribeh/0.0__12-po-ctyrech-mesicich.jpg" alt="Matyáš, 18 let" loading="lazy" width="300" height="400"><figcaption><b>18 let</b><span>−15 kg</span><span>o 4 měsíce později</span><em>kdy: doplníš</em></figcaption></figure><figure><img src="/media/matyas-uvod.jpg" alt="Matyáš, 20 let" loading="lazy" width="300" height="400"><figcaption><b>20 let</b><span>191 cm · 94 kg</span><span>dnes</span><em>kdy: doplníš</em></figcaption></figure></div>
     </div>
   </section>
   <div class="clanek okno-proc" id="proc" role="dialog" aria-modal="true" aria-labelledby="proc-nadpis">
@@ -140,14 +142,6 @@
     </div>
   </section>
 
-  <section class="pas galerie-pas">
-    <div class="obal">
-      <p class="nadtitul">Galerie</p>
-      <h2>Zdraví je vidět</h2>
-    </div>
-    <div class="galerie-pruh"><figure><img src="/_nahledy/galerie/g1.jpg" alt="Matyáš Jakeš" loading="lazy" width="640" height="800"></figure><figure><img src="/_nahledy/galerie/g2.jpg" alt="Matyáš Jakeš" loading="lazy" width="640" height="800"></figure><figure><img src="/_nahledy/galerie/g3.jpg" alt="Matyáš Jakeš" loading="lazy" width="640" height="800"></figure><figure><img src="/_nahledy/galerie/g4.jpg" alt="Matyáš Jakeš" loading="lazy" width="640" height="800"></figure><figure><img src="/_nahledy/galerie/g5.jpg" alt="Matyáš Jakeš" loading="lazy" width="640" height="800"></figure><figure><img src="/_nahledy/galerie/g6.jpg" alt="Matyáš Jakeš" loading="lazy" width="640" height="800"></figure></div>
-  </section>
-
   <section class="pas sourcing-pas">
     <div class="obal uzky stred">
       <p class="nadtitul">Zdarma</p>
@@ -165,6 +159,14 @@
       <div class="cesty"><article class="cesta"><p class="cesta-znak">Nejdostupnější</p><h3>Akademie</h3><p class="vysvetleni">Celý systém napsaný, čteš vlastním tempem</p><ul><li>Šest modulů, čtyřiadvacet submodulů, sto dvě lekce</li><li>Mapa, první týden den po dni a vstupní diagnostika</li><li>Komunita, kde se doptáváš, když něco nesedí</li><li>Zůstává ti to napořád, vracíš se k tomu kdykoli</li></ul><p class="pro-koho">Pro toho, kdo si to chce odvodit sám a nechce, aby mu někdo stál za ramenem.</p><div class="dole"><a href="https://www.skool.com/zivot-vysvetlen-1338">Vstoupit do Akademie</a></div></article><article class="cesta hlavni"><p class="cesta-znak">Nejhlubší</p><h3>Osobní vedení 1:1</h3><p class="vysvetleni">Ten samý systém aplikovaný na jednoho člověka</p><ul><li>Vstupní dotazník: historie, prostředí, spánek, jídlo, trénink, míry</li><li>Tvůj vlastní dokument s tvým pořadím kroků a odůvodněním</li><li>Týdenní balíčky, každý týden jedna věc</li><li>Kontrolní hovory a přehazování tempa podle toho, co ti vychází</li></ul><p class="pro-koho">Pro toho, komu běžná cesta nezabrala a chce vědět, proč to jeho tělo dělá.</p><div class="dole"><a href="https://calendly.com/yacashh/1-1-osobni-kvalifikacni-hovor">Domluvit hovor</a><span class="pod">Hovor je zdarma a nezavazuje</span></div></article></div>
       <p class="text-stred" style="margin-top:26px">Nevíš, co z toho? Začni Akademií. Kdo pak chce jít hlouběji, přejde na osobní vedení.</p>
     </div>
+  </section>
+
+  <section class="pas recenze-pas" id="recenze">
+    <div class="obal">
+      <p class="nadtitul">Jejich slovy</p>
+      <h2>Co říkají klienti a studenti</h2>
+    </div>
+    <div class="recenze-okno"><div class="recenze-pruh"><figure class="recenze zastupna"><blockquote>Sem přijde recenze klienta z 1:1, jeho slovy, se souhlasem.</blockquote><figcaption><b>XY</b> · Klient · 1:1</figcaption></figure><figure class="recenze zastupna"><blockquote>Sem přijde dlouhá recenze studenta Akademie.</blockquote><figcaption><b>XY</b> · Student · Akademie</figcaption></figure><figure class="recenze zastupna"><blockquote>Nebo screenshot výhry z tvých highlightů na Instagramu.</blockquote><figcaption><b>XY</b> · Klient · 1:1</figcaption></figure><figure class="recenze zastupna"><blockquote>Sem přijde recenze studenta Akademie.</blockquote><figcaption><b>XY</b> · Student · Akademie</figcaption></figure><figure class="recenze zastupna"><blockquote>Sem přijde recenze klienta z 1:1.</blockquote><figcaption><b>XY</b> · Klient · 1:1</figcaption></figure><figure aria-hidden="true" class="recenze zastupna"><blockquote>Sem přijde recenze klienta z 1:1, jeho slovy, se souhlasem.</blockquote><figcaption><b>XY</b> · Klient · 1:1</figcaption></figure><figure aria-hidden="true" class="recenze zastupna"><blockquote>Sem přijde dlouhá recenze studenta Akademie.</blockquote><figcaption><b>XY</b> · Student · Akademie</figcaption></figure><figure aria-hidden="true" class="recenze zastupna"><blockquote>Nebo screenshot výhry z tvých highlightů na Instagramu.</blockquote><figcaption><b>XY</b> · Klient · 1:1</figcaption></figure><figure aria-hidden="true" class="recenze zastupna"><blockquote>Sem přijde recenze studenta Akademie.</blockquote><figcaption><b>XY</b> · Student · Akademie</figcaption></figure><figure aria-hidden="true" class="recenze zastupna"><blockquote>Sem přijde recenze klienta z 1:1.</blockquote><figcaption><b>XY</b> · Klient · 1:1</figcaption></figure></div></div>
   </section>
 
   <section class="pas hoste" id="hoste">
@@ -190,7 +192,7 @@
     <div class="obal uzky stred">
       <div class="ozdoba" aria-hidden="true">◆</div>
       <p class="vyzva">Každý modul staví na předchozím a nic v něm nezazní bez vysvětlení.<strong>Kdo přeskočí rovnou na viry, bude mít pocit, že tomu rozumí, a bude se mýlit.</strong></p>
-      <div class="tlacitka" style="justify-content:center"><a class="cta" href="/akademie.html">Prohlédnout Akademii</a><a class="cta-druhy" href="/jedna-na-jedna.html">Osobní vedení 1:1</a></div>
+      <div class="tlacitka" style="justify-content:center"><a class="cta" href="/akademie.html">Vstoupit do Akademie</a><a class="cta-druhy" href="/jedna-na-jedna.html">Osobní vedení 1:1</a></div>
     </div>
   </section>
 </main>
@@ -201,6 +203,6 @@
   <p class="drobne">Matyáš Jakeš · <a href="https://www.skool.com/zivot-vysvetlen-1338">Akademie na Skoolu</a> · <a href="/akademie.html">Akademie</a> · <a href="/jedna-na-jedna.html">Osobní vedení 1:1</a> · <a href="/pribeh.html">O mně</a> · <a href="/sourcing.html">Sourcing mapa</a> · <a href="/kontakt.html">Kontakt</a></p>
   <p class="drobne">IČO 23494204 · <a href="/pravni.html">Právní informace a zásady</a></p>
 </footer>
-<script src="/web.js?v=8bc7d0b1" defer></script>
+<script src="/web.js?v=0ab60ed8" defer></script>
 </body>
 </html>

@@ -71,6 +71,30 @@
     if (zpet) location.hash = zpet.getAttribute('href');
   });
 
+  // úvod: fotky k přetáčení (šipky, tečky, prst)
+  document.querySelectorAll('.uvod-karusel').forEach(function (k) {
+    var pas = k.querySelector('.uvod-pas'), tecky = k.querySelectorAll('.uvod-tecky button');
+    function index() { return Math.round(pas.scrollLeft / pas.clientWidth); }
+    function jdi(i) {
+      var cil = i * pas.clientWidth;
+      pas.scrollTo({ left: cil, behavior: document.hidden ? 'auto' : 'smooth' });
+      setTimeout(function () { if (Math.abs(pas.scrollLeft - cil) > 4) pas.scrollLeft = cil; }, 700);
+    }
+    k.querySelector('.predchozi').addEventListener('click', function () { jdi(Math.max(0, index() - 1)); });
+    k.querySelector('.dalsi').addEventListener('click', function () { jdi(Math.min(tecky.length - 1, index() + 1)); });
+    tecky.forEach(function (t, i) { t.addEventListener('click', function () { jdi(i); }); });
+    pas.addEventListener('scroll', function () {
+      var i = index();
+      tecky.forEach(function (t, j) { if (j === i) t.setAttribute('aria-current', 'true'); else t.removeAttribute('aria-current'); });
+    }, { passive: true });
+  });
+
+  // recenze: zastavit pod prstem
+  document.querySelectorAll('.recenze-okno').forEach(function (o) {
+    o.addEventListener('touchstart', function () { o.classList.add('stuj'); }, { passive: true });
+    o.addEventListener('touchend', function () { o.classList.remove('stuj'); });
+  });
+
   // menu na telefonu: zavřít klepnutím vedle nebo klávesou Esc
   var menu = document.querySelector('.menu');
   if (menu) {

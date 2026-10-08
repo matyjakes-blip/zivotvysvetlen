@@ -174,7 +174,7 @@ NENI = [
 ]
 
 
-def postav_stranku(HLAVA, PATA, SKOOL):
+def postav_stranku(HLAVA, PATA, SKOOL, recenze=""):
     moduly = data()
     c = cisla(moduly)
     dlazdice = "".join(
@@ -253,6 +253,7 @@ def postav_stranku(HLAVA, PATA, SKOOL):
     </div>
   </section>
 
+{recenze}
   <section class="pas">
     <div class="obal uzky">
       <p class="nadtitul">Ať je jasno</p>
@@ -269,7 +270,7 @@ def postav_stranku(HLAVA, PATA, SKOOL):
     </div>
   </section>
 </main>
-""".format(skool=SKOOL, dlazdice=dlazdice, sine="".join(sine), ukazka=_ukazka_lekce(), neni=neni, **c)
+""".format(skool=SKOOL, dlazdice=dlazdice, sine="".join(sine), ukazka=_ukazka_lekce(), neni=neni, recenze=recenze, **c)
 
     stranka = HLAVA.format(titulek="Akademie · Život vysvětlen",
                            popis="Šest modulů, %d submodulů, %d lekcí. Co je v Akademii Život vysvětlen, modul po modulu." % (c["submoduly"], c["lekce"]),

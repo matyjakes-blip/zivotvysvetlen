@@ -17,6 +17,24 @@ BOLEST = [
     "Pryč průmyslové oleje. Zpátky skutečné jídlo. Srovnat světlo, spánek a trávení.",
 ]
 
+# úvod 1:1: varianty (MOJE věty, 8. 10. k výběru); výchozí V2
+UVOD_11 = {
+    "v1": ("Život vysvětlen.", "Na tobě.", "Akademie je ten systém napsaný. Tohle je ten samý systém aplikovaný na jednoho člověka."),
+    "v2": ("Na každé proč", "dostaneš odpověď.", "Spánek, jídlo, trénink, hormony, pleť i hlava. Tvoje tělo, tvoje pořadí kroků a vysvětlení, proč zrovna takhle."),
+    "v3": ("Celý systém.", "Postavený kolem tebe.", "Akademie je ten systém napsaný. Tohle je ten samý systém aplikovaný na jednoho člověka."),
+}
+UVOD_11_VYCHOZI = "v2"
+
+# co klient dostane navíc k Akademii (podle skutečné struktury klientského boardu; popisy MOJE)
+NAVIC = [
+    ("🏛️", "Tvůj proces implementace", "Dokument jen pro tebe: tvoje situace, tvoje pořadí kroků a proč zrovna takhle."),
+    ("🚀", "Úkoly týden po týdnu", "Každý týden se otevře další krok, až zvládneš ten předchozí."),
+    ("📋", "Check-in každou neděli", "Krátký formulář: spánek, energie, trávení, fotky. Podle něj stavím další týden."),
+    ("🗺️", "Tvoje mapa", "Tvoje čísla a cíle na jednom místě, ať je vidět posun."),
+    ("📞", "Hovory se mnou", "Onboarding a kontrolní hovory, když je potřeba něco přehodit."),
+    ("🌟", "Podklady jen pro klienty", "Krevní testy, syrová kuchyně v receptech, nákup v řetězcích a hotový košík na Rohlíku."),
+]
+
 # ukázka boardu: (ikona, název bloku, co v něm je = MOJE věty o mechanice)
 BOARD = [
     ("🏛️", "Tvůj specifický proces implementace", "Dokument jen pro tebe. Tvoje situace, tvoje pořadí kroků a proč zrovna takhle."),
@@ -55,25 +73,29 @@ def _board():
             '<p class="nb-pozn">Ukázka. Jména a data jsou vymyšlená.</p></div>' % radky)
 
 
-def postav_11_v2(HLAVA, PATA, SKOOL, CALENDLY):
+def postav_11_v2(HLAVA, PATA, SKOOL, CALENDLY, varianta=None, soubor="jedna-na-jedna.html", recenze=""):
     bolest = "".join('<p>%s</p>' % esc(t) for t in BOLEST)
     popisy = "".join('<li><span class="nb-ikona">%s</span><div><b>%s</b><span>%s</span></div></li>' % (i, esc(n), esc(p))
                      for i, n, p in BOARD)
     prubeh = "".join('<li><b>%d</b><strong>%s</strong><span>%s</span></li>' % (k + 1, esc(a), esc(b))
                      for k, (a, b) in enumerate(PRUBEH))
     neni = "".join('<li>%s</li>' % esc(x) for x in NENI)
+    h1a, h1b, pod = UVOD_11[varianta or UVOD_11_VYCHOZI]
+    navic = "".join('<li><span class="nb-ikona">%s</span><div><b>%s</b><span>%s</span></div></li>' % (i, esc(n), esc(t)) for i, n, t in NAVIC)
+    import os
+    board_img = '<figure class="board-snimek"><img src="/media/ukazka-board.jpg" alt="Ukázka osobního boardu v Notionu" loading="lazy"><figcaption>Ukázka. Jméno a data jsou vymyšlená.</figcaption></figure>' if os.path.exists("media/ukazka-board.jpg") else _board()
     telo = """
 <main>
   <section class="uvod v11-uvod">
     <div class="obal uvod-mriz">
       <div class="uvod-text">
         <p class="nadtitul">Osobní vedení 1:1</p>
-        <h1 class="v11-h1">Přišli kvůli postavě.<span>Zůstali kvůli tomu, jak se začali cítit.</span></h1>
-        <p class="tvrzeni-pod">Akademie je ten systém napsaný. Tohle je ten samý systém aplikovaný na jednoho člověka.</p>
+        <h1 class="v11-h1">{h1a}<span>{h1b}</span></h1>
+        <p class="tvrzeni-pod">{pod}</p>
         <div class="tlacitka"><a class="cta" href="#zadost">Požádat o místo</a><a class="cta-druhy" href="#board">Co dostaneš</a></div>
         <p class="drobne">Hovor je zdarma a nezavazuje.</p>
       </div>
-      <div class="v11-board">{board}</div>
+      <div class="v11-board">{board_img}</div>
     </div>
   </section>
 
@@ -84,8 +106,12 @@ def postav_11_v2(HLAVA, PATA, SKOOL, CALENDLY):
   <section class="pas" id="board">
     <div class="obal">
       <p class="nadtitul">Co dostaneš</p>
-      <h2>Tvůj vlastní board</h2>
-      <div class="v11-dostanes"><div>{board}</div><ul class="v11-popisy">{popisy}</ul></div>
+      <h2>Tohle všechno dostaneš</h2>
+      <p class="text-stred">Akademie ti dá všechno, co potřebuješ vědět. Osobní vedení to postaví na tobě.</p>
+      <div class="v11-dostanes"><div>{board_img}</div>
+        <div><div class="v11-akademie"><span class="nb-ikona">🎓</span><div><b>Celá Akademie</b><span>Všech 102 lekcí, protokoly a komunita. Je v ceně.</span></div></div>
+        <p class="v11-navic-titul">Navíc jen pro klienty</p><ul class="v11-popisy">{navic}</ul></div>
+      </div>
     </div>
   </section>
 
@@ -97,14 +123,7 @@ def postav_11_v2(HLAVA, PATA, SKOOL, CALENDLY):
     </div>
   </section>
 
-  <section class="pas">
-    <div class="obal">
-      <p class="nadtitul">Výsledky</p>
-      <h2>Co píšou klienti</h2>
-      <div class="v11-ref"><div>Sem přijde zpráva od klienta<br><small>se souhlasem, bez jména</small></div><div>Sem přijde zpráva od klienta<br><small>se souhlasem, bez jména</small></div><div>Sem přijdou fotky před a po<br><small>se souhlasem</small></div></div>
-    </div>
-  </section>
-
+{recenze}
   <section class="pas">
     <div class="obal uzky">
       <p class="nadtitul">Ať je jasno</p>
@@ -128,11 +147,12 @@ def postav_11_v2(HLAVA, PATA, SKOOL, CALENDLY):
     </div>
   </section>
 </main>
-""".format(board=_board(), bolest=bolest, popisy=popisy, prubeh=prubeh, neni=neni, calendly=CALENDLY)
+""".format(board_img=board_img, bolest=bolest, navic=navic, prubeh=prubeh, neni=neni, calendly=CALENDLY,
+           h1a=esc(h1a), h1b=esc(h1b), pod=esc(pod), recenze=recenze)
     stranka = HLAVA.format(titulek="Osobní vedení 1:1 · Život vysvětlen",
                            popis="Akademie je ten systém napsaný. 1:1 je ten samý systém aplikovaný na jednoho člověka. Hovor je zdarma.",
                            kanon="jedna-na-jedna.html", ogobr="media/matyas-uvod.jpg", skool=SKOOL) + telo + PATA.format(skool=SKOOL)
-    open("jedna-na-jedna.html", "w", encoding="utf-8").write(stranka)
+    open(soubor, "w", encoding="utf-8").write(stranka)
 
 
 # ------------------------------------------------------------ O mně
@@ -185,12 +205,30 @@ def postav_pribeh_v2(HLAVA, PATA, SKOOL, cely_text_html):
         <p class="nadtitul">O mně</p>
         <h1>Mohl jsem já, proč ne ty?</h1>
         <p class="tvrzeni">Moje důvěryhodnost není v tom, že jsem to vždycky věděl.<strong>Je v tom, že jsem si tu špatnou cestu prošel celou.</strong></p>
-        <ol class="osa"><li><b>15 let</b><span>167 cm · 55 kg</span></li><li><b>18 let</b><span>182 cm · 110 kg</span></li><li><b>20 let</b><span>dnes · __ kg</span></li></ol>
+        <ol class="osa"><li><b>15 let</b><span>167 cm · 55 kg</span></li><li><b>18 let</b><span>182 cm · 110 kg</span></li><li><b>20 let</b><span>191 cm · 94 kg</span></li></ol>
       </div>
       <figure class="uvod-foto"><img src="/_nahledy/galerie/g2.jpg" alt="Matyáš Jakeš" width="640" height="800"></figure>
     </div>
   </section>
+  <section class="pas omne-mel" id="prosel">
+    <div class="obal uzky">
+      <p class="nadtitul">Čím jsem si prošel</p>
+      <ul class="mel-seznam"><li>Zažívací problémy</li><li>Nadváha, +55 kg (z 55 na 110)</li><li>Akné</li><li>Inzulínová rezistence</li><li>Neustálé přejídání</li><li>Záněty kloubů</li></ul>
+    </div>
+  </section>
   <div class="obal kapitoly">{kapitoly}</div>
+  <section class="pas autorita-pas" id="odkud">
+    <div class="obal uzky">
+      <p class="nadtitul">Odkud to vím</p>
+      <h2>Co jsem studoval a z čeho čerpám</h2>
+      <div class="autorita-mriz">
+        <div><b>Studium</b><span>doplníš: co a kde jsi studoval, kurzy, certifikáty</span></div>
+        <div><b>Zdroje</b><span>doplníš: autoři a knihy, ze kterých stavíš (Weston Price, Pottenger…)</span></div>
+        <div><b>Praxe</b><span>doplníš: od kdy pracuješ s klienty, kolik lidí jsi vedl</span></div>
+        <div><b>Akademie</b><span>6 modulů, 102 lekcí, u každé napsané, odkud informace je</span></div>
+      </div>
+    </div>
+  </section>
   <section class="pas citat-pas"><div class="obal uzky stred"><p class="citat">Hormony mají neskutečný vliv na člověka a hrají zásadní roli ve vývinu jeho vzhledu, zdraví orgánů, metabolismu, a psychiky.</p></div></section>
   <section class="pas"><div class="obal uzky"><details class="cely-text"><summary>Celý příběh, jak jsem ho napsal</summary><div class="text">{cely}</div></details></div></section>
   <section class="pas zaver-pas"><div class="obal uzky stred"><div class="tlacitka" style="justify-content:center"><a class="cta" href="/akademie.html">Prohlédnout Akademii</a><a class="cta-druhy" href="/jedna-na-jedna.html">Osobní vedení 1:1</a></div></div></section>

@@ -692,6 +692,69 @@ h3{font-family:var(--nadpis);font-weight:600;color:var(--inkoust)}
   .v11-osa{grid-template-columns:1fr}
 }
 
+/* ================= návrhy v3 (8. 10. 2026) ================= */
+/* úvod: fotky k přetáčení */
+.uvod-karusel{position:relative}
+.uvod-pas{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;border-radius:22px;box-shadow:var(--stin);scrollbar-width:none;background:#ebe3d4}
+.uvod-pas::-webkit-scrollbar{display:none}
+.uvod-snimek{flex:0 0 100%;scroll-snap-align:start}
+.uvod-snimek img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;display:block}
+.uvod-karusel .uvod-pas img{border-radius:0;box-shadow:none}
+.uvod-sipka{position:absolute;top:50%;width:40px;height:40px;margin-top:-20px;border-radius:50%;border:0;cursor:pointer;background:rgba(253,251,246,.9);box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.uvod-sipka::before{content:"";position:absolute;left:50%;top:50%;width:9px;height:9px;border-left:2px solid var(--inkoust);border-bottom:2px solid var(--inkoust)}
+.uvod-sipka.predchozi{left:12px}.uvod-sipka.predchozi::before{transform:translate(-30%,-50%) rotate(45deg)}
+.uvod-sipka.dalsi{right:12px}.uvod-sipka.dalsi::before{transform:translate(-70%,-50%) rotate(-135deg)}
+.uvod-tecky{position:absolute;left:0;right:0;bottom:14px;display:flex;justify-content:center;gap:6px}
+.uvod-tecky button{width:7px;height:7px;padding:0;border:0;border-radius:50%;background:rgba(253,251,246,.55);cursor:pointer}
+.uvod-tecky button[aria-current="true"]{background:#fdfbf6;width:20px;border-radius:4px}
+.psali-titul{width:100%;font-family:var(--text)!important;font-size:.72rem!important;font-weight:600!important;letter-spacing:.14em;text-transform:uppercase;color:var(--tlumeny)!important}
+
+/* důkaz: přepínání věku a skutečné fotky */
+.prepinac-radek{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 12px;margin-bottom:14px;font-size:.86rem;font-weight:600;color:var(--tlumeny)}
+.prepinac-radek .prepinac{margin-bottom:0}
+.skutecne-titul{margin-top:clamp(36px,6vw,60px)}
+.skutecne{margin-top:18px;display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;scrollbar-width:thin}
+.skutecne figure{flex:0 0 clamp(150px,18vw,190px);margin:0;scroll-snap-align:start;background:var(--plocha);border:1px solid var(--linka);border-radius:14px;overflow:hidden}
+.skutecne img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
+.skutecne figcaption{padding:10px 12px 12px;display:grid;gap:2px}
+.skutecne figcaption b{font-family:var(--nadpis);font-size:1.25rem;line-height:1.1}
+.skutecne figcaption span{font-size:.84rem;color:var(--text2)}
+.skutecne figcaption em{font-style:normal;font-size:.74rem;color:var(--zlato)}
+
+/* recenze jako Beyond Terrain */
+.recenze-pas{background:var(--pas);overflow:hidden}
+.recenze-okno{margin-top:30px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.recenze-pruh{display:flex;gap:16px;width:max-content;animation:recenze-jede 60s linear infinite;padding-block:4px}
+.recenze-okno:hover .recenze-pruh,.recenze-okno.stuj .recenze-pruh{animation-play-state:paused}
+@keyframes recenze-jede{to{transform:translateX(-50%)}}
+.recenze{flex:0 0 clamp(260px,30vw,380px);margin:0;padding:24px 26px;background:var(--plocha);border:1px solid var(--linka);border-radius:18px;display:flex;flex-direction:column;justify-content:space-between;gap:18px}
+.recenze blockquote{margin:0;font-family:var(--nadpis);font-style:italic;font-size:1.25rem;line-height:1.4;color:var(--inkoust)}
+.recenze blockquote::before{content:"„";display:block;font-size:2rem;line-height:.6;color:var(--zlato-ozdoba);font-style:normal}
+.recenze figcaption{font-size:.74rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--zlato)}
+.recenze.zastupna{border-style:dashed;border-color:var(--linka2)}
+.recenze.zastupna blockquote{color:var(--tlumeny)}
+@media (prefers-reduced-motion:reduce){.recenze-pruh{animation:none}.recenze-okno{overflow-x:auto}}
+
+/* 1:1 v3 */
+.board-snimek{margin:0;border-radius:16px;overflow:hidden;box-shadow:var(--stin);border:1px solid var(--linka);background:#191919}
+.board-snimek img{width:100%;height:auto;display:block}
+.board-snimek figcaption{padding:8px 14px;font-size:.74rem;color:var(--tlumeny);background:#efe8da}
+.v11-akademie{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:16px;background:var(--tma);color:var(--tma-text)}
+.v11-akademie .nb-ikona{font-size:1.5rem}
+.v11-akademie b{display:block;font-family:var(--nadpis);font-size:1.45rem;color:#fbf6ec}
+.v11-akademie span{display:block;font-size:.94rem;color:#cfc5b3}
+.v11-navic-titul{margin:22px 0 12px;font-size:.74rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--zlato)}
+
+/* O mně v3 */
+.omne-mel{padding-block:clamp(30px,5vw,50px)}
+.mel-seznam{list-style:none;margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+.mel-seznam li{padding:8px 14px;border-radius:999px;background:var(--plocha);border:1px solid var(--linka);font-size:.94rem;color:var(--inkoust)}
+.autorita-mriz{margin-top:26px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.autorita-mriz div{padding:16px 18px;border-radius:16px;background:var(--plocha);border:1px solid var(--linka)}
+.autorita-mriz b{display:block;font-family:var(--nadpis);font-size:1.35rem}
+.autorita-mriz span{display:block;margin-top:4px;font-size:.9rem;color:var(--tlumeny)}
+@media (max-width:600px){.autorita-mriz{grid-template-columns:1fr}}
+
 /* ---------- telefon ---------- */
 @media (max-width:860px){
   .uvod-mriz{grid-template-columns:1fr}

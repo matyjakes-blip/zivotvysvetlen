@@ -318,12 +318,24 @@ def pas_cesty():
 # ---- proměna: posuvník před / po (krok 2 přestavby, 6. 10. 2026) ----
 # štítky jen z faktů v lekci 0.0; "Teď · 20 let" = selfie od Matyáše 6. 10. (věk řekl 6. 10.)
 PROMENA = [
-    dict(klic="plet", nazev="Pleť",
-         pred="/media/promena-plet-pred.jpg", po="/media/promena-plet-po.jpg",
-         stitek_pred="Před · 17 let", stitek_po="Teď · 20 let"),
-    dict(klic="telo", nazev="Postava",
-         pred="/media/promena-telo-pred.jpg", po="/media/promena-telo-po.jpg",
-         stitek_pred="Před", stitek_po="Po 4 měsících"),
+    # před = 15 nebo 18 let, po = 20 let; teď zástupné skutečné fotky, sem přijdou AI vizualizace na čistém pozadí
+    dict(klic="v15", nazev="15 let",
+         pred="/_nahledy/vek/15.jpg", po="/_nahledy/vek/20.jpg",
+         stitek_pred="15 let · 55 kg", stitek_po="20 let · 94 kg"),
+    dict(klic="v18", nazev="18 let",
+         pred="/_nahledy/vek/18.jpg", po="/_nahledy/vek/20.jpg",
+         stitek_pred="18 let · 110 kg", stitek_po="20 let · 94 kg"),
+]
+
+# skutečné fotky pod posuvníkem: (soubor, věk, údaj, poznámka)
+SKUTECNE = [
+    ("/pribeh/0.0__01-patnact-selfie.jpg", "15 let", "55 kg", ""),
+    ("/pribeh/0.0__03-patnact-postava.jpg", "15 let", "167 cm · 55 kg", ""),
+    ("/pribeh/0.0__06-sedmnact-bulk.jpg", "16 let", "182 cm · 95 kg", "+40 kg za rok"),
+    ("/pribeh/0.0__07-akne-zblizka.jpg", "17 let", "akné", ""),
+    ("/pribeh/0.0__11-pred-ctyri-mesice.jpg", "18 let", "110 kg", "před změnou stravy"),
+    ("/pribeh/0.0__12-po-ctyrech-mesicich.jpg", "18 let", "−15 kg", "o 4 měsíce později"),
+    ("/media/matyas-uvod.jpg", "20 let", "191 cm · 94 kg", "dnes"),
 ]
 
 # okno „Co se změnilo a proč": jen jeho věty (lekce 0.0 a 1.4.5), nic dopsaného; názvy záložek jsou moje
@@ -360,6 +372,9 @@ def pas_promena():
         '</div>'
         % (p["klic"], p["po"], esc(p["nazev"]), esc(p["stitek_po"]), p["pred"], esc(p["nazev"]), esc(p["stitek_pred"]),
            esc(p["stitek_pred"]), esc(p["stitek_po"]), esc(p["nazev"])) for p in PROMENA)
+    skutecne = "".join(
+        '<figure><img src="%s" alt="Matyáš, %s" loading="lazy" width="300" height="400"><figcaption><b>%s</b><span>%s</span>%s<em>kdy: doplníš</em></figcaption></figure>'
+        % (f, esc(v), esc(v), esc(u), ('<span>%s</span>' % esc(p)) if p else "") for f, v, u, p in SKUTECNE)
     zalozky = "".join(
         '<button type="button" class="zalozka" data-zalozka="%s" aria-selected="%s">%s</button>'
         % (k, "true" if i == 0 else "false", esc(n)) for i, (k, n, _, _, _) in enumerate(PROC))
@@ -372,19 +387,19 @@ def pas_promena():
     <div class="obal">
       <div class="promena-mriz">
         <div class="promena-hlava">
-          <p class="nadtitul">Proměna</p>
+          <p class="nadtitul">Důkaz</p>
           <h2>Nejdřív jsem to zkusil na sobě</h2>
         </div>
         <div class="promena-obr">
-          <div class="prepinac" role="group" aria-label="Co porovnat">%s</div>
+          <div class="prepinac-radek"><span>Před:</span><div class="prepinac" role="group" aria-label="Věk před">%s</div><span>Po: 20 let</span></div>
           %s
-          <p class="popisek">Táhni předělem do stran · výsledky jsou individuální</p>
+          <p class="popisek">Táhni předělem do stran · zástupné fotky, sem přijdou vizualizace · výsledky jsou individuální</p>
         </div>
         <div class="promena-text">
           <ol class="osa">
             <li><b>15 let</b><span>167 cm · 55 kg</span></li>
             <li><b>18 let</b><span>182 cm · 110 kg</span></li>
-            <li><b>20 let</b><span>dnes · __ kg</span></li>
+            <li><b>20 let</b><span>191 cm · 94 kg</span></li>
           </ol>
           <p>Moje důvěryhodnost není v tom, že jsem to vždycky věděl. Je v tom, že jsem si tu špatnou cestu prošel celou.</p>
           <div class="tlacitka">
@@ -393,6 +408,8 @@ def pas_promena():
           </div>
         </div>
       </div>
+      <p class="nadtitul skutecne-titul">Skutečné fotky, nic upraveného</p>
+      <div class="skutecne">%s</div>
     </div>
   </section>
   <div class="clanek okno-proc" id="proc" role="dialog" aria-modal="true" aria-labelledby="proc-nadpis">
@@ -404,7 +421,7 @@ def pas_promena():
       <div class="panely">%s</div>
     </div>
   </div>
-""" % (prep, posuvniky, zalozky, panely)
+""" % (prep, posuvniky, skutecne, zalozky, panely)
 
 
 # ---- starý × nový způsob (krok 3 přestavby, návrh 7. 10. 2026) ----
@@ -464,9 +481,22 @@ def pas_galerie():
 """ % fotky
 
 
+# fotky za hlavní fotkou v úvodu (6 až 12, dodá Matyáš; teď zástupné z _nahledy, na živý web nepouštět)
+FOTKY_UVOD = ["/_nahledy/galerie/g%d.jpg" % i for i in (2, 3, 4, 5, 6)]
+
+
 def uvod_foto():
     if FOTO_UVOD:
-        return '<img src="%s" alt="%s" width="800" height="1000" fetchpriority="high">' % (FOTO_UVOD, esc(FOTO_UVOD_POPIS))
+        vse = [FOTO_UVOD] + FOTKY_UVOD
+        snimky = "".join('<div class="uvod-snimek"><img src="%s" alt="%s" width="800" height="1000"%s></div>'
+                         % (f, esc(FOTO_UVOD_POPIS), ' fetchpriority="high"' if i == 0 else ' loading="lazy"')
+                         for i, f in enumerate(vse))
+        tecky = "".join('<button type="button" aria-label="Fotka %d"%s></button>' % (i + 1, ' aria-current="true"' if i == 0 else "")
+                        for i in range(len(vse)))
+        return ('<div class="uvod-karusel"><div class="uvod-pas">%s</div>'
+                '<button type="button" class="uvod-sipka predchozi" aria-label="Předchozí fotka"></button>'
+                '<button type="button" class="uvod-sipka dalsi" aria-label="Další fotka"></button>'
+                '<div class="uvod-tecky">%s</div></div>' % (snimky, tecky))
     # prázdné políčko, dokud Matyáš nedodá fotku (na živý web takhle nepouštět)
     return '<div class="foto-misto"><b>Sem přijde tvoje fotka</b><small>portrét na výšku, poměr 4 : 5</small></div>'
 
@@ -518,10 +548,10 @@ def postav_index():
         <p class="tvrzeni">Postava, energie, klid i vzhled jsou vedlejší produkty.<strong>Ne cíl.</strong></p>
         <p class="tvrzeni-pod">Oprav terén a biologie, psychika i to, kdo jsi, začnou vyjadřovat to, co měly celou dobu.</p>
         <div class="tlacitka">
-          <a class="cta" href="/akademie.html">Prohlédnout Akademii</a>
+          <a class="cta" href="/akademie.html">Vstoupit do Akademie</a>
           <a class="cta-druhy" href="/jedna-na-jedna.html">Osobní vedení 1:1</a>
         </div>
-        <p class="psali"><span>Psali o mně a byl jsem hostem</span><a href="#respekt">Respekt</a><a href="https://www.youtube.com/watch?v=CHxI8kVo_2Q">Debatní deník</a><a href="https://www.youtube.com/watch?v=xNz05rFzncQ">POD 10</a><a href="https://www.youtube.com/watch?v=bs12r6PMWC0">Světy proti sobě</a></p>
+        <p class="psali"><a class="psali-titul" href="#hoste">Psali o mně a byl jsem hostem</a><a href="#respekt">Respekt</a><a href="#hoste">Debatní deník</a><a href="#hoste">POD 10</a><a href="#hoste">Světy proti sobě</a></p>
       </div>
       <figure class="uvod-foto">{foto}</figure>
     </div>
@@ -537,16 +567,16 @@ def postav_index():
       <a class="cta-druhy" href="/sourcing.html">Otevřít sourcing mapu</a>
     </div>
   </section>
-{cesty}{podcasty}
+{cesty}{recenze}{podcasty}
   <section class="pas zaver-pas">
     <div class="obal uzky stred">
       <div class="ozdoba" aria-hidden="true">◆</div>
       <p class="vyzva">Každý modul staví na předchozím a nic v něm nezazní bez vysvětlení.<strong>Kdo přeskočí rovnou na viry, bude mít pocit, že tomu rozumí, a bude se mýlit.</strong></p>
-      <div class="tlacitka" style="justify-content:center"><a class="cta" href="/akademie.html">Prohlédnout Akademii</a><a class="cta-druhy" href="/jedna-na-jedna.html">Osobní vedení 1:1</a></div>
+      <div class="tlacitka" style="justify-content:center"><a class="cta" href="/akademie.html">Vstoupit do Akademie</a><a class="cta-druhy" href="/jedna-na-jedna.html">Osobní vedení 1:1</a></div>
     </div>
   </section>
 </main>
-""".format(skool=SKOOL, video=video, podcasty=pas_podcasty(), cesty=pas_cesty(), foto=uvod_foto(), promena=pas_promena(), zpusob=pas_zpusob(), akademie=_akademie.pas_akademie(_akademie.data()), galerie=pas_galerie(),
+""".format(skool=SKOOL, video=video, podcasty=pas_podcasty(), cesty=pas_cesty(), foto=uvod_foto(), promena=pas_promena(), zpusob=pas_zpusob(), akademie=_akademie.pas_akademie(_akademie.data()), galerie="", recenze=_recenze.pas_recenze(),
            poradi=poradi, moduly=moduly, pravidla=pravidla)
 
     stranka = HLAVA.format(titulek="Život vysvětlen · Akademie",
@@ -851,6 +881,7 @@ def pata_mapy():
 
 import _sourcing
 import _akademie
+import _recenze
 
 
 if __name__ == "__main__":
@@ -859,14 +890,17 @@ if __name__ == "__main__":
     postav_11()
     # návrhy v2 (větev navrhy-v2): nové 1:1 a O mně přepíšou staré
     import _stranky_v2
-    _stranky_v2.postav_11_v2(HLAVA, PATA, SKOOL, CALENDLY)
+    rek = _recenze.pas_recenze("Co píšou klienti", jen="klient")
+    _stranky_v2.postav_11_v2(HLAVA, PATA, SKOOL, CALENDLY, recenze=rek)
+    for v in ("v1", "v3"):   # varianty úvodu jen do náhledů
+        _stranky_v2.postav_11_v2(HLAVA, PATA, SKOOL, CALENDLY, varianta=v, soubor="_nahledy/jedna-%s.html" % v, recenze=rek)
     _stranky_v2.postav_pribeh_v2(HLAVA, PATA, SKOOL, pribeh_html())
     postav_kontakt()
     postav_pravni()
     print(oprav_mapu())
     print(pata_mapy())
     print("sourcing.html: %d mist" % _sourcing.postav(HLAVA, PATA, SKOOL, esc))
-    print("akademie.html:", _akademie.postav_stranku(HLAVA, PATA, SKOOL))
+    print("akademie.html:", _akademie.postav_stranku(HLAVA, PATA, SKOOL, recenze=_recenze.pas_recenze("Co píšou studenti", jen="student")))
     print("pribeh.html: %d bloku" % n)
     for f in ("index.html", "jedna-na-jedna.html", "kontakt.html", "pravni.html"):
         print("%-22s %d znaku" % (f, os.path.getsize(f)))
