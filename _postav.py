@@ -191,7 +191,7 @@ def postav_pribeh():
 """ % ("\n".join("    " + x for x in ven), SKOOL)
 
     stranka = HLAVA.format(titulek="Můj příběh · Život vysvětlen",
-                           popis="Od 55 kilo a neplodnosti přes 110 kilo a akné až sem. Celá cesta, bez vynechání.",
+                           popis="Od 55 kilo a neplodnosti přes 106 kilo a akné až sem. Celá cesta, bez vynechání.",
                            kanon="pribeh.html", ogobr="pribeh/0.0__09-porovnani-dvojice.jpg",
                            skool=SKOOL) + telo + PATA.format(skool=SKOOL)
     open("pribeh.html", "w", encoding="utf-8").write(stranka)
@@ -324,7 +324,7 @@ PROMENA = [
          stitek_pred="15 let · 55 kg", stitek_po="20 let · 94 kg"),
     dict(klic="v18", nazev="18 let",
          pred="/_nahledy/vek/18.jpg", po="/_nahledy/vek/20.jpg",
-         stitek_pred="18 let · 110 kg", stitek_po="20 let · 94 kg"),
+         stitek_pred="18 let · 106 kg", stitek_po="20 let · 94 kg"),
 ]
 
 # skutečné fotky pod posuvníkem: (soubor, věk, údaj, poznámka)
@@ -333,7 +333,7 @@ SKUTECNE = [
     ("/pribeh/0.0__03-patnact-postava.jpg", "15 let", "167 cm · 55 kg", ""),
     ("/pribeh/0.0__06-sedmnact-bulk.jpg", "16 let", "182 cm · 95 kg", "+40 kg za rok"),
     ("/pribeh/0.0__07-akne-zblizka.jpg", "17 let", "akné", ""),
-    ("/pribeh/0.0__11-pred-ctyri-mesice.jpg", "18 let", "110 kg", "před změnou stravy"),
+    ("/pribeh/0.0__11-pred-ctyri-mesice.jpg", "18 let", "106 kg", "před změnou stravy"),
     ("/pribeh/0.0__12-po-ctyrech-mesicich.jpg", "18 let", "−15 kg", "o 4 měsíce později"),
     ("/media/matyas-uvod.jpg", "20 let", "191 cm · 94 kg", "dnes"),
 ]
@@ -398,7 +398,7 @@ def pas_promena():
         <div class="promena-text">
           <ol class="osa">
             <li><b>15 let</b><span>167 cm · 55 kg</span></li>
-            <li><b>18 let</b><span>182 cm · 110 kg</span></li>
+            <li><b>18 let</b><span>182 cm · 106 kg</span></li>
             <li><b>20 let</b><span>191 cm · 94 kg</span></li>
           </ol>
           <p>Moje důvěryhodnost není v tom, že jsem to vždycky věděl. Je v tom, že jsem si tu špatnou cestu prošel celou.</p>

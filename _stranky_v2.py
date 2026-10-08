@@ -175,10 +175,10 @@ KAPITOLY = [
      ["Šel jsem k doktorovi s kolenama – řekl mi, že je všechno v pohodě. Šel jsem k dalšímu – řekl to samý.",
       "O pár měsíců později se mi brutálně rozjelo akné. Zkoušel jsem všechno – drahý skincare, červený lampy, celerový džusy, kosmetičky, různé detox kůry... a nic."],
      ["0.0__07-akne-zblizka.jpg", "0.0__08-akne-venku.jpg", "0.0__10-cervena-lampa.jpg"], ""),
-    ("18", "110 kilo a krevní testy",
+    ("18", "106 kilo a krevní testy",
      ["Šel jsem k doktorce na krevní testy, protože už jsem fakt nevěděl, co se se mnou děje – a byla úplně v šoku.",
       "Řekla mi, že mám hyperurikémii – zvýšenou hladinu kyseliny močový, a to na úrovni 60letýho chlapa. Zároveň jsem si nechal zkontrolovat i testosteron, a ten byl taky úplně na dně.",
-      "Když mi bylo osmnáct, vážil jsem 110 kilo při 182 cm."],
+      "Když mi bylo osmnáct, vážil jsem 106 kilo při 182 cm."],
      ["0.0__09-porovnani-dvojice.jpg"], ""),
     ("Zlom", "Správná dieta",
      ["Okamžitě po správné dietě se mi zastavil zánět, kyselina močová a močovina se vrátili do normálu. Můj testosteron vystřelil, můj metabolismus se dal zpátky do normálu, vysekal jsem 15 kilo a vypadal 10 krát lépe."],
@@ -205,7 +205,7 @@ def postav_pribeh_v2(HLAVA, PATA, SKOOL, cely_text_html):
         <p class="nadtitul">O mně</p>
         <h1>Mohl jsem já, proč ne ty?</h1>
         <p class="tvrzeni">Moje důvěryhodnost není v tom, že jsem to vždycky věděl.<strong>Je v tom, že jsem si tu špatnou cestu prošel celou.</strong></p>
-        <ol class="osa"><li><b>15 let</b><span>167 cm · 55 kg</span></li><li><b>18 let</b><span>182 cm · 110 kg</span></li><li><b>20 let</b><span>191 cm · 94 kg</span></li></ol>
+        <ol class="osa"><li><b>15 let</b><span>167 cm · 55 kg</span></li><li><b>18 let</b><span>182 cm · 106 kg</span></li><li><b>20 let</b><span>191 cm · 94 kg</span></li></ol>
       </div>
       <figure class="uvod-foto"><img src="/_nahledy/galerie/g2.jpg" alt="Matyáš Jakeš" width="640" height="800"></figure>
     </div>
@@ -213,7 +213,7 @@ def postav_pribeh_v2(HLAVA, PATA, SKOOL, cely_text_html):
   <section class="pas omne-mel" id="prosel">
     <div class="obal uzky">
       <p class="nadtitul">Čím jsem si prošel</p>
-      <ul class="mel-seznam"><li>Zažívací problémy</li><li>Nadváha, +55 kg (z 55 na 110)</li><li>Akné</li><li>Inzulínová rezistence</li><li>Neustálé přejídání</li><li>Záněty kloubů</li></ul>
+      <ul class="mel-seznam"><li>Zažívací problémy</li><li>Nadváha, +51 kg (z 55 na 106)</li><li>Akné</li><li>Inzulínová rezistence</li><li>Neustálé přejídání</li><li>Záněty kloubů</li></ul>
     </div>
   </section>
   <div class="obal kapitoly">{kapitoly}</div>
@@ -235,6 +235,6 @@ def postav_pribeh_v2(HLAVA, PATA, SKOOL, cely_text_html):
 </main>
 """.format(kapitoly="".join(kap), cely=cely_text_html)
     stranka = HLAVA.format(titulek="O mně · Život vysvětlen",
-                           popis="Od 55 kilo přes 110 kilo a akné až sem. Celá cesta.",
+                           popis="Od 55 kilo přes 106 kilo a akné až sem. Celá cesta.",
                            kanon="pribeh.html", ogobr="pribeh/0.0__09-porovnani-dvojice.jpg", skool=SKOOL) + telo + PATA.format(skool=SKOOL)
     open("pribeh.html", "w", encoding="utf-8").write(stranka)
