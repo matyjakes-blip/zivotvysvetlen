@@ -174,7 +174,7 @@ def postav_pribeh():
 """ % ("\n".join("    " + x for x in ven), SKOOL)
 
     stranka = HLAVA.format(titulek="Můj příběh · Život vysvětlen",
-                           popis="Od 55 kilo a neplodnosti přes 110 kilo a akné až sem. Celá cesta, bez vynechání.",
+                           popis="Od 55 kilo a neplodnosti přes 106 kilo a akné až sem. Celá cesta, bez vynechání.",
                            kanon="pribeh.html", ogobr="pribeh/0.0__09-porovnani-dvojice.jpg",
                            skool=SKOOL) + telo + PATA.format(skool=SKOOL)
     open("pribeh.html", "w", encoding="utf-8").write(stranka)
@@ -364,7 +364,7 @@ def pas_promena():
           <p class="popisek">Táhni předělem do stran · výsledky jsou individuální</p>
         </div>
         <div class="promena-text">
-          <p>V patnácti jsem měl 167 centimetrů a 55 kilo, ženské rysy, nulovou energii a byl jsem v podstatě neplodný. V osmnácti jsem vážil 110 kilo, měl kyselinu močovou na úrovni šedesátiletého chlapa a testosteron na dně.</p>
+          <p>V patnácti jsem měl 167 centimetrů a 55 kilo, ženské rysy, nulovou energii a byl jsem v podstatě neplodný. V osmnácti jsem vážil 106 kilo, měl kyselinu močovou na úrovni šedesátiletého chlapa a testosteron na dně.</p>
           <div class="tlacitka">
             <a class="cta" href="#proc">Co se změnilo a proč</a>
             <a class="cta-druhy" href="/pribeh.html">Celý příběh</a>
