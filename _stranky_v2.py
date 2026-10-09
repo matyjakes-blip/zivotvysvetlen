@@ -210,18 +210,46 @@ KAPITOLY = [
 
 # „Odkud to vím" (návrh 9. 10. 2026, stavba jako u Beyond Terrain / lievdalton.com: bez titulů, samostudium jako volba,
 # jmenované zdroje z lekcí Akademie, vlastní cesta, klienti; tvrzení „líp než většina vystudovaných" chtěl Matyáš)
+# 9. 10. hlouběji: obory a zdroje podle rozboru research_notes/akademie-obory-a-zdroje.md (Velcek se nejmenuje, v lekcích taky ne)
 ODKUD = """  <section class="pas autorita-pas" id="odkud">
-    <div class="obal uzky">
-      <p class="nadtitul">Odkud to vím</p>
-      <h2>Nestudoval jsem to na škole. Šel jsem ke zdrojům.</h2>
-      <div class="autorita-text">
-        <p>Mikrobiologii, virologii ani medicínu jsem na vysoké škole nestudoval. Všechno, co učím, jsem si nastudoval sám.</p>
-        <p>Škola učí, co obor tvrdí dnes. Mě zajímalo, odkud se to vzalo. Proto jsem četl původní práce, ze kterých dnešní učebnice vycházejí, od Mieschera v roce 1869 přes Kossela a Chargaffa po Watsona a Cricka. A k tomu lidi, kteří šli proti proudu nebo zkoumali, jak žili zdraví lidé bez moderní stravy: Béchampa, Enderleina, Reckewega, Reného Quintona a Westona Price.</p>
-        <p>V tom, na čem pro tvoje zdraví doopravdy záleží, tedy proč tělo dělá, co dělá, a co mu vrátit, se vyznám líp než většina lidí, kteří tyhle obory vystudovali. Ne proto, že bych byl chytřejší. Jen jsem nezůstal u učebnice.</p>
+    <div class="obal">
+      <div class="uzky-blok">
+        <p class="nadtitul">Odkud to vím</p>
+        <h2>Nestudoval jsem to na škole. Šel jsem ke zdrojům.</h2>
+        <div class="autorita-text">
+          <p>Mikrobiologii, virologii ani medicínu jsem na vysoké škole nestudoval. Všechno, co učím, jsem si nastudoval sám.</p>
+          <p>Škola učí, co obor tvrdí dnes. Mě zajímalo, odkud se to vzalo a jestli to sedí. Proto čtu původní práce, ze kterých dnešní učebnice vycházejí, i ty, se kterými nesouhlasím. K nim recenzované studie a autory, kteří šli proti proudu.</p>
+          <p>V tom, na čem pro tvoje zdraví doopravdy záleží, tedy proč tělo dělá, co dělá, a co mu vrátit, se vyznám líp než většina lidí, kteří tyhle obory vystudovali. Ne proto, že bych byl chytřejší. Jen jsem nezůstal u učebnice.</p>
+        </div>
       </div>
-      <div class="autorita-mriz tri">
+      <ul class="autorita-cisla">
+        <li><b>102</b><span>lekcí v šesti modulech</span></li>
+        <li><b>226 000</b><span>slov výkladu</span></li>
+        <li><b>200+</b><span>jmenovaných autorů, prací a institucí</span></li>
+        <li><b>60+</b><span>recenzovaných studií s DOI nebo PMID, každá dohledatelná</span></li>
+      </ul>
+      <h3 class="autorita-podnadpis">Obory, které Akademie pokrývá</h3>
+      <div class="obory-mriz">
+        <div class="obor"><b>Příčiny nemoci</b><span>obecná etiologie</span><span>patofyziologie a symptomatologie</span><span>nosologie a filozofie medicíny</span><span>homotoxikologie</span><span>imunologie a sérologie</span><span>lymfologie</span></div>
+        <div class="obor"><b>Buňka a mikroby</b><span>dějiny molekulární biologie a genetiky</span><span>biochemie a izolační metody</span><span>buněčná biologie (membrány, vezikuly, exozomy)</span><span>virologie a její metody</span><span>mikrobiologie a mikrobiom</span><span>parazitologie</span><span>laboratorní diagnostika a mikroskopie</span></div>
+        <div class="obor"><b>Prostředí</b><span>fotobiologie a chronobiologie</span><span>spánková fyziologie</span><span>biofyzika vody</span><span>biomechanika a evoluční antropologie pohybu</span><span>fyziologie dýchání</span><span>toxikologie</span></div>
+        <div class="obor"><b>Výživa</b><span>výživa a antropologie výživy</span><span>minerály, sůl a elektrolyty</span><span>lipidologie</span><span>dějiny vitaminologie</span><span>potravinářská chemie a potravinové právo</span><span>půdní ekologie</span></div>
+        <div class="obor"><b>Tělo a výkon</b><span>sportovní fyziologie</span><span>endokrinologie</span><span>fyziologie vylučování a půst</span><span>vývoj obličeje a bioarcheologie</span><span>gerontologie</span></div>
+        <div class="obor"><b>Mysl</b><span>psychologie myšlení a emocí</span><span>psychoneuroimunologie, placebo a nocebo</span><span>kognitivní neurověda vnímání</span><span>psychotraumatologie</span><span>kritika psychiatrie</span></div>
+      </div>
+      <p class="obory-napric">A napříč všemi moduly: dějiny medicíny a pokusů na lidech, epidemiologie a zdravotní statistika, filozofie vědy a vědecká metoda, lékařská antropologie.</p>
+      <h3 class="autorita-podnadpis">Na koho navazuju</h3>
+      <div class="zdroje-mriz">
+        <div><b>Terén a buňka</b><span>Antoine Béchamp, Claude Bernard, Günther Enderlein, Gaston Naessens, René Quinton, Gerald Pollack</span></div>
+        <div><b>Výživa tradičních národů</b><span>Weston A. Price, John Boyd Orr a John Gilks (Masajové a Kikujové, 1931)</span></div>
+        <div><b>Nemoc jako proces</b><span>Hans-Heinrich Reckeweg a jeho šestifázová tabulka</span></div>
+        <div><b>Pokusy o přenos nemoci</b><span>Milton Rosenau 1919, Ludvig Hektoen, Max von Pettenkofer, Ilja Mečnikov a další, sto let pokusů</span></div>
+        <div><b>Mysl</b><span>Sydney Banks, George a Linda Pransky, Viktor Frankl, Robert Whitaker</span></div>
+        <div><b>Současná terénní škola</b><span>Beyond Terrain (Liev Dalton), na kterou v lekcích otevřeně odkazuju</span></div>
+      </div>
+      <p class="obory-napric">Rozebírám i práce, se kterými nesouhlasím: Miescher 1869, Kossel, Chargaff 1950, Watson a Crick 1953, Pasteur, Kochovy postuláty, Eijkman a Funk 1912. Abys viděl, z čeho dnešní výklad vzešel, ne jen co tvrdí.</p>
+      <div class="autorita-mriz">
         <div><b>Na sobě</b><span>Pět let, od 55 kilo přes 106 až sem. Co učím, jsem nejdřív vyzkoušel na vlastním těle.</span></div>
-        <div><b>U zdroje</b><span>V Akademii ukazuju i původní práce, ze kterých to vychází, ať si to můžeš ověřit sám.</span></div>
         <div><b>S klienty</b><span>Vedu klienty 1:1. Vidím, co funguje i na jiných tělech než na mém.</span></div>
       </div>
     </div>

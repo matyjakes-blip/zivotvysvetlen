@@ -862,3 +862,24 @@ h3{font-family:var(--nadpis);font-weight:600;color:var(--inkoust)}
 .prihlaska.vybrano .prihlaska-panel{display:none}
 .prihlaska.vybrano[data-volba="pod"] [data-pr-panel="pod"],.prihlaska.vybrano[data-volba="nad"] [data-pr-panel="nad"]{display:block}
 .js .prihlaska:not(.vybrano) .prihlaska-panel{display:none}
+
+/* O mně · Odkud to vím (v5): čísla, obory, zdroje */
+.autorita-pas .uzky-blok{max-width:760px;margin:0 auto}
+.autorita-cisla{list-style:none;margin:30px auto 0;max-width:1000px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.autorita-cisla li{padding:18px 16px;border:1px solid var(--linka);border-radius:16px;background:var(--plocha);text-align:center}
+.autorita-cisla b{display:block;font-family:var(--nadpis);font-size:2.1rem;line-height:1;color:var(--inkoust);font-variant-numeric:lining-nums}
+.autorita-cisla span{display:block;margin-top:6px;font-size:.84rem;line-height:1.4;color:var(--tlumeny)}
+.autorita-podnadpis{max-width:1000px;margin:44px auto 14px;font-family:var(--nadpis);font-size:1.6rem;font-weight:500;color:var(--inkoust)}
+.obory-mriz{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.obor{padding:16px 18px;border:1px solid var(--linka);border-radius:16px;background:var(--pozadi)}
+.obor b{display:block;margin-bottom:8px;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--zlato)}
+.obor span{display:block;padding:5px 0;border-top:1px dashed var(--linka2);font-size:.92rem;line-height:1.4;color:var(--text2)}
+.obor span:first-of-type{border-top:0}
+.obory-napric{max-width:1000px;margin:14px auto 0;font-size:.95rem;line-height:1.6;color:var(--tlumeny)}
+.zdroje-mriz{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.zdroje-mriz div{padding:14px 18px;border-left:3px solid var(--zlato-svetle);background:var(--plocha);border-radius:0 14px 14px 0}
+.zdroje-mriz b{display:block;font-size:.95rem;color:var(--inkoust)}
+.zdroje-mriz span{display:block;margin-top:4px;font-size:.92rem;line-height:1.5;color:var(--text2)}
+.autorita-pas .autorita-mriz{max-width:1000px;margin:30px auto 0;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:860px){.autorita-cisla{grid-template-columns:repeat(2,minmax(0,1fr))}.obory-mriz{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.obory-mriz,.zdroje-mriz,.autorita-pas .autorita-mriz{grid-template-columns:1fr}}
