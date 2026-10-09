@@ -136,14 +136,11 @@ def postav_11_v2(HLAVA, PATA, SKOOL, CALENDLY, varianta=None, soubor="jedna-na-j
   <section class="pas v11-zadost-pas" id="zadost">
     <div class="obal uzky">
       <p class="nadtitul">Žádost o místo</p>
-      <h2>Tři otázky, pak si vybereš termín</h2>
+      <h2>Začíná to hovorem</h2>
       <div class="v11-form">
-        <p class="v11-krok">Krok 1 ze 3</p>
-        <label>Jméno<input type="text" placeholder="Jak ti říkat" disabled></label>
-        <label>Věk<input type="text" placeholder="Osobní vedení beru od 20 let" disabled></label>
-        <div class="v11-form-dalsi"><span>2 · Co řešíš a co už jsi zkoušel</span><span>3 · Kontakt (Instagram nebo WhatsApp)</span></div>
-        <a class="cta" href="{calendly}">Pokračovat</a>
-        <p class="drobne">Návrh: formulář se dodělá v kroku 5. Teď tlačítko vede rovnou do kalendáře.</p>
+        <p>Hovor je zdarma a nezávazný. Projdeme, co řešíš a co už jsi zkoušel.</p>
+        <p class="drobne">Osobní vedení beru od 20 let. Pro mladší je tu <a href="/akademie.html">Akademie</a>.</p>
+        <a class="cta" href="{calendly}">Vybrat termín hovoru</a>
       </div>
     </div>
   </section>

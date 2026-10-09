@@ -927,7 +927,7 @@ if __name__ == "__main__":
         spatne = []
         for f in glob.glob("*.html") + glob.glob("sourcing/**/*.html", recursive=True) + glob.glob("mapa/**/*.html", recursive=True):
             t = open(f, encoding="utf-8").read()
-            for znak in ("/_nahledy/", "doplníš", "recenze zastupna", "foto-misto"):
+            for znak in ("/_nahledy/", "doplníš", "recenze zastupna", "foto-misto", "Návrh:", "disabled>"):
                 if znak in t:
                     spatne.append("%s: %s" % (f, znak))
         print("POZOR, zástupné věci na živých stránkách: " + "; ".join(spatne) if spatne else "kontrola živých stránek: čisto")
