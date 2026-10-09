@@ -17,7 +17,7 @@ RECENZE = [
     ("Cítím se jako superman. Zvládnu daleko víc věcí, jsem líp koncentrovaný, síla šla nahoru okamžitě, jsem víc v klidu a víc přítomný. Manželka říkala, že mám najednou nějakou jiskru.", "", "klient", "po 4 dnech"),
     ("Zmizelo nadýmání, s tím špatný trávení a ty fakt nepříjemný a neřešitelný crashe odpoledne. Cítím velkou změnu na spánku, energii a náladě přes den.", "M.", "klient", "1. týden"),
     # spojené zprávy VŽDY od stejného člověka (různé lidi nikdy dohromady)
-    ("Dneska mi trenér řekl, že vypadám esteticky dobře a že silově sem na tom líp, po měsíci, co sem něco změnil. A nahoře na horách sem se sedl na okraj a byl sem na sebe fakt hrdý, že se mi ten život teď mění.", "R.", "klient", "po měsíci"),
+    ("Dneska mi trenér řekl, že vypadám esteticky dobře a že silově sem na tom líp, po měsíci, co sem něco změnil. Nahoře sem si sedl sám na okraj, koukal sem na polskou stranu a byl sem na sebe fakt hrdý, že se mi ten život teď mění.", "R.", "klient", "po měsíci"),
     ("Větší energie, lepší spánek, plynatost se zmenšila, úzkosti ustoupily. Nehty a vlasy rostou rychleji, i pleť je lepší, přijdu si hezčí v zrcadle. Přítelkyně mi řekla taky, že vypadám líp.", "", "klient", ""),
     ("Mám obrovskou radost, co se to se mnou děje. Prostě ta nálada, chuť si na max užívat života. Všechno feeluju 1000× líp.", "", "klient", "po měsíci"),
     # další samostatné
