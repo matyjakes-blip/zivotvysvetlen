@@ -55,7 +55,9 @@ section[id]{scroll-margin-top:72px}
 .znacka{
   font-family:var(--znacka);font-weight:600;font-size:.8rem;letter-spacing:.22em;
   text-transform:uppercase;color:var(--inkoust);text-decoration:none;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:10px;
 }
+.znacka img{width:28px;height:28px;flex:none}
 .nav{display:flex;align-items:center;gap:clamp(14px,2.6vw,30px)}
 .nav a{font-size:.92rem;color:var(--text2);text-decoration:none;transition:color .2s}
 .nav a:hover{color:var(--inkoust)}
@@ -736,7 +738,8 @@ h3{font-family:var(--nadpis);font-weight:600;color:var(--inkoust)}
 .recenze{flex:0 0 clamp(260px,30vw,380px);margin:0;padding:24px 26px;background:var(--plocha);border:1px solid var(--linka);border-radius:18px;display:flex;flex-direction:column;justify-content:space-between;gap:18px}
 .recenze blockquote{margin:0;font-family:var(--nadpis);font-style:italic;font-size:1.25rem;line-height:1.4;color:var(--inkoust)}
 .recenze blockquote::before{content:"„";display:block;font-size:2rem;line-height:.6;color:var(--zlato-ozdoba);font-style:normal}
-.recenze figcaption{font-size:.74rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--zlato)}
+.recenze figcaption{font-size:.74rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--zlato);display:flex;align-items:center;gap:9px}
+.recenze .odznak{width:24px;height:24px;flex:none}
 .recenze.zastupna{border-style:dashed;border-color:var(--linka2)}
 .recenze.zastupna blockquote{color:var(--tlumeny)}
 @media (prefers-reduced-motion:reduce){.recenze-pruh{animation:none}.recenze-okno{overflow-x:auto}}

@@ -51,6 +51,7 @@ HLAVA = """<!doctype html>
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://zivotvysvetlen.cz/{ogobr}">
 <link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/ikona.svg" type="image/svg+xml">
 <link rel="icon" href="/ikona-512.png" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/pisma/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
@@ -59,7 +60,7 @@ HLAVA = """<!doctype html>
 </head>
 <body>
 <header class="hlavicka">
-  <a class="znacka" href="/">Život vysvětlen</a>
+  <a class="znacka" href="/"><img src="/media/lev/lev.svg" alt="" width="28" height="28">Život vysvětlen</a>
   <nav class="nav" aria-label="Hlavní">
     <a href="/akademie.html">Akademie</a>
     <a href="/sourcing.html">Sourcing mapa</a>
@@ -608,7 +609,7 @@ def postav_index():
 
     stranka = HLAVA.format(titulek="Život vysvětlen · Akademie",
                            popis="Tohle není kurz o tom, jak být zdravý. Je to kurz o tom, jak zdraví vlastně funguje. První terénní akademie v češtině.",
-                           kanon="", ogobr="mapa/hero.jpg", skool=SKOOL) + telo + PATA.format(skool=SKOOL)
+                           kanon="", ogobr="media/lev/og.jpg", skool=SKOOL) + telo + PATA.format(skool=SKOOL)
     open("index.html", "w", encoding="utf-8").write(stranka)
 
 
@@ -734,7 +735,7 @@ def postav_kontakt():
 
     stranka = HLAVA.format(titulek="Kontakt · Život vysvětlen",
                            popis="Instagram, hovor 1:1, Akademie na Skoolu a e-mail.",
-                           kanon="kontakt.html", ogobr="mapa/hero.jpg",
+                           kanon="kontakt.html", ogobr="media/lev/og.jpg",
                            skool=SKOOL) + telo + PATA.format(skool=SKOOL)
     open("kontakt.html", "w", encoding="utf-8").write(stranka)
 
@@ -787,7 +788,7 @@ def postav_jak_mapa():
            form_tipy=_sourcing.FORM_TIPY)
     stranka = HLAVA.format(titulek="Jak mapa funguje · Život vysvětlen",
                            popis="Odkud jsou místa na sourcing mapě, co se na ni dostane a jak opravit nebo odstranit údaj.",
-                           kanon="jak-mapa-funguje.html", ogobr="mapa/hero.jpg",
+                           kanon="jak-mapa-funguje.html", ogobr="media/lev/og.jpg",
                            skool=SKOOL) + telo + PATA.format(skool=SKOOL)
     open("jak-mapa-funguje.html", "w", encoding="utf-8").write(stranka)
 
@@ -905,7 +906,7 @@ def postav_pravni():
 
     stranka = HLAVA.format(titulek="Právní informace · Život vysvětlen",
                            popis="Kdo web provozuje, co se tu děje s údaji a jaké máš práva.",
-                           kanon="pravni.html", ogobr="mapa/hero.jpg",
+                           kanon="pravni.html", ogobr="media/lev/og.jpg",
                            skool=SKOOL) + telo + PATA.format(skool=SKOOL)
     open("pravni.html", "w", encoding="utf-8").write(stranka)
 

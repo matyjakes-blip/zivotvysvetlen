@@ -37,6 +37,10 @@ ZASTUPNE = [("klient", "Sem přijde recenze klienta z 1:1, jeho slovy, se souhla
             ("klient", "Sem přijde recenze klienta z 1:1.")]
 
 
+# odznak se lvem jen u klientů 1:1 (studenti Akademie ho nemají)
+ODZNAK = '<img class="odznak" src="/media/lev/odznak.svg" alt="" width="24" height="24">'
+
+
 def pas_recenze(nadpis="Co říkají klienti a studenti", jen=None):
     if RECENZE:
         polozky = [r for r in RECENZE if not jen or r[2] == jen]
@@ -44,8 +48,8 @@ def pas_recenze(nadpis="Co říkají klienti a studenti", jen=None):
             return ""
         if nadpis == "Co říkají klienti a studenti" and all(r[2] == "klient" for r in polozky):
             nadpis = "Co píšou klienti"   # dokud nejsou recenze studentů
-        karty = "".join('<figure class="recenze"><blockquote>%s</blockquote><figcaption>%s%s%s</figcaption></figure>'
-                        % (esc(t), ("<b>%s</b> · " % esc(i)) if i else "", TYPY[typ], (" · %s" % esc(kdy)) if kdy else "")
+        karty = "".join('<figure class="recenze"><blockquote>%s</blockquote><figcaption>%s<span>%s%s%s</span></figcaption></figure>'
+                        % (esc(t), ODZNAK if typ == "klient" else "", ("<b>%s</b> · " % esc(i)) if i else "", TYPY[typ], (" · %s" % esc(kdy)) if kdy else "")
                         for t, i, typ, kdy in polozky)
     elif os.environ.get("NAHLED") != "1":
         return ""  # bez skutečných recenzí se souhlasem se sekce na živém webu neukazuje
