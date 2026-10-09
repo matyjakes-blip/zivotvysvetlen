@@ -174,6 +174,18 @@ NENI = [
 ]
 
 
+# „Co budeš umět po modulu" (návrh 9. 10. 2026, odvozené z popisů submodulů a protokolů, ke schválení)
+VYSLEDKY = {
+    0: "Víš, kterým modulem začít a jakým tempem. Vyjde ti to ze vstupní diagnostiky.",
+    1: "Umíš si vysvětlit, odkud se nemoc bere, co dělá imunitní systém a co znamená příznak. A víš, co dělat, když onemocníš.",
+    2: "Víš, čím jsou viry, bakterie a paraziti doopravdy, a zprávy o epidemiích čteš jinak.",
+    3: "Máš nastavené světlo, spánek, vodu, pohyb a dech na celý den. Většina z toho je zadarmo.",
+    4: "Víš, co jíst a proč, kde v Česku sehnat mléko, maso a vejce a co z nich uvařit.",
+    5: "Máš trénink podle toho, kolik dní v týdnu doopravdy máš, a víš, jak podpořit hormony a regeneraci bez násilí.",
+    6: "Rozumíš tomu, odkud se bere to, co prožíváš, a máš praktický týden kroků pro mysl.",
+}
+
+
 def _obrazky_submodulu():
     """obrázky z lekcí (mapa/nahledy, jako ve staré mapě) podle submodulu: '1.3.2--x.jpg' patří k '1.3'"""
     import glob
@@ -247,12 +259,13 @@ def postav_stranku(HLAVA, PATA, SKOOL, recenze=""):
             '<section class="sin sin4" id="modul-%d">'
             '<div class="sin-hlava">'
             '<figure class="sin-obr"><img src="%s" alt="%s" loading="lazy" width="%d" height="%d"><figcaption>%s</figcaption></figure>'
-            '<div class="sin-text"><p class="modul-cislo">Modul %d</p><h3>%s</h3><p class="sin-proc">%s</p><p class="modul-meta">%s</p></div>'
+            '<div class="sin-text"><p class="modul-cislo">Modul %d</p><h3>%s</h3><p class="sin-proc">%s</p>%s<p class="modul-meta">%s</p></div>'
             '</div>'
             '<div class="sub-mriz">%s</div>'
             '</section>'
             % (m["i"], m["img"], esc(m["alt"]), m["w"], m["h"], esc(m["cap"]), m["i"], esc(m["jmeno"]),
-               esc(m["proc"]), esc(meta), karty))
+               esc(m["proc"]), ('<p class="modul-vysledek"><b>Po modulu:</b> %s</p>' % esc(VYSLEDKY[m["i"]])) if m["i"] in VYSLEDKY else "",
+               esc(meta), karty))
 
     neni = "".join('<li><b>%s</b> %s</li>' % (esc(a), esc(b)) for a, b in NENI)
 
@@ -290,9 +303,9 @@ def postav_stranku(HLAVA, PATA, SKOOL, recenze=""):
 
   <section class="pas">
     <div class="obal uzky">
-      <p class="nadtitul">Ukázka</p>
+      <p class="nadtitul">Lekce zdarma</p>
       <h2>1.1 · Co je nemoc</h2>
-      <div class="ukazka"><div class="ukazka-text">{ukazka}</div><div class="ukazka-zamek"><p>Pokračování je v Akademii</p><a class="cta" href="{skool}">Vstoupit do Akademie</a></div></div>
+      <div class="ukazka"><div class="ukazka-text">{ukazka}</div><div class="ukazka-zamek"><p>Celou lekci si přečti zdarma</p><div class="tlacitka" style="justify-content:center"><a class="cta" href="/lekce-zdarma.html">Přečíst celou lekci</a><a class="cta-druhy" href="{skool}">Vstoupit do Akademie</a></div></div></div>
     </div>
   </section>
 
@@ -326,3 +339,50 @@ if __name__ == "__main__":
     for m in data():
         print(m["i"], m["jmeno"], m["pocet_sub"], m["lekci"], m["cas"], [ (s["klic"], len(s["lekce"])) for s in m["sub"]])
     print(cisla(data()))
+
+
+# ------------------------------------------------------------ lekce zdarma (9. 10. 2026): celá 1.1 jeho slovy
+def postav_lekci_zdarma(HLAVA, PATA, SKOOL):
+    import markdown
+    p = os.path.join(ZDROJ, "telo", "1.1__1-1-co-je-nemoc.md")
+    t = open(p, encoding="utf-8").read()
+    t = re.sub(r"^<!--.*?-->\s*", "", t, flags=re.S)
+    t = re.sub(r"\n---\s*$", "", t.strip())
+    slov = len(re.findall(r"\w+", t))
+    minut = max(1, round(slov / 230))
+    telo_html = markdown.markdown(t, extensions=["extra", "sane_lists"])
+    moduly = data(); c = cisla(moduly)
+    dalsi = ""
+    for m in moduly:
+        for sm in m["sub"]:
+            if sm["klic"] == "1.1" and sm["lekce"]:
+                dalsi = sm["lekce"][0]
+    stranka = HLAVA.format(titulek="Lekce zdarma: 1.1 Co je nemoc · Život vysvětlen",
+                           popis="Celá první lekce Akademie Život vysvětlen. Co nemoc vlastně je a odkud se bere.",
+                           kanon="lekce-zdarma.html", ogobr="mapa/hero.jpg", skool=SKOOL) + """
+<main>
+  <section class="hero hero-uzsi">
+    <div class="obal uzky">
+      <p class="nadtitul">Lekce zdarma · Akademie</p>
+      <h1 class="nadpis-str">1.1 · Co je nemoc</h1>
+      <p class="tvrzeni-pod">Celá lekce z Akademie, tak jak ji mají studenti. Čtení asi na {minut} minut.</p>
+    </div>
+  </section>
+  <section class="pas lekce-pas">
+    <div class="obal uzky">
+      <article class="text lekce-text">{telo}</article>
+    </div>
+  </section>
+  <section class="pas zaver-pas">
+    <div class="obal uzky stred">
+      <div class="ozdoba" aria-hidden="true">◆</div>
+      <h2>Tohle byla jedna ze {lekci} lekcí</h2>
+      <p class="text-stred">{dalsi_veta}</p>
+      <div class="tlacitka" style="justify-content:center"><a class="cta" href="{skool}">Vstoupit do Akademie</a><a class="cta-druhy" href="/akademie.html">Prohlédnout celou Akademii</a></div>
+    </div>
+  </section>
+</main>
+""".format(minut=minut, telo=telo_html, lekci=c["lekce"], skool=SKOOL,
+           dalsi_veta=("Další je %s." % esc(dalsi)) if dalsi else "Další lekce jsou v Akademii.") + PATA.format(skool=SKOOL)
+    open("lekce-zdarma.html", "w", encoding="utf-8").write(stranka)
+    return minut

@@ -980,6 +980,7 @@ if __name__ == "__main__":
     print(oprav_mapu())
     print(pata_mapy())
     print("sourcing.html: %d mist" % _sourcing.postav(HLAVA, PATA, SKOOL, esc))
+    print("lekce-zdarma.html: %d min" % _akademie.postav_lekci_zdarma(HLAVA, PATA, SKOOL))
     print("akademie.html:", _akademie.postav_stranku(HLAVA, PATA, SKOOL, recenze=_recenze.pas_recenze("Co píšou studenti", jen="student")))
     print("pribeh.html: %d bloku" % n)
     for f in ("index.html", "jedna-na-jedna.html", "kontakt.html", "pravni.html"):
