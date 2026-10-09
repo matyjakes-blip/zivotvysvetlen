@@ -11,20 +11,21 @@ def esc(t):
 # (text, iniciály, typ "klient" nebo "student", kdy). Klienti z jeho IG highlightu „Klienti" (souhlas má ke všem,
 # Matyáš 9. 10. 2026), zkrácené jejich slovy; jen text, žádné fotky klientů, jména jen iniciálou, intimní věci vynechané.
 RECENZE = [
-    ("Díky tobě se cítím opravdu skvěle. Moje zdraví i fyzická kondice jsou na úplně jiné úrovni než dřív. Vážím si nejen tvých znalostí a zkušeností, ale i toho, jak lidsky ke mně přistupuješ.", "R.", "klient", ""),
+    # nejsilnější, beze změny
     ("Přišel jsem hlavně proto, že mě často bolelo břicho, měl jsem průjmy, ranní zvracení a reflux. Přestala mě bolet záda i břicho, zmizel reflux a ranní zvracení, mnohem lépe spím a podstatně méně se potím. Všechno jsi mi srozumitelně vysvětlil a nastavil tak, aby se to dalo normálně dodržovat.", "", "klient", ""),
+    ("Díky tobě se cítím opravdu skvěle. Moje zdraví i fyzická kondice jsou na úplně jiné úrovni než dřív. Vážím si nejen tvých znalostí a zkušeností, ale i toho, jak lidsky ke mně přistupuješ.", "R.", "klient", ""),
     ("Cítím se jako superman. Zvládnu daleko víc věcí, jsem líp koncentrovaný, síla šla nahoru okamžitě, jsem víc v klidu a víc přítomný. Manželka říkala, že mám najednou nějakou jiskru.", "", "klient", "po 4 dnech"),
-    ("Dneska mi trenér řekl, že vypadám esteticky dobře a že silově sem na tom líp. Po měsíci, co sem něco změnil. To je kompliment jako blázen, on to normálně neříká.", "R.", "klient", "po měsíci"),
     ("Zmizelo nadýmání, s tím špatný trávení a ty fakt nepříjemný a neřešitelný crashe odpoledne. Cítím velkou změnu na spánku, energii a náladě přes den.", "M.", "klient", "1. týden"),
-    ("Energie a celkově nálada se mi kompletně vrací do normálu. Hlavně ta nálada, to je úplně něco jinýho než předtím.", "F.", "klient", ""),
+    # spojené zprávy VŽDY od stejného člověka (různé lidi nikdy dohromady)
+    ("Dneska mi trenér řekl, že vypadám esteticky dobře a že silově sem na tom líp, po měsíci, co sem něco změnil. A nahoře na horách sem se sedl na okraj a byl sem na sebe fakt hrdý, že se mi ten život teď mění.", "R.", "klient", "po měsíci"),
+    ("Větší energie, lepší spánek, plynatost se zmenšila, úzkosti ustoupily. Nehty a vlasy rostou rychleji, i pleť je lepší, přijdu si hezčí v zrcadle. Přítelkyně mi řekla taky, že vypadám líp.", "", "klient", ""),
+    ("Mám obrovskou radost, co se to se mnou děje. Prostě ta nálada, chuť si na max užívat života. Všechno feeluju 1000× líp.", "", "klient", "po měsíci"),
+    # další samostatné
     ("Brácho, mám problém. Padají mi všechny kalhoty. Jak bylo vedro, nosil jsem jen kraťasy, a dneska prší, jdu na schůzku a kalhoty velký všechny.", "", "klient", ""),
-    ("Cítím progress hlavně i po tý mentální straně, ta strava mi dává úplně jiný signály v tom těle. Nehty a vlasy rostou rychleji, i pleť je lepší, přijdu si hezčí v zrcadle. Přítelkyně mi řekla taky, že vypadám líp.", "", "klient", ""),
     ("Co se businessu týče, mám daleko víc energie. Díky změně stravy nepotřebuju jíst tolik jídel denně jako předtím, stačí mi dvě velký jídla a jedna svačina. Produktivita se zvýšila.", "", "klient", ""),
-    ("Prostě ta nálada, chuť si na max užívat života. Všechno feeluju 1000× líp.", "", "klient", "po měsíci"),
     ("Ráno je teď 100% moje. Vstanu, umyju ze sebe pot, jdu ven, dám si grounding a mořskou plazmu a k tomu pět základních cviků. Jedu to fakt napohodu, bez stresu a v klidu.", "", "klient", ""),
+    ("Energie a celkově nálada se mi kompletně vrací do normálu. Hlavně ta nálada, to je úplně něco jinýho než předtím.", "F.", "klient", ""),
     ("Větší přítomnost, klid v hlavě, jiná energie a přirozenější chuť dělat věci podle sebe a pro sebe.", "", "klient", ""),
-    ("Přijde mi, že každý den je výhra. Všechno pod kontrolou a zase začínám mít víc energie a chuti na trénink.", "", "klient", ""),
-    ("Kámo, to je šílený. Mám obrovskou radost, co se to se mnou děje.", "", "klient", ""),
 ]
 
 TYPY = {"klient": "Klient · 1:1", "student": "Student · Akademie"}
