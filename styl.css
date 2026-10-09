@@ -896,3 +896,15 @@ h3{font-family:var(--nadpis);font-weight:600;color:var(--inkoust)}
 .pravidla-mapy li,.pravidla-mapy p{font-size:1.02rem;line-height:1.7;color:var(--text2)}
 .pravidla-mapy p{margin-top:10px}
 .pravidla-mapy b{color:var(--inkoust)}
+
+/* Akademie: výsledek modulu + lekce zdarma (9. 10. 2026) */
+.modul-vysledek{margin-top:12px;padding:10px 14px;border-left:3px solid var(--zlato-svetle);background:var(--pozadi);border-radius:0 10px 10px 0;font-size:.95rem;line-height:1.5;color:var(--text2)}
+.modul-vysledek b{color:var(--zlato)}
+.lekce-pas{background:var(--plocha)}
+.lekce-text h2{margin:40px 0 14px;font-size:clamp(1.5rem,3vw,1.9rem)}
+.lekce-text h3{margin:28px 0 10px;font-family:var(--nadpis);font-size:1.35rem;font-weight:600;color:var(--inkoust)}
+.lekce-text ul,.lekce-text ol{margin:0 0 20px 1.2em;display:grid;gap:8px}
+.lekce-text li{font-size:1.04rem;line-height:1.7;color:#2e2a23}
+.lekce-text table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:.95rem}
+.lekce-text th,.lekce-text td{border:1px solid var(--linka);padding:8px 10px;text-align:left;vertical-align:top}
+.lekce-text th{background:var(--pas)}
