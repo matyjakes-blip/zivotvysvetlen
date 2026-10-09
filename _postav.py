@@ -504,8 +504,8 @@ def pas_galerie():
 """ % fotky
 
 
-# kartičky v úvodu: hlavní fotka + jeho fotky z 9. 10. 2026 (balíček, táhne se do strany, po poslední zase první)
-FOTKY_UVOD = ["/media/uvod/%s.jpg" % n for n in ("hory", "podcast", "ostrovy", "slunce", "garda", "kokos", "more", "zrcadlo")]
+# kartičky v úvodu: hlavní fotka + jeho fotky z 9. 10. 2026 (šatna: kamarád ořízlý, letadlo: spolucestující rozmazaná) (balíček, táhne se do strany, po poslední zase první)
+FOTKY_UVOD = ["/media/uvod/%s.jpg" % n for n in ("hory", "podcast", "zapad", "ostrovy", "slunce", "satna", "garda", "kokos", "letadlo", "more", "zrcadlo")]
 
 
 def uvod_foto():
