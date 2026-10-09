@@ -127,4 +127,96 @@
       if (e.key === 'Escape') menu.open = false;
     });
   }
+
+  // úvod: balíček kartiček. Táhni nebo klikni, horní karta odletí, po poslední je zase první (bez JS je vidět první fotka)
+  document.querySelectorAll('[data-karty]').forEach(function (box) {
+    var balik = box.querySelector('.karty-balik'), karty = [].slice.call(balik.querySelectorAll('.fotokarta'));
+    var pocet = box.querySelector('.karty-pocet'), n = karty.length, poradi = karty.map(function (_, i) { return i; });
+    var bezPohybu = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var rozbeh = false;
+    function rozloz() {
+      poradi.forEach(function (idx, k) {
+        var k_ = karty[idx];
+        k_.setAttribute('data-poz', Math.min(k, 3));
+        k_.style.zIndex = n - k;
+        k_.style.transform = '';
+      });
+      if (pocet) pocet.textContent = (poradi[0] + 1) + ' / ' + n;
+    }
+    function dalsi(smer) {
+      if (rozbeh) return;
+      rozbeh = true;
+      if (smer > 0) {
+        var horni = karty[poradi[0]];
+        horni.style.setProperty('--smer', smer >= 0 ? 1 : -1);
+        horni.classList.add('odlet');
+        setTimeout(function () {
+          horni.classList.add('bez'); horni.classList.remove('odlet');
+          poradi.push(poradi.shift()); rozloz();
+          void horni.offsetWidth; horni.classList.remove('bez'); rozbeh = false;
+        }, bezPohybu ? 60 : 420);
+      } else {
+        poradi.unshift(poradi.pop());
+        var nova = karty[poradi[0]];
+        nova.classList.add('bez'); nova.style.setProperty('--smer', -1); nova.classList.add('odlet');
+        nova.style.zIndex = n + 1;
+        void nova.offsetWidth; nova.classList.remove('bez');
+        requestAnimationFrame(function () { nova.classList.remove('odlet'); rozloz(); setTimeout(function () { rozbeh = false; }, 420); });
+      }
+    }
+    box.querySelectorAll('.karty-tl').forEach(function (t) {
+      t.addEventListener('click', function () { dalsi(+t.getAttribute('data-smer')); });
+    });
+    balik.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); dalsi(1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); dalsi(-1); }
+    });
+    var start = null, dx = 0, id = null;
+    balik.addEventListener('pointerdown', function (e) {
+      if (rozbeh) return;
+      start = { x: e.clientX, y: e.clientY }; dx = 0; id = e.pointerId;
+      karty[poradi[0]].classList.add('tazena');
+    });
+    balik.addEventListener('pointermove', function (e) {
+      if (!start || e.pointerId !== id) return;
+      dx = e.clientX - start.x;
+      if (Math.abs(dx) > 6 && balik.setPointerCapture) { try { balik.setPointerCapture(id); } catch (err) {} }
+      karty[poradi[0]].style.transform = 'translateX(' + dx + 'px) rotate(' + (dx / 18) + 'deg)';
+    });
+    function pust() {
+      if (!start) return;
+      var horni = karty[poradi[0]];
+      horni.classList.remove('tazena');
+      if (Math.abs(dx) > 70) {
+        horni.style.transform = '';
+        horni.style.setProperty('--smer', dx > 0 ? 1 : -1);
+        rozbeh = true; horni.classList.add('odlet');
+        setTimeout(function () {
+          horni.classList.add('bez'); horni.classList.remove('odlet');
+          poradi.push(poradi.shift()); rozloz();
+          void horni.offsetWidth; horni.classList.remove('bez'); rozbeh = false;
+        }, bezPohybu ? 60 : 420);
+      } else if (Math.abs(dx) < 6) {
+        horni.style.transform = ''; dalsi(1);
+      } else {
+        horni.style.transform = '';
+      }
+      start = null;
+    }
+    balik.addEventListener('pointerup', pust);
+    balik.addEventListener('pointercancel', function () { if (start) { karty[poradi[0]].classList.remove('tazena'); karty[poradi[0]].style.transform = ''; start = null; } });
+    rozloz();
+  });
+
+  // 1:1 přihláška: věk se vybere na webu, pod 20 let vede do Akademie (bez JS jsou vidět obě možnosti)
+  document.querySelectorAll('[data-prihlaska]').forEach(function (box) {
+    document.documentElement.classList.add('js');
+    box.querySelectorAll('[data-pr-vek]').forEach(function (t) {
+      t.addEventListener('click', function () {
+        var v = t.getAttribute('data-pr-vek');
+        box.classList.add('vybrano'); box.setAttribute('data-volba', v);
+        box.querySelectorAll('[data-pr-vek]').forEach(function (x) { x.setAttribute('aria-pressed', x === t ? 'true' : 'false'); });
+      });
+    });
+  });
 })();

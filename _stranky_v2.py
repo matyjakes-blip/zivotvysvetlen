@@ -74,6 +74,18 @@ def _board():
             '<p class="nb-pozn">Ukázka. Jména a data jsou vymyšlená.</p></div>' % radky)
 
 
+# odkaz na formulář přihlášky (Notion formulář do 🎯 Leady), dokud není schválený a veřejný, krok se na živém webu vynechá
+PRIHLASKA_URL = None
+
+
+def _krok_formular():
+    if not (PRIHLASKA_URL or NAHLED):
+        return ""
+    return ('          <p class="prihlaska-krok"><b>2</b>Napiš mi pár řádků o sobě</p>\n'
+            '          <p>Jméno, co řešíš, co už jsi zkoušel a jak tě nejlíp zastihnu. Zabere to dvě minuty.</p>\n'
+            '          <a class="cta-druhy" href="%s" target="_blank" rel="noopener">Vyplnit přihlášku</a>\n' % (PRIHLASKA_URL or "#zadost"))
+
+
 def postav_11_v2(HLAVA, PATA, SKOOL, CALENDLY, varianta=None, soubor="jedna-na-jedna.html", recenze=""):
     bolest = "".join('<p>%s</p>' % esc(t) for t in BOLEST)
     popisy = "".join('<li><span class="nb-ikona">%s</span><div><b>%s</b><span>%s</span></div></li>' % (i, esc(n), esc(p))
@@ -137,16 +149,25 @@ def postav_11_v2(HLAVA, PATA, SKOOL, CALENDLY, varianta=None, soubor="jedna-na-j
     <div class="obal uzky">
       <p class="nadtitul">Žádost o místo</p>
       <h2>Začíná to hovorem</h2>
-      <div class="v11-form">
-        <p>Hovor je zdarma a nezávazný. Projdeme, co řešíš a co už jsi zkoušel.</p>
-        <p class="drobne">Osobní vedení beru od 20 let. Pro mladší je tu <a href="/akademie.html">Akademie</a>.</p>
-        <a class="cta" href="{calendly}">Vybrat termín hovoru</a>
+      <div class="prihlaska" data-prihlaska>
+        <p class="prihlaska-krok"><b>1</b>Kolik ti je let?</p>
+        <div class="prepinac prihlaska-volby" role="group" aria-label="Věk"><button type="button" class="prepinac-tl" data-pr-vek="pod" aria-pressed="false">Méně než 20</button><button type="button" class="prepinac-tl" data-pr-vek="nad" aria-pressed="false">20 a víc</button></div>
+        <div class="prihlaska-panel" data-pr-panel="pod">
+          <p>Osobní vedení beru od 20 let. Pro tebe je teď Akademie: stejné principy, svým tempem.</p>
+          <a class="cta" href="/akademie.html">Prohlédnout Akademii</a>
+        </div>
+        <div class="prihlaska-panel" data-pr-panel="nad">
+{formular}          <p class="prihlaska-krok"><b>{krok_hovor}</b>Vyber si termín hovoru</p>
+          <p>Hovor je zdarma a nezávazný. Projdeme, co řešíš a co už jsi zkoušel.</p>
+          <a class="cta" href="{calendly}">Vybrat termín hovoru</a>
+        </div>
       </div>
     </div>
   </section>
 </main>
 """.format(board_img=board_img, bolest=bolest, navic=navic, prubeh=prubeh, neni=neni, calendly=CALENDLY,
-           h1a=esc(h1a), h1b=esc(h1b), pod=esc(pod), recenze=recenze)
+           h1a=esc(h1a), h1b=esc(h1b), pod=esc(pod), recenze=recenze,
+           formular=_krok_formular(), krok_hovor="3" if (PRIHLASKA_URL or NAHLED) else "2")
     stranka = HLAVA.format(titulek="Osobní vedení 1:1 · Život vysvětlen",
                            popis="Akademie je ten systém napsaný. 1:1 je ten samý systém aplikovaný na jednoho člověka. Hovor je zdarma.",
                            kanon="jedna-na-jedna.html", ogobr="media/matyas-uvod.jpg", skool=SKOOL) + telo + PATA.format(skool=SKOOL)
@@ -187,16 +208,21 @@ KAPITOLY = [
 ]
 
 
-# „Odkud to vím": zatím zástupné texty, na živý web až s jeho údaji
+# „Odkud to vím" (návrh 9. 10. 2026, stavba jako u Beyond Terrain / lievdalton.com: bez titulů, samostudium jako volba,
+# jmenované zdroje z lekcí Akademie, vlastní cesta, klienti; tvrzení „líp než většina vystudovaných" chtěl Matyáš)
 ODKUD = """  <section class="pas autorita-pas" id="odkud">
     <div class="obal uzky">
       <p class="nadtitul">Odkud to vím</p>
-      <h2>Co jsem studoval a z čeho čerpám</h2>
-      <div class="autorita-mriz">
-        <div><b>Studium</b><span>doplníš: co a kde jsi studoval, kurzy, certifikáty</span></div>
-        <div><b>Zdroje</b><span>doplníš: autoři a knihy, ze kterých stavíš (Weston Price, Pottenger…)</span></div>
-        <div><b>Praxe</b><span>doplníš: od kdy pracuješ s klienty, kolik lidí jsi vedl</span></div>
-        <div><b>Akademie</b><span>6 modulů, 102 lekcí, u každé napsané, odkud informace je</span></div>
+      <h2>Nestudoval jsem to na škole. Šel jsem ke zdrojům.</h2>
+      <div class="autorita-text">
+        <p>Mikrobiologii, virologii ani medicínu jsem na vysoké škole nestudoval. Všechno, co učím, jsem si nastudoval sám.</p>
+        <p>Škola učí, co obor tvrdí dnes. Mě zajímalo, odkud se to vzalo. Proto jsem četl původní práce, ze kterých dnešní učebnice vycházejí, od Mieschera v roce 1869 přes Kossela a Chargaffa po Watsona a Cricka. A k tomu lidi, kteří šli proti proudu nebo zkoumali, jak žili zdraví lidé bez moderní stravy: Béchampa, Enderleina, Reckewega, Reného Quintona a Westona Price.</p>
+        <p>V tom, na čem pro tvoje zdraví doopravdy záleží, tedy proč tělo dělá, co dělá, a co mu vrátit, se vyznám líp než většina lidí, kteří tyhle obory vystudovali. Ne proto, že bych byl chytřejší. Jen jsem nezůstal u učebnice.</p>
+      </div>
+      <div class="autorita-mriz tri">
+        <div><b>Na sobě</b><span>Pět let, od 55 kilo přes 106 až sem. Co učím, jsem nejdřív vyzkoušel na vlastním těle.</span></div>
+        <div><b>U zdroje</b><span>V Akademii ukazuju i původní práce, ze kterých to vychází, ať si to můžeš ověřit sám.</span></div>
+        <div><b>S klienty</b><span>Vedu klienty 1:1. Vidím, co funguje i na jiných tělech než na mém.</span></div>
       </div>
     </div>
   </section>
@@ -204,13 +230,7 @@ ODKUD = """  <section class="pas autorita-pas" id="odkud">
 
 
 def postav_pribeh_v2(HLAVA, PATA, SKOOL, cely_text_html):
-    kap = []
-    for vek, nadpis, vety, fotky, popisek in KAPITOLY:
-        obr = "".join('<figure><img src="/pribeh/%s" alt="" loading="lazy"></figure>' % f for f in fotky)
-        pop = '<p class="popisek">%s</p>' % esc(popisek) if popisek else ""
-        kap.append('<section class="kap"><div class="kap-vek">%s</div><div class="kap-telo"><h2>%s</h2>%s'
-                   '<div class="kap-fotky n%d">%s</div>%s</div></section>'
-                   % (esc(vek), esc(nadpis), "".join("<p>%s</p>" % esc(v) for v in vety), len(fotky), obr, pop))
+    # 9. 10. 2026 (Matyáš): příběh zpátky celý jeho slovy, žádné kapitoly; políčka s věkem jen v Důkazu na hlavní stránce
     telo = """
 <main>
   <section class="uvod">
@@ -219,9 +239,9 @@ def postav_pribeh_v2(HLAVA, PATA, SKOOL, cely_text_html):
         <p class="nadtitul">O mně</p>
         <h1>Mohl jsem já, proč ne ty?</h1>
         <p class="tvrzeni">Moje důvěryhodnost není v tom, že jsem to vždycky věděl.<strong>Je v tom, že jsem si tu špatnou cestu prošel celou.</strong></p>
-        <ol class="osa"><li><b>15 let</b><span>167 cm · 55 kg</span></li><li><b>18 let</b><span>182 cm · 106 kg</span></li><li><b>20 let</b><span>191 cm · 94 kg</span></li></ol>
+        <div class="tlacitka"><a class="cta" href="#pribeh">Číst můj příběh</a><a class="cta-druhy" href="#odkud">Odkud to vím</a></div>
       </div>
-      <figure class="uvod-foto"><img src="{foto_omne}" alt="Matyáš Jakeš" width="640" height="800"></figure>
+      <figure class="uvod-foto"><img src="/media/matyas-uvod.jpg" alt="Matyáš Jakeš" width="640" height="800"></figure>
     </div>
   </section>
   <section class="pas omne-mel" id="prosel">
@@ -230,15 +250,16 @@ def postav_pribeh_v2(HLAVA, PATA, SKOOL, cely_text_html):
       <ul class="mel-seznam"><li>Zažívací problémy</li><li>Nadváha, +51 kg (z 55 na 106)</li><li>Akné</li><li>Inzulínová rezistence</li><li>Neustálé přejídání</li><li>Záněty kloubů</li></ul>
     </div>
   </section>
-  <div class="obal kapitoly">{kapitoly}</div>
-{odkud}  <section class="pas citat-pas"><div class="obal uzky stred"><p class="citat">Hormony mají neskutečný vliv na člověka a hrají zásadní roli ve vývinu jeho vzhledu, zdraví orgánů, metabolismu, a psychiky.</p></div></section>
-  <section class="pas"><div class="obal uzky"><details class="cely-text"><summary>Celý příběh, jak jsem ho napsal</summary><div class="text">{cely}</div></details></div></section>
-  <section class="pas zaver-pas"><div class="obal uzky stred"><div class="tlacitka" style="justify-content:center"><a class="cta" href="/akademie.html">Prohlédnout Akademii</a><a class="cta-druhy" href="/jedna-na-jedna.html">Osobní vedení 1:1</a></div></div></section>
+  <section class="pas pribeh-pas" id="pribeh">
+    <div class="obal uzky">
+      <p class="nadtitul">Můj příběh</p>
+      <div class="text pribeh-text">{cely}</div>
+    </div>
+  </section>
+{odkud}  <section class="pas zaver-pas"><div class="obal uzky stred"><div class="tlacitka" style="justify-content:center"><a class="cta" href="/akademie.html">Prohlédnout Akademii</a><a class="cta-druhy" href="/jedna-na-jedna.html">Osobní vedení 1:1</a></div></div></section>
 </main>
-""".format(kapitoly="".join(kap), cely=cely_text_html,
-               foto_omne="/_nahledy/galerie/g2.jpg" if NAHLED else "/media/matyas-uvod.jpg",
-               odkud=ODKUD if NAHLED else "")
+""".format(cely=cely_text_html, odkud=ODKUD)
     stranka = HLAVA.format(titulek="O mně · Život vysvětlen",
-                           popis="Od 55 kilo přes 106 kilo a akné až sem. Celá cesta.",
+                           popis="Od 55 kilo přes 106 kilo a akné až sem. Celá cesta, jak jsem ji napsal.",
                            kanon="pribeh.html", ogobr="pribeh/0.0__09-porovnani-dvojice.jpg", skool=SKOOL) + telo + PATA.format(skool=SKOOL)
     open("pribeh.html", "w", encoding="utf-8").write(stranka)

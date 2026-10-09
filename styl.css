@@ -781,3 +781,84 @@ h3{font-family:var(--nadpis);font-weight:600;color:var(--inkoust)}
   .video-play::before{left:25px;top:19px;border-width:13px 0 13px 21px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* ===== návrhy v4 (9. 10. 2026) ===== */
+/* úvod: balíček kartiček, táhne se do strany, po poslední zase první */
+.karty{position:relative;width:100%}
+.karty-balik{position:relative;aspect-ratio:4/5;touch-action:pan-y;user-select:none;-webkit-user-select:none;outline:none}
+.fotokarta{
+  position:absolute;inset:0;margin:0;border-radius:22px;overflow:hidden;background:#e7dfcf;box-shadow:var(--stin);
+  transition:transform .5s cubic-bezier(.2,.75,.25,1),opacity .5s;will-change:transform;cursor:grab;
+}
+.fotokarta img{display:block;width:100%;height:100%;object-fit:cover;border-radius:0;box-shadow:none;aspect-ratio:auto;pointer-events:none;-webkit-user-drag:none}
+.fotokarta[data-poz="1"]{transform:translate(12px,10px) rotate(3deg) scale(.97)}
+.fotokarta[data-poz="2"]{transform:translate(-10px,18px) rotate(-3.5deg) scale(.94)}
+.fotokarta[data-poz="3"]{transform:translateY(24px) scale(.9);opacity:0}
+.fotokarta.tazena{transition:none;cursor:grabbing}
+.fotokarta.odlet{transform:translateX(calc(var(--smer,1)*135%)) rotate(calc(var(--smer,1)*16deg));opacity:0}
+.fotokarta.bez{transition:none}
+.fotokarta:not([data-poz="0"]) img{filter:saturate(.85) brightness(.97)}
+.karty-ovladani{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:22px}
+.karty-tl{
+  position:relative;width:42px;height:42px;border-radius:50%;border:1px solid var(--linka);background:var(--plocha);
+  cursor:pointer;transition:background .2s,border-color .2s;
+}
+.karty-tl::before{content:"";position:absolute;top:50%;left:50%;width:9px;height:9px;margin:-5px 0 0 -3px;border:solid var(--inkoust);border-width:0 0 2px 2px;transform:rotate(45deg)}
+.karty-tl[data-smer="1"]::before{margin-left:-7px;transform:rotate(-135deg)}
+.karty-tl:hover{border-color:var(--zlato-svetle)}
+.karty-pocet{min-width:4em;text-align:center;font-size:.86rem;color:var(--tlumeny);font-variant-numeric:tabular-nums lining-nums}
+@media (prefers-reduced-motion:reduce){.fotokarta{transition:opacity .2s}.fotokarta.odlet{transform:none}}
+
+/* O mně: jeho příběh, fotky v řadách se stejnou výškou */
+.pribeh-pas{background:var(--plocha)}
+.pribeh-text{margin-top:18px}
+.fotorada{display:flex;gap:10px;margin:28px 0 30px}
+.fotorada figure{flex:var(--p) 1 0;min-width:0;margin:0;border-radius:16px;overflow:hidden;background:#ebe3d4;box-shadow:0 6px 22px rgba(29,26,21,.08)}
+.fotorada img{display:block;width:100%;height:auto}
+.fotorada.jedna{justify-content:center}
+.fotorada.jedna figure{flex:0 1 auto;width:min(100%,420px)}
+.autorita-text{margin-top:18px}
+.autorita-text p{margin-bottom:16px;font-size:1.05rem;line-height:1.75;color:var(--text2)}
+.autorita-mriz.tri{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:760px){.autorita-mriz.tri{grid-template-columns:1fr}}
+
+/* Akademie: modul nahoře, pod ním submoduly ve dvou stejných sloupcích, lekce po rozbalení */
+.sin4{display:block}
+.sin-hlava{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(18px,4vw,44px);align-items:center}
+.sin4 .sin-obr{position:static}
+.sub-mriz{margin-top:clamp(18px,3vw,28px);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.sub-karta{display:flex;flex-direction:column;border:1px solid var(--linka);border-radius:16px;overflow:hidden;background:var(--pozadi)}
+.sub-obr{display:flex;gap:2px;height:150px;background:var(--pas)}
+.sub-obr img{flex:1 1 0;min-width:0;height:100%;object-fit:cover;filter:sepia(.15) saturate(.9)}
+.sub-obr.znak{align-items:center;justify-content:center}
+.sub-obr.znak span{font-family:var(--nadpis);font-size:3rem;line-height:1;color:var(--zlato);font-variant-numeric:lining-nums}
+.sub-obr.znak.protokol{background:var(--tma)}
+.sub-obr.znak.protokol span{font-family:var(--znacka);font-size:1.05rem;letter-spacing:.2em;text-transform:uppercase;color:var(--zlato-svetle)}
+.sub-telo{padding:14px 16px 16px;display:flex;flex-direction:column;flex:1}
+.sub-telo h4{font-size:1rem;font-weight:600;color:var(--inkoust);line-height:1.35}
+.sub-telo h4 span{color:var(--zlato);margin-right:4px;font-variant-numeric:lining-nums}
+.sub-telo > p{margin-top:5px;min-height:4.5em;font-size:.9rem;line-height:1.5;color:var(--text2)}
+.sub-lekce{margin-top:auto;padding-top:12px}
+.sub-lekce summary{cursor:pointer;list-style:none;font-size:.86rem;font-weight:600;color:var(--zlato)}
+.sub-lekce summary::-webkit-details-marker{display:none}
+.sub-lekce summary::after{content:" ↓"}
+.sub-lekce[open] summary::after{content:" ↑"}
+.sub-lekce ol{list-style:none;margin-top:10px;padding-top:10px;border-top:1px dashed var(--linka2);display:grid;gap:5px}
+.sub-lekce li{position:relative;padding-left:20px;font-size:.86rem;line-height:1.45;color:var(--text2)}
+.sub-lekce li::before{content:"";position:absolute;left:3px;top:.5em;width:7px;height:6px;border-radius:2px;background:var(--linka2)}
+.sub-karta.siroka{grid-column:1/-1;flex-direction:row}
+.sub-karta.siroka .sub-obr{flex:0 0 38%;height:auto;min-height:150px}
+.sub-karta.siroka .sub-telo > p{min-height:0}
+@media (max-width:760px){.sin-hlava,.sub-mriz{grid-template-columns:1fr}.sub-karta.siroka{flex-direction:column}.sub-karta.siroka .sub-obr{flex:none;height:150px}}
+
+/* 1:1: přihláška, věk se vybírá na webu */
+.prihlaska{margin-top:22px;padding:clamp(18px,3vw,28px);border:1px solid var(--linka);border-radius:20px;background:var(--plocha);text-align:left}
+.prihlaska-krok{display:flex;align-items:center;gap:10px;margin:6px 0 10px;font-weight:600;color:var(--inkoust)}
+.prihlaska-krok b{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--inkoust);color:var(--pozadi);font-size:.85rem}
+.prihlaska-volby{margin-bottom:6px}
+.prihlaska-panel{margin-top:18px;padding-top:16px;border-top:1px solid var(--linka)}
+.prihlaska-panel p{margin-bottom:12px;color:var(--text2)}
+.prihlaska-panel .cta,.prihlaska-panel .cta-druhy{margin-bottom:14px}
+.prihlaska.vybrano .prihlaska-panel{display:none}
+.prihlaska.vybrano[data-volba="pod"] [data-pr-panel="pod"],.prihlaska.vybrano[data-volba="nad"] [data-pr-panel="nad"]{display:block}
+.js .prihlaska:not(.vybrano) .prihlaska-panel{display:none}

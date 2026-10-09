@@ -174,6 +174,46 @@ NENI = [
 ]
 
 
+def _obrazky_submodulu():
+    """obrázky z lekcí (mapa/nahledy, jako ve staré mapě) podle submodulu: '1.3.2--x.jpg' patří k '1.3'"""
+    import glob
+    ven = {}
+    for f in sorted(glob.glob("mapa/nahledy/*.jpg")):
+        jmeno = os.path.basename(f)
+        klic = jmeno.split("--")[0]
+        sub = ".".join(klic.split(".")[:2])
+        popis = jmeno.split("--", 1)[1].rsplit(".", 1)[0].replace("-", " ")
+        ven.setdefault(sub, []).append(("/" + f, popis))
+    return ven
+
+
+def _zobraz_lekce(n):
+    if n == 1:
+        return "Zobrazit lekci"
+    if n < 5:
+        return "Zobrazit všechny %d lekce" % n
+    return "Zobrazit všech %d lekcí" % n
+
+
+def _sub_karta(s, obr, siroka=False):
+    if obr:
+        vrch = '<div class="sub-obr n%d">%s</div>' % (min(len(obr), 3), "".join(
+            '<img src="%s" alt="%s" loading="lazy">' % (f, esc(pop)) for f, pop in obr[:3]))
+    elif s["protokol"]:
+        vrch = '<div class="sub-obr znak protokol"><span>Protokol</span></div>'
+    else:
+        vrch = '<div class="sub-obr znak"><span>%s</span></div>' % esc(s["klic"])
+    nazev = re.sub(r"^%s\s*·\s*" % re.escape(s["klic"]), "", s["nazev"])
+    nazev = nazev[:1].upper() + nazev[1:]
+    nadpis = esc(nazev) if s["protokol"] else '<span>%s ·</span> %s' % (esc(s["klic"]), esc(nazev))
+    lekce = ""
+    if s["lekce"]:
+        lekce = '<details class="sub-lekce"><summary>%s</summary><ol>%s</ol></details>' % (
+            _zobraz_lekce(len(s["lekce"])), "".join("<li>%s</li>" % esc(t) for t in s["lekce"]))
+    return '<article class="sub-karta%s%s">%s<div class="sub-telo"><h4>%s</h4><p>%s</p>%s</div></article>' % (
+        " protokol" if s["protokol"] else "", " siroka" if siroka else "", vrch, nadpis, esc(s["popis"]), lekce)
+
+
 def postav_stranku(HLAVA, PATA, SKOOL, recenze=""):
     moduly = data()
     c = cisla(moduly)
@@ -182,34 +222,37 @@ def postav_stranku(HLAVA, PATA, SKOOL, recenze=""):
         '<h3>%s</h3><p>%s</p></article>' % (img, esc(n.format(**c)), esc(t)) for n, t, img in CO_DOSTANES)
 
     sine = []
+    obrazky = _obrazky_submodulu()
     for m in moduly:
-        polozky = []
-        for s in m["sub"]:
-            if s["protokol"]:
-                polozky.append('<li class="sub protokol"><div class="sub-hlava"><b>%s</b><span>%s</span></div></li>'
-                               % (esc(s["nazev"]), esc(s["popis"])))
-                continue
-            ukaz = s["lekce"][:3]
-            zbytek = len(s["lekce"]) - len(ukaz)
-            lek = "".join("<li>%s</li>" % esc(t) for t in ukaz)
-            if zbytek > 0:
-                lek += '<li class="dalsi">+ %s</li>' % (
-                    "ještě 1 lekce" if zbytek == 1 else ("další %d lekce" % zbytek if zbytek < 5 else "dalších %d lekcí" % zbytek))
-            lek_html = '<ol class="lekce">%s</ol>' % lek if lek else ""
-            polozky.append('<li class="sub"><div class="sub-hlava"><b>%s</b><span>%s</span></div>%s</li>'
-                           % (esc(s["nazev"]), esc(s["popis"]), lek_html))
+        if m["i"] == 0:
+            subs = [dict(klic="0.0", nazev="Můj příběh", popis="Kdo tě tím provede a proč.", lekce=[], protokol=False),
+                    dict(klic="0.1", nazev="Začni zde", popis="Jak je to postavené, pět pravidel a první týden den po dni.", lekce=[], protokol=False),
+                    dict(klic="0.2", nazev="Vstupní diagnostika", popis="Ze které ti vyjde, kterým modulem začínáš a jakým tempem.", lekce=[], protokol=False)]
+        else:
+            subs = m["sub"]
+        # souměrnost: protokol přes celou šířku, a když v úseku zbude jedna karta navíc, roztáhne se taky
+        siroke, usek = set(), []
+        for k, s in enumerate(subs + [None]):
+            if s is None or s["protokol"]:
+                if len(usek) % 2:
+                    siroke.add(usek[-1])
+                usek = []
+                if s is not None:
+                    siroke.add(k)
+            else:
+                usek.append(k)
+        karty = "".join(_sub_karta(s, obrazky.get(s["klic"], []), k in siroke) for k, s in enumerate(subs))
         meta = "Než začneš" if m["i"] == 0 else "%s · %s · %s" % (submoduly_slovo(m["pocet_sub"]), lekci_slovo(m["lekci"]), m["cas"])
-        obsah = '<ul class="sine-sub">%s</ul>' % "".join(polozky) if polozky else \
-            '<ul class="sine-sub"><li class="sub"><div class="sub-hlava"><b>0.0 · Můj příběh</b><span>Kdo tě tím provede a proč.</span></div></li>' \
-            '<li class="sub"><div class="sub-hlava"><b>0.1 · Začni zde</b><span>Jak je to postavené, pět pravidel a první týden den po dni.</span></div></li>' \
-            '<li class="sub"><div class="sub-hlava"><b>0.2 · Vstupní diagnostika</b><span>Ze které ti vyjde, kterým modulem začínáš a jakým tempem.</span></div></li></ul>'
         sine.append(
-            '<section class="sin" id="modul-%d">'
+            '<section class="sin sin4" id="modul-%d">'
+            '<div class="sin-hlava">'
             '<figure class="sin-obr"><img src="%s" alt="%s" loading="lazy" width="%d" height="%d"><figcaption>%s</figcaption></figure>'
-            '<div class="sin-text"><p class="modul-cislo">Modul %d</p><h3>%s</h3><p class="sin-proc">%s</p><p class="modul-meta">%s</p>%s</div>'
+            '<div class="sin-text"><p class="modul-cislo">Modul %d</p><h3>%s</h3><p class="sin-proc">%s</p><p class="modul-meta">%s</p></div>'
+            '</div>'
+            '<div class="sub-mriz">%s</div>'
             '</section>'
             % (m["i"], m["img"], esc(m["alt"]), m["w"], m["h"], esc(m["cap"]), m["i"], esc(m["jmeno"]),
-               esc(m["proc"]), esc(meta), obsah))
+               esc(m["proc"]), esc(meta), karty))
 
     neni = "".join('<li><b>%s</b> %s</li>' % (esc(a), esc(b)) for a, b in NENI)
 

@@ -141,8 +141,20 @@ def galerie(soubory, popisek=None):
     return '<div class="dvojice">%s</div>%s' % (figs, pop)
 
 
+def _fotorada(skupina):
+    from PIL import Image
+    figs = []
+    for f in skupina:
+        try:
+            w, h = Image.open(os.path.join("pribeh", f)).size
+        except Exception:
+            w, h = 3, 4
+        figs.append('<figure style="--p:%.3f"><img src="/pribeh/%s" alt="" loading="lazy" width="%d" height="%d"></figure>' % (w / h, f, w, h))
+    return '<div class="fotorada%s">%s</div>' % (" jedna" if len(skupina) == 1 else "", "".join(figs))
+
+
 def pribeh_html():
-    """celý text lekce 0.0 s fotkami na původních místech (pro rozbalovací „Celý příběh")"""
+    """celý text lekce 0.0 jeho slovy, fotky na původních místech v řadách se stejnou výškou"""
     kusy = nacti_pribeh()
     ven, i = [], 0
     while i < len(kusy):
@@ -151,8 +163,7 @@ def pribeh_html():
             skupina = []
             while i < len(kusy) and kusy[i][0] == "obr":
                 skupina.append(kusy[i][1]); i += 1
-            ven.append('<div class="obrazy">%s</div>' % "".join(
-                '<figure class="ram"><img src="/pribeh/%s" alt="" loading="lazy"></figure>' % s for s in skupina))
+            ven.append(_fotorada(skupina))
             continue
         ven.append("<p>%s</p>" % v); i += 1
     return "\n".join(ven)
@@ -422,8 +433,6 @@ def pas_promena():
           </div>
         </div>
       </div>
-      <p class="nadtitul skutecne-titul">Skutečné fotky, nic upraveného</p>
-      <div class="skutecne">%s</div>
     </div>
   </section>
   <div class="clanek okno-proc" id="proc" role="dialog" aria-modal="true" aria-labelledby="proc-nadpis">
@@ -435,7 +444,7 @@ def pas_promena():
       <div class="panely">%s</div>
     </div>
   </div>
-""" % (prep_rezim, prep_vek, posuvniky, skutecne, zalozky, panely)
+""" % (prep_rezim, prep_vek, posuvniky, zalozky, panely)
 
 
 # ---- starý × nový způsob (krok 3 přestavby, návrh 7. 10. 2026) ----
@@ -495,8 +504,8 @@ def pas_galerie():
 """ % fotky
 
 
-# fotky za hlavní fotkou v úvodu (6 až 12, dodá Matyáš; teď zástupné z _nahledy, na živý web nepouštět)
-FOTKY_UVOD = ["/_nahledy/galerie/g%d.jpg" % i for i in (2, 3, 4, 5, 6)] if NAHLED else []
+# kartičky v úvodu: hlavní fotka + jeho fotky z 9. 10. 2026 (balíček, táhne se do strany, po poslední zase první)
+FOTKY_UVOD = ["/media/uvod/%s.jpg" % n for n in ("hory", "podcast", "ostrovy", "slunce", "garda", "kokos", "more", "zrcadlo")]
 
 
 def uvod_foto():
@@ -504,15 +513,15 @@ def uvod_foto():
         return '<img src="%s" alt="%s" width="800" height="1000" fetchpriority="high">' % (FOTO_UVOD, esc(FOTO_UVOD_POPIS))
     if FOTO_UVOD:
         vse = [FOTO_UVOD] + FOTKY_UVOD
-        snimky = "".join('<div class="uvod-snimek"><img src="%s" alt="%s" width="800" height="1000"%s></div>'
-                         % (f, esc(FOTO_UVOD_POPIS), ' fetchpriority="high"' if i == 0 else ' loading="lazy"')
-                         for i, f in enumerate(vse))
-        tecky = "".join('<button type="button" aria-label="Fotka %d"%s></button>' % (i + 1, ' aria-current="true"' if i == 0 else "")
-                        for i in range(len(vse)))
-        return ('<div class="uvod-karusel"><div class="uvod-pas">%s</div>'
-                '<button type="button" class="uvod-sipka predchozi" aria-label="Předchozí fotka"></button>'
-                '<button type="button" class="uvod-sipka dalsi" aria-label="Další fotka"></button>'
-                '<div class="uvod-tecky">%s</div></div>' % (snimky, tecky))
+        n = len(vse)
+        karty = "".join(
+            '<figure class="fotokarta" data-poz="%d" style="z-index:%d"><img src="%s" alt="%s" width="800" height="1000" draggable="false"%s></figure>'
+            % (min(i, 3), n - i, f, esc(FOTO_UVOD_POPIS), ' fetchpriority="high"' if i == 0 else ' loading="lazy"')
+            for i, f in enumerate(vse))
+        return ('<div class="karty" data-karty><div class="karty-balik" tabindex="0" aria-label="Moje fotky, táhni do strany">%s</div>'
+                '<div class="karty-ovladani"><button type="button" class="karty-tl" data-smer="-1" aria-label="Předchozí fotka"></button>'
+                '<span class="karty-pocet" aria-live="polite">1 / %d</span>'
+                '<button type="button" class="karty-tl" data-smer="1" aria-label="Další fotka"></button></div></div>' % (karty, n))
     # prázdné políčko, dokud Matyáš nedodá fotku (na živý web takhle nepouštět)
     return '<div class="foto-misto"><b>Sem přijde tvoje fotka</b><small>portrét na výšku, poměr 4 : 5</small></div>'
 
