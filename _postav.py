@@ -87,7 +87,8 @@ PATA = """
   <div class="ozdoba" aria-hidden="true">◆</div>
   <p class="znacka-pata">Život vysvětlen</p>
   <p class="drobne">Matyáš Jakeš · <a href="{skool}">Akademie na Skoolu</a> · <a href="/akademie.html">Akademie</a> · <a href="/jedna-na-jedna.html">Osobní vedení 1:1</a> · <a href="/pribeh.html">O mně</a> · <a href="/sourcing.html">Sourcing mapa</a> · <a href="/kontakt.html">Kontakt</a></p>
-  <p class="drobne">IČO 23494204 · <a href="/pravni.html">Právní informace a zásady</a></p>
+  <p class="drobne">Obsah webu a Akademie je vzdělávací, nejde o zdravotní služby.</p>
+  <p class="drobne">IČO 23494204 · <a href="/pravni.html">Právní informace a zásady</a> · <a href="/jak-mapa-funguje.html">Jak mapa funguje</a></p>
 </footer>
 <script src="/web.js" defer></script>
 </body>
@@ -737,6 +738,59 @@ def postav_kontakt():
     open("kontakt.html", "w", encoding="utf-8").write(stranka)
 
 
+# ---------------------------------------------------------------- jak mapa funguje (krok 7, 9. 10. 2026)
+def postav_jak_mapa():
+    import json as _json
+    d = _json.load(open("sourcing/data.json", encoding="utf-8"))
+    pocet = sum(len(o["m"]) for o in d["obce"])
+    telo = """
+<main>
+  <section class="hero hero-uzsi">
+    <div class="obal uzky">
+      <p class="nadtitul">Sourcing mapa</p>
+      <h1 class="nadpis-str">Jak mapa funguje</h1>
+      <p class="tvrzeni-pod">Odkud jsou místa, co se na mapu dostane a jak opravit nebo odstranit údaj.</p>
+    </div>
+  </section>
+
+  <section class="pas">
+    <div class="obal uzky pravidla-mapy">
+      <h2>Odkud jsou místa</h2>
+      <ul>
+        <li><b>Registr Státní veterinární správy.</b> Základ mapy. Každý, kdo smí prodávat syrové mléko ze dvora nebo z automatu, bourat maso a zpracovávat zvěřinu, ryby a med pro přímý prodej. Je to seznam lidí, kteří na to mají povolení. O kvalitě to neříká nic. Údaje ze dne {aktualizace}, teď {pocet} míst.</li>
+        <li><b>Od lidí.</b> Tipy, které pošleš přes formulář. Každý projdu ručně, než se na mapě objeví, a na mapě jsou označené zvlášť. Nejsou ověřené tak jako registr.</li>
+        <li><b>◆ Doporučeno.</b> Farmy, které doporučuju v Akademii.</li>
+      </ul>
+
+      <h2>Co se na mapu dostane</h2>
+      <ul>
+        <li>Místo, kde se dají koupit potraviny přímo od chovatele nebo zpracovatele: syrové mléko, maso, zvěřina, med, ryby, vejce.</li>
+        <li>Žádná reklama a žádné osobní údaje soukromých lidí bez jejich souhlasu.</li>
+        <li>Jméno toho, kdo tip poslal, nikde nezveřejňuju.</li>
+      </ul>
+
+      <h2>Soukromí chovatelé</h2>
+      <p>Soukromé chovatele z registru ukazuju jen podle obce, bez jména a ulice. Kdo je chce najít, dohledá je v registru SVS podle čísla.</p>
+
+      <h2>Oprava nebo odstranění</h2>
+      <p>Jsi na mapě a nechceš tam být? Je údaj špatně nebo místo už neprodává? Napiš na <a href="mailto:{mail}">{mail}</a> s názvem obce a místa. Opravím to nebo místo z mapy odstraním.</p>
+
+      <h2>Než vyrazíš</h2>
+      <p>Údaje se mění. Před cestou si u prodejce ověř, že pořád prodává a kdy. Za to, co prodává, odpovídá prodejce.</p>
+
+      <div class="tlacitka" style="justify-content:center;margin-top:30px"><a class="cta" href="/sourcing.html">Otevřít mapu</a><a class="cta-druhy" href="{form_tipy}" target="_blank" rel="noopener">Přidat místo</a></div>
+    </div>
+  </section>
+</main>
+""".format(aktualizace=d.get("aktualizace", ""), pocet="{:,}".format(pocet).replace(",", "\u00a0"), mail=MAIL,
+           form_tipy=_sourcing.FORM_TIPY)
+    stranka = HLAVA.format(titulek="Jak mapa funguje · Život vysvětlen",
+                           popis="Odkud jsou místa na sourcing mapě, co se na ni dostane a jak opravit nebo odstranit údaj.",
+                           kanon="jak-mapa-funguje.html", ogobr="mapa/hero.jpg",
+                           skool=SKOOL) + telo + PATA.format(skool=SKOOL)
+    open("jak-mapa-funguje.html", "w", encoding="utf-8").write(stranka)
+
+
 # ---------------------------------------------------------------- pravni informace
 UDAJE = [
     ("Jméno", "Matyáš Jakeš"),
@@ -921,6 +975,7 @@ if __name__ == "__main__":
         _stranky_v2.postav_11_v2(HLAVA, PATA, SKOOL, CALENDLY, varianta=v, soubor="_nahledy/jedna-%s.html" % v, recenze=rek)
     _stranky_v2.postav_pribeh_v2(HLAVA, PATA, SKOOL, pribeh_html())
     postav_kontakt()
+    postav_jak_mapa()
     postav_pravni()
     print(oprav_mapu())
     print(pata_mapy())

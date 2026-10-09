@@ -99,7 +99,7 @@ def postav(HLAVA, PATA, SKOOL, esc):
       <h2>Oficiální registr a moje doporučení</h2>
       <p class="text-stred">Základ mapy tvoří registry Státní veterinární správy: <strong>každý, kdo smí prodávat syrové mléko ze dvora nebo z automatu</strong>, bourat maso, zpracovávat zvěřinu, ryby a med pro přímý prodej. Je to seznam lidí, kteří na to mají povolení, ne reklama. Zlatě orámované body jsou farmy, které doporučuju v Akademii.</p>
       <p class="text-stred">Soukromé chovatele ukazuju jen podle obce, bez jména a ulice. Kdo je chce najít, dohledá je v registru SVS podle čísla.</p>
-      <p class="text-stred drobne">Údaje ze dne {aktualizace}. Slovensko se doplní.</p>
+      <p class="text-stred drobne">Údaje ze dne {aktualizace}. Slovensko se doplní. <a href="/jak-mapa-funguje.html">Jak mapa funguje, oprava a odstranění údajů</a></p>
       <div class="stred"><a class="cta-druhy" href="{skool}">Vstoupit do Akademie</a></div>
     </div>
   </section>

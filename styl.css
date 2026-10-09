@@ -883,3 +883,16 @@ h3{font-family:var(--nadpis);font-weight:600;color:var(--inkoust)}
 .autorita-pas .autorita-mriz{max-width:1000px;margin:30px auto 0;grid-template-columns:repeat(2,minmax(0,1fr))}
 @media (max-width:860px){.autorita-cisla{grid-template-columns:repeat(2,minmax(0,1fr))}.obory-mriz{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:600px){.obory-mriz,.zdroje-mriz,.autorita-pas .autorita-mriz{grid-template-columns:1fr}}
+
+/* ===== krok 6: jemný pohyb (9. 10. 2026) — bloky se při posouvání jemně objeví; bez JS a s „omezit pohyb" se nehýbe nic ===== */
+.odhal{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--zpozdeni,0s)}
+.odhal.videt{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.odhal{opacity:1;transform:none;transition:none}}
+
+/* Jak mapa funguje */
+.pravidla-mapy h2{margin-top:34px;font-size:1.5rem}
+.pravidla-mapy h2:first-child{margin-top:0}
+.pravidla-mapy ul{margin-top:12px;padding-left:1.1em;display:grid;gap:10px}
+.pravidla-mapy li,.pravidla-mapy p{font-size:1.02rem;line-height:1.7;color:var(--text2)}
+.pravidla-mapy p{margin-top:10px}
+.pravidla-mapy b{color:var(--inkoust)}

@@ -219,4 +219,40 @@
       });
     });
   });
+
+  // krok 6: jemný pohyb. Bloky v sekcích se při posouvání jemně objeví, karty v mřížkách postupně za sebou.
+  // Úvod nahoře se nehýbe (je vidět hned), pás recenzí má vlastní pohyb. S „omezit pohyb" se nedělá nic.
+  (function () {
+    if (!('IntersectionObserver' in window)) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cile = [];
+    document.querySelectorAll('section.pas').forEach(function (sec) {
+      if (sec.classList.contains('recenze-pas')) {
+        sec.querySelectorAll('.obal > *').forEach(function (el) { cile.push([el, 0]); });
+        return;
+      }
+      var obal = sec.querySelector(':scope > .obal') || sec;
+      [].forEach.call(obal.children, function (el) {
+        var mriz = /(^|\s)[a-z-]*(mriz|cisla|tri-cesty|skutecne)(\s|$)/.test(el.className || '');
+        if (mriz) {
+          [].forEach.call(el.children, function (k, i) { cile.push([k, Math.min(i, 5) * 0.08]); });
+        } else {
+          cile.push([el, 0]);
+        }
+      });
+    });
+    var pozor = new IntersectionObserver(function (zaznamy) {
+      zaznamy.forEach(function (z) {
+        if (z.isIntersecting) { z.target.classList.add('videt'); pozor.unobserve(z.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    var vyska = window.innerHeight;
+    cile.forEach(function (c) {
+      var el = c[0];
+      if (el.getBoundingClientRect().top < vyska * 0.92) return;   // co je vidět hned po načtení, zůstane bez pohybu
+      el.classList.add('odhal');
+      if (c[1]) el.style.setProperty('--zpozdeni', c[1] + 's');
+      pozor.observe(el);
+    });
+  })();
 })();
