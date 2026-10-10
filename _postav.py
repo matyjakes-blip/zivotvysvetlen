@@ -298,6 +298,10 @@ CESTY = [
 ]
 
 
+# lev patří jen k programu 1:1 (Matyáš 10. 10.), ne vedle „Život vysvětlen“
+ODZNAK_PROGRAMU = '<img class="cesta-odznak" src="/media/lev/odznak.svg" alt="" width="52" height="52">'
+
+
 def pas_cesty():
     karty = []
     for c in CESTY:
@@ -307,7 +311,7 @@ def pas_cesty():
         odkaz = c["odkaz"] or (CALENDLY if c["hlavni"] else SKOOL)
         pod = '<span class="pod">%s</span>' % esc(c["pod"]) if c["pod"] else ""
         karty.append(
-            '<article class="cesta%s">'
+            '<article class="cesta%s">%s'
             '<p class="cesta-znak">%s</p>'
             '<h3>%s</h3>'
             '<p class="vysvetleni">%s</p>'
@@ -315,7 +319,7 @@ def pas_cesty():
             '<p class="pro-koho">%s</p>'
             '<div class="dole"><a href="%s">%s</a>%s</div>'
             '</article>'
-            % (" hlavni" if c["hlavni"] else "", esc(c["znak"]), esc(c["nazev"]),
+            % (" hlavni" if c["hlavni"] else "", ODZNAK_PROGRAMU if c["hlavni"] else "", esc(c["znak"]), esc(c["nazev"]),
                esc(c["vysvetleni"]), body, esc(c["pro"]), odkaz, esc(c["odkaz_text"]), pod))
     return """
   <section class="pas cesty-pas" id="cesty">

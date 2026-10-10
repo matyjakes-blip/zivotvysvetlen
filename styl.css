@@ -909,3 +909,9 @@ h3{font-family:var(--nadpis);font-weight:600;color:var(--inkoust)}
 .lekce-text table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:.95rem}
 .lekce-text th,.lekce-text td{border:1px solid var(--linka);padding:8px 10px;text-align:left;vertical-align:top}
 .lekce-text th{background:var(--pas)}
+
+/* lev jen u programu 1:1 (10. 10.) */
+.cesta{position:relative}
+.cesta-odznak{position:absolute;top:22px;right:22px;width:52px;height:52px}
+.nadtitul-odznak{display:flex;align-items:center;gap:10px}
+.nadtitul-odznak img{width:34px;height:34px;flex:none}

@@ -102,7 +102,7 @@ def postav_11_v2(HLAVA, PATA, SKOOL, CALENDLY, varianta=None, soubor="jedna-na-j
   <section class="uvod v11-uvod">
     <div class="obal uvod-mriz">
       <div class="uvod-text">
-        <p class="nadtitul">Osobní vedení 1:1</p>
+        <p class="nadtitul nadtitul-odznak"><img src="/media/lev/odznak.svg" alt="" width="34" height="34">Osobní vedení 1:1</p>
         <h1 class="v11-h1">{h1a}<span>{h1b}</span></h1>
         <p class="tvrzeni-pod">{pod}</p>
         <div class="tlacitka"><a class="cta" href="#zadost">Požádat o místo</a><a class="cta-druhy" href="#board">Co dostaneš</a></div>
