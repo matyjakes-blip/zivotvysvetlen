@@ -1,0 +1,13 @@
+# Glossary for the English version of zivotvysvetlen.cz (keep consistent)
+- Život vysvětlen → Life Explained (the brand / umbrella; on the EN site "the Academy" = the English Skool group Life Explained)
+- Akademie → the Academy (or Life Explained when the brand is meant)
+- Osobní vedení 1:1 → 1:1 coaching ; Osobní vedení → Coaching
+- O mně → About ; Můj příběh → My story ; Odkud to vím → How I know this ; Kdo za tím je → Who's behind this
+- terén → terrain ; terénní → terrain-based ; germ teorie → germ theory ; zárodek → germ
+- Důkaz → Proof ; Vizualizace AI → AI visualization ; Před / Po → Before / After ; „Zdraví je vidět“ → "Health shows"
+- Klient · 1:1 → Client · 1:1 ; student → student ; recenze → reviews ; Co píšou klienti → What clients write
+- lekce → lesson ; submodul → submodule ; modul → module ; Lekce zdarma → Free lesson ; Vstoupit do Akademie → Join the Academy ; Vstoupit → Join
+- Sourcing mapa → sourcing map ; syrové mléko → raw milk ; mlékomat → raw milk vending machine
+- Psali o mně a byl jsem hostem → Featured in and guest appearances (keep Czech media names; add "Czech weekly" etc. only where the Czech text explains it)
+- Hovor je zdarma a nezavazuje → The call is free and there is no obligation
+- Kč stays as CZK only if a price appears (there should be none)

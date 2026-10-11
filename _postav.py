@@ -1039,6 +1039,9 @@ if __name__ == "__main__":
     print("sourcing.html: %d mist" % _sourcing.postav(HLAVA, PATA, SKOOL, esc))
     print("lekce zdarma: %s" % _akademie.postav_lekci_zdarma(HLAVA, PATA, SKOOL))
     print("akademie.html:", _akademie.postav_stranku(HLAVA, PATA, SKOOL, recenze=_recenze.pas_recenze("Co píšou studenti", jen="student")))
+    import _en
+    chybi = _en.postav()
+    print("anglická verze: chybí přeložit %d textů" % len(chybi))
     print("pribeh.html: %d bloku" % n)
     for f in ("index.html", "jedna-na-jedna.html", "kontakt.html", "pravni.html"):
         print("%-22s %d znaku" % (f, os.path.getsize(f)))
@@ -1047,7 +1050,7 @@ if __name__ == "__main__":
     if not NAHLED:
         # pojistka před pushem: na živých stránkách nesmí zůstat nic zástupného
         spatne = []
-        for f in glob.glob("*.html") + glob.glob("sourcing/**/*.html", recursive=True) + glob.glob("mapa/**/*.html", recursive=True):
+        for f in glob.glob("*.html") + glob.glob("en/*.html") + glob.glob("sourcing/**/*.html", recursive=True) + glob.glob("mapa/**/*.html", recursive=True):
             t = open(f, encoding="utf-8").read()
             for znak in ("/_nahledy/", "doplníš", "recenze zastupna", "foto-misto", "Návrh:", "disabled>"):
                 if znak in t:

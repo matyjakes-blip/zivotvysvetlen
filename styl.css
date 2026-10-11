@@ -959,3 +959,13 @@ h3{font-family:var(--nadpis);font-weight:600;color:var(--inkoust)}
 @media (max-width:760px){.dp-dal ul{grid-template-columns:1fr}}
 .lekce-obr{margin:22px 0}.lekce-obr img{display:block;width:100%;height:auto;border-radius:12px}
 .lekce-dalsi{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px;justify-items:center}
+
+/* anglická verze (11. 10.): přepínač jazyka a Life Explained */
+.jazyk{font-size:.76rem;font-weight:600;letter-spacing:.08em;color:var(--text2);text-decoration:none;padding:6px 10px;border:1px solid var(--linka2);border-radius:999px;line-height:1}
+.jazyk:hover{color:var(--inkoust);border-color:var(--zlato)}
+.le-urovne{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:26px}
+.le-uroven{background:var(--plocha);border:1px solid var(--linka);border-radius:16px;padding:16px 18px}
+.le-vrstva{font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--zlato)}
+.le-uroven h3{margin-top:6px;font-family:var(--nadpis);font-size:1.3rem;line-height:1.2;color:var(--inkoust)}
+.le-uroven p:last-child{margin-top:4px;color:var(--text2);font-size:.95rem}
+@media (max-width:420px){.jazyk{padding:5px 8px;font-size:.7rem}}
