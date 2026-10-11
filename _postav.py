@@ -744,6 +744,12 @@ def postav_jak_mapa():
     import json as _json
     d = _json.load(open("sourcing/data.json", encoding="utf-8"))
     pocet = sum(len(o["m"]) for o in d["obce"])
+    osm_pocet, osm_den = 0, ""
+    if os.path.exists("sourcing/osm.json"):
+        o_ = _json.load(open("sourcing/osm.json", encoding="utf-8"))
+        osm_pocet = sum(len(x["m"]) for x in o_["obce"])
+        r_, m_, d_ = o_.get("stazeno", "--").split("-")
+        osm_den = "%d. %d. %s" % (int(d_), int(m_), r_)
     telo = """
 <main>
   <section class="hero hero-uzsi">
@@ -759,6 +765,7 @@ def postav_jak_mapa():
       <h2>Odkud jsou místa</h2>
       <ul>
         <li><b>Registr Státní veterinární správy.</b> Základ mapy. Každý, kdo smí prodávat syrové mléko ze dvora nebo z automatu, bourat maso a zpracovávat zvěřinu, ryby a med pro přímý prodej. Je to seznam lidí, kteří na to mají povolení. O kvalitě to neříká nic. Údaje ze dne {aktualizace}, teď {pocet} míst.</li>
+        <li><b>OpenStreetMap.</b> Mlékomaty, mléčné prodejny a farmářské obchody, které v registru nejsou, beru z otevřené komunitní mapy <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> (© přispěvatelé OpenStreetMap, licence ODbL). Úřad je neověřoval. Údaje ze dne {osm_den}, teď {osm_pocet} míst.</li>
         <li><b>Od lidí.</b> Tipy, které pošleš přes formulář. Každý projdu ručně, než se na mapě objeví, a na mapě jsou označené zvlášť. Nejsou ověřené tak jako registr.</li>
         <li><b>◆ Doporučeno.</b> Farmy, které doporučuju v Akademii.</li>
       </ul>
@@ -783,7 +790,7 @@ def postav_jak_mapa():
     </div>
   </section>
 </main>
-""".format(aktualizace=d.get("aktualizace", ""), pocet="{:,}".format(pocet).replace(",", "\u00a0"), mail=MAIL,
+""".format(aktualizace=d.get("aktualizace", ""), pocet="{:,}".format(pocet).replace(",", "\u00a0"), mail=MAIL, osm_den=osm_den, osm_pocet=osm_pocet,
            form_tipy=_sourcing.FORM_TIPY)
     stranka = HLAVA.format(titulek="Jak mapa funguje · Život vysvětlen",
                            popis="Odkud jsou místa na sourcing mapě, co se na ni dostane a jak opravit nebo odstranit údaj.",
@@ -865,7 +872,7 @@ def postav_pravni():
 
     <section>
       <h2>Sourcing mapa</h2>
-      <p>Místa na <a href="/sourcing.html">sourcing mapě</a> pocházejí z veřejných registrů Státní veterinární správy (prodejci syrového mléka a zpracovatelé živočišných produktů registrovaní pro přímý prodej). Firmy a farmy ukazuju s názvem a adresou tak, jak je zveřejňuje SVS. Soukromé chovatele ukazuju jen podle obce, bez jména a ulice.</p>
+      <p>Místa na <a href="/sourcing.html">sourcing mapě</a> pocházejí z veřejných registrů Státní veterinární správy (prodejci syrového mléka a zpracovatelé živočišných produktů registrovaní pro přímý prodej). Firmy a farmy ukazuju s názvem a adresou tak, jak je zveřejňuje SVS. Mlékomaty, mléčné prodejny a farmářské obchody, které v registru nejsou, doplňuju z OpenStreetMap (© přispěvatelé OpenStreetMap, licence ODbL); tahle data jsou v samostatném souboru <a href="/sourcing/osm.json">osm.json</a> pod stejnou licencí. Soukromé chovatele ukazuju jen podle obce, bez jména a ulice.</p>
       <p>Jste na mapě a nechcete tam být, nebo je něco špatně? Napište mi na <a href="mailto:{mail}">{mail}</a> a do pár dní to opravím nebo odstraním.</p>
     </section>
 
