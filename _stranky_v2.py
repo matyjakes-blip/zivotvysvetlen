@@ -265,19 +265,14 @@ def postav_pribeh_v2(HLAVA, PATA, SKOOL, cely_text_html):
     <div class="obal uvod-mriz">
       <div class="uvod-text">
         <p class="nadtitul">O mně</p>
-        <h1>Mohl jsem já, proč ne ty?</h1>
+        <h1>Kdo za tím je</h1>
         <p class="tvrzeni">Moje důvěryhodnost není v tom, že jsem to vždycky věděl.<strong>Je v tom, že jsem si tu špatnou cestu prošel celou.</strong></p>
         <div class="tlacitka"><a class="cta" href="#pribeh">Číst můj příběh</a><a class="cta-druhy" href="#odkud">Odkud to vím</a></div>
       </div>
       <figure class="uvod-foto"><img src="/media/matyas-uvod.jpg" alt="Matyáš Jakeš" width="640" height="800"></figure>
     </div>
   </section>
-  <section class="pas omne-mel" id="prosel">
-    <div class="obal uzky">
-      <p class="nadtitul">Čím jsem si prošel</p>
-      <ul class="mel-seznam"><li>Zažívací problémy</li><li>Nadváha, +51 kg (z 55 na 106)</li><li>Akné</li><li>Inzulínová rezistence</li><li>Neustálé přejídání</li><li>Záněty kloubů</li></ul>
-    </div>
-  </section>
+  <!-- „Čím jsem si prošel“ pryč (Matyáš 11. 10.: Č1, rovnou příběh) -->
   <section class="pas pribeh-pas" id="pribeh">
     <div class="obal uzky">
       <p class="nadtitul">Můj příběh</p>

@@ -116,7 +116,7 @@ def postav(HLAVA, PATA, SKOOL, esc):
   <section class="hero hero-uzsi">
     <div class="obal uzky">
       <p class="nadtitul">Zdarma</p>
-      <h1 class="nadpis-str">Primal sourcing mapa</h1>
+      <h1 class="nadpis-str">Sourcing mapa</h1>
       <p class="tvrzeni-pod">Kde v Česku sehnat syrové mléko, maso, zvěřinu, med a ryby přímo od chovatele. {pocet_slovy} míst na jedné mapě.</p>
     </div>
   </section>
@@ -309,7 +309,7 @@ def postav(HLAVA, PATA, SKOOL, esc):
            par=json.dumps({k: round(v, 6) for k, v in par.items()}),
            kat=json.dumps(dict(KATEGORIE), ensure_ascii=False))
 
-    stranka = HLAVA.format(titulek="Primal sourcing mapa · Život vysvětlen",
+    stranka = HLAVA.format(titulek="Sourcing mapa · Život vysvětlen",
                            popis="Syrové mléko, maso, zvěřina, med a ryby přímo od chovatele. Přes 3 000 míst v Česku na jedné mapě, zdarma.",
                            kanon="sourcing.html", ogobr="mapa/hero.jpg",
                            skool=SKOOL) + telo + PATA.format(skool=SKOOL)
