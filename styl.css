@@ -917,3 +917,16 @@ h3{font-family:var(--nadpis);font-weight:600;color:var(--inkoust)}
 .cesta-odznak{position:absolute;top:22px;right:22px;width:52px;height:52px}
 .nadtitul-odznak{display:flex;align-items:center;gap:10px}
 .nadtitul-odznak img{width:34px;height:34px;flex:none}
+
+/* rámec Život vysvětlen (11. 10.) */
+.ramec-pas .nadtitul,.ramec-pas h2{text-align:center}
+.ramec-kroky{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px}
+.ramec-krok{background:var(--plocha);border:1px solid var(--linka);border-radius:18px;padding:22px 22px 24px}
+.ramec-krok:last-child{background:var(--tma);border-color:var(--tma)}
+.ramec-krok:last-child h3{color:#fbf6ec}.ramec-krok:last-child p{color:#cfc5b3}
+.ramec-cislo{font-family:var(--nadpis);font-size:2rem;line-height:1;color:var(--zlato)}
+.ramec-krok h3{margin-top:10px;font-family:var(--nadpis);font-size:1.6rem;color:var(--inkoust)}
+.ramec-krok p{margin-top:8px;color:var(--text2);line-height:1.55}
+.ramec-krok .ramec-cislo{margin-top:0}
+.ramec-pro{margin:22px auto 0;max-width:720px;text-align:center;color:var(--text2)}
+@media (max-width:760px){.ramec-kroky{grid-template-columns:1fr}}

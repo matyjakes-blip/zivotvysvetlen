@@ -240,5 +240,61 @@
   "soukromy": false,
   "pocet": 1,
   "notion": "3f658825-a3f1-81e2-9396-d64e1ebdd030"
+ },
+ {
+  "nazev": "Tip ze seznamu",
+  "obec": "Jirny",
+  "adresa": "Zámecká 345, 250 90 Jirny",
+  "kategorie": "ostatni",
+  "co": "",
+  "soukromy": true,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-8101-92b5-dff8f0de4982"
+ },
+ {
+  "nazev": "Tip ze seznamu",
+  "obec": "Praha",
+  "adresa": "K Netlukám, 104 00 Praha",
+  "kategorie": "ostatni",
+  "co": "",
+  "soukromy": true,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-81c3-849e-e52205c22c77"
+ },
+ {
+  "nazev": "Tip ze seznamu",
+  "obec": "Mukařov",
+  "adresa": "Žernovka, 251 62 Mukařov",
+  "kategorie": "ostatni",
+  "co": "",
+  "soukromy": true,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-816b-8c87-fefaa77ed5b3"
+ },
+ {
+  "nazev": "Tip ze seznamu",
+  "obec": "Freistadt",
+  "kraj": "Rakousko",
+  "adresa": "",
+  "lat": 48.5102,
+  "lon": 14.5051,
+  "kategorie": "ostatni",
+  "co": "",
+  "soukromy": true,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-81a5-87ce-ea4d29c34fee"
+ },
+ {
+  "nazev": "Tip ze seznamu",
+  "obec": "Kitzelsbach",
+  "kraj": "Rakousko",
+  "adresa": "",
+  "lat": 48.3742,
+  "lon": 14.312,
+  "kategorie": "ostatni",
+  "co": "",
+  "soukromy": true,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-8114-9fbc-fe79441186bf"
  }
 ]

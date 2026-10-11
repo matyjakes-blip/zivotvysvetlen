@@ -159,7 +159,10 @@ if __name__ == "__main__":
                            "r": "", "u": d.get("odkaz", ""), "z": "Doporučeno v Akademii", "d": 1})
         celkem += 1
     for t in tipy():
-        o = najdi_obec((t.get("adresa") or "") + ", " + t.get("obec", ""), podle_nazvu, podle_psc)
+        if t.get("lat") and t.get("lon"):   # místo mimo české obce (Rakousko, Matyáš 11. 10.): souřadnice v tipu
+            o = {"obec": t["obec"], "okres": t["obec"], "kraj": t.get("kraj", ""), "lat": t["lat"], "lon": t["lon"]}
+        else:
+            o = najdi_obec((t.get("adresa") or "") + ", " + t.get("obec", ""), podle_nazvu, podle_psc)
         if not o:
             nenalezeno.append("TIP: " + t.get("obec", "")); continue
         klic_obce = o["obec"] + "|" + o["okres"]

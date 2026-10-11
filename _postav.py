@@ -381,6 +381,31 @@ PROC = [
 ]
 
 
+# ---- rámec Život vysvětlen (Matyáš 11. 10.: „pro koho to je a není … kde se momentálně nachází, co se naučí
+# a kde může být, až tím projde“; vybral variantu B) ----
+RAMEC = [
+    ("Kde jsi teď", "Únava, trávení, pleť, žádná energie. Zkoušíš věci zvenku a nikdo ti neřekl proč."),
+    ("Co pochopíš", "Odkud se nemoc bere, co s tělem dělá světlo, spánek, jídlo a hlava. Jeden princip, ze kterého si odvodíš všechno ostatní."),
+    ("S čím odejdeš", "Víš, co dělat a proč, a další otázku si zodpovíš sám. Nejčastější věta, co mi lidi píšou: „poprvé po letech se cítím normálně.“"),
+]
+RAMEC_PRO = "Pro toho, kdo už zkusil diety, doplňky i doktory a chce konečně vědět proč. Ne pro toho, kdo hledá pilulku nebo výsledek za týden."
+
+
+def pas_ramec():
+    kroky = "".join('<div class="ramec-krok"><p class="ramec-cislo">%d</p><h3>%s</h3><p>%s</p></div>' % (i + 1, esc(n), esc(t))
+                    for i, (n, t) in enumerate(RAMEC))
+    return """
+  <section class="pas ramec-pas">
+    <div class="obal">
+      <p class="nadtitul">Život vysvětlen</p>
+      <h2>Odkud přicházíš a kam to vede</h2>
+      <div class="ramec-kroky">%s</div>
+      <p class="ramec-pro">%s</p>
+    </div>
+  </section>
+""" % (kroky, esc(RAMEC_PRO))
+
+
 def pas_promena():
     prep_rezim = "".join(
         '<button type="button" class="prepinac-tl" data-rezim="%s" aria-pressed="%s">%s</button>'
@@ -572,8 +597,8 @@ def postav_index():
       <div class="uvod-text">
         <p class="nadtitul">Život vysvětlen</p>
         <h1>Matyáš Jakeš</h1>
-        <p class="tvrzeni">Postava, energie, klid i vzhled jsou vedlejší produkty.<strong>Ne cíl.</strong></p>
-        <p class="tvrzeni-pod">Oprav terén a biologie, psychika i to, kdo jsi, začnou vyjadřovat to, co měly celou dobu.</p>
+        <p class="tvrzeni">Jak vypadáš a jak se cítíš, vychází zevnitř.</p>
+        <p class="tvrzeni-pod">Spravíš terén a postava, energie i klid přijdou jako vedlejší produkt.</p>
         <div class="tlacitka">
           <a class="cta" href="/akademie.html">Vstoupit do Akademie</a>
           <a class="cta-druhy" href="/jedna-na-jedna.html">Osobní vedení 1:1</a>
@@ -583,7 +608,7 @@ def postav_index():
       <figure class="uvod-foto">{foto}</figure>
     </div>
   </section>
-{video}
+{ramec}{video}
 {promena}{zpusob}
 {akademie}{galerie}
   <section class="pas sourcing-pas">
@@ -603,7 +628,7 @@ def postav_index():
     </div>
   </section>
 </main>
-""".format(skool=SKOOL, video=video, podcasty=pas_podcasty(), cesty=pas_cesty(), foto=uvod_foto(), promena=pas_promena(), zpusob=pas_zpusob(), akademie=_akademie.pas_akademie(_akademie.data()), galerie="", recenze=_recenze.pas_recenze(),
+""".format(skool=SKOOL, ramec=pas_ramec(), video=video, podcasty=pas_podcasty(), cesty=pas_cesty(), foto=uvod_foto(), promena=pas_promena(), zpusob=pas_zpusob(), akademie=_akademie.pas_akademie(_akademie.data()), galerie="", recenze=_recenze.pas_recenze(),
            poradi=poradi, moduly=moduly, pravidla=pravidla)
 
     stranka = HLAVA.format(titulek="Život vysvětlen · Akademie",
