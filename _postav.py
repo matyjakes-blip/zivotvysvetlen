@@ -339,9 +339,7 @@ def pas_cesty():
 PROMENA = [
     # AI vizualizace z jeho skutečných fotek (Gemini, 8. 10. 2026); obličej 15/18 → 20, postava jen 18 → 20
     # (v 15 byl nezletilý: žádné AI tělo z té doby). Originály v _fotky/ai-vystupy/ (mimo git), výtky k dalšímu kolu v POZNAMKY.md.
-    dict(klic="o15", rezim="o", vek="15", nazev="Obličej, 15 let",
-         pred="/media/dukaz/ai-15.jpg", po="/media/dukaz/ai-20.jpg",
-         stitek_pred="15 let · 55 kg", stitek_po="20 let · 94 kg"),
+    # 15 let z důkazu pryč (Matyáš 11. 10.: „dal bych pryč 15yo variantu z důkazu úplně“)
     dict(klic="o18", rezim="o", vek="18", nazev="Obličej, 18 let",
          pred="/media/dukaz/ai-18.jpg", po="/media/dukaz/ai-20.jpg",
          stitek_pred="18 let · 106 kg", stitek_po="20 let · 94 kg"),
@@ -350,7 +348,7 @@ PROMENA = [
          stitek_pred="18 let · 106 kg", stitek_po="20 let · 94 kg"),
 ]
 REZIMY = [("o", "Obličej"), ("p", "Postava")]
-VEKY = [("15", "15 let"), ("18", "18 let")]
+VEKY = [("18", "18 let")]
 
 # skutečné fotky pod posuvníkem: (soubor, věk, údaj, poznámka)
 SKUTECNE = [
@@ -422,13 +420,11 @@ def pas_promena():
         </div>
         <div class="promena-obr">
           <div class="prepinac-radek"><div class="prepinac" role="group" aria-label="Co porovnat">%s</div></div>
-          <div class="prepinac-radek"><span>Před:</span><div class="prepinac" role="group" aria-label="Věk před">%s</div><span>Po: 20 let</span></div>
           %s
           <p class="popisek">Táhni předělem do stran · Vizualizace vytvořená AI z mých skutečných fotek · výsledky jsou individuální</p>
         </div>
         <div class="promena-text">
           <ol class="osa">
-            <li><b>15 let</b><span>167 cm · 55 kg</span></li>
             <li><b>18 let</b><span>182 cm · 106 kg</span></li>
             <li><b>20 let</b><span>191 cm · 94 kg</span></li>
           </ol>
@@ -450,7 +446,7 @@ def pas_promena():
       <div class="panely">%s</div>
     </div>
   </div>
-""" % (prep_rezim, prep_vek, posuvniky, zalozky, panely)
+""" % (prep_rezim, posuvniky, zalozky, panely)
 
 
 # ---- starý × nový způsob (krok 3 přestavby, návrh 7. 10. 2026) ----

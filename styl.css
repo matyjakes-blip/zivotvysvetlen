@@ -512,7 +512,7 @@ h3{font-family:var(--nadpis);font-weight:600;color:var(--inkoust)}
 .psali a:hover{color:var(--inkoust);border-color:var(--linka2)}
 
 /* proměna: věcná osa místo dramatického odstavce */
-.osa{list-style:none;margin-top:22px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:520px}
+.osa{list-style:none;margin-top:22px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-width:400px}
 .osa li{padding:14px 16px;border:1px solid var(--linka);border-radius:14px;background:var(--plocha)}
 .osa li:last-child{background:var(--tma);border-color:var(--tma)}
 .osa b{display:block;font-family:var(--nadpis);font-size:1.5rem;line-height:1;color:var(--inkoust)}
@@ -616,7 +616,7 @@ h3{font-family:var(--nadpis);font-weight:600;color:var(--inkoust)}
 }
 @media (max-width:600px){
   .moduly-mriz,.dlazdice-mriz{grid-template-columns:1fr}
-  .osa{grid-template-columns:1fr 1fr 1fr;gap:6px}
+  .osa{grid-template-columns:1fr 1fr;gap:6px}
   .osa li{padding:10px}
   .osa b{font-size:1.2rem}
 }
