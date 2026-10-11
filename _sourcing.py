@@ -24,15 +24,17 @@ KATEGORIE = [
 # sourcing/osm.json pod ODbL (© přispěvatelé OpenStreetMap); s daty z registru SVS se slučuje až v prohlížeči,
 # takže registr zůstává oddělený. Na mapu jen místa, kde se dá něco koupit.
 OSM_VYRADIT = ("jen craft=beekeeper", "firemní prodejna velké mlékárny", "včelařské potřeby",
-               "vending=sweets", "construction_date")
+               "vending=sweets", "construction_date", "ne mléčná prodejna")
+# Slovensko z OpenStreetMap (11. 10. 2026, sourcing/zdroje/osm-sk.json): stejný formát, shoda s registrem ŠVPS = duplicita_svps
+OSM_ZDROJE = ("sourcing/zdroje/osm-cz.json", "sourcing/zdroje/osm-sk.json")
 OSM_KAT = {"Mlékomat": "mleko", "Mléčná prodejna": "mleko", "Med": "med", "Farmářský obchod": "obchod"}
 
 
 def osm_vrstva(data):
-    zdroj = "sourcing/zdroje/osm-cz.json"
-    if not os.path.exists(zdroj):
+    zdroje = [json.load(open(z, encoding="utf-8")) for z in OSM_ZDROJE if os.path.exists(z)]
+    if not zdroje:
         return None
-    src = json.load(open(zdroj, encoding="utf-8"))
+    src = {"stazeno": max(z.get("stazeno", "") for z in zdroje), "mista": [m for z in zdroje for m in z["mista"]]}
     souradnice = {(o["obec"], o["okres"]): (o["lat"], o["lon"]) for o in data["obce"]}
     skupiny = {}
     for m in src["mista"]:
@@ -40,12 +42,12 @@ def osm_vrstva(data):
         upo = [upo] if isinstance(upo, str) else upo
         if any(v in u for u in upo for v in OSM_VYRADIT):
             continue
-        if m.get("duplicita_svs") or m.get("duplicita_osm"):
+        if m.get("duplicita_svs") or m.get("duplicita_svps") or m.get("duplicita_osm"):
             continue
         typ, bezejmenne = m["typ"], bool(m.get("nazev_generovany"))
         if bezejmenne and typ in ("Med", "Farmářský obchod"):
             continue
-        if bezejmenne and typ == "Mlékomat" and m.get("mozna_duplicita_svs"):
+        if bezejmenne and typ == "Mlékomat" and (m.get("mozna_duplicita_svs") or m.get("mozna_duplicita_svps")):
             continue
         soukr = bool(m.get("soukroma_osoba"))
         pol = {"n": "Soukromý prodej" if soukr else m["nazev"], "t": typ, "k": OSM_KAT.get(typ, "obchod"), "o": m["osm"]}
@@ -57,7 +59,7 @@ def osm_vrstva(data):
             pol["h"] = m["oteviraci_doba"]
         klic = (m["obec"], m["okres"])
         if klic not in skupiny:
-            lat, lon = souradnice.get(klic, (m["lat"], m["lon"]))
+            lat, lon = souradnice.get(klic, (m.get("obec_lat") or m["lat"], m.get("obec_lon") or m["lon"]))
             skupiny[klic] = {"obec": m["obec"], "okres": m["okres"], "kraj": m["kraj"], "lat": lat, "lon": lon, "m": []}
         skupiny[klic]["m"].append(pol)
     ven = {"zdroj": "OpenStreetMap", "licence": "ODbL 1.0 (https://opendatacommons.org/licenses/odbl/)",
@@ -117,7 +119,7 @@ def postav(HLAVA, PATA, SKOOL, esc):
     <div class="obal uzky">
       <p class="nadtitul">Zdarma</p>
       <h1 class="nadpis-str">Sourcing mapa</h1>
-      <p class="tvrzeni-pod">Kde v Česku sehnat syrové mléko, maso, zvěřinu, med a ryby přímo od chovatele. {pocet_slovy} míst na jedné mapě.</p>
+      <p class="tvrzeni-pod">Kde v Česku a na Slovensku sehnat syrové mléko, maso, zvěřinu, med a ryby přímo od chovatele. {pocet_slovy} míst na jedné mapě.</p>
     </div>
   </section>
 
@@ -150,9 +152,10 @@ def postav(HLAVA, PATA, SKOOL, esc):
       <p class="nadtitul">Odkud to je</p>
       <h2>Oficiální registr a moje doporučení</h2>
       <p class="text-stred">Základ mapy tvoří registry Státní veterinární správy: <strong>každý, kdo smí prodávat syrové mléko ze dvora nebo z automatu</strong>, bourat maso, zpracovávat zvěřinu, ryby a med pro přímý prodej. Je to seznam lidí, kteří na to mají povolení, ne reklama. Zlatě orámované body jsou farmy, které doporučuju v Akademii.</p>
+      <p class="text-stred">Na Slovensku jsou základem úřední seznamy Štátnej veterinárnej a potravinovej správy SR (ŠVPS): salaše, mlékárny a sýrárny z farem, malá jatka, zvěřina, med a vejce. U jatek a zvěřiny seznam neříká, jestli prodávají veřejnosti, tak si to ověř předem.</p>
       <p class="text-stred">Mlékomaty, mléčné prodejny a farmářské obchody, které v registru nejsou, doplňuju z <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>, otevřené mapy, kterou kreslí lidi. Tyhle body úřad neověřoval, u každého místa je vidět, odkud je.</p>
-      <p class="text-stred">Soukromé chovatele ukazuju jen podle obce, bez jména a ulice. Kdo je chce najít, dohledá je v registru SVS podle čísla.</p>
-      <p class="text-stred drobne">Údaje ze dne {aktualizace}. Slovensko se doplní. <a href="/jak-mapa-funguje.html">Jak mapa funguje, oprava a odstranění údajů</a></p>
+      <p class="text-stred">Soukromé chovatele ukazuju jen podle obce, bez jména a ulice. Kdo je chce najít, dohledá je v registru SVS nebo ŠVPS podle čísla.</p>
+      <p class="text-stred drobne">Česko ze dne {aktualizace}, Slovensko ze dne {aktualizace_sk}. <a href="/jak-mapa-funguje.html">Jak mapa funguje, oprava a odstranění údajů</a></p>
       <div class="stred"><a class="cta-druhy" href="{skool}">Vstoupit do Akademie</a></div>
     </div>
   </section>
@@ -174,7 +177,7 @@ def postav(HLAVA, PATA, SKOOL, esc):
 (function () {{
   var P = {par};
   var KAT = {kat};
-  var SVS_DATUM = {svs_datum}, OSM_DATUM = {osm_datum};
+  var SVS_DATUM = {svs_datum}, SVPS_DATUM = {svps_datum}, OSM_DATUM = {osm_datum};
   var W = {W}, H = {H};
   var svg = document.querySelector('.mapa-svg');
   var vrstva = svg.querySelector('.body-vrstva');
@@ -243,11 +246,12 @@ def postav(HLAVA, PATA, SKOOL, esc):
       }} else {{
         var u = typeof m.u === 'number' ? DATA.registry[m.u] : m.u;
         if (u) {{
-          var a = el('a', 'polozka-odkaz', m.d ? 'Otevřít web farmy' : (m.l ? 'Otevřít' : ('V registru SVS' + (m.r ? ' · ' + m.r : ''))));
+          var a = el('a', 'polozka-odkaz', m.d ? 'Otevřít web farmy' : (m.l ? 'Otevřít' : ((m.c === 'sk' ? 'V seznamu ŠVPS' : 'V registru SVS') + (m.r ? ' · ' + m.r : ''))));
           a.href = u; a.target = '_blank'; a.rel = 'noopener';
           b.appendChild(a);
         }}
-        b.appendChild(el('p', 'polozka-zdroj', m.d ? 'Zdroj: moje doporučení' : (m.l ? 'Zdroj: od lidí, prošel jsem ručně' : ('Zdroj: registr Státní veterinární správy · stav k ' + SVS_DATUM))));
+        b.appendChild(el('p', 'polozka-zdroj', m.d ? 'Zdroj: moje doporučení' : (m.l ? 'Zdroj: od lidí, prošel jsem ručně' :
+          (m.c === 'sk' ? 'Zdroj: úřední seznam ŠVPS SR · stav k ' + SVPS_DATUM : 'Zdroj: registr Státní veterinární správy · stav k ' + SVS_DATUM))));
       }}
       s.appendChild(b);
     }});
@@ -304,13 +308,14 @@ def postav(HLAVA, PATA, SKOOL, esc):
 </script>
 """.format(W=W, H=H, tvary=tvary, filtry=filtry, skool=SKOOL, form_tipy=FORM_TIPY,
            pocet_slovy=("Přes %d 000" % (pocet // 1000)) if pocet >= 1000 else str(pocet),
-           aktualizace=data.get("aktualizace", ""),
+           aktualizace=data.get("aktualizace", ""), aktualizace_sk=data.get("aktualizace_sk", ""),
+           svps_datum=json.dumps(data.get("aktualizace_sk", ""), ensure_ascii=False),
            svs_datum=json.dumps(data.get("aktualizace", ""), ensure_ascii=False), osm_datum=json.dumps(osm_datum, ensure_ascii=False),
            par=json.dumps({k: round(v, 6) for k, v in par.items()}),
            kat=json.dumps(dict(KATEGORIE), ensure_ascii=False))
 
     stranka = HLAVA.format(titulek="Sourcing mapa · Život vysvětlen",
-                           popis="Syrové mléko, maso, zvěřina, med a ryby přímo od chovatele. Přes 3 000 míst v Česku na jedné mapě, zdarma.",
+                           popis="Syrové mléko, maso, zvěřina, med a ryby přímo od chovatele. Přes %d 000 míst v Česku a na Slovensku na jedné mapě, zdarma." % (pocet // 1000),
                            kanon="sourcing.html", ogobr="mapa/hero.jpg",
                            skool=SKOOL) + telo + PATA.format(skool=SKOOL)
     open("sourcing.html", "w", encoding="utf-8").write(stranka)

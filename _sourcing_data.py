@@ -101,6 +101,58 @@ def kategorie_mleko(zaznam):
     return "mleko", "Syrové mléko ze dvora"
 
 
+# Slovensko (Matyáš 11. 10. 2026: „slovensko v mapě také“): úřední seznamy ŠVPS SR, připravené do
+# sourcing/zdroje/svps-sk.json (přehled v sk-PREHLED.md). Sběrná střediska ulovené zvěře na mapu nejdou (sbírají
+# zvěř od myslivců, nejsou to prodejny), stejně jako větší mlékárny s dodávkami do obchodů. U jatek a zpracoven
+# zvěřiny registr prodej veřejnosti neuvádí, proto to karta říká. Fyzické osoby: jen obec, bez jména a ulice.
+SK_VYRADIT = ("sběrné středisko zvěře", "větší mlékárna")
+SK_NEOVERENO = "Prodej veřejnosti registr neuvádí, ověř si ho předem."
+
+
+def sk_adresa(a):
+    """registr často opakuje PSČ a obec dvakrát („…, 014 01 Bytča, 01401 Bytča“): nechat jen jednou"""
+    casti = [c.strip() for c in (a or "").split(",") if c.strip()]
+    psc = lambda c: re.sub(r"\D", "", " ".join(re.findall(r"\b\d{3}\s?\d{2}\b", c)))
+    if len(casti) > 1 and psc(casti[-1]):
+        for i in range(len(casti) - 1):
+            if psc(casti[i]) == psc(casti[-1]):
+                del casti[i if not re.search(r"[^\d\s]", casti[i]) else -1]
+                break
+    return ", ".join(casti)
+
+
+def slovensko(obce):
+    p = Z + "svps-sk.json"
+    if not os.path.exists(p):
+        return 0, 0, [], ""
+    src = json.load(open(p, encoding="utf-8"))
+    with open(Z + "obce-sk.csv", encoding="utf-8") as f:
+        sour = {(r["obec"], r["okres"]): r for r in csv.DictReader(f)}
+    registry, pocet, fyzicke = [], 0, 0
+    for m in src["mista"]:
+        upo = m.get("upozorneni") or []
+        if any(v in u for u in upo for v in SK_VYRADIT):
+            continue
+        fo = bool(m.get("fyzicka_osoba"))
+        fyzicke += fo
+        url = m.get("zdroj_url", "")
+        if url and url not in registry:
+            registry.append(url)
+        misto = {"n": (m.get("nazev") or "Soukromý chovatel") if fo else m["nazev"],
+                 "a": "" if fo else sk_adresa(m.get("adresa")), "t": m["typ"], "k": m["kategorie"],
+                 "r": (m.get("registr_cislo") or "").strip(), "u": url, "c": "sk"}
+        if any("prodej" in u and "neověřen" in u for u in upo):
+            misto["p"] = SK_NEOVERENO
+        o = sour.get((m["obec"], m["okres"]))
+        lat, lon = (float(o["lat"]), float(o["lon"])) if o else (m["lat"], m["lon"])
+        ob = obce.setdefault(m["obec"] + "|" + m["okres"], {"obec": m["obec"], "okres": m["okres"], "kraj": m["kraj"],
+                                                            "lat": lat, "lon": lon, "m": []})
+        ob["m"].append(misto)
+        pocet += 1
+    r_, m_, d_ = src.get("stazeno", "--").split("-")
+    return pocet, fyzicke, registry, "%d. %d. %s" % (int(d_), int(m_), r_)
+
+
 def tipy():
     """overene tipy od lidi (plni tydenni agent sourcing-tipy z Notionu)"""
     p = "sourcing/tipy.json"
@@ -158,6 +210,8 @@ if __name__ == "__main__":
         ob["m"].insert(0, {"n": d["nazev"], "a": d["adresa"], "t": d["co"], "k": d["kategorie"],
                            "r": "", "u": d.get("odkaz", ""), "z": "Doporučeno v Akademii", "d": 1})
         celkem += 1
+    sk_pocet, sk_fyzicke, sk_registry, sk_datum = slovensko(obce)
+    celkem += sk_pocet; fyzicke += sk_fyzicke
     for t in tipy():
         if t.get("lat") and t.get("lon"):   # místo mimo české obce (Rakousko, Matyáš 11. 10.): souřadnice v tipu
             o = {"obec": t["obec"], "okres": t["obec"], "kraj": t.get("kraj", ""), "lat": t["lat"], "lon": t["lon"]}
@@ -178,7 +232,7 @@ if __name__ == "__main__":
                            "z": "Tip od lidí", "l": 1, "p": popis, "q": t.get("poznamka", "")})
         celkem += 1
     ven = sorted(obce.values(), key=lambda o: -len(o["m"]))
-    registry = [SVS_MLEKO, SVS_PP]
+    registry = [SVS_MLEKO, SVS_PP] + sk_registry
     typy = sorted({m["t"] for o in ven for m in o["m"]})
     for o in ven:
         for m in o["m"]:
@@ -188,9 +242,10 @@ if __name__ == "__main__":
             if not m["r"]: del m["r"]
             m.pop("z", None)
         o["lat"] = round(o["lat"], 4); o["lon"] = round(o["lon"], 4)
-    json.dump({"aktualizace": "27. 9. 2026", "registry": registry, "typy": typy, "obce": ven},
+    json.dump({"aktualizace": "27. 9. 2026", "aktualizace_sk": sk_datum, "registry": registry, "typy": typy, "obce": ven},
               open("sourcing/data.json", "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     from collections import Counter
+    print("z toho Slovensko (ŠVPS):", sk_pocet)
     print("mist celkem:", celkem, "| obci:", len(ven), "| anonymizovanych fyzickych osob:", fyzicke)
     print("podle kategorie:", Counter(m["k"] for o in ven for m in o["m"]))
     print("nenalezeno adres:", len(nenalezeno))

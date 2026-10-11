@@ -22,7 +22,7 @@ Otevři `mista.json` a přidej záznam do pole `mista`:
 ```
 
 - **lat a lon** vezmi z Mapy.cz nebo Google Maps: pravým tlačítkem na místo, souřadnice se zkopírují. Stačí čtyři desetinná místa.
-- **kategorie** musí být jedna z: `mleko`, `maso`, `vejce`, `tuky`, `ryby`, `med`, `minerals`, `zelenina`, `ostatni`.
+- **kategorie** musí být jedna z: `mleko`, `maso`, `zverina`, `vejce`, `tuky`, `ryby`, `med`, `minerals`, `zelenina`, `ostatni`.
 - **odkaz** a **pozn** jsou nepovinné.
 
 Pak v kořeni webu spusť `python3 _postav.py` a pushni. Mapa se překreslí sama.
