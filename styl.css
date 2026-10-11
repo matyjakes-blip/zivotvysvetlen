@@ -380,6 +380,8 @@ h3{font-family:var(--nadpis);font-weight:600;color:var(--inkoust)}
 .karta .polozka-nazev{margin-top:3px;color:var(--inkoust);font-size:.98rem;line-height:1.3}
 .karta .polozka-adresa{margin-top:2px;color:var(--text2);font-size:.88rem;line-height:1.35}
 .karta .polozka-odkaz{display:inline-block;margin-top:4px;font-size:.86rem}
+.karta .polozka-zdroj{margin-top:3px;font-size:.74rem;color:var(--tlumeny)}
+.karta .karta-chyba{display:block;margin-top:4px;padding-top:10px;border-top:1px solid var(--linka);font-size:.8rem;color:var(--tlumeny)}
 .prazdno{margin-top:14px;color:var(--text2)}
 .hledani{display:flex;justify-content:center;margin:-6px 0 18px}
 .hledani input{

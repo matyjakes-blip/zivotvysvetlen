@@ -21,7 +21,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/pisma/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/pisma/cormorant.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/styl.css?v=fc84eee0">
+<link rel="stylesheet" href="/styl.css?v=ef8b7158">
 </head>
 <body>
 <header class="hlavicka">
@@ -59,7 +59,7 @@
 
   <section class="pas mapa-pas">
     <div class="obal">
-      <div class="filtry"><button class="filtr aktivni" data-kat="vse">Vše</button><button class="filtr" data-kat="mleko">Mléko</button><button class="filtr" data-kat="maso">Maso</button><button class="filtr" data-kat="zverina">Zvěřina</button><button class="filtr" data-kat="med">Med</button><button class="filtr" data-kat="ryby">Ryby</button><button class="filtr" data-kat="vejce">Vejce</button><button class="filtr filtr-dop" data-kat="dop">◆ Doporučeno</button></div>
+      <div class="filtry"><button class="filtr aktivni" data-kat="vse">Vše</button><button class="filtr" data-kat="mleko">Mléko</button><button class="filtr" data-kat="maso">Maso</button><button class="filtr" data-kat="zverina">Zvěřina</button><button class="filtr" data-kat="med">Med</button><button class="filtr" data-kat="ryby">Ryby</button><button class="filtr" data-kat="vejce">Vejce</button><button class="filtr" data-kat="obchod">Farmářské obchody</button><button class="filtr filtr-dop" data-kat="dop">◆ Doporučeno</button></div>
       <div class="hledani"><input id="hledej-obec" type="search" placeholder="Najdi obec" autocomplete="off" aria-label="Najdi obec"></div>
       <div class="mapa-ram">
         <svg viewBox="0 0 1000 560" class="mapa-svg" role="img" aria-label="Mapa Česka a Slovenska s místy k nákupu">
@@ -73,7 +73,7 @@
           <div class="karta-seznam"></div>
         </div>
       </div>
-      <p class="popisek"><span class="pocet">Načítám…</span> · klikni na bod</p>
+      <p class="popisek"><span class="pocet">Načítám…</span> · klikni na bod · část míst © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">přispěvatelé OpenStreetMap</a></p>
       <div class="pridej">
         <p><strong>Chybí tu místo, kam chodíš?</strong> Registr říká jen, kdo smí prodávat. Jestli je to dobré, víš ty.</p>
         <a class="cta" href="https://indecisive-zenobia-f04.notion.site/ce110a2416d64dbbbbf337d14894c801" target="_blank" rel="noopener">Přidej místo</a>
@@ -86,6 +86,7 @@
       <p class="nadtitul">Odkud to je</p>
       <h2>Oficiální registr a moje doporučení</h2>
       <p class="text-stred">Základ mapy tvoří registry Státní veterinární správy: <strong>každý, kdo smí prodávat syrové mléko ze dvora nebo z automatu</strong>, bourat maso, zpracovávat zvěřinu, ryby a med pro přímý prodej. Je to seznam lidí, kteří na to mají povolení, ne reklama. Zlatě orámované body jsou farmy, které doporučuju v Akademii.</p>
+      <p class="text-stred">Mlékomaty, mléčné prodejny a farmářské obchody, které v registru nejsou, doplňuju z <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>, otevřené mapy, kterou kreslí lidi. Tyhle body úřad neověřoval, u každého místa je vidět, odkud je.</p>
       <p class="text-stred">Soukromé chovatele ukazuju jen podle obce, bez jména a ulice. Kdo je chce najít, dohledá je v registru SVS podle čísla.</p>
       <p class="text-stred drobne">Údaje ze dne 27. 9. 2026. Slovensko se doplní. <a href="/jak-mapa-funguje.html">Jak mapa funguje, oprava a odstranění údajů</a></p>
       <div class="stred"><a class="cta-druhy" href="https://www.skool.com/zivot-vysvetlen-1338">Vstoupit do Akademie</a></div>
@@ -108,7 +109,8 @@
 <script>
 (function () {
   var P = {"k": 0.649625, "x0": 7.854435, "y1": 51.037393, "mer": 139.682287, "dx": 26.0, "dy": 51.332936};
-  var KAT = {"mleko": "Mléko", "maso": "Maso", "zverina": "Zvěřina", "med": "Med", "ryby": "Ryby", "vejce": "Vejce"};
+  var KAT = {"mleko": "Mléko", "maso": "Maso", "zverina": "Zvěřina", "med": "Med", "ryby": "Ryby", "vejce": "Vejce", "obchod": "Farmářské obchody"};
+  var SVS_DATUM = "27. 9. 2026", OSM_DATUM = "11. 10. 2026";
   var W = 1000, H = 560;
   var svg = document.querySelector('.mapa-svg');
   var vrstva = svg.querySelector('.body-vrstva');
@@ -163,19 +165,31 @@
     while (s.firstChild) s.removeChild(s.firstChild);
     o.m.filter(odpovida).forEach(function (m) {
       var b = el('div', 'polozka' + (m.d ? ' polozka-dop' : ''));
-      b.appendChild(el('p', 'polozka-typ', (m.d ? '◆ Doporučeno v Akademii · ' : '') + (DATA.typy[m.t] || '')));
+      b.appendChild(el('p', 'polozka-typ', (m.d ? '◆ Doporučeno v Akademii · ' : '') + (typeof m.t === 'string' ? m.t : (DATA.typy[m.t] || ''))));
       if (m.p) b.appendChild(el('p', 'polozka-adresa', m.p));
       if (m.q) b.appendChild(el('p', 'polozka-adresa', '„' + m.q + '“'));
       b.appendChild(el('p', 'polozka-nazev', m.n));
       if (m.a) b.appendChild(el('p', 'polozka-adresa', m.a));
-      var u = typeof m.u === 'number' ? DATA.registry[m.u] : m.u;
-      if (u) {
-        var a = el('a', 'polozka-odkaz', m.d ? 'Otevřít web farmy' : (m.l ? 'Otevřít' : ('V registru SVS' + (m.r ? ' · ' + m.r : ''))));
-        a.href = u; a.target = '_blank'; a.rel = 'noopener';
-        b.appendChild(a);
+      if (m.h) b.appendChild(el('p', 'polozka-adresa', 'Otevírací doba: ' + m.h));
+      if (m.s === 'osm') {
+        var ao = el('a', 'polozka-odkaz', m.w ? 'Otevřít web' : 'Na OpenStreetMap');
+        ao.href = m.w || ('https://www.openstreetmap.org/' + m.o); ao.target = '_blank'; ao.rel = 'noopener';
+        b.appendChild(ao);
+        b.appendChild(el('p', 'polozka-zdroj', 'Zdroj: OpenStreetMap, komunitní mapa · stav k ' + OSM_DATUM));
+      } else {
+        var u = typeof m.u === 'number' ? DATA.registry[m.u] : m.u;
+        if (u) {
+          var a = el('a', 'polozka-odkaz', m.d ? 'Otevřít web farmy' : (m.l ? 'Otevřít' : ('V registru SVS' + (m.r ? ' · ' + m.r : ''))));
+          a.href = u; a.target = '_blank'; a.rel = 'noopener';
+          b.appendChild(a);
+        }
+        b.appendChild(el('p', 'polozka-zdroj', m.d ? 'Zdroj: moje doporučení' : (m.l ? 'Zdroj: od lidí, prošel jsem ručně' : ('Zdroj: registr Státní veterinární správy · stav k ' + SVS_DATUM))));
       }
       s.appendChild(b);
     });
+    var ch = el('a', 'karta-chyba', 'Nahlásit chybu nebo odstranění');
+    ch.href = 'mailto:mjmates@email.cz?subject=' + encodeURIComponent('Mapa: ' + o.obec);
+    s.appendChild(ch);
     karta.hidden = false;
   }
 
@@ -205,7 +219,21 @@
     }
   });
 
-  fetch('/sourcing/data.json').then(function (r) { return r.json(); }).then(function (d) {
+  // registr SVS a vrstva z OpenStreetMap jsou dva oddělené soubory, slučují se až tady
+  Promise.all([
+    fetch('/sourcing/data.json').then(function (r) { return r.json(); }),
+    fetch('/sourcing/osm.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
+  ]).then(function (v) {
+    var d = v[0], osm = v[1];
+    if (osm) {
+      var idx = {};
+      d.obce.forEach(function (o, i) { idx[o.obec + '|' + o.okres] = i; });
+      osm.obce.forEach(function (o) {
+        o.m.forEach(function (m) { m.s = 'osm'; });
+        var i = idx[o.obec + '|' + o.okres];
+        if (i === undefined) d.obce.push(o); else d.obce[i].m = d.obce[i].m.concat(o.m);
+      });
+    }
     DATA = d; kresli();
   }).catch(function () { pocetEl.textContent = 'Mapu se nepodařilo načíst.'; });
 })();
