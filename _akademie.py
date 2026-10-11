@@ -186,6 +186,25 @@ VYSLEDKY = {
 }
 
 
+# karty bez obrázku z lekcí (Matyáš 11. 10.: „chci aby každá věc měla svou fotku“): volná díla z Wikimedia Commons
+# (public domain / CC0, stažené 11. 10. 2026, zdroje v _nahledy/v12/karty-zdroje.json), jeho fotka a výřez jeho mapy
+OBRAZKY_KARET = {
+    "0.0": [("/pribeh/0.0__09-porovnani-dvojice.jpg", "Matyáš před a po")],
+    "1.1": [("/mapa/karty/1-1.jpg", "Luke Fildes, Lékař, 1891")],
+    "1.2": [("/mapa/karty/1-2.jpg", "Albert Edelfelt, Louis Pasteur, 1885")],
+    "PLAYBOOK": [("/mapa/karty/playbook.jpg", "Jan Steen, Návštěva lékaře")],
+    "2.1": [("/mapa/karty/2-1.jpg", "Robert Hooke, Micrographia, 1665")],
+    "3.2": [("/mapa/karty/3-2.jpg", "Gustave Courbet, Pramen řeky Loue, 1864")],
+    "Protokol PROSTŘEDÍ": [("/mapa/karty/prostredi.jpg", "Caspar David Friedrich, Žena před vycházejícím sluncem, 1818")],
+    "Protokol VÝŽIVY": [("/mapa/karty/vyziva-sourcing.jpg", "Sourcing mapa")],
+    "4.9": [("/mapa/karty/4-9.jpg", "Pieter Claesz, Zátiší")],
+    "5.1": [("/mapa/karty/5-1.jpg", "Thomas Eakins, Max Schmitt na skifu, 1871")],
+    "Protokol TRÉNINKU": [("/mapa/karty/trenink.jpg", "Leonardo da Vinci, Vitruviánský muž")],
+    "6.4": [("/mapa/karty/6-4.jpg", "Caspar David Friedrich, Poutník nad mořem mlhy, 1818")],
+    "6.5": [("/mapa/karty/6-5.jpg", "Albrecht Dürer, Melancholie I, 1514")],
+}
+
+
 def _obrazky_submodulu():
     """obrázky z lekcí (mapa/nahledy, jako ve staré mapě) podle submodulu: '1.3.2--x.jpg' patří k '1.3'"""
     import glob
@@ -253,7 +272,7 @@ def postav_stranku(HLAVA, PATA, SKOOL, recenze=""):
                     siroke.add(k)
             else:
                 usek.append(k)
-        karty = "".join(_sub_karta(s, obrazky.get(s["klic"], []), k in siroke) for k, s in enumerate(subs))
+        karty = "".join(_sub_karta(s, obrazky.get(s["klic"]) or OBRAZKY_KARET.get(s["klic"], []), k in siroke) for k, s in enumerate(subs))
         meta = "Než začneš" if m["i"] == 0 else "%s · %s · %s" % (submoduly_slovo(m["pocet_sub"]), lekci_slovo(m["lekci"]), m["cas"])
         sine.append(
             '<section class="sin sin4" id="modul-%d">'
