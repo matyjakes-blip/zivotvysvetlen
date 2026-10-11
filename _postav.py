@@ -361,24 +361,6 @@ SKUTECNE = [
     ("/media/matyas-uvod.jpg", "20 let", "191 cm · 94 kg", "dnes"),
 ]
 
-# okno „Co se změnilo a proč": jen jeho věty (lekce 0.0 a 1.4.5), nic dopsaného; názvy záložek jsou moje
-PROC = [
-    ("zkousel", "Co jsem zkoušel", [
-        "A jako by toho nebylo málo, o pár měsíců později se mi brutálně rozjelo akné. Totální breakout. Psychicky mě to úplně ničilo. Zkoušel jsem všechno – drahý skincare, červený lampy, celerový džusy, kosmetičky, různé detox kůry... a nic. **Jen se to horšilo.** Až mi došlo, že všechny ty chemický přípravky vlastně tělo jen ještě víc zanáší.",
-     ], "Lekce 0.0 · Můj příběh", "/pribeh.html"),
-    ("testy", "Co ukázaly testy", [
-        "Šel jsem k doktorce na krevní testy, protože už jsem fakt nevěděl, co se se mnou děje – a byla úplně v šoku. Řekla mi, že mám hyperurikémii – zvýšenou hladinu kyseliny močový, a to na úrovni 60letýho chlapa. Zároveň jsem si nechal zkontrolovat i testosteron, a ten byl taky úplně na dně.",
-     ], "Lekce 0.0 · Můj příběh", "/pribeh.html"),
-    ("zmena", "Co se změnilo", [
-        "Okamžitě po správné dietě se mi zastavil zánět, kyselina močová a močovina se vrátili do normálu. Můj testosteron vystřelil, můj metabolismus se dal zpátky do normálu, vysekal jsem 15 kilo a vypadal 10 krát lépe. Od té doby jsem nikdy nebyl šťastnější.",
-        "Hormony mají neskutečný vliv na člověka a hrají zásadní roli ve vývinu jeho vzhledu, zdraví orgánů, metabolismu, a psychiky.",
-     ], "Lekce 0.0 · Můj příběh", "/pribeh.html"),
-    ("akne", "Proč akné", [
-        "**Znamená:** chronické vylučování kůží a ukládání navázané na hormony, na střevní stagnaci a na psychický terén.",
-        "**Pohání:** zpracované potraviny, semenné oleje, rafinované sacharidy · hormonální stres, tedy antikoncepce, endokrinní disruptory, narušený spánek · chronická zácpa nebo líná játra · sebekritika, stud, srovnávání, starosti.",
-        "**Podpora:** úplný reset stravy · denní průchodné střevo, podpora lymfy pohybem · přírodní péče o pleť, tedy syrové tuky a prosté mytí bez odmastení · medové nebo jílové masky · méně obrazovek a srovnávání, léčení sebeobrazu · dost slunce a spánku.",
-     ], "Lekce 1.4.5 · Aplikované dekódování příznaků", SKOOL),
-]
 
 
 # ---- rámec Život vysvětlen (Matyáš 11. 10.: „pro koho to je a není … kde se momentálně nachází, co se naučí
@@ -406,6 +388,25 @@ def pas_ramec():
 """ % (kroky, esc(RAMEC_PRO))
 
 
+# okno „Co se změnilo a proč“ = popsaná AI vizualizace místo textu (Matyáš 11. 10.: „místo toho textu … jen tu ai
+# describing vizualizaci“, „neprokládal lekcemi spíše brief vysvětlení … health = looks“). Body v pixelech 720×960.
+DUKAZ_POPISKY = [
+    ("oblicej", "Obličej", "/media/dukaz/ai-20.jpg", [
+        (540, 510, "Čistá pleť", "Kůže je jedna z cest, kudy tělo vylučuje. Když se vyčistí terén, akné nemá z čeho vznikat."),
+        (430, 240, "Tmavší, opálená pleť", "Kůže, která snese slunce a opálí se, je známka zdraví. Pomáhá postupné slunce a dost živočišných tuků."),
+        (190, 360, "Silnější a světlejší vlasy", "Na vlasech je vidět výživa a hormony. Světlejší jsou od slunce."),
+        (330, 344, "Hustší obočí", "Obočí houstne s hormony. Když se srovná výživa a testosteron, je to vidět i tady."),
+        (300, 600, "Míň tuku v obličeji", "Míň tuku a zadržené vody. Ostřejší rysy jsou vedlejší produkt srovnaného metabolismu."),
+    ]),
+    ("postava", "Postava", "/media/dukaz/ai-p20.jpg", [
+        (570, 410, "Víc svalů", "Sval roste z napětí v tréninku a z jídla, které ho postaví. Bez výživy a hormonů ho trénink sám nepostaví."),
+        (410, 600, "Míň tuku na břiše", "Z 106 na 94 kilo. Tuk jde dolů, když se srovná metabolismus, ne počítáním kalorií."),
+        (260, 520, "Opálená kůže", "Stejně jako u obličeje: postupné slunce a dost živočišných tuků."),
+        (232, 215, "Vlasy", "Silnější a světlejší, od výživy, hormonů a slunce."),
+    ]),
+]
+
+
 def pas_promena():
     prep_rezim = "".join(
         '<button type="button" class="prepinac-tl" data-rezim="%s" aria-pressed="%s">%s</button>'
@@ -430,11 +431,18 @@ def pas_promena():
         for f, v, u, p in SKUTECNE)
     zalozky = "".join(
         '<button type="button" class="zalozka" data-zalozka="%s" aria-selected="%s">%s</button>'
-        % (k, "true" if i == 0 else "false", esc(n)) for i, (k, n, _, _, _) in enumerate(PROC))
+        % (k, "true" if i == 0 else "false", esc(n)) for i, (k, n, _, _) in enumerate(DUKAZ_POPISKY))
     panely = "".join(
-        '<section class="panel" data-panel="%s"><h3>%s</h3>%s<p class="zdroj"><a href="%s">%s</a></p></section>'
-        % (k, esc(n), "".join("<p>%s</p>" % md_inline(t) for t in texty), odkaz, esc(zdroj))
-        for k, n, texty, zdroj, odkaz in PROC)
+        '<section class="panel" data-panel="%s"><div class="dp">'
+        '<div class="dp-obr"><img src="%s" alt="Vizualizace AI, 20 let: %s" width="720" height="960" loading="lazy">%s'
+        '<span class="stitek-ai">Vizualizace AI · 20 let</span></div>'
+        '<ol class="dp-seznam">%s</ol></div></section>'
+        % (k, img, esc(n.lower()),
+           "".join('<span class="dp-mk" style="left:%.2f%%;top:%.2f%%" aria-hidden="true">%d</span>' % (x / 7.2, y / 9.6, i + 1)
+                   for i, (x, y, _, _) in enumerate(body)),
+           "".join('<li><b class="dp-cis">%d</b><div><h4>%s</h4><p>%s</p></div></li>' % (i + 1, esc(t), esc(v))
+                   for i, (_, _, t, v) in enumerate(body)))
+        for k, n, img, body in DUKAZ_POPISKY)
     return """
   <section class="pas promena" id="promena">
     <div class="obal">
@@ -466,7 +474,9 @@ def pas_promena():
     <a class="clanek-pozadi" href="#promena" aria-label="Zavřít"></a>
     <div class="clanek-okno">
       <a class="clanek-zavrit" href="#promena" aria-label="Zavřít">×</a>
-      <p class="nadtitul" id="proc-nadpis">Co se změnilo a proč</p>
+      <p class="nadtitul">Co se změnilo a proč</p>
+      <h2 class="dp-nadpis" id="proc-nadpis">Zdraví je vidět</h2>
+      <p class="dp-pod">Vizualizace z mých skutečných fotek. Každá změna, kterou na ní vidíš, je známka zdraví, ne kosmetika.</p>
       <div class="zalozky" role="tablist">%s</div>
       <div class="panely">%s</div>
     </div>

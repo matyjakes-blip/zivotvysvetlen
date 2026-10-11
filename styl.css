@@ -930,3 +930,19 @@ h3{font-family:var(--nadpis);font-weight:600;color:var(--inkoust)}
 .ramec-krok .ramec-cislo{margin-top:0}
 .ramec-pro{margin:22px auto 0;max-width:720px;text-align:center;color:var(--text2)}
 @media (max-width:760px){.ramec-kroky{grid-template-columns:1fr}}
+
+/* Důkaz: popsaná vizualizace v okně „Co se změnilo a proč“ (11. 10.) */
+.okno-proc .clanek-okno{width:min(100%,980px)}
+.dp-nadpis{margin-top:6px;text-align:left;font-size:clamp(1.8rem,3.4vw,2.4rem)}
+.dp-pod{margin-top:6px;color:var(--text2);max-width:620px}
+.dp{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:28px;align-items:start}
+.dp-obr{position:relative;border-radius:18px;overflow:hidden;box-shadow:var(--stin)}
+.dp-obr img{display:block;width:100%;height:auto}
+.dp-obr .stitek-ai{position:absolute;left:50%;bottom:10px;transform:translateX(-50%)}
+.dp-mk,.dp-cis{width:30px;height:30px;border-radius:50%;background:#1d1a15;color:#e3c98e;font:600 15px/30px var(--text);text-align:center}
+.dp-mk{position:absolute;transform:translate(-50%,-50%);border:2px solid #e3c98e;box-shadow:0 0 0 4px rgba(29,26,21,.25);line-height:26px}
+.dp-seznam{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.dp-seznam li{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:12px 14px;background:var(--pozadi);border:1px solid var(--linka);border-radius:14px}
+.dp-seznam h4{margin:2px 0 3px;font-family:var(--nadpis);font-size:1.25rem;color:var(--inkoust)}
+.dp-seznam p{margin:0;color:var(--text2);font-size:.95rem;line-height:1.5}
+@media (max-width:760px){.dp{grid-template-columns:1fr}.dp-obr{max-width:420px}}
