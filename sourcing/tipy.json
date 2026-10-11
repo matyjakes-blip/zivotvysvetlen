@@ -1,1 +1,244 @@
-[]
+[
+ {
+  "nazev": "Husí farma",
+  "obec": "Čelákovice",
+  "adresa": "Čelákovice 43, 250 88 Čelákovice",
+  "kategorie": "maso",
+  "co": "drůbež",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=Hus%C3%AD%20farma%2C%20%C4%8Cel%C3%A1kovice%2043%2C%20250%2088%20%C4%8Cel%C3%A1kovice",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-8142-a357-fc1056655757"
+ },
+ {
+  "nazev": "Šestajovice trh v sobotu",
+  "obec": "Šestajovice",
+  "adresa": "Balkán, 250 92 Šestajovice",
+  "kategorie": "ostatni",
+  "co": "farmářský trh",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=%C5%A0estajovice%20trh%20v%20sobotu%2C%20Balk%C3%A1n%2C%20250%2092%20%C5%A0estajovice",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-8159-a358-d5812982e6ca"
+ },
+ {
+  "nazev": "Farma a Minimlékárna Tehov",
+  "obec": "Tehov",
+  "adresa": "Dlouhá 311, 251 01 Tehov",
+  "kategorie": "mleko",
+  "co": "syrové mléko, mléčné výrobky",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=Farma%20a%20Miniml%C3%A9k%C3%A1rna%20Tehov%2C%20Dlouh%C3%A1%20311%2C%20251%2001%20Tehov",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-8118-85f0-e9a4add921f3"
+ },
+ {
+  "nazev": "Mlékárna U Josefa, FARMA POUR s.r.o.",
+  "obec": "Hradec Králové",
+  "adresa": "Jaroměřská 49, 500 03 Hradec Králové",
+  "kategorie": "mleko",
+  "co": "syrové mléko, mléčné výrobky",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=Ml%C3%A9k%C3%A1rna%20U%20Josefa%2C%20FARMA%20POUR%20s.r.o.%2C%20Jarom%C4%9B%C5%99sk%C3%A1%2049%2C%20500%2003%20Hradec%20Kr%C3%A1lov%C3%A9",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-81b2-8e91-cbd31eddb146"
+ },
+ {
+  "nazev": "Farma pod Lipou",
+  "obec": "Rokytnice v Orlických horách",
+  "adresa": "Prostřední Rokytnice, 517 61 Rokytnice v Orlických horách",
+  "kategorie": "ostatni",
+  "co": "farma",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=Farma%20pod%20Lipou%2C%20Prost%C5%99edn%C3%AD%20Rokytnice%2C%20517%2061%20Rokytnice%20v%20Orlick%C3%BDch%20hor%C3%A1ch",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-8126-946f-f74e3d04afdd"
+ },
+ {
+  "nazev": "Farma Bulvovi",
+  "obec": "Makov",
+  "adresa": "Makov 34, 570 01 Makov",
+  "kategorie": "ostatni",
+  "co": "farmářský obchod",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=Farma%20Bulvovi%2C%20Makov%2034%2C%20570%2001%20Makov",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-812c-8b19-e885e9db1ee5"
+ },
+ {
+  "nazev": "Automat na mléko, Obživa",
+  "obec": "České Libchavy",
+  "adresa": "České Libchavy 96, 561 14 České Libchavy",
+  "kategorie": "mleko",
+  "co": "syrové mléko, mlékomat",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=Automat%20na%20ml%C3%A9ko%2C%20Ob%C5%BEiva%2C%20%C4%8Cesk%C3%A9%20Libchavy%2096%2C%20561%2014%20%C4%8Cesk%C3%A9%20Libchavy",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-81c5-96fe-c75e7545a456"
+ },
+ {
+  "nazev": "Mlékomat Ostřetín",
+  "obec": "Ostřetín",
+  "adresa": "Ostřetín 218, 534 01 Ostřetín",
+  "kategorie": "mleko",
+  "co": "syrové mléko, mlékomat",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=Ml%C3%A9komat%20Ost%C5%99et%C3%ADn%2C%20Ost%C5%99et%C3%ADn%20218%2C%20534%2001%20Ost%C5%99et%C3%ADn",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-8100-9f59-e8717bd776c1"
+ },
+ {
+  "nazev": "Kozí statek Pod Křížkem",
+  "obec": "Studená",
+  "adresa": "Horní Pole 35, 378 53 Studená",
+  "kategorie": "ostatni",
+  "co": "kozí farma",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=Koz%C3%AD%20statek%20Pod%20K%C5%99%C3%AD%C5%BEkem%2C%20Horn%C3%AD%20Pole%2035%2C%20378%2053%20Studen%C3%A1",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-8109-baa5-c607ccb2a2a3"
+ },
+ {
+  "nazev": "Ranč Bělečko",
+  "obec": "Býšť",
+  "adresa": "Bělečko 21, 534 01 Býšť",
+  "kategorie": "ostatni",
+  "co": "ranč",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=Ran%C4%8D%20B%C4%9Ble%C4%8Dko%2C%20B%C4%9Ble%C4%8Dko%2021%2C%20534%2001%20B%C3%BD%C5%A1%C5%A5",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-8173-9e5c-cbdb5083deea"
+ },
+ {
+  "nazev": "Prodej čerstvého mléka, Přední Lhota",
+  "obec": "Poděbrady",
+  "adresa": "Přední Lhota, 290 01 Poděbrady",
+  "kategorie": "mleko",
+  "co": "syrové mléko",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=Prodej%20%C4%8Derstv%C3%A9ho%20ml%C3%A9ka%2C%20P%C5%99edn%C3%AD%20Lhota%2C%20P%C5%99edn%C3%AD%20Lhota%2C%20290%2001%20Pod%C4%9Bbrady",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-810d-b1b5-c5d89dccebad"
+ },
+ {
+  "nazev": "Mlékárna Krasolesí",
+  "obec": "Praha",
+  "adresa": "Ve Smečkách 585/2, 110 00 Praha 1",
+  "kategorie": "mleko",
+  "co": "sýry, mléčné výrobky",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=Ml%C3%A9k%C3%A1rna%20Krasoles%C3%AD%2C%20Ve%20Sme%C4%8Dk%C3%A1ch%20585/2%2C%20110%2000%20Praha%201",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-815e-85c4-ea557c9c3536"
+ },
+ {
+  "nazev": "Farmářský obchod MILU",
+  "obec": "Praha",
+  "adresa": "Boleslavova 17, 140 00 Praha 4",
+  "kategorie": "maso",
+  "co": "řeznictví, farmářský obchod",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=Farm%C3%A1%C5%99sk%C3%BD%20obchod%20MILU%2C%20Boleslavova%2017%2C%20140%2000%20Praha%204",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-81e3-83e5-eed170e9da80"
+ },
+ {
+  "nazev": "Kozí farma Na Jabloňce",
+  "obec": "Praha",
+  "adresa": "Mezi Rolemi, 158 00 Praha 5",
+  "kategorie": "ostatni",
+  "co": "kozí farma",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=Koz%C3%AD%20farma%20Na%20Jablo%C5%88ce%2C%20Mezi%20Rolemi%2C%20158%2000%20Praha%205",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-8131-8146-c23815327e5d"
+ },
+ {
+  "nazev": "Mlékomat Hodyně",
+  "obec": "Skuhrov",
+  "adresa": "Hodyně 22, 267 27 Skuhrov",
+  "kategorie": "mleko",
+  "co": "syrové mléko, mlékomat",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=Ml%C3%A9komat%20Hodyn%C4%9B%2C%20Hodyn%C4%9B%2022%2C%20267%2027%20Skuhrov",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-81da-bd2e-fef478484318"
+ },
+ {
+  "nazev": "Mlékomat Drhovy",
+  "obec": "Drhovy",
+  "adresa": "263 01 Drhovy",
+  "kategorie": "mleko",
+  "co": "syrové mléko, mlékomat",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=Ml%C3%A9komat%20Drhovy%2C%20263%2001%20Drhovy",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-814a-b2a4-d96fb125be8f"
+ },
+ {
+  "nazev": "Automat na kravské mléko Buzice",
+  "obec": "Buzice",
+  "adresa": "388 01 Buzice",
+  "kategorie": "mleko",
+  "co": "syrové mléko, mlékomat",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=Automat%20na%20kravsk%C3%A9%20ml%C3%A9ko%20Buzice%2C%20388%2001%20Buzice",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-8152-9f5e-d82ae1c75cb4"
+ },
+ {
+  "nazev": "NAŠE FARMA, bio maso",
+  "obec": "Praha",
+  "adresa": "Karlovo náměstí 18, 120 00 Praha 2",
+  "kategorie": "maso",
+  "co": "bio maso",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=NA%C5%A0E%20FARMA%2C%20bio%20maso%2C%20Karlovo%20n%C3%A1m%C4%9Bst%C3%AD%2018%2C%20120%2000%20Praha%202",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-813d-8d31-e82da7dd05e2"
+ },
+ {
+  "nazev": "Farmářský obchůdek na Statku u Milušky",
+  "obec": "Zápy",
+  "adresa": "Zápy 26, 250 01 Zápy",
+  "kategorie": "ostatni",
+  "co": "farmářský obchod",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=Farm%C3%A1%C5%99sk%C3%BD%20obch%C5%AFdek%20na%20Statku%20u%20Milu%C5%A1ky%2C%20Z%C3%A1py%2026%2C%20250%2001%20Z%C3%A1py",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-81c0-a3c8-fbe4b7bdb1a7"
+ },
+ {
+  "nazev": "Fransýr",
+  "obec": "Praha",
+  "adresa": "Vodičkova 701/34, 110 00 Praha 1",
+  "kategorie": "mleko",
+  "co": "sýry",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=Frans%C3%BDr%2C%20Vodi%C4%8Dkova%20701/34%2C%20110%2000%20Praha%201",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-81ac-9ffb-cb72b44d340d"
+ },
+ {
+  "nazev": "The Real Meat Society",
+  "obec": "Praha",
+  "adresa": "Náplavní 2011/5, 120 00 Praha 2",
+  "kategorie": "maso",
+  "co": "řeznictví",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=The%20Real%20Meat%20Society%2C%20N%C3%A1plavn%C3%AD%202011/5%2C%20120%2000%20Praha%202",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-8149-83e3-ea3e5cd497c9"
+ },
+ {
+  "nazev": "Farma u svaté Anny",
+  "obec": "Brandýs nad Labem-Stará Boleslav",
+  "adresa": "Brázdimská 936/23, 250 01 Brandýs nad Labem-Stará Boleslav",
+  "kategorie": "ostatni",
+  "co": "farma",
+  "odkaz": "https://www.google.com/maps/search/?api=1&query=Farma%20u%20svat%C3%A9%20Anny%2C%20Br%C3%A1zdimsk%C3%A1%20936/23%2C%20250%2001%20Brand%C3%BDs%20nad%20Labem-Star%C3%A1%20Boleslav",
+  "soukromy": false,
+  "pocet": 1,
+  "notion": "3f658825-a3f1-81e2-9396-d64e1ebdd030"
+ }
+]
