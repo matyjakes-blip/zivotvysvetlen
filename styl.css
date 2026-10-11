@@ -946,3 +946,16 @@ h3{font-family:var(--nadpis);font-weight:600;color:var(--inkoust)}
 .dp-seznam h4{margin:2px 0 3px;font-family:var(--nadpis);font-size:1.25rem;color:var(--inkoust)}
 .dp-seznam p{margin:0;color:var(--text2);font-size:.95rem;line-height:1.5}
 @media (max-width:760px){.dp{grid-template-columns:1fr}.dp-obr{max-width:420px}}
+
+/* lekce zdarma: odkazy v okně Důkazu, obrázky a další lekce (11. 10.) */
+.dp-dal{margin-top:24px;padding-top:20px;border-top:1px solid var(--linka)}
+.dp-dal .nadtitul{text-align:left}
+.dp-dal-pod{margin-top:4px;color:var(--text2)}
+.dp-dal ul{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.dp-dal a{display:block;height:100%;padding:14px 16px;border:1px solid var(--linka2);border-radius:14px;text-decoration:none;background:var(--plocha)}
+.dp-dal a:hover{border-color:var(--zlato)}
+.dp-dal b{display:block;font-family:var(--nadpis);font-size:1.15rem;line-height:1.25;color:var(--inkoust)}
+.dp-dal span{display:block;margin-top:4px;font-size:.8rem;color:var(--zlato)}
+@media (max-width:760px){.dp-dal ul{grid-template-columns:1fr}}
+.lekce-obr{margin:22px 0}.lekce-obr img{display:block;width:100%;height:auto;border-radius:12px}
+.lekce-dalsi{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px;justify-items:center}

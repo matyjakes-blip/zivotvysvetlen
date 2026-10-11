@@ -407,6 +407,13 @@ DUKAZ_POPISKY = [
 ]
 
 
+def lekce_zdarma_odkazy():
+    poradi = ["lekce-zdarma-vzhled.html", "lekce-zdarma-hormony.html", "lekce-zdarma.html"]
+    podle = {l["soubor"]: l for l in _akademie.LEKCE_ZDARMA}
+    return "".join('<li><a href="/%s"><b>%s</b><span>lekce %s · asi %d minut čtení</span></a></li>'
+                   % (f, esc(podle[f]["nazev"]), esc(podle[f]["klic"]), _akademie.lekce_minut(podle[f])) for f in poradi if f in podle)
+
+
 def pas_promena():
     prep_rezim = "".join(
         '<button type="button" class="prepinac-tl" data-rezim="%s" aria-pressed="%s">%s</button>'
@@ -479,9 +486,14 @@ def pas_promena():
       <p class="dp-pod">Vizualizace z mých skutečných fotek. Každá změna, kterou na ní vidíš, je známka zdraví, ne kosmetika.</p>
       <div class="zalozky" role="tablist">%s</div>
       <div class="panely">%s</div>
+      <div class="dp-dal">
+        <p class="nadtitul">Do hloubky, zdarma</p>
+        <p class="dp-dal-pod">Jak spolu zdraví a vzhled souvisí, celé z Akademie:</p>
+        <ul>%s</ul>
+      </div>
     </div>
   </div>
-""" % (prep_rezim, posuvniky, zalozky, panely)
+""" % (prep_rezim, posuvniky, zalozky, panely, lekce_zdarma_odkazy())
 
 
 # ---- starý × nový způsob (krok 3 přestavby, návrh 7. 10. 2026) ----
@@ -1023,7 +1035,7 @@ if __name__ == "__main__":
     print(oprav_mapu())
     print(pata_mapy())
     print("sourcing.html: %d mist" % _sourcing.postav(HLAVA, PATA, SKOOL, esc))
-    print("lekce-zdarma.html: %d min" % _akademie.postav_lekci_zdarma(HLAVA, PATA, SKOOL))
+    print("lekce zdarma: %s" % _akademie.postav_lekci_zdarma(HLAVA, PATA, SKOOL))
     print("akademie.html:", _akademie.postav_stranku(HLAVA, PATA, SKOOL, recenze=_recenze.pas_recenze("Co píšou studenti", jen="student")))
     print("pribeh.html: %d bloku" % n)
     for f in ("index.html", "jedna-na-jedna.html", "kontakt.html", "pravni.html"):

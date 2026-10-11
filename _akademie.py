@@ -325,6 +325,7 @@ def postav_stranku(HLAVA, PATA, SKOOL, recenze=""):
       <p class="nadtitul">Lekce zdarma</p>
       <h2>1.1 · Co je nemoc</h2>
       <div class="ukazka"><div class="ukazka-text">{ukazka}</div><div class="ukazka-zamek"><p>Celou lekci si přečti zdarma</p><div class="tlacitka" style="justify-content:center"><a class="cta" href="/lekce-zdarma.html">Přečíst celou lekci</a><a class="cta-druhy" href="{skool}">Vstoupit do Akademie</a></div></div></div>
+      <p class="text-stred" style="margin-top:22px">Zdarma jsou i <a href="/lekce-zdarma-vzhled.html">Vzhled jako viditelný výraz vnitřního terénu</a> (z lekce 5.4) a <a href="/lekce-zdarma-hormony.html">5.2 · Hormony</a>.</p>
     </div>
   </section>
 
@@ -361,30 +362,86 @@ if __name__ == "__main__":
 
 
 # ------------------------------------------------------------ lekce zdarma (9. 10. 2026): celá 1.1 jeho slovy
-def postav_lekci_zdarma(HLAVA, PATA, SKOOL):
-    import markdown
-    p = os.path.join(ZDROJ, "telo", "1.1__1-1-co-je-nemoc.md")
-    t = open(p, encoding="utf-8").read()
+# lekce zdarma na webu (9. 10. 1.1; 11. 10. Matyáš: „relevantní lekce zdarma … jak health a vzhled jsou interconnected“)
+# od/do = výřez části submodulu podle nadpisu; text se nemění, jen se nadpis části stane nadpisem stránky
+LEKCE_ZDARMA = [
+    dict(soubor="lekce-zdarma.html", zdroj="1.1__1-1-co-je-nemoc.md", klic="1.1", nazev="Co je nemoc",
+         popis="Celá první lekce Akademie Život vysvětlen. Co nemoc vlastně je a odkud se bere.", od=None, do=None, cast=None),
+    dict(soubor="lekce-zdarma-vzhled.html", zdroj="5.4__5-4-dlouhovekost.md", klic="5.4",
+         nazev="Vzhled jako viditelný výraz vnitřního terénu",
+         popis="Proč tvář a postava nesou informaci o zdraví a co obličej staví. Část lekce z Akademie Život vysvětlen, zdarma.",
+         od="# ČÁST 2 · Vzhled", do="# 📏 Co délku života", cast="Část submodulu 5.4 · Dlouhověkost"),
+    dict(soubor="lekce-zdarma-hormony.html", zdroj="5.2__5-2-hormony.md", klic="5.2", nazev="Hormony",
+         popis="Co doopravdy určuje testosteron, štítnou žlázu a cyklus a co hormony rozbíjí zvenčí. Celá lekce z Akademie, zdarma.",
+         od=None, do=None, cast=None),
+]
+
+
+def _lekce_text(l):
+    t = open(os.path.join(ZDROJ, "telo", l["zdroj"]), encoding="utf-8").read()
+    if l["od"]:
+        i = t.index(l["od"])
+        j = t.index(l["do"], i) if l["do"] else len(t)
+        t = t[i:j]
+        t = t.split("\n", 1)[1] if t.startswith("# ") else t      # nadpis části → nadpis stránky
     t = re.sub(r"^<!--.*?-->\s*", "", t, flags=re.S)
     t = re.sub(r"\n---\s*$", "", t.strip())
-    slov = len(re.findall(r"\w+", t))
-    minut = max(1, round(slov / 230))
-    telo_html = markdown.markdown(t, extensions=["extra", "sane_lists"])
+    return t
+
+
+def lekce_minut(l):
+    return max(1, round(len(re.findall(r"\w+", _lekce_text(l))) / 230))
+
+
+def _obrazek_lekce(jmeno):
+    """obrázek z exportu Akademie → /lekce/obr/<jméno>.jpg (zmenšený, průhlednost na papír)"""
+    from PIL import Image
+    zdroj = os.path.join(ZDROJ, "obrazky", jmeno)
+    cil_rel = "lekce/obr/%s.jpg" % os.path.splitext(jmeno)[0]
+    if not os.path.exists(zdroj):
+        return None
+    if not os.path.exists(cil_rel) or os.path.getmtime(cil_rel) < os.path.getmtime(zdroj):
+        os.makedirs("lekce/obr", exist_ok=True)
+        im = Image.open(zdroj)
+        if im.mode in ("RGBA", "LA", "P"):
+            im = im.convert("RGBA"); pod = Image.new("RGB", im.size, (253, 251, 246)); pod.paste(im, (0, 0), im); im = pod
+        else:
+            im = im.convert("RGB")
+        im.thumbnail((1400, 1400), Image.LANCZOS)
+        im.save(cil_rel, quality=84, optimize=True)
+    return "/" + cil_rel
+
+
+def postav_lekci_zdarma(HLAVA, PATA, SKOOL):
+    import markdown
     moduly = data(); c = cisla(moduly)
-    dalsi = ""
-    for m in moduly:
-        for sm in m["sub"]:
-            if sm["klic"] == "1.1" and sm["lekce"]:
-                dalsi = sm["lekce"][0]
-    stranka = HLAVA.format(titulek="Lekce zdarma: 1.1 Co je nemoc · Život vysvětlen",
-                           popis="Celá první lekce Akademie Život vysvětlen. Co nemoc vlastně je a odkud se bere.",
-                           kanon="lekce-zdarma.html", ogobr="mapa/hero.jpg", skool=SKOOL) + """
+    vystup = []
+    for l in LEKCE_ZDARMA:
+        t = _lekce_text(l)
+        def obr(m):
+            src = _obrazek_lekce(m.group(1).strip())
+            return '\n\n<figure class="lekce-obr"><img src="%s" alt="" loading="lazy"></figure>\n\n' % src if src else ""
+        t = re.sub(r"\[\[\s*SEM OBRÁZEK:\s*(.+?)\s*\]\]", obr, t)
+        minut = lekce_minut(l)
+        telo_html = markdown.markdown(t, extensions=["extra", "sane_lists"])
+        dalsi = ""
+        if l["klic"] == "1.1":
+            for m in moduly:
+                for sm in m["sub"]:
+                    if sm["klic"] == "1.1" and sm["lekce"]:
+                        dalsi = sm["lekce"][0]
+        jine = "".join('<li><a href="/%s">%s · %s</a></li>' % (x["soubor"], esc(x["klic"]), esc(x["nazev"]))
+                       for x in LEKCE_ZDARMA if x is not l)
+        pod = ("%s, tak jak ji mají studenti. Čtení asi na %d minut." % (l["cast"], minut)) if l["cast"] else \
+              ("Celá lekce z Akademie, tak jak ji mají studenti. Čtení asi na %d minut." % minut)
+        stranka = HLAVA.format(titulek="Lekce zdarma: %s %s · Život vysvětlen" % (l["klic"], l["nazev"]), popis=l["popis"],
+                               kanon=l["soubor"], ogobr="mapa/hero.jpg", skool=SKOOL) + """
 <main>
   <section class="hero hero-uzsi">
     <div class="obal uzky">
       <p class="nadtitul">Lekce zdarma · Akademie</p>
-      <h1 class="nadpis-str">1.1 · Co je nemoc</h1>
-      <p class="tvrzeni-pod">Celá lekce z Akademie, tak jak ji mají studenti. Čtení asi na {minut} minut.</p>
+      <h1 class="nadpis-str">{klic} · {nazev}</h1>
+      <p class="tvrzeni-pod">{pod}</p>
     </div>
   </section>
   <section class="pas lekce-pas">
@@ -395,13 +452,17 @@ def postav_lekci_zdarma(HLAVA, PATA, SKOOL):
   <section class="pas zaver-pas">
     <div class="obal uzky stred">
       <div class="ozdoba" aria-hidden="true">◆</div>
-      <h2>Tohle byla jedna ze {lekci} lekcí</h2>
+      <h2>{konec}</h2>
       <p class="text-stred">{dalsi_veta}</p>
       <div class="tlacitka" style="justify-content:center"><a class="cta" href="{skool}">Vstoupit do Akademie</a><a class="cta-druhy" href="/akademie.html">Prohlédnout celou Akademii</a></div>
+      <p class="nadtitul" style="margin-top:34px">Další lekce zdarma</p>
+      <ul class="lekce-dalsi">{jine}</ul>
     </div>
   </section>
 </main>
-""".format(minut=minut, telo=telo_html, lekci=c["lekce"], skool=SKOOL,
+""".format(klic=esc(l["klic"]), nazev=esc(l["nazev"]), pod=esc(pod), telo=telo_html, skool=SKOOL, jine=jine,
+           konec=("Tohle byla část jedné ze %d lekcí" % c["lekce"]) if l["cast"] else ("Tohle byla jedna ze %d lekcí" % c["lekce"]),
            dalsi_veta=("Další je %s." % esc(dalsi)) if dalsi else "Další lekce jsou v Akademii.") + PATA.format(skool=SKOOL)
-    open("lekce-zdarma.html", "w", encoding="utf-8").write(stranka)
-    return minut
+        open(l["soubor"], "w", encoding="utf-8").write(stranka)
+        vystup.append("%s %d min" % (l["soubor"], minut))
+    return ", ".join(vystup)
