@@ -13,6 +13,32 @@
   <url><loc>https://zivotvysvetlen.cz/sourcing.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://zivotvysvetlen.cz/jak-mapa-funguje.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 
+  <!-- kraje -->
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraje.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/praha.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/stredocesky-kraj.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/jihocesky-kraj.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/plzensky-kraj.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/karlovarsky-kraj.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/ustecky-kraj.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/liberecky-kraj.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/kralovehradecky-kraj.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/pardubicky-kraj.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/kraj-vysocina.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/jihomoravsky-kraj.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/olomoucky-kraj.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/zlinsky-kraj.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/moravskoslezsky-kraj.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/bratislavsky-kraj.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/trnavsky-kraj.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/trencinsky-kraj.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/nitransky-kraj.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/zilinsky-kraj.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/banskobystricky-kraj.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/presovsky-kraj.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://zivotvysvetlen.cz/sourcing/kraj/kosicky-kraj.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <!-- /kraje -->
+
   <url><loc>https://zivotvysvetlen.cz/en/</loc></url>
   <url><loc>https://zivotvysvetlen.cz/en/academy.html</loc></url>
   <url><loc>https://zivotvysvetlen.cz/en/coaching.html</loc></url>

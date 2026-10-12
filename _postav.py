@@ -1038,6 +1038,8 @@ if __name__ == "__main__":
     print(oprav_mapu())
     print(pata_mapy())
     print("sourcing.html: %d mist" % _sourcing.postav(HLAVA, PATA, SKOOL, esc))
+    import _sourcing_kraje
+    print("sourcing po krajích: %d stránek" % len(_sourcing_kraje.postav(HLAVA, PATA, SKOOL, esc)))
     print("lekce zdarma: %s" % _akademie.postav_lekci_zdarma(HLAVA, PATA, SKOOL))
     print("akademie.html:", _akademie.postav_stranku(HLAVA, PATA, SKOOL, recenze=_recenze.pas_recenze("Co píšou studenti", jen="student")))
     import _en

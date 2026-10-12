@@ -155,7 +155,7 @@ def postav(HLAVA, PATA, SKOOL, esc):
       <p class="text-stred">Na Slovensku jsou základem úřední seznamy Štátnej veterinárnej a potravinovej správy SR (ŠVPS): salaše, mlékárny a sýrárny z farem, malá jatka, zvěřina, med a vejce. U jatek a zvěřiny seznam neříká, jestli prodávají veřejnosti, tak si to ověř předem.</p>
       <p class="text-stred">Mlékomaty, mléčné prodejny a farmářské obchody, které v registru nejsou, doplňuju z <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>, otevřené mapy, kterou kreslí lidi. Tyhle body úřad neověřoval, u každého místa je vidět, odkud je.</p>
       <p class="text-stred">Soukromé chovatele ukazuju jen podle obce, bez jména a ulice. Kdo je chce najít, dohledá je v registru SVS nebo ŠVPS podle čísla.</p>
-      <p class="text-stred drobne">Česko ze dne {aktualizace}, Slovensko ze dne {aktualizace_sk}. <a href="/jak-mapa-funguje.html">Jak mapa funguje, oprava a odstranění údajů</a></p>
+      <p class="text-stred drobne">Česko ze dne {aktualizace}, Slovensko ze dne {aktualizace_sk}. <a href="/sourcing/kraje.html">Místa po krajích</a> · <a href="/jak-mapa-funguje.html">Jak mapa funguje, oprava a odstranění údajů</a></p>
       <div class="stred"><a class="cta-druhy" href="{skool}">Vstoupit do Akademie</a></div>
     </div>
   </section>
@@ -303,6 +303,9 @@ def postav(HLAVA, PATA, SKOOL, esc):
       }});
     }}
     DATA = d; kresli();
+    // odkaz ze stránek po krajích: /sourcing.html?obec=Název
+    var q = new URLSearchParams(location.search).get('obec');
+    if (q) {{ var inp = document.getElementById('hledej-obec'); inp.value = q; inp.dispatchEvent(new Event('input')); document.querySelector('.mapa-pas').scrollIntoView(); }}
   }}).catch(function () {{ pocetEl.textContent = 'Mapu se nepodařilo načíst.'; }});
 }})();
 </script>

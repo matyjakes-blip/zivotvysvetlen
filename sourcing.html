@@ -22,7 +22,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=lev">
 <link rel="preload" href="/pisma/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/pisma/cormorant.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/styl.css?v=b1b74f0d">
+<link rel="stylesheet" href="/styl.css?v=a77ed034">
 </head>
 <body>
 <header class="hlavicka">
@@ -91,7 +91,7 @@
       <p class="text-stred">Na Slovensku jsou základem úřední seznamy Štátnej veterinárnej a potravinovej správy SR (ŠVPS): salaše, mlékárny a sýrárny z farem, malá jatka, zvěřina, med a vejce. U jatek a zvěřiny seznam neříká, jestli prodávají veřejnosti, tak si to ověř předem.</p>
       <p class="text-stred">Mlékomaty, mléčné prodejny a farmářské obchody, které v registru nejsou, doplňuju z <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>, otevřené mapy, kterou kreslí lidi. Tyhle body úřad neověřoval, u každého místa je vidět, odkud je.</p>
       <p class="text-stred">Soukromé chovatele ukazuju jen podle obce, bez jména a ulice. Kdo je chce najít, dohledá je v registru SVS nebo ŠVPS podle čísla.</p>
-      <p class="text-stred drobne">Česko ze dne 27. 9. 2026, Slovensko ze dne 11. 10. 2026. <a href="/jak-mapa-funguje.html">Jak mapa funguje, oprava a odstranění údajů</a></p>
+      <p class="text-stred drobne">Česko ze dne 27. 9. 2026, Slovensko ze dne 11. 10. 2026. <a href="/sourcing/kraje.html">Místa po krajích</a> · <a href="/jak-mapa-funguje.html">Jak mapa funguje, oprava a odstranění údajů</a></p>
       <div class="stred"><a class="cta-druhy" href="https://www.skool.com/zivot-vysvetlen-1338">Vstoupit do Akademie</a></div>
     </div>
   </section>
@@ -239,6 +239,9 @@
       });
     }
     DATA = d; kresli();
+    // odkaz ze stránek po krajích: /sourcing.html?obec=Název
+    var q = new URLSearchParams(location.search).get('obec');
+    if (q) { var inp = document.getElementById('hledej-obec'); inp.value = q; inp.dispatchEvent(new Event('input')); document.querySelector('.mapa-pas').scrollIntoView(); }
   }).catch(function () { pocetEl.textContent = 'Mapu se nepodařilo načíst.'; });
 })();
 </script>

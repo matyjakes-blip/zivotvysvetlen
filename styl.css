@@ -969,3 +969,25 @@ h3{font-family:var(--nadpis);font-weight:600;color:var(--inkoust)}
 .le-uroven h3{margin-top:6px;font-family:var(--nadpis);font-size:1.3rem;line-height:1.2;color:var(--inkoust)}
 .le-uroven p:last-child{margin-top:4px;color:var(--text2);font-size:.95rem}
 @media (max-width:420px){.jazyk{padding:5px 8px;font-size:.7rem}}
+
+/* sourcing po krajích (12. 10. 2026) */
+.nadtitul a{color:inherit;text-decoration:none;border-bottom:1px solid var(--linka)}
+.kraj-filtry a.filtr{text-decoration:none}
+.kraj-kat{margin-top:34px}
+.kraj-kat h2{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.kraj-pocet{font-family:inherit;font-size:.85rem;font-weight:500;color:var(--tlumeny);font-variant-numeric:tabular-nums}
+.kraj-kat h3{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tlumeny);margin:22px 0 4px;font-weight:600}
+.kraj-obec{padding:10px 0;border-bottom:1px solid var(--linka)}
+.kraj-obec h4{margin:0 0 4px;font-size:1rem;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.kraj-namape{font-size:.78rem;font-weight:500;color:var(--zlato);text-decoration:none;border-bottom:1px solid var(--linka)}
+.kraj-obec ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.kraj-obec li{font-size:.92rem;line-height:1.5;overflow-wrap:anywhere}
+.kraj-obec li a{color:var(--zlato)}
+.kraj-zdroj{font-size:.75rem;color:var(--tlumeny);margin-left:4px}
+.kraj-soukr{color:var(--tlumeny);font-style:italic}
+.kraj-pata{margin-top:28px}
+.kraj-rozcestnik{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.kraj-rozcestnik ul{list-style:none;margin:0;padding:0}
+.kraj-rozcestnik li{padding:8px 0;border-bottom:1px solid var(--linka);display:flex;justify-content:space-between;gap:10px}
+.kraj-rozcestnik li a{color:var(--inkoust);text-decoration:none}
+@media (max-width:640px){.kraj-rozcestnik{grid-template-columns:minmax(0,1fr)}}
