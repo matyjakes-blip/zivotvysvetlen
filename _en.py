@@ -45,8 +45,8 @@ UPRAVY = {
     # „v češtině“ v anglické verzi neplatí, věta vypuštěna
     "Tohle není kurz o tom, jak být zdravý. Je to kurz o tom, jak zdraví vlastně funguje. První terénní akademie v češtině.":
         "This isn’t a course on how to be healthy. It’s a course on how health actually works.",
-    # v originále překlep „Modul 3 a 3“; spánek, jídlo, zátěž, světlo a klid = Modul 3 Prostředí + Modul 4 Výživa
-    "Všimni si, co v tom seznamu <strong>není.</strong> Není tam žádný doplněk, žádný booster a žádný prášek. <strong>Je tam spánek, jídlo, zátěž, světlo a klid.</strong> To je celý Modul 3 a 3.":
+    # překlep „Modul 3 a 3“ opraven i v originále 12. 10. (Modul 3 Prostředí + Modul 4 Výživa)
+    "Všimni si, co v tom seznamu <strong>není.</strong> Není tam žádný doplněk, žádný booster a žádný prášek. <strong>Je tam spánek, jídlo, zátěž, světlo a klid.</strong> To je celý Modul 3 a 4.":
         "Notice what <strong>isn’t</strong> on that list. No supplement, no booster, no pill. <strong>It’s sleep, food, load, light and calm.</strong> That’s all of Modules 3 and 4.",
 }
 
