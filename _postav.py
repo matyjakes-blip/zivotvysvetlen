@@ -207,7 +207,7 @@ def postav_pribeh():
 """ % ("\n".join("    " + x for x in ven), SKOOL)
 
     stranka = HLAVA.format(titulek="Můj příběh · Život vysvětlen",
-                           popis="Od 55 kilo a neplodnosti přes 106 kilo a akné až sem. Celá cesta, bez vynechání.",
+                           popis="Od 55 kilo přes 106 kilo a akné až sem. Celá cesta, bez vynechání.",
                            kanon="pribeh.html", ogobr="pribeh/0.0__09-porovnani-dvojice.jpg",
                            skool=SKOOL) + telo + PATA.format(skool=SKOOL)
     open("pribeh.html", "w", encoding="utf-8").write(stranka)
@@ -356,7 +356,7 @@ VEKY = [("18", "18 let")]
 # skutečné fotky pod posuvníkem: (soubor, věk, údaj, poznámka)
 SKUTECNE = [
     ("/pribeh/0.0__01-patnact-selfie.jpg", "15 let", "55 kg", ""),
-    ("/pribeh/0.0__03-patnact-postava.jpg", "15 let", "167 cm · 55 kg", ""),
+    ("/pribeh/0.0__03-patnact-postava.jpg", "15 let", "170 cm · 55 kg", ""),
     ("/pribeh/0.0__06-sedmnact-bulk.jpg", "16 let", "182 cm · 95 kg", "+40 kg za rok"),
     ("/pribeh/0.0__07-akne-zblizka.jpg", "17 let", "akné", ""),
     ("/pribeh/0.0__11-pred-ctyri-mesice.jpg", "18 let", "106 kg", "před změnou stravy"),
