@@ -280,13 +280,15 @@ CESTY = [
          pro="Pro toho, kdo si to chce odvodit sám a nechce, aby mu někdo stál za ramenem.",
          odkaz=None, odkaz_text="Vstoupit do Akademie", pod=None),
 
-    dict(aktivni=False, hlavni=False, znak="Mezi tím",
+    # zapnuto 13. 10. 2026 (Matyáš: „zapni kartu na webu“), cena se říká v DM, na webu žádná
+    dict(aktivni=True, hlavni=False, znak="Mezi tím",
          nazev="Akademie a hovory", vysvetleni="Čteš sám, ale nejsi v tom sám",
-         body=["Celá Akademie",
-               "Tři hovory se mnou v průběhu prvních měsíců",
-               "Na každém si ověříš, že to aplikuješ na svoji situaci správně"],
+         body=["Celá Akademie a zůstává ti napořád",
+               "Tři hovory se mnou: na startu, po 4 a po 8 týdnech",
+               "Na každém si ověříš, že to aplikuješ na svoji situaci správně",
+               "Když pak přejdeš na 1:1, započítám ti to"],
          pro="Pro toho, kdo si věří, že si to přečte sám, ale chce si to nechat zkontrolovat.",
-         odkaz=None, odkaz_text="Napsat mi", pod=None),
+         odkaz="https://ig.me/m/yacashh", odkaz_text="Napsat mi", pod="Na Instagramu, odpovídám sám"),
 
     dict(aktivni=True, hlavni=True, znak="Nejhlubší",
          nazev="Osobní vedení 1:1", vysvetleni="Ten samý systém aplikovaný na jednoho člověka",
@@ -326,8 +328,8 @@ def pas_cesty():
   <section class="pas cesty-pas" id="cesty">
     <div class="obal">
       <p class="nadtitul">Jak se do toho dá jít</p>
-      <h2>Dvě cesty, jeden systém</h2>
-      <p class="text-stred">Je to pořád stejné vysvětlení. Rozdíl je jen v tom, jestli si ho přečteš sám, nebo ti ho na tebe někdo přeloží.</p>
+      <h2>Tři cesty, jeden systém</h2>
+      <p class="text-stred">Je to pořád stejné vysvětlení. Rozdíl je jen v tom, jestli si ho přečteš sám, necháš si ho zkontrolovat, nebo ti ho na tebe někdo přeloží.</p>
       <div class="cesty">%s</div>
       <p class="text-stred" style="margin-top:26px">Nevíš, co z toho? Začni Akademií. Kdo pak chce jít hlouběji, přejde na osobní vedení.</p>
     </div>
