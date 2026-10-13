@@ -96,7 +96,7 @@ def postav_11_v2(HLAVA, PATA, SKOOL, CALENDLY, varianta=None, soubor="jedna-na-j
     h1a, h1b, pod = UVOD_11[varianta or UVOD_11_VYCHOZI]
     navic = "".join('<li><span class="nb-ikona">%s</span><div><b>%s</b><span>%s</span></div></li>' % (i, esc(n), esc(t)) for i, n, t in NAVIC)
     import os
-    board_img = '<figure class="board-snimek"><img src="/media/ukazka-board.jpg" alt="Ukázka osobního boardu v Notionu" loading="lazy"><figcaption>Ukázka. Jméno a data jsou vymyšlená.</figcaption></figure>' if os.path.exists("media/ukazka-board.jpg") else _board()
+    board_img = '<figure class="board-snimek"><img src="/media/ukazka-board.jpg?v=2" alt="Ukázka osobního boardu v Notionu" loading="lazy"><figcaption>Ukázka. Jméno a data jsou vymyšlená.</figcaption></figure>' if os.path.exists("media/ukazka-board.jpg") else _board()
     telo = """
 <main>
   <section class="uvod v11-uvod">
