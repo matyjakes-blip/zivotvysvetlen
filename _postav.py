@@ -276,7 +276,7 @@ CESTY = [
          body=["Šest modulů, čtyřiadvacet submodulů, sto dvě lekce",
                "Mapa, první týden den po dni a vstupní diagnostika",
                "Komunita, kde se doptáváš, když něco nesedí",
-               "Zůstává ti to napořád, vracíš se k tomu kdykoli"],
+               "Platíš měsíčně nebo ročně, zrušíš kdykoli"],
          pro="Pro toho, kdo si to chce odvodit sám a nechce, aby mu někdo stál za ramenem.",
          odkaz=None, odkaz_text="Vstoupit do Akademie", pod=None),
 
