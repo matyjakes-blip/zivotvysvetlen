@@ -9,7 +9,7 @@ takže každá změna v Akademii se při dalším `python3 _postav.py` promítne
 - počty lekcí a časy čtení      ... soubory v telo/ (stejný výpočet jako statistiky() mapy)
 
 Vytváří: blok „Jak je to postavené“ na hlavní stránce a stránku akademie.html."""
-import importlib.util, json, os, re, html
+import glob, importlib.util, json, os, re, html
 
 ZDROJ = os.path.expanduser("~/Work/skool/export-do-skoolu")
 
@@ -96,6 +96,58 @@ def cisla(moduly):
     sub = sum(m["pocet_sub"] for m in ms)
     hodin = round(sum(_hodiny(m["cas"]) for m in moduly))   # i s Modulem 0, stejně jako statistiky() mapy (17. 10.: 22 h)
     return dict(moduly=len(ms), submoduly=sub, lekce=lekci, hodiny=hodin)
+
+
+def cislo_slovy(n, rod="m"):
+    """1 až 999 slovy, v 1. pádě (rod: m = submodul, f = lekce): 106 -> „sto šest“, 28 -> „dvacet osm“"""
+    jed = {"m": ["", "jeden", "dva"], "f": ["", "jedna", "dvě"]}[rod] + ["tři", "čtyři", "pět", "šest", "sedm", "osm", "devět"]
+    nact = ["deset", "jedenáct", "dvanáct", "třináct", "čtrnáct", "patnáct", "šestnáct", "sedmnáct", "osmnáct", "devatenáct"]
+    des = ["", "", "dvacet", "třicet", "čtyřicet", "padesát", "šedesát", "sedmdesát", "osmdesát", "devadesát"]
+    sta = ["", "sto", "dvě stě", "tři sta", "čtyři sta", "pět set", "šest set", "sedm set", "osm set", "devět set"]
+    s, zb = divmod(n, 100)
+    kusy = [sta[s]] if s else []
+    if 10 <= zb < 20:
+        kusy.append(nact[zb - 10])
+    else:
+        d, j = divmod(zb, 10)
+        if d:
+            kusy.append(des[d])
+        if j:
+            kusy.append(jed[j])
+    return " ".join(kusy)
+
+
+def _tvar(n, jedna, dve, pet):
+    """tvar podstatného jména podle posledního členu čísla: sto jedna lekce, sto dvě lekce, sto šest lekcí"""
+    z = n % 100
+    return jedna if z == 1 else (dve if 2 <= z <= 4 else pet)
+
+
+def pocty():
+    """Jediný zdroj počtů pro celý web (17. 10. 2026, Matyáš: „aby kdykoliv jakýkoliv build byl relevantní“).
+    Počítá se ze zdrojů Akademie stejně jako statistiky() mapy, nikde na webu se čísla nepíšou ručně."""
+    c = cisla(data())
+    slov = sum(len(open(f, encoding="utf-8").read().split()) for f in glob.glob(os.path.join(ZDROJ, "telo", "*.md")))
+    zaokr = slov // 1000 * 1000
+    c.update(
+        slov=slov,
+        slov_cz="{:,}".format(zaokr).replace(",", " "),
+        slov_en="{:,}".format(zaokr),
+        veta=("Šest modulů, %s %s, %s %s" % (cislo_slovy(c["submoduly"], "m"),
+                                             _tvar(c["submoduly"], "submodul", "submoduly", "submodulů"),
+                                             cislo_slovy(c["lekce"], "f"),
+                                             _tvar(c["lekce"], "lekce", "lekce", "lekcí"))),
+    )
+    return c
+
+
+def dosad_pocty(text, c=None):
+    """Nahradí v textu značky §LEKCI§, §SUBMODULU§, §HODIN§, §SLOV§ a §POCTY_VETA§ skutečnými čísly."""
+    c = c or pocty()
+    for znacka, hodnota in (("§LEKCI§", str(c["lekce"])), ("§SUBMODULU§", str(c["submoduly"])),
+                            ("§HODIN§", str(c["hodiny"])), ("§SLOV§", c["slov_cz"]), ("§POCTY_VETA§", c["veta"])):
+        text = text.replace(znacka, hodnota)
+    return text
 
 
 def _hodiny(cas):

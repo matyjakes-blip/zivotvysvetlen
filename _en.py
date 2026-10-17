@@ -36,11 +36,8 @@ for cz, en in PROTEJSEK.items():
 
 # místa, kde se anglická verze vědomě liší od doslovného překladu (Akademie = Life Explained, lekce z české Akademie)
 UPRAVY = {
-    "Šest modulů, dvacet osm submodulů, sto šest lekcí": "Six levels, thirteen modules, about eight hours",
     "Mapa, první týden den po dni a vstupní diagnostika": "Start Here first, then level by level, in a clear order",
     "Celý systém napsaný, čteš vlastním tempem": "The whole system in one place, at your own pace",
-    "Tohle byla jedna ze 106 lekcí": "This was one lesson from the curriculum",
-    "Tohle byla část jedné ze 106 lekcí": "This was part of one lesson from the curriculum",
     "Další je 1.1.1 · Dvanáct axiomů terénu.": "The rest of the curriculum is inside the Academy.",
     # „v češtině“ v anglické verzi neplatí, věta vypuštěna
     "Tohle není kurz o tom, jak být zdravý. Je to kurz o tom, jak zdraví vlastně funguje. První terénní akademie v češtině.":
@@ -74,6 +71,21 @@ BLOKY = ("title", "h1", "h2", "h3", "h4", "p", "li", "blockquote", "figcaption",
 VNORENE = re.compile(r"<(p|div|ul|ol|li|h[1-4]|section|figure|blockquote|table|details)\b")
 
 
+def upravy_pocty():
+    """překlady vět s počty Akademie; klíče se skládají z aktuálních čísel (_akademie.pocty), takže po každé nové
+    lekci sedí samy (17. 10. 2026)"""
+    import _akademie
+    c = _akademie.pocty()
+    return {
+        c["veta"]: "Six levels, thirteen modules, about eight hours",
+        "Tohle byla jedna ze %d lekcí" % c["lekce"]: "This was one lesson from the curriculum",
+        "Tohle byla část jedné ze %d lekcí" % c["lekce"]: "This was part of one lesson from the curriculum",
+        "Všech %d lekcí, protokoly a komunita. Je v ceně." % c["lekce"]: "The full curriculum, protocols and community. Included.",
+        "<b>%d</b><span>lekcí v šesti modulech</span>" % c["lekce"]: "<b>%d</b><span>lessons across six modules</span>" % c["lekce"],
+        "<b>%s</b><span>slov výkladu</span>" % c["slov_cz"]: "<b>%s</b><span>words of explanation</span>" % c["slov_en"],
+    }
+
+
 def slovnik():
     d = {}
     for f in sorted(glob.glob("_preklad/preklad-*.json")):
@@ -81,8 +93,10 @@ def slovnik():
             continue
         d.update(json.load(open(f, encoding="utf-8")))
     d.update(UPRAVY)
+    d.update(upravy_pocty())
     uzly = json.load(open("_preklad/preklad-uzly.json", encoding="utf-8")) if os.path.exists("_preklad/preklad-uzly.json") else {}
     uzly.update(UPRAVY)
+    uzly.update(upravy_pocty())
     return d, uzly
 
 

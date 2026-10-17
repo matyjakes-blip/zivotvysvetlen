@@ -273,7 +273,7 @@ def pas_podcasty():
 CESTY = [
     dict(aktivni=True, hlavni=False, znak="Nejdostupnější",
          nazev="Akademie", vysvetleni="Celý systém napsaný, čteš vlastním tempem",
-         body=["Šest modulů, dvacet osm submodulů, sto šest lekcí",
+         body=["§POCTY_VETA§",   # počty dosadí _akademie.dosad_pocty() ze zdrojů Akademie
                "Mapa, první týden den po dni a vstupní diagnostika",
                "Komunita, kde se doptáváš, když něco nesedí",
                "Platíš měsíčně nebo ročně, zrušíš kdykoli"],
@@ -982,6 +982,41 @@ PISMA_MISTNE = """<link rel="preload" href="/pisma/cinzel.woff2" as="font" type=
 </style>"""
 
 
+AKADEMIE_ZDROJ = os.path.expanduser("~/Work/skool/export-do-skoolu")
+
+
+def synchronizuj_mapu():
+    """Mapa na webu = galerie a čísla z ~/Work/skool/export-do-skoolu/mapa-akademie.html (generuje ji
+    _mapa-prestav.py --html ze zdrojů lekcí). Hlava, písma a pata webové verze zůstávají, chybějící náhledy se
+    dokopírují. Matyáš 17. 10. 2026: „aby kdykoliv jakýkoliv build byl relevantní“."""
+    import shutil
+    zdroj = os.path.join(AKADEMIE_ZDROJ, "mapa-akademie.html")
+    if not (os.path.exists(zdroj) and os.path.exists("mapa.html")):
+        return "mapa: zdroj nebo mapa.html chybí"
+    web = open("mapa.html", encoding="utf-8").read()
+    exp = open(zdroj, encoding="utf-8").read()
+    pat = r'  <div class="galerie" id="galerie">.*?\n  </div>\n'
+    gw, ge = re.search(pat, web, re.S), re.search(pat, exp, re.S)
+    if not (gw and ge):
+        return "mapa: galerie nenalezena, nic se nezměnilo"
+    nove = web[:gw.start()] + ge.group(0) + web[gw.end():]
+    ce = re.search(r'<p class="cisla">.*?</p>', exp, re.S)
+    if ce:
+        nove = re.sub(r'<p class="cisla">.*?</p>', lambda m: ce.group(0), nove, count=1, flags=re.S)
+    veta = _akademie.pocty()["veta"]
+    nove = re.sub(r'(<meta name="description" content="Mapa Akademie Život vysvětlen\. )[^"]*(">)',
+                  lambda m: m.group(1) + veta + "." + m.group(2), nove, count=1)
+    zkop = 0
+    for src in sorted(set(re.findall(r'mapa/nahledy/[^"]+', nove))):
+        if not os.path.exists(src) and os.path.exists(os.path.join(AKADEMIE_ZDROJ, src)):
+            os.makedirs(os.path.dirname(src), exist_ok=True)
+            shutil.copy(os.path.join(AKADEMIE_ZDROJ, src), src)
+            zkop += 1
+    if nove != web:
+        open("mapa.html", "w", encoding="utf-8").write(nove)
+    return "mapa: %s, náhledů dokopírováno %d" % ("aktualizována ze zdroje" if nove != web else "sedí se zdrojem", zkop)
+
+
 def oprav_mapu():
     """Vymeni Google Fonts v mape za pisma z tohoto webu. Da se poustet opakovane."""
     if not os.path.exists("mapa.html"):
@@ -1037,6 +1072,7 @@ if __name__ == "__main__":
     postav_kontakt()
     postav_jak_mapa()
     postav_pravni()
+    print(synchronizuj_mapu())
     print(oprav_mapu())
     print(pata_mapy())
     print("sourcing.html: %d mist" % _sourcing.postav(HLAVA, PATA, SKOOL, esc))
@@ -1044,6 +1080,13 @@ if __name__ == "__main__":
     print("sourcing po krajích: %d stránek" % len(_sourcing_kraje.postav(HLAVA, PATA, SKOOL, esc)))
     print("lekce zdarma: %s" % _akademie.postav_lekci_zdarma(HLAVA, PATA, SKOOL))
     print("akademie.html:", _akademie.postav_stranku(HLAVA, PATA, SKOOL, recenze=_recenze.pas_recenze("Co píšou studenti", jen="student")))
+    # počty Akademie (§LEKCI§ ap.) se dosazují ze zdrojů Akademie, nikde se nepíšou ručně (17. 10. 2026)
+    P = _akademie.pocty()
+    for f in glob.glob("*.html") + glob.glob("_nahledy/*.html"):
+        t = open(f, encoding="utf-8").read()
+        if "§" in t:
+            open(f, "w", encoding="utf-8").write(_akademie.dosad_pocty(t, P))
+    print("počty Akademie: %d submodulů, %d lekcí, %d hodin, %s slov" % (P["submoduly"], P["lekce"], P["hodiny"], P["slov_cz"]))
     import _en
     chybi = _en.postav()
     print("anglická verze: chybí přeložit %d textů" % len(chybi))
@@ -1057,7 +1100,7 @@ if __name__ == "__main__":
         spatne = []
         for f in glob.glob("*.html") + glob.glob("en/*.html") + glob.glob("sourcing/**/*.html", recursive=True) + glob.glob("mapa/**/*.html", recursive=True):
             t = open(f, encoding="utf-8").read()
-            for znak in ("/_nahledy/", "doplníš", "recenze zastupna", "foto-misto", "Návrh:", "disabled>"):
+            for znak in ("/_nahledy/", "doplníš", "recenze zastupna", "foto-misto", "Návrh:", "disabled>", "§LEKCI§", "§SUBMODULU§", "§HODIN§", "§SLOV§", "§POCTY_VETA§"):
                 if znak in t:
                     spatne.append("%s: %s" % (f, znak))
         print("POZOR, zástupné věci na živých stránkách: " + "; ".join(spatne) if spatne else "kontrola živých stránek: čisto")
