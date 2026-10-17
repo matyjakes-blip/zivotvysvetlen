@@ -36,11 +36,11 @@ for cz, en in PROTEJSEK.items():
 
 # místa, kde se anglická verze vědomě liší od doslovného překladu (Akademie = Life Explained, lekce z české Akademie)
 UPRAVY = {
-    "Šest modulů, čtyřiadvacet submodulů, sto dvě lekce": "Six levels, thirteen modules, about eight hours",
+    "Šest modulů, dvacet osm submodulů, sto šest lekcí": "Six levels, thirteen modules, about eight hours",
     "Mapa, první týden den po dni a vstupní diagnostika": "Start Here first, then level by level, in a clear order",
     "Celý systém napsaný, čteš vlastním tempem": "The whole system in one place, at your own pace",
-    "Tohle byla jedna ze 102 lekcí": "This was one lesson from the curriculum",
-    "Tohle byla část jedné ze 102 lekcí": "This was part of one lesson from the curriculum",
+    "Tohle byla jedna ze 106 lekcí": "This was one lesson from the curriculum",
+    "Tohle byla část jedné ze 106 lekcí": "This was part of one lesson from the curriculum",
     "Další je 1.1.1 · Dvanáct axiomů terénu.": "The rest of the curriculum is inside the Academy.",
     # „v češtině“ v anglické verzi neplatí, věta vypuštěna
     "Tohle není kurz o tom, jak být zdravý. Je to kurz o tom, jak zdraví vlastně funguje. První terénní akademie v češtině.":

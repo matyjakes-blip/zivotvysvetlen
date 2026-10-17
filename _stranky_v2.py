@@ -122,7 +122,7 @@ def postav_11_v2(HLAVA, PATA, SKOOL, CALENDLY, varianta=None, soubor="jedna-na-j
       <h2>Tohle všechno dostaneš</h2>
       <p class="text-stred">Akademie ti dá všechno, co potřebuješ vědět. Osobní vedení to postaví na tobě.</p>
       <div class="v11-dostanes"><div>{board_img}</div>
-        <div><div class="v11-akademie"><span class="nb-ikona">🎓</span><div><b>Celá Akademie</b><span>Všech 102 lekcí, protokoly a komunita. Je v ceně.</span></div></div>
+        <div><div class="v11-akademie"><span class="nb-ikona">🎓</span><div><b>Celá Akademie</b><span>Všech 106 lekcí, protokoly a komunita. Je v ceně.</span></div></div>
         <p class="v11-navic-titul">Navíc jen pro klienty</p><ul class="v11-popisy">{navic}</ul></div>
       </div>
     </div>
@@ -223,8 +223,8 @@ ODKUD = """  <section class="pas autorita-pas" id="odkud">
         </div>
       </div>
       <ul class="autorita-cisla">
-        <li><b>102</b><span>lekcí v šesti modulech</span></li>
-        <li><b>226 000</b><span>slov výkladu</span></li>
+        <li><b>106</b><span>lekcí v šesti modulech</span></li>
+        <li><b>236 000</b><span>slov výkladu</span></li>
         <li><b>200+</b><span>jmenovaných autorů, prací a institucí</span></li>
         <li><b>60+</b><span>recenzovaných studií s DOI nebo PMID, každá dohledatelná</span></li>
       </ul>

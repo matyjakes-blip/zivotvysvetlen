@@ -94,7 +94,7 @@ def cisla(moduly):
     ms = [m for m in moduly if m["i"] > 0]
     lekci = sum(m["lekci"] for m in moduly)   # i se vstupním Modulem 0, stejně jako statistiky() mapy (102)
     sub = sum(m["pocet_sub"] for m in ms)
-    hodin = round(sum(_hodiny(m["cas"]) for m in ms))
+    hodin = round(sum(_hodiny(m["cas"]) for m in moduly))   # i s Modulem 0, stejně jako statistiky() mapy (17. 10.: 22 h)
     return dict(moduly=len(ms), submoduly=sub, lekce=lekci, hodiny=hodin)
 
 

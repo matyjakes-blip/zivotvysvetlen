@@ -273,7 +273,7 @@ def pas_podcasty():
 CESTY = [
     dict(aktivni=True, hlavni=False, znak="Nejdostupnější",
          nazev="Akademie", vysvetleni="Celý systém napsaný, čteš vlastním tempem",
-         body=["Šest modulů, čtyřiadvacet submodulů, sto dvě lekce",
+         body=["Šest modulů, dvacet osm submodulů, sto šest lekcí",
                "Mapa, první týden den po dni a vstupní diagnostika",
                "Komunita, kde se doptáváš, když něco nesedí",
                "Platíš měsíčně nebo ročně, zrušíš kdykoli"],
