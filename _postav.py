@@ -1022,6 +1022,12 @@ def oprav_mapu():
     if not os.path.exists("mapa.html"):
         return "mapa.html chybi"
     h = open("mapa.html", encoding="utf-8").read()
+    # telefon (21. 10. 2026): nadpis „Akademie“ s rozestupy písmen byl na 320 px širší než stránka bez okrajů
+    # (294 px do 284 px), na užších displejích se proto trochu zmenší. Opravuje se tady, ať to přežije každý build.
+    if "/* nadpis na úzkém telefonu */" not in h and "  .podnadpis{margin-top:14px" in h:
+        h = h.replace("  .podnadpis{margin-top:14px",
+                      "  /* nadpis na úzkém telefonu */\n  @media (max-width:340px){.nadpis{font-size:2.3rem}}\n  .podnadpis{margin-top:14px", 1)
+        open("mapa.html", "w", encoding="utf-8").write(h)
     if "fonts.googleapis" not in h:
         return "mapa.html: pisma uz jsou mistni"
     h = re.sub(r'<link rel="stylesheet" href="https://fonts\.googleapis\.com[^"]*">',

@@ -991,3 +991,31 @@ h3{font-family:var(--nadpis);font-weight:600;color:var(--inkoust)}
 .kraj-rozcestnik li{padding:8px 0;border-bottom:1px solid var(--linka);display:flex;justify-content:space-between;gap:10px}
 .kraj-rozcestnik li a{color:var(--inkoust);text-decoration:none}
 @media (max-width:640px){.kraj-rozcestnik{grid-template-columns:minmax(0,1fr)}}
+
+/* ===== telefon: nic nesmí přetékat do strany (21. 10. 2026) =====
+   Příčiny: hlavička (logo + EN + Vstoupit + menu) potřebovala 379 px šířky a na 375 px a užších se nevešla,
+   zadní kartička úvodního balíčku fotek (otočená, posunutá) vyčnívala o 2 px za okraj na 375 až 430 px
+   a karta, která se táhne nebo odlétá, rozšiřovala stránku do strany. */
+/* dlouhé slovo nebo adresa se zalomí, nerozšíří stránku */
+body{overflow-wrap:break-word}
+.hlavicka>*{min-width:0}
+.hlavicka-vpravo{flex:0 0 auto}
+@media (max-width:420px){
+  .hlavicka{gap:8px;padding-inline:14px}
+  .znacka{font-size:.74rem;letter-spacing:.15em}
+  .hlavicka-vpravo{gap:7px}
+  .cta-maly{font-size:.84rem;padding:7px 13px}
+  .menu summary{width:38px;height:34px}
+}
+@media (max-width:350px){
+  .hlavicka{gap:6px;padding-inline:12px}
+  .znacka{font-size:.66rem;letter-spacing:.1em}
+  .hlavicka-vpravo{gap:5px}
+  .cta-maly{font-size:.8rem;padding:7px 11px}
+  .jazyk{padding:4px 6px;font-size:.66rem}
+  .menu summary{width:36px;height:32px}
+}
+/* úvod: balíček kartiček (zadní karty vyčnívají, horní se táhne a odlétá) se ořízne na šířku stránky.
+   Ořez je jen vodorovný, svisle se nic neřeže, takže stíny a překryv karet zůstávají. */
+.uvod{overflow-x:clip}
+@supports not (overflow:clip){.uvod{overflow-x:hidden}}
