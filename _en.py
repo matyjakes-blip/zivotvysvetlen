@@ -17,6 +17,10 @@ SKOOL_CZ = "https://www.skool.com/zivot-vysvetlen-1338"
 SKOOL_EN = "https://www.skool.com/life-explained-1568"
 CAL_CZ = "https://calendly.com/yacashh/1-1-osobni-kvalifikacni-hovor"
 CAL_EN = "https://calendly.com/yacashh/1-1-qualification-call-with-matyas"
+IG_CZ = "https://www.instagram.com/yacashh/"
+IG_EN = "https://www.instagram.com/yyacash/"
+DM_CZ = "https://ig.me/m/yacashh"
+DM_EN = "https://ig.me/m/yyacash"
 
 STRANKY = [  # česká → anglická
     ("index.html", "en/index.html"),
@@ -172,6 +176,8 @@ def preloz(t, d, uzly, chybi, stranka):
 
 def odkazy(t):
     t = t.replace(SKOOL_CZ, SKOOL_EN).replace(CAL_CZ, CAL_EN)
+    # anglický web vede na anglický účet @yyacash, ne na český (30. 10. 2026, gameplan EN)
+    t = t.replace(IG_CZ, IG_EN).replace(DM_CZ, DM_EN)
     def r(m):
         u = m.group(2)
         cesta, _, kotva = u.partition("#")
